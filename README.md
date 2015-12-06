@@ -1,4 +1,4 @@
-# ds-ios
+# 逗视 iOS客户端
 
 项目使用cocoapods管理
 
