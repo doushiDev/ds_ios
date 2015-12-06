@@ -1,0 +1,6 @@
+framework module APParallaxHeader {
+  umbrella header "APParallaxHeader-umbrella.h"
+
+  export *
+  module * { export * }
+}

@@ -1,0 +1,6 @@
+framework module RoundImageView {
+  umbrella header "RoundImageView-umbrella.h"
+
+  export *
+  module * { export * }
+}

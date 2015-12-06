@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="9059" systemVersion="15B42" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Y2L-JE-ALJ">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="9019"/>
+    </dependencies>
+    <scenes>
+        <!--Interface Controller-->
+        <scene sceneID="aou-V4-d1y">
+            <objects>
+                <controller id="AgC-eL-Hgc" customClass="InterfaceController" customModule="ds_watch" customModuleProvider="target"/>
+            </objects>
+            <point key="canvasLocation" x="220" y="345"/>
+        </scene>
+        <!--Static Notification Interface Controller-->
+        <scene sceneID="AEw-b0-oYE">
+            <objects>
+                <notificationController id="YCC-NB-fut">
+                    <items>
+                        <label alignment="left" text="Alert Label" id="IdU-wH-bcW"/>
+                    </items>
+                    <notificationCategory key="notificationCategory" identifier="myCategory" id="JfB-70-Muf"/>
+                    <connections>
+                        <outlet property="notificationAlertLabel" destination="IdU-wH-bcW" id="JKC-fr-R95"/>
+                        <segue destination="4sK-HA-Art" kind="relationship" relationship="dynamicNotificationInterface" id="kXh-Jw-8B1"/>
+                    </connections>
+                </notificationController>
+            </objects>
+            <point key="canvasLocation" x="220" y="643"/>
+        </scene>
+        <!--Notification Controller-->
+        <scene sceneID="ZPc-GJ-vnh">
+            <objects>
+                <controller id="4sK-HA-Art" customClass="NotificationController" customModule="ds_watch" customModuleProvider="target"/>
+            </objects>
+            <point key="canvasLocation" x="468" y="643"/>
+        </scene>
+        <!--Home Videos Interface Controller-->
+        <scene sceneID="mN8-bl-z0A">
+            <objects>
+                <controller id="Y2L-JE-ALJ" customClass="HomeVideosInterfaceController" customModule="ds_watch_Extension">
+                    <items>
+                        <table alignment="left" id="QM4-e8-mwn">
+                            <items>
+                                <tableRow identifier="dsVideoType" id="YBV-L1-2cE" customClass="MainRowType" customModule="ds_watch_Extension">
+                                    <group key="rootItem" width="1" alignment="left" id="92u-18-jQc">
+                                        <items>
+                                            <label width="132.5" height="44.5" alignment="left" text="甄嬛气死皇后" textAlignment="center" id="nOf-H3-Hc4"/>
+                                        </items>
+                                    </group>
+                                    <connections>
+                                        <outlet property="titleLabel" destination="nOf-H3-Hc4" id="Hfe-B1-5bl"/>
+                                        <segue destination="c7y-xb-8fh" kind="push" identifier="goPlay" id="Pkt-LH-eaD"/>
+                                    </connections>
+                                </tableRow>
+                            </items>
+                        </table>
+                    </items>
+                    <connections>
+                        <outlet property="videoTable" destination="QM4-e8-mwn" id="Db8-3k-X6d"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="443" y="254"/>
+        </scene>
+        <!--PlayVideoInterfaceController-->
+        <scene sceneID="ySB-dK-cIi">
+            <objects>
+                <controller identifier="PlayVideoInterfaceController" id="c7y-xb-8fh" customClass="PlayVideoInterfaceController" customModule="ds_watch_Extension">
+                    <items>
+                        <movie width="1" height="107" alignment="left" id="eMa-3n-dqs"/>
+                    </items>
+                    <connections>
+                        <outlet property="playVideo" destination="eMa-3n-dqs" id="Fbl-1u-mLP"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="635" y="249"/>
+        </scene>
+    </scenes>
+</document>

@@ -1,0 +1,6 @@
+framework module StrechyParallaxScrollView {
+  umbrella header "StrechyParallaxScrollView-umbrella.h"
+
+  export *
+  module * { export * }
+}
