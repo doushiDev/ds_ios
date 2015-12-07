@@ -18,6 +18,8 @@ class VideoTableViewController: UITableViewController {
     //加载超时操作
     var ti:NSTimer?
     
+    
+    
     //视频集合
     var videos  = NSMutableOrderedSet()
     
