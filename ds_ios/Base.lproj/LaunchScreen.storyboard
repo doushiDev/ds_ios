@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9059" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" initialViewController="0mo-Hb-Ggx">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" initialViewController="0mo-Hb-Ggx">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -18,7 +18,6 @@
                         <subviews>
                             <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="doushi_icon33" translatesAutoresizingMaskIntoConstraints="NO" id="V15-kk-Mzn">
                                 <rect key="frame" x="250" y="155" width="100" height="100"/>
-                                <animations/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="100" id="e8e-JI-4Cf"/>
                                     <constraint firstAttribute="width" constant="100" id="hNo-3N-RJP"/>
@@ -26,7 +25,6 @@
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="逗视－搞笑视频聚集地" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b2n-AL-Yro">
                                 <rect key="frame" x="198" y="471" width="204" height="37"/>
-                                <animations/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="37" id="XP3-pc-nBN"/>
                                     <constraint firstAttribute="width" constant="204" id="XiN-zh-zLg"/>
@@ -36,7 +34,6 @@
                                 <color key="highlightedColor" name="alternateSelectedControlTextColor" catalog="System" colorSpace="catalog"/>
                             </label>
                         </subviews>
-                        <animations/>
                         <color key="backgroundColor" red="0.99607843139999996" green="0.81568627449999997" blue="0.043137254899999998" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="V15-kk-Mzn" firstAttribute="top" secondItem="gc9-ys-IRM" secondAttribute="bottom" constant="135" id="249-MI-5dd"/>

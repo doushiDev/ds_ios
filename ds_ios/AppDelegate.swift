@@ -68,47 +68,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //Share SMS
         SMSSDK.registerApp("c06e0d3b9ec2", withSecret: "ad02d765bad19681273e61a5c570a145")
         
-        //推送
-        //        UMessage.startWithAppkey("563b6bdc67e58e73ee002acd", launchOptions: launchOptions)
-        //
-        //         let action1 = UIMutableUserNotificationAction()
-        //
-        //        action1.identifier = "toPlayVideo"
-        //        action1.title = "Accept"
-        //        action1.activationMode = UIUserNotificationActivationMode.Foreground//当点击的时候启动程序
-        //
-        //       let action2 =  UIMutableUserNotificationAction()
-        //            action2.identifier =  "action2_identifier";
-        //            action2.title = "Reject";
-        //            action2.activationMode = UIUserNotificationActivationMode.Background;//当点击的时候不启动程序，在后台处理
-        //            action2.authenticationRequired = true;//需要解锁才能处理，如果        //
-        //
-        //
-        //        let categorys = UIMutableUserNotificationCategory()
-        //        categorys.identifier = "category1"
-        //        categorys.setActions([action1,action2], forContext: UIUserNotificationActionContext.Default)
-        //
-        //
-        //        let seta =  NSSet(object: categorys)
-        //
-        //        let userSettings = UIUserNotificationSettings(forTypes:[.Alert, .Badge, .Sound], categories: seta as? Set<UIUserNotificationCategory>)
-        //
-        //
-        //        UMessage.registerRemoteNotificationAndUserNotificationSettings(userSettings)
-        //        UMessage.setLogEnabled(false)
-        
-        
         
         
         UIApplication.sharedApplication().applicationIconBadgeNumber = 1
         UIApplication.sharedApplication().applicationIconBadgeNumber = 0
         
         
+        
+        
+        
         // Required
         
-        APService.registerForRemoteNotificationTypes(UIUserNotificationType.Badge.rawValue | UIUserNotificationType.Badge.rawValue | UIUserNotificationType.Alert.rawValue , categories: nil)
-        
-        
+        APService.registerForRemoteNotificationTypes(UIUserNotificationType.Badge.rawValue | UIUserNotificationType.Sound.rawValue | UIUserNotificationType.Alert.rawValue , categories: nil)
         
         
         // Required
@@ -135,6 +106,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //        } else {
         //            // Fallback on earlier versions
         //        }
+        
+        
+        
+        
+        
         return true
     }
     
@@ -207,6 +183,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let tabBar = UIApplication.sharedApplication().keyWindow?.rootViewController as! UITabBarController
         
         
+        UIApplication.sharedApplication().applicationIconBadgeNumber += 1
+
+
         // 获取当前TabBar Nav
         let nav = tabBar.selectedViewController as! UINavigationController
         
@@ -329,6 +308,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         print("application:didFailToRegisterForRemoteNotificationsWithError: \(error)");
         
     }
+    
+    
     
     
     func applicationWillResignActive(application: UIApplication) {
