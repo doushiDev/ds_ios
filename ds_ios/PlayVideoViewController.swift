@@ -136,6 +136,8 @@ class PlayVideoViewController: UIViewController {
         
         pageMenu = CAPSPageMenu(viewControllers: controllerArray, frame: CGRectMake(0.0, width*(9.0/16.0)+20, self.view.frame.width, self.view.frame.height -  width*(9.0/16.0) - 20), pageMenuOptions: parameters)
         
+        print("pageMenu frame -> \( pageMenu?.view.frame)")
+        
         self.addChildViewController(pageMenu!)
         self.view.addSubview(pageMenu!.view)
         

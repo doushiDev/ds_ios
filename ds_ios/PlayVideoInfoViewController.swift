@@ -29,19 +29,20 @@ class PlayVideoInfoViewController: UIViewController {
 		super.viewDidLoad()
 
 		let bannerView = GADBannerView()
+        
 
-		print("\(self.bannerView.frame)")
-
-		bannerView.backgroundColor = UIColor.redColor()
-		bannerView.frame = CGRect(x: 0, y: self.bannerView.frame.maxY - 20 - width * (9.0 / 16.0) - 40, width: self.view.bounds.width, height: 80)
-
-		//        bannerView.frame = self.bannerView.frame
-
+//		bannerView.backgroundColor = UIColor.redColor()
+		bannerView.frame = CGRect(x: 0, y: self.view.bounds.width - 80 , width: self.view.bounds.width, height: 80)
+//
+////		        bannerView.frame = self.view.frame
+//
+//        print("bannerView-> \(bannerView.frame)")
+//        
 		// 添加Google广告
 		bannerView.adUnitID = "ca-app-pub-7191090490730162/2348155930"
 		bannerView.rootViewController = self;
 		let request = GADRequest()
-		request.testDevices = ["7fa45ea242e06acf374bbde4d05916e0"]
+//		request.testDevices = ["7fa45ea242e06acf374bbde4d05916e0"]
 		bannerView.loadRequest(request)
 		self.view.addSubview(bannerView)
 

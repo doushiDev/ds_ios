@@ -127,7 +127,7 @@ class MyUserFavoriteTableViewController: UITableViewController {
 		}
 		populatingVideo = true
 
-		HttpController.getVideos(HttpClientByUserAndVideo.DSRouter.getVideosByUserId(userId, currentPage, 10)) {videoInfos in
+		HttpController.getVideos(HttpClientByUserAndVideo.DSRouter.getVideosByUserId(userId, currentPage, 20)) {videoInfos in
 
 			if videoInfos != nil {
 				self.videos = []
@@ -160,7 +160,7 @@ class MyUserFavoriteTableViewController: UITableViewController {
 		populatingVideo = true
 
 
-		HttpController.getVideos(HttpClientByUserAndVideo.DSRouter.getVideosByUserId(userId, currentPage, 10)) {videoInfos in
+		HttpController.getVideos(HttpClientByUserAndVideo.DSRouter.getVideosByUserId(userId, currentPage, 20)) {videoInfos in
 
 			if videoInfos != nil {
 
