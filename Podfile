@@ -42,13 +42,13 @@ end
 target 'ds_ios'  do
 shared_pods
 end
-
-target 'ds_watch Extension' do
-    
-    platform :watchos, '2.0'
-    
-    pod 'Alamofire', '~> 3.0'
-    pod 'SwiftyJSON', :git => 'https://github.com/SwiftyJSON/SwiftyJSON.git'
-
-
-end
+#
+#target 'ds_watch Extension' do
+#    
+#    platform :watchos, '2.0'
+#    
+#    pod 'Alamofire', '~> 3.0'
+#    pod 'SwiftyJSON', :git => 'https://github.com/SwiftyJSON/SwiftyJSON.git'
+#
+#
+#end
