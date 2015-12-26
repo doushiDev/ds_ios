@@ -8,10 +8,11 @@
 
 import UIKit
 
-class MainTabBarViewController: UITabBarController {
+class MainTabBarViewController: UITabBarController,UITabBarControllerDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.delegate = self
 
         // Do any additional setup after loading the view.
     }
@@ -23,17 +24,51 @@ class MainTabBarViewController: UITabBarController {
     
     
     // MARK: UITabBar delegate 实现双击tabBar刷新
-    override func tabBar(tabBar: UITabBar, didSelectItem item: UITabBarItem) {
-        
-//        print("self.selectedIndex-> \(self.selectedIndex)")
-//        print("item.tag-> \(item.tag)")
-
+//    override func tabBar(tabBar: UITabBar, didSelectItem item: UITabBarItem) {
 //        
-         if (self.selectedIndex == 1 && self.selectedIndex == item.tag ) {
-//            print("双击了\(item.tag)")
-
+////        print("self.selectedIndex-> \(self.selectedIndex)")
+////        print("item.tag-> \(item.tag)")
+//
+////        
+//         if (self.selectedIndex == 1 && self.selectedIndex == item.tag ) {
+////            print("双击了\(item.tag)")
+//
+//        }
+//        self.selectedIndex = item.tag;
+//    }
+    
+    
+    
+//    -(void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController{
+//    if (viewController.tabBarItem.tag==2) {
+//    UINavigationController *navigation =(UINavigationController *)viewController;
+//    NoticeTableViewController *notice=(NoticeTableViewController *)navigation.topViewController;
+//    [notice refreshData];
+//    }
+//    }
+    
+    func tabBarController(tabBarController: UITabBarController, didSelectViewController viewController: UIViewController) {
+        
+        if (viewController.tabBarItem.tag==1) {
+            let navigation = viewController as! UINavigationController
+            
+           let  homeViewController = navigation.topViewController as! VideoTableViewController
+            homeViewController.viewDidLoad()
+//            if  homeViewController.pageMenu?.currentPageIndex == 1 {
+//                
+//                let aStoryboard = UIStoryboard(name: "Home", bundle:NSBundle.mainBundle())
+//                let newVideoTableViewController = aStoryboard.instantiateViewControllerWithIdentifier("VideoTableViewController") as! VideoTableViewController
+//                 newVideoTableViewController.type = 0
+//                 newVideoTableViewController.videoInfos =
+//                    DataCenter.shareDataCenter.getVideosFromType(0)
+//                newVideoTableViewController.tableView.mj_header.beginRefreshing()
+////                newVideoTableViewController.viewDidLoad()
+//                
+//                
+//            }
+//            homeViewController.viewDidLoad()
         }
-        self.selectedIndex = item.tag;
+        
     }
     
 

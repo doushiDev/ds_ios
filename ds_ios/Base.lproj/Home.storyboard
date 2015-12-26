@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9059" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -16,7 +16,6 @@
                     <view key="view" contentMode="scaleToFill" id="9m7-4L-IZ0">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" title="逗视" id="A47-Cg-QX8"/>
@@ -29,12 +28,11 @@
         <scene sceneID="41o-6F-5iZ">
             <objects>
                 <navigationController storyboardIdentifier="UINavigationController-OxP-gU-fvi" id="OxP-gU-fvi" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="首页" image="home" id="4Nc-68-3Th"/>
+                    <tabBarItem key="tabBarItem" tag="1" title="首页" image="home" id="4Nc-68-3Th"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="cNQ-oy-w9I">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <animations/>
                     </navigationBar>
                     <connections>
                         <segue destination="o7X-PY-w2E" kind="relationship" relationship="rootViewController" id="V7z-Xe-lr0"/>
@@ -51,13 +49,11 @@
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="85" sectionHeaderHeight="28" sectionFooterHeight="28" id="zH2-6X-zMb">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="sectionIndexBackgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <view key="tableFooterView" contentMode="scaleToFill" id="FQD-Kd-hTs">
                             <rect key="frame" x="0.0" y="128" width="600" height="0.0"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <animations/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         </view>
                         <prototypes>
@@ -70,14 +66,12 @@
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="j0y-1e-EZv">
                                             <rect key="frame" x="18" y="8" width="118" height="84"/>
-                                            <animations/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="118" id="HKy-dX-FuB"/>
                                             </constraints>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1分钟前" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ybz-hL-SPt">
                                             <rect key="frame" x="144" y="70" width="100" height="21"/>
-                                            <animations/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="100" id="RNA-eR-SMs"/>
                                                 <constraint firstAttribute="height" constant="21" id="Ul0-N9-hwR"/>
@@ -88,13 +82,11 @@
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="痛苦来的太快，我还想多美几秒" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8tT-HZ-07y">
                                             <rect key="frame" x="144" y="8" width="439" height="54"/>
-                                            <animations/>
                                             <fontDescription key="fontDescription" name="KohinoorDevanagari-Regular" family="Kohinoor Devanagari" pointSize="15"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
-                                    <animations/>
                                     <constraints>
                                         <constraint firstItem="Ybz-hL-SPt" firstAttribute="top" secondItem="8tT-HZ-07y" secondAttribute="bottom" constant="8" id="5jh-MD-WlV"/>
                                         <constraint firstItem="8tT-HZ-07y" firstAttribute="top" secondItem="A2d-Rx-jni" secondAttribute="topMargin" id="8TV-s6-RQX"/>
@@ -107,7 +99,6 @@
                                         <constraint firstItem="j0y-1e-EZv" firstAttribute="centerY" secondItem="A2d-Rx-jni" secondAttribute="centerY" id="wec-Ir-05K"/>
                                     </constraints>
                                 </tableViewCellContentView>
-                                <animations/>
                                 <connections>
                                     <outlet property="picImageView" destination="j0y-1e-EZv" id="w75-VX-vQW"/>
                                     <outlet property="timeLabel" destination="Ybz-hL-SPt" id="P4S-OO-vjc"/>
@@ -132,7 +123,6 @@
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7T2-XZ-l7C">
                             <rect key="frame" x="283" y="45.5" width="32" height="32"/>
-                            <animations/>
                             <state key="normal" image="restart"/>
                             <connections>
                                 <action selector="restartData:" destination="JhJ-3x-UdT" eventType="touchUpInside" id="c5K-yJ-oX2"/>
@@ -140,13 +130,11 @@
                         </button>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="数据加载失败" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jpc-Iy-IfM">
                             <rect key="frame" x="267" y="24" width="66" height="13.5"/>
-                            <animations/>
                             <fontDescription key="fontDescription" type="system" pointSize="11"/>
                             <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
                         </label>
                     </subviews>
-                    <animations/>
                     <constraints>
                         <constraint firstItem="7T2-XZ-l7C" firstAttribute="centerY" secondItem="BhI-xE-3pb" secondAttribute="centerY" constant="11.5" id="1gu-jc-2me"/>
                         <constraint firstItem="Jpc-Iy-IfM" firstAttribute="centerY" secondItem="BhI-xE-3pb" secondAttribute="centerY" constant="-19.25" id="etU-QB-9ih"/>
@@ -164,13 +152,11 @@
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="85" sectionHeaderHeight="28" sectionFooterHeight="28" id="ahe-cG-dhA">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="sectionIndexBackgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <view key="tableFooterView" contentMode="scaleToFill" id="qvB-kl-5W7">
                             <rect key="frame" x="0.0" y="128" width="600" height="0.0"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <animations/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         </view>
                         <prototypes>
@@ -183,21 +169,18 @@
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="BSg-qX-ord">
                                             <rect key="frame" x="16" y="8" width="118" height="84"/>
-                                            <animations/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="118" id="lXJ-Nr-H3l"/>
                                             </constraints>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="大白版&quot;胖子的一天&quot;，看得眼泪流出来，要不要这么神准！" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f7P-UZ-Uu9">
                                             <rect key="frame" x="142" y="8" width="439" height="65"/>
-                                            <animations/>
                                             <fontDescription key="fontDescription" name="KohinoorDevanagari-Regular" family="Kohinoor Devanagari" pointSize="15"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1分钟前" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oaY-qF-Tt7">
                                             <rect key="frame" x="142" y="75" width="100" height="17"/>
-                                            <animations/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="100" id="CwN-mh-gub"/>
                                                 <constraint firstAttribute="height" constant="17" id="ukh-b2-len"/>
@@ -207,7 +190,6 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
-                                    <animations/>
                                     <constraints>
                                         <constraint firstItem="f7P-UZ-Uu9" firstAttribute="leading" secondItem="BSg-qX-ord" secondAttribute="trailing" constant="8" symbolic="YES" id="ENN-kK-Pjr"/>
                                         <constraint firstItem="BSg-qX-ord" firstAttribute="leading" secondItem="9VO-Vw-wWW" secondAttribute="leadingMargin" constant="8" id="GRe-a5-TL1"/>
@@ -220,7 +202,6 @@
                                         <constraint firstItem="oaY-qF-Tt7" firstAttribute="leading" secondItem="BSg-qX-ord" secondAttribute="trailing" constant="8" symbolic="YES" id="f3Z-gG-ope"/>
                                     </constraints>
                                 </tableViewCellContentView>
-                                <animations/>
                                 <connections>
                                     <outlet property="picImageView" destination="BSg-qX-ord" id="gwQ-te-E5z"/>
                                     <outlet property="timeLabel" destination="oaY-qF-Tt7" id="L62-rA-kds"/>
@@ -245,7 +226,6 @@
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jQh-KZ-eUd">
                             <rect key="frame" x="283" y="45.5" width="32" height="32"/>
-                            <animations/>
                             <state key="normal" image="restart"/>
                             <connections>
                                 <action selector="restartData:" destination="JhJ-3x-UdT" eventType="touchUpInside" id="Tdw-j2-yeh"/>
@@ -253,13 +233,11 @@
                         </button>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="数据加载失败" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X4k-7i-VAr">
                             <rect key="frame" x="267" y="24" width="66" height="13.5"/>
-                            <animations/>
                             <fontDescription key="fontDescription" type="system" pointSize="11"/>
                             <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
                         </label>
                     </subviews>
-                    <animations/>
                     <constraints>
                         <constraint firstItem="jQh-KZ-eUd" firstAttribute="centerX" secondItem="p6B-G8-wEW" secondAttribute="centerX" constant="-1" id="1LN-up-MXz"/>
                         <constraint firstItem="jQh-KZ-eUd" firstAttribute="centerY" secondItem="p6B-G8-wEW" secondAttribute="centerY" constant="11.5" id="60c-zX-ZFj"/>
@@ -291,7 +269,6 @@
                     <view key="view" contentMode="scaleToFill" id="5d1-5d-g5Z">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                 </viewController>
@@ -306,13 +283,11 @@
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="85" sectionHeaderHeight="28" sectionFooterHeight="28" id="hdJ-00-EwE">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="sectionIndexBackgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <view key="tableFooterView" contentMode="scaleToFill" id="4Rm-sZ-Os5">
                             <rect key="frame" x="0.0" y="128" width="600" height="0.0"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <animations/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         </view>
                         <prototypes>
@@ -325,14 +300,12 @@
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="xMw-T8-yX4">
                                             <rect key="frame" x="18" y="8" width="118" height="84"/>
-                                            <animations/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="118" id="IeV-eD-fb8"/>
                                             </constraints>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1分钟前" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A8M-BW-Cww">
                                             <rect key="frame" x="144" y="70" width="100" height="21"/>
-                                            <animations/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="100" id="FAZ-yn-D1y"/>
                                                 <constraint firstAttribute="height" constant="21" id="VyQ-XF-OCP"/>
@@ -343,13 +316,11 @@
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="痛苦来的太快，我还想多美几秒" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xa7-lP-QzF">
                                             <rect key="frame" x="144" y="8" width="439" height="54"/>
-                                            <animations/>
                                             <fontDescription key="fontDescription" name="KohinoorDevanagari-Regular" family="Kohinoor Devanagari" pointSize="15"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
-                                    <animations/>
                                     <constraints>
                                         <constraint firstItem="xa7-lP-QzF" firstAttribute="leading" secondItem="xMw-T8-yX4" secondAttribute="trailing" constant="8" symbolic="YES" id="EYH-fI-gfV"/>
                                         <constraint firstItem="A8M-BW-Cww" firstAttribute="top" secondItem="xa7-lP-QzF" secondAttribute="bottom" constant="8" id="XRg-rF-nQ4"/>
@@ -362,7 +333,6 @@
                                         <constraint firstItem="xa7-lP-QzF" firstAttribute="top" secondItem="7i5-20-wEc" secondAttribute="topMargin" id="zuR-kT-1eq"/>
                                     </constraints>
                                 </tableViewCellContentView>
-                                <animations/>
                                 <connections>
                                     <outlet property="picImageView" destination="xMw-T8-yX4" id="pTA-eQ-bfg"/>
                                     <outlet property="timeLabel" destination="A8M-BW-Cww" id="dLk-kI-z2M"/>
@@ -387,7 +357,6 @@
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zlZ-xQ-Grp">
                             <rect key="frame" x="283" y="45.5" width="32" height="32"/>
-                            <animations/>
                             <state key="normal" image="restart"/>
                             <connections>
                                 <action selector="restartData:" destination="o0s-Nd-SFO" eventType="touchUpInside" id="WKS-gZ-8gH"/>
@@ -396,13 +365,11 @@
                         </button>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="数据加载失败" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ch6-L6-JVq">
                             <rect key="frame" x="267" y="24" width="66" height="13.5"/>
-                            <animations/>
                             <fontDescription key="fontDescription" type="system" pointSize="11"/>
                             <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
                         </label>
                     </subviews>
-                    <animations/>
                     <constraints>
                         <constraint firstItem="zlZ-xQ-Grp" firstAttribute="centerY" secondItem="sG3-c8-Pf4" secondAttribute="centerY" constant="11.5" id="UgV-GX-gS6"/>
                         <constraint firstItem="Ch6-L6-JVq" firstAttribute="centerX" secondItem="sG3-c8-Pf4" secondAttribute="centerX" id="aNV-PC-7Ny"/>

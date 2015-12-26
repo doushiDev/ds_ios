@@ -66,7 +66,7 @@
         <scene sceneID="vcN-Dv-3CV">
             <objects>
                 <navigationController id="v0A-F1-Kkg" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" tag="1" title="发现" image="find" id="TMG-eV-gaT"/>
+                    <tabBarItem key="tabBarItem" title="发现" image="find" id="TMG-eV-gaT"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="w8z-Jx-yRk">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
