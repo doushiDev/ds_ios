@@ -14,7 +14,7 @@
 支持3DTouch 手势，快捷菜单：我的收藏，排行榜
 
 ## Apple Store
-Apple Store [逗视-搞笑视频聚集地](https://itunes.apple.com/cn/app/id1044917946)<br/>
+Apple Store: [逗视-搞笑视频聚集地](https://itunes.apple.com/cn/app/id1044917946)<br/>
 
 ## 功能简介
 
