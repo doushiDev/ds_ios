@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		AB1B58D71C0D493B00ECCA40 /* DataCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB1B58D61C0D493B00ECCA40 /* DataCenter.swift */; };
 		AB269BC91C08520100CF7AD9 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB269BC81C08520100CF7AD9 /* StoreKit.framework */; };
+		AB4686F71C4CF13200BD7AE0 /* libMobClickLibrary.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AB4686F41C4CF13200BD7AE0 /* libMobClickLibrary.a */; };
 		AB4BBF2F1C1556D0002F94A5 /* AboutView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AB4BBF231C1556D0002F94A5 /* AboutView.storyboard */; };
 		AB4BBF301C1556D0002F94A5 /* Find.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AB4BBF251C1556D0002F94A5 /* Find.storyboard */; };
 		AB4BBF311C1556D0002F94A5 /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AB4BBF271C1556D0002F94A5 /* Home.storyboard */; };
@@ -156,6 +157,9 @@
 		8AB52F706B9CA565D454896B /* Pods_ds_watch_Extension.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ds_watch_Extension.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AB1B58D61C0D493B00ECCA40 /* DataCenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataCenter.swift; sourceTree = "<group>"; };
 		AB269BC81C08520100CF7AD9 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		AB4686F41C4CF13200BD7AE0 /* libMobClickLibrary.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libMobClickLibrary.a; sourceTree = "<group>"; };
+		AB4686F51C4CF13200BD7AE0 /* MobClick.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MobClick.h; sourceTree = "<group>"; };
+		AB4686F61C4CF13200BD7AE0 /* MobClickSocialAnalytics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MobClickSocialAnalytics.h; sourceTree = "<group>"; };
 		AB4BBF241C1556D0002F94A5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/AboutView.storyboard; sourceTree = "<group>"; };
 		AB4BBF261C1556D0002F94A5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Find.storyboard; sourceTree = "<group>"; };
 		AB4BBF281C1556D0002F94A5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Home.storyboard; sourceTree = "<group>"; };
@@ -343,6 +347,7 @@
 				AB86EC041C0ADC410095412C /* libSocialQQ.a in Frameworks */,
 				AB86EA771C09CE640095412C /* MessageUI.framework in Frameworks */,
 				AB86EA751C09CE530095412C /* MobileCoreServices.framework in Frameworks */,
+				AB4686F71C4CF13200BD7AE0 /* libMobClickLibrary.a in Frameworks */,
 				AB86EC071C0ADC410095412C /* libSocialWechat.a in Frameworks */,
 				AB86EBF91C0ADC410095412C /* libUMSocial_Sdk_4.3.a in Frameworks */,
 				AB86EC081C0ADC410095412C /* libWeChatSDK.a in Frameworks */,
@@ -372,6 +377,16 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		AB4686F31C4CF13200BD7AE0 /* UMAnalytics_Sdk_3.6.6 */ = {
+			isa = PBXGroup;
+			children = (
+				AB4686F41C4CF13200BD7AE0 /* libMobClickLibrary.a */,
+				AB4686F51C4CF13200BD7AE0 /* MobClick.h */,
+				AB4686F61C4CF13200BD7AE0 /* MobClickSocialAnalytics.h */,
+			);
+			path = UMAnalytics_Sdk_3.6.6;
+			sourceTree = "<group>";
+		};
 		AB86EA881C09D2840095412C /* Util */ = {
 			isa = PBXGroup;
 			children = (
@@ -392,6 +407,7 @@
 		AB86EAE91C09E4B60095412C /* Lib */ = {
 			isa = PBXGroup;
 			children = (
+				AB4686F31C4CF13200BD7AE0 /* UMAnalytics_Sdk_3.6.6 */,
 				AB86EC111C0ADCF60095412C /* PushConfig.plist */,
 				AB86EC121C0ADCF60095412C /* APService.h */,
 				AB86EC131C0ADCF60095412C /* libPushSDK-1.8.8.a */,
@@ -1216,6 +1232,8 @@
 					"$(PROJECT_DIR)/ds_ios/UMSocial_Sdk_4.3/UMSocial_Sdk_Extra_Frameworks/TencentOpenAPI",
 					"$(PROJECT_DIR)/ds_ios/UMSocial_Sdk_4.3/UMSocial_Sdk_Extra_Frameworks/Wechat",
 					"$(PROJECT_DIR)/ds_ios",
+					"$(PROJECT_DIR)/ds_ios/umsdk_IOS_analytics_idfa_v3.6.6/UMAnalytics_Sdk_3.6.6",
+					"$(PROJECT_DIR)/ds_ios/UMAnalytics_Sdk_3.6.6",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "me.doushi.ds-ios";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1248,6 +1266,8 @@
 					"$(PROJECT_DIR)/ds_ios/UMSocial_Sdk_4.3/UMSocial_Sdk_Extra_Frameworks/TencentOpenAPI",
 					"$(PROJECT_DIR)/ds_ios/UMSocial_Sdk_4.3/UMSocial_Sdk_Extra_Frameworks/Wechat",
 					"$(PROJECT_DIR)/ds_ios",
+					"$(PROJECT_DIR)/ds_ios/umsdk_IOS_analytics_idfa_v3.6.6/UMAnalytics_Sdk_3.6.6",
+					"$(PROJECT_DIR)/ds_ios/UMAnalytics_Sdk_3.6.6",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "me.doushi.ds-ios";
 				PRODUCT_NAME = "$(TARGET_NAME)";

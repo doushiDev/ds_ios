@@ -22,6 +22,7 @@
 #import "UMSocialSnsPlatformManager.h"
 #import "UMSocialQQHandler.h"
 #import "UMessage.h"
+#import "MobClick.h"
 
 
 #import <SMS_SDK/SMSSDK.h>

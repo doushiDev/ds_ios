@@ -63,10 +63,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UMSocialWechatHandler.setWXAppId("wxfd23fac852a54c97", appSecret: "d4624c36b6795d1d99dcf0547af5443d", url: "www.doushi.me")
         
         
+//            [MobClick startWithAppkey:UMAPPKey reportPolicy:(ReportPolicy) REALTIME channelId:nil];
+        
+        
+        
+        MobClick.startWithAppkey("563b6bdc67e58e73ee002acd")
         
         
         //Share SMS
         SMSSDK.registerApp("c06e0d3b9ec2", withSecret: "ad02d765bad19681273e61a5c570a145")
+        
+        
         
         
         
