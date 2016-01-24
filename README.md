@@ -29,7 +29,7 @@ Apple Store: [逗视-搞笑视频聚集地](https://itunes.apple.com/cn/app/id10
 
 ## ds_ios 第三方库
 * SimpleButton Button样式
-* Snap         约束
+* Snap         布局约束
 * Alamofire    网络请求
 * Kingfisher   图片缓存
 * MJRefresh    下拉，上拉刷新
