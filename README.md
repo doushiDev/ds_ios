@@ -21,13 +21,13 @@ Apple Store: [逗视-搞笑视频聚集地](https://itunes.apple.com/cn/app/id10
 ## 功能简介
 
 ### 1.支持3DTouch 快捷键
-![ds](http://img.itjh.com.cn/ds-ios-3dtouch.jpg "ds-3DTouch")
+![ds](https://dn-itjhcdn.qbox.me/ds-ios-3dtouch.jpg "ds-3DTouch")
 
 ### 2.首页
-![ds](http://img.itjh.com.cn/ds-ios-home.jpg "ds-home")
+![ds](https://dn-itjhcdn.qbox.me/ds-ios-home.jpg "ds-home")
 
 ### 3.播放页面
-![ds](http://img.itjh.com.cn/ds-ios-play.jpg "ds-play")
+![ds](https://dn-itjhcdn.qbox.me/ds-ios-play.jpg "ds-play")
 
 ## ds_ios 第三方库
 * SimpleButton Button样式
