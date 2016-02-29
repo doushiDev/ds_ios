@@ -34,6 +34,8 @@ def shared_pods
     
     pod 'Qiniu', '~> 7.0'
     
+    pod "MobilePlayer"
+
     pod 'Google-Mobile-Ads-SDK', '~> 7.0'
     
 end

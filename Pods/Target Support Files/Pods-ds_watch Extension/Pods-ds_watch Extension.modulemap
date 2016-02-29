@@ -1,6 +1,0 @@
-framework module Pods_ds_watch_Extension {
-  umbrella header "Pods-ds_watch Extension-umbrella.h"
-
-  export *
-  module * { export * }
-}
