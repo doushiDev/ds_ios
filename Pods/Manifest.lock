@@ -21,12 +21,15 @@ PODS:
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
   - Alamofire (3.1.3)
+  - Answers (1.0.0):
+    - Fabric
   - APParallaxHeader (0.1.6)
-  - Google-Mobile-Ads-SDK (7.5.2)
+  - Fabric (1.6.1)
+  - Google-Mobile-Ads-SDK (7.6.0)
   - HappyDNS (0.2.3)
   - IQKeyboardManagerSwift (3.3.4)
-  - Kingfisher (1.8.2)
-  - MJRefresh (3.0.6)
+  - Kingfisher (1.8.5)
+  - MJRefresh (3.0.7)
   - MobilePlayer (1.1.1)
   - Qiniu (7.0.16):
     - AFNetworking (~> 2.0)
@@ -34,13 +37,15 @@ PODS:
   - RoundImageView (1.0.1)
   - SDCycleScrollView (1.3)
   - StrechyParallaxScrollView (0.1)
-  - SwiftyJSON (2.3.1)
+  - SwiftyJSON (2.3.2)
   - TextFieldEffects (1.1.0)
-  - Validator (0.0.9)
+  - Validator (1.1)
 
 DEPENDENCIES:
   - Alamofire (~> 3.0)
+  - Answers
   - APParallaxHeader
+  - Fabric
   - Google-Mobile-Ads-SDK (~> 7.0)
   - IQKeyboardManagerSwift
   - Kingfisher (~> 1.6)
@@ -60,25 +65,27 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   SwiftyJSON:
-    :commit: a4cce2ec0bf31bfec2cf4cc7f1030a59a7bc95d2
+    :commit: 42bdb102d2624b143c07850ebdc1537d5b6579b6
     :git: https://github.com/SwiftyJSON/SwiftyJSON.git
 
 SPEC CHECKSUMS:
   AFNetworking: cb8d14a848e831097108418f5d49217339d4eb60
   Alamofire: 9f93b56389e48def9220dd57d1f44b1927229a5a
+  Answers: 25f0d740e3e4384ed0d97a8bda6b5eea1842c3d3
   APParallaxHeader: 854bc48a2487ca12c702f8a236fec0d89cdac5c3
-  Google-Mobile-Ads-SDK: 24a8ddfc0bcfec281960c5d88f75327df0d86b00
+  Fabric: bf0ceb04e7c924090efc5f8c55e4fbcca189e0a0
+  Google-Mobile-Ads-SDK: 0290020329c61183c4685304264b73382bc49fb4
   HappyDNS: 6d85942e64c28b4fa61f8c76580398f52d6d1d11
   IQKeyboardManagerSwift: 6f2290d093f5269dc07bdae8bc58e968cf9c4738
-  Kingfisher: b39315e9dbed7e8ffe73a9ca1be2ee006d1d57e4
-  MJRefresh: df419e2393f9020bcd340c552e8f0cf700073f32
+  Kingfisher: 780fed0fa82692a3bd59d53329ae2b85cdd354a5
+  MJRefresh: f3e1228ec3d38c7ba5208d58032631a52f39f495
   MobilePlayer: e9e35f7b39b17bf45156506ac91652fbd23bd4ed
   Qiniu: 51a8702cddc02b50867e10cef99291b9a8a006b1
   RoundImageView: af3ea25d9b69456749c5b4da68e513060ddbd428
   SDCycleScrollView: 90e43636fcc8e6a7f74e8b64d87418a8e96549b4
   StrechyParallaxScrollView: 81988959c814063eae05264e4cf4cd1dbbd32e2e
-  SwiftyJSON: 592b53bee5ef3dd9b3bebc6b9cb7ee35426ae8c3
+  SwiftyJSON: 04ccea08915aa0109039157c7974cf0298da292a
   TextFieldEffects: 8e43fea8836e97be80fc4db27a1596c9e98a26ba
-  Validator: 9012664aa29024d8bc92a3504bb97406bc719601
+  Validator: 30b7e50f1f82b0e5b2dd14f54fc2f2533e70e5d6
 
 COCOAPODS: 0.39.0

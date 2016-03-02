@@ -30,7 +30,7 @@
 import Foundation
 
 public enum ValidationPattern: String {
-    case EmailAddress = "^[_A-Za-z0-9-+]+(\\.[_A-Za-z0-9-+]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*(\\.[A-Za-z‌​]{2,4})$"
+    case EmailAddress = "^[_A-Za-z0-9-+]+(\\.[_A-Za-z0-9-+]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*(\\.[A-Za-z‌​]{2,})$"
     case ContainsNumber = ".*\\d.*"
     case ContainsCapital = "^.*?[A-Z].*?$"
 }
@@ -40,7 +40,7 @@ public struct ValidationRulePattern: ValidationRule {
     public typealias InputType = String
     
     public let pattern: String
-    public var failureError: ValidationErrorType
+    public let failureError: ValidationErrorType
     
     public init(pattern: String, failureError: ValidationErrorType) {
         self.pattern = pattern

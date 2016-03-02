@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '0FA5DCB455BF2BCD172FAC8D'
+               BlueprintIdentifier = '02524B73739D5D487C3E1029'
                BlueprintName = 'MobilePlayer'
                ReferencedContainer = 'container:Pods.xcodeproj'
                BuildableName = 'MobilePlayer.framework'>

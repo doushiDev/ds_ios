@@ -8,8 +8,17 @@ Validator is a user input validation library written in Swift.
 
 ## Features
 
-- [x] Validation rules
-- [x] Swift standard library type extensions
+- [x] Validation rules:
+  - [x] Required
+  - [x] Equality
+  - [x] Comparison
+  - [x] Length (min, max, range)
+  - [x] Pattern (email, password constraints and more...)
+  - [x] Contains
+  - [x] URL
+  - [x] Payment card (Luhn validated, accepted types)
+  - [x] Condition (quickly write your own)
+- [x] Swift standard library type extensions with one API (not just strings!)
 - [x] UIKit element extensions
 - [x] Flexible validation error types
 - [x] An open protocol-oriented implementation
@@ -40,6 +49,18 @@ case .Invalid(let failures): print(failures.first?.message)
 ```
 
 ### Validation Rules
+
+#### Required
+
+Validates any type exists (not-nil).
+
+```swift
+let stringRequiredRule = ValidationRuleRequired<String?>(failureError: someValidationErrorType)
+
+let floatRequiredRule = ValidationRuleRequired<Float?>(failureError: someValidationErrorType)
+```
+
+*Note - You can't use `validate` on an optional `Validatable` type (e.g. `myString?.validate(aRule...)` because the optional chaining mechanism will bypass the call. `"thing".validate(rule: aRule...)` is fine. To validate an optional for required in this way use: `Validator.validate(input: anOptional, rule: aRule)`.*
 
 #### Equality
 
@@ -81,6 +102,46 @@ let emailRule = ValidationRulePattern(pattern: .EmailAddress, failureError: some
 let digitRule = ValidationRulePattern(pattern: .ContainsDigit, failureError: someValidationErrorType)
 
 let helloRule = ValidationRulePattern(pattern: ".*hello.*", failureError: someValidationErrorType)
+```
+
+#### Contains
+
+Validates an `Equatable` type is within a predefined `SequenceType`'s elements (where the `Element` of the `SequenceType` matches the input type).
+
+```swift
+let stringContainsRule = ValidationRuleContains<String, [String]>(sequence: ["hello", "hi", "hey"], failureError: someValidationErrorType)
+
+let rule = ValidationRuleContains<Int, [Int]>(sequence: [1, 2, 3], failureError: someValidationErrorType)
+```
+
+#### URL
+
+Validates a `String` to see if it's a valid URL conforming to RFC 2396.
+
+```swift
+let urlRule = ValidationRuleURL(failureError: someValidationErrorType)
+```
+
+#### Payment Card
+
+Validates a `String` to see if it's a valid payment card number by firstly running it through the [Luhn check algorithm](https://en.wikipedia.org/wiki/Luhn_algorithm), and secondly ensuring it follows the format of a number of payment card providers.
+
+```swift
+public enum PaymentCardType: Int {
+    case Amex, Mastercard, Visa, Maestro, DinersClub, JCB, Discover, UnionPay
+    ///...
+```
+
+To be validate against any card type (just the Luhn check):
+
+```swift
+let anyCardRule = ValidationRulePaymentCard(failureError: someValidationErrorType)
+```
+
+To be validate against a set of accepted card types (e.g Visa, Mastercard and American Express in this example):
+
+```swift
+let acceptedCardsRule = ValidationRulePaymentCard(acceptedTypes: [.Visa, .Mastercard, .Amex], failureError: someValidationErrorType)
 ```
 
 #### Condition
@@ -227,33 +288,33 @@ A `ValidatableInterfaceElement` can be configured to automatically validate when
 
 1. Attach a set of default rules:
 
-```swift
-let textField = UITextField()
-let rules = ValidationRuleSet<String>()
-rules.addRule(someRule)
-textField.validationRules = rules
-```
+    ```swift
+    let textField = UITextField()
+    let rules = ValidationRuleSet<String>()
+    rules.addRule(someRule)
+    textField.validationRules = rules
+    ```
 
 2. Attach a closure to fire on input change:
 
-```swift
-textField.validationHandler = { result in
-	switch result {
-  case .Valid:
-		textField.textColor = UIColor.blackColor()
-  case .Invalid(let failureErrors):
-		let messages = failureErrors.map { $0.message }
-        print(messages)
-		textField.textColor = UIColor.redColor()
-  }
-}
-```
+    ```swift
+    textField.validationHandler = { result, control in
+	  switch result {
+      case .Valid:
+		    control.textColor = UIColor.blackColor()
+      case .Invalid(let failureErrors):
+		    let messages = failureErrors.map { $0.message }
+            print(messages)
+		    control.textColor = UIColor.redColor()
+      }
+    }
+    ```
 
 3. Begin observation:
 
-```swift
-textField.validateOnInputChange(true)
-```
+    ```swift
+    textField.validateOnInputChange(true)
+    ```
 
 Note - Use `.validateOnInputChange(false)` to end observation.
 

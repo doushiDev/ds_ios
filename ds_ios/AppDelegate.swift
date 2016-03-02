@@ -10,7 +10,8 @@ import UIKit
 import CoreData
 import IQKeyboardManagerSwift
 import Alamofire
-
+import Fabric
+import Answers
 
 
 @UIApplicationMain
@@ -21,7 +22,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
-        
+        Fabric.with([Answers.self])
+
         
         //判断用户是否登录
         

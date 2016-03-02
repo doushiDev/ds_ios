@@ -83,7 +83,7 @@ $ brew install carthage
 To integrate Kingfisher into your Xcode project using Carthage, specify it in your `Cartfile`:
 
 ``` ogdl
-github "onevcat/Kingfisher" >= 1.8
+github "onevcat/Kingfisher" ~> 1.8
 ```
 
 Then, run the following command to build the Kingfisher framework:
@@ -205,10 +205,10 @@ imageView.kf_setImageWithURL(NSURL(string: "your_image_url")!,
                          placeholderImage: nil,
                               optionsInfo: nil,
                             progressBlock: { (receivedSize, totalSize) -> () in
-                                println("Download Progress: \(receivedSize)/\(totalSize)")
+                                print("Download Progress: \(receivedSize)/\(totalSize)")
                             },
                         completionHandler: { (image, error, imageURL) -> () in
-                            println("Downloaded and set!")
+                            print("Downloaded and set!")
                         }
 )
 ```
@@ -259,7 +259,7 @@ cache.maxCachePeriodInSecond = 60 * 60 * 24 * 3
 
 // Get the disk size taken by the cache.
 cache.calculateDiskCacheSizeWithCompletionHandler { (size) -> () in
-    println("disk size in bytes: \(size)")
+    print("disk size in bytes: \(size)")
 }
 ```
 

@@ -38,6 +38,10 @@ def shared_pods
 
     pod 'Google-Mobile-Ads-SDK', '~> 7.0'
     
+    pod 'Fabric'
+    pod 'Answers'
+#    pod 'Crashlytics'
+
 end
 
 

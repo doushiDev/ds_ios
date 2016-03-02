@@ -35,6 +35,26 @@
 	</array>
 	<key>CFBundleVersion</key>
 	<string>1.2.160127</string>
+	<key>Fabric</key>
+	<dict>
+		<key>APIKey</key>
+		<string>f3f1048997d1ed934d9098f3c6e6be1a105cd07b</string>
+		<key>Kits</key>
+		<array>
+			<dict>
+				<key>KitInfo</key>
+				<dict/>
+				<key>KitName</key>
+				<string>Answers</string>
+			</dict>
+			<dict>
+				<key>KitInfo</key>
+				<dict/>
+				<key>KitName</key>
+				<string>Crashlytics</string>
+			</dict>
+		</array>
+	</dict>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>wechat</string>

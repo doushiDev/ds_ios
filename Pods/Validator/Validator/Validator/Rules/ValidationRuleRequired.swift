@@ -33,7 +33,7 @@ public struct ValidationRuleRequired<T>: ValidationRule {
 
     public typealias InputType = T
     
-    public var failureError: ValidationErrorType
+    public let failureError: ValidationErrorType
     
     public init(failureError: ValidationErrorType) {
         self.failureError = failureError

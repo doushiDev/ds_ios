@@ -1,0 +1,2 @@
+echo "warning: The run script is now located at $"{"PODS_ROOT"}"/Fabric/run'. To remove this warning, update your Run Script Build Phase to point to this new location."
+sh ${PODS_ROOT}/Fabric/run "$@"
