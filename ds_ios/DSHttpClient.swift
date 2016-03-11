@@ -212,7 +212,7 @@ struct HttpClientByVideo {
     enum DSRouter: URLRequestConvertible {
         
         // 逗视API地址
-        static let baseURLString = "https://api.doushi.me/v1/rest/video/"
+        static let baseURLString = "https://api.ds.itjh.net/v1/rest/video/"
         
         
         // 请求方法
@@ -274,7 +274,7 @@ struct HttpClientByUser {
     enum DSRouter: URLRequestConvertible {
         
         // 逗视API地址
-        static let baseURLString = "https://api.doushi.me/v1/rest/user/"
+        static let baseURLString = "https://api.ds.itjh.net/v1/rest/user/"
         
         // 请求方法
         case registerUser(User) //注册用户
@@ -335,7 +335,7 @@ struct HttpClientByUtil {
     enum DSRouter: URLRequestConvertible {
         
         // 逗视API地址
-        static let baseURLString = "https://api.doushi.me/v1/rest/util/"
+        static let baseURLString = "https://api.ds.itjh.net/v1/rest/util/"
         
         
         // 请求方法
@@ -381,7 +381,7 @@ struct HttpClientByUserAndVideo {
     enum DSRouter: URLRequestConvertible {
         
         // 逗视API地址
-        static let baseURLString = "https://api.doushi.me/v1/rest/userAndVideo/"
+        static let baseURLString = "https://api.ds.itjh.net/v1/rest/userAndVideo/"
         
         
         // 请求方法

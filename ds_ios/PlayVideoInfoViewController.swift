@@ -174,7 +174,7 @@ class PlayVideoInfoViewController: UIViewController {
 
 
 		print("点击了分享")
-		let share = "https://api.doushi.me/share.html?id=\(DataCenter.shareDataCenter.videoInfo.id)"
+		let share = "https://api.ds.itjh.net/share.html?id=\(DataCenter.shareDataCenter.videoInfo.id)"
 
 
 		let saimg = UIImage(data: NSData(contentsOfURL: NSURL(string: DataCenter.shareDataCenter.videoInfo.pic)!)!)

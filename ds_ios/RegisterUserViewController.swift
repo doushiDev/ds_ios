@@ -74,6 +74,7 @@ class RegisterUserViewController: UIViewController,UIImagePickerControllerDelega
         let phoneRule = ValidationRuleLength(min: 11, max: 11, failureError: ValidationError(message: "😫"))
         
         let pwdRule = ValidationRuleLength(min: 8, failureError: ValidationError(message: "😫"))
+        
         let result:ValidationResult
         
          

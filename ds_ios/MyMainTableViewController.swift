@@ -238,7 +238,7 @@ class MyMainTableViewController: UITableViewController,APParallaxViewDelegate,MF
         }
         
         if indexPath.section == 2 && indexPath.row == 1 {
-            print("朋友需要")
+            print("朋友推荐")
             let share = "https://itunes.apple.com/cn/app/id1044917946"
             
             

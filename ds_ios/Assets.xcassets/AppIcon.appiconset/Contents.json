@@ -69,8 +69,9 @@
       "scale" : "2x"
     },
     {
-      "idiom" : "ipad",
       "size" : "83.5x83.5",
+      "idiom" : "ipad",
+      "filename" : "doushi_167.png",
       "scale" : "2x"
     }
   ],
