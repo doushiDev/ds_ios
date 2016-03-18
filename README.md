@@ -1,6 +1,6 @@
 # 逗视 iOS客户端
 * 支持iPhone，iPad
-**最新版本1.2**
+**最新版本1.2.2 **
 
 
 ## 简介
@@ -19,15 +19,14 @@
 Apple Store: [逗视-搞笑视频聚集地](https://itunes.apple.com/cn/app/id1044917946)<br/>
 
 ## 功能简介
+ 
+![ds](http://7xrxhd.com1.z0.glb.clouddn.com/0x0ss.jpg)
+ 
+![ds](http://7xrxhd.com1.z0.glb.clouddn.com/22.jpg) 
 
-### 1.支持3DTouch 快捷键
-![ds](https://dn-itjhcdn.qbox.me/ds-ios-3dtouch.jpg "ds-3DTouch")
+![ds](http://7xrxhd.com1.z0.glb.clouddn.com/33.jpg) 
 
-### 2.首页
-![ds](https://dn-itjhcdn.qbox.me/ds-ios-home.jpg "ds-home")
-
-### 3.播放页面
-![ds](https://dn-itjhcdn.qbox.me/ds-ios-play.jpg "ds-play")
+![ds](http://7xrxhd.com1.z0.glb.clouddn.com/44.jpg) 
 
 ## ds_ios 第三方库
 * SimpleButton Button样式
