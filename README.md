@@ -1,6 +1,5 @@
 # 逗视 iOS客户端
-* 支持iPhone，iPad
-** 最新版本1.2.2 **
+* 支持iPhone，iPad   最新版本1.2.2 
 
 
 ## 简介
@@ -20,7 +19,7 @@ Apple Store: [逗视-搞笑视频聚集地](https://itunes.apple.com/cn/app/id10
 
 ## 功能简介
  
-![ds](http://7xrxhd.com1.z0.glb.clouddn.com/0x0ss.jp) 
+![ds](http://7xrxhd.com1.z0.glb.clouddn.com/0x0ss.jpg) 
  
 ![ds](http://7xrxhd.com1.z0.glb.clouddn.com/22.jpg) 
 
