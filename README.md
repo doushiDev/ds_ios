@@ -1,5 +1,5 @@
 # 逗视 iOS客户端
-* 支持iPhone，iPad   最新版本1.2.2 
+* 支持iPhone，iPad   最新版本1.2.3
 
 
 ## 简介
