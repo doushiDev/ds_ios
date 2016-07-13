@@ -41,16 +41,16 @@ class RegisterUserViewController: UIViewController,UIImagePickerControllerDelega
         self.alamofireManager =  Manager.sharedInstanceAndTimeOut
         headImageView.userInteractionEnabled = true
         
-        let tapGestureRecognizer  = UITapGestureRecognizer(target: self, action: "uploadHeadImage:")
+        let tapGestureRecognizer  = UITapGestureRecognizer(target: self, action: #selector(RegisterUserViewController.uploadHeadImage(_:)))
         headImageView.addGestureRecognizer(tapGestureRecognizer)
         
         phoneTextField.delegate = self
         passwordTextField.delegate = self
         
         
-         phoneTextField.addTarget(self, action: "textFieldDidChange:", forControlEvents: UIControlEvents.EditingChanged)
+         phoneTextField.addTarget(self, action: #selector(RegisterUserViewController.textFieldDidChange(_:)), forControlEvents: UIControlEvents.EditingChanged)
         
-         passwordTextField.addTarget(self, action: "textFieldDidChange:", forControlEvents: UIControlEvents.EditingChanged)
+         passwordTextField.addTarget(self, action: #selector(RegisterUserViewController.textFieldDidChange(_:)), forControlEvents: UIControlEvents.EditingChanged)
         
         
         //设置注册按钮一开始为不可点击
@@ -140,7 +140,7 @@ class RegisterUserViewController: UIViewController,UIImagePickerControllerDelega
                 sender.enabled = false
                 sender.alpha = 0.6
                 
-                self.timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: "updateTimer:", userInfo: nil, repeats: true)
+                self.timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: #selector(RegisterUserViewController.updateTimer(_:)), userInfo: nil, repeats: true)
                 self.sendCodeButton.setTitle("\(self.remainingSeconds)s", forState: .Disabled)
             }
         }

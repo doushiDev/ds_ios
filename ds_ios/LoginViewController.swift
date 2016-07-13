@@ -22,9 +22,9 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         pwdTextField.delegate = self
         
         
-        phoneTextField.addTarget(self, action: "textFieldDidChange:", forControlEvents: UIControlEvents.EditingChanged)
+        phoneTextField.addTarget(self, action: #selector(LoginViewController.textFieldDidChange(_:)), forControlEvents: UIControlEvents.EditingChanged)
         
-        pwdTextField.addTarget(self, action: "textFieldDidChange:", forControlEvents: UIControlEvents.EditingChanged)
+        pwdTextField.addTarget(self, action: #selector(LoginViewController.textFieldDidChange(_:)), forControlEvents: UIControlEvents.EditingChanged)
         
         
         //设置登录按钮一开始为不可点击

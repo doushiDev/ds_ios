@@ -67,7 +67,7 @@ class VideoTableViewController: UITableViewController {
         self.tableView.mj_footer.hidden = true
         
         
-        ti = NSTimer.scheduledTimerWithTimeInterval(10, target: self, selector: "isLoading", userInfo: "isLoading", repeats: true)
+        ti = NSTimer.scheduledTimerWithTimeInterval(10, target: self, selector: #selector(VideoTableViewController.isLoading), userInfo: "isLoading", repeats: true)
         
         
         //注册3DTouch
@@ -81,7 +81,7 @@ class VideoTableViewController: UITableViewController {
     }
     
     @IBAction func restartData(sender: AnyObject) {
-        ti = NSTimer.scheduledTimerWithTimeInterval(10, target: self, selector: "isLoading", userInfo: "isLoading", repeats: true)
+        ti = NSTimer.scheduledTimerWithTimeInterval(10, target: self, selector: #selector(VideoTableViewController.isLoading), userInfo: "isLoading", repeats: true)
         
         self.tableView.mj_header.beginRefreshing()
         self.loadNewData()
@@ -93,7 +93,7 @@ class VideoTableViewController: UITableViewController {
     
     
     func restartData() {
-        ti = NSTimer.scheduledTimerWithTimeInterval(10, target: self, selector: "isLoading", userInfo: "isLoading", repeats: true)
+        ti = NSTimer.scheduledTimerWithTimeInterval(10, target: self, selector: #selector(VideoTableViewController.isLoading), userInfo: "isLoading", repeats: true)
         
         self.tableView.mj_header.beginRefreshing()
         self.loadNewData()

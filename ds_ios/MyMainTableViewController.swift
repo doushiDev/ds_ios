@@ -51,7 +51,7 @@ class MyMainTableViewController: UITableViewController,APParallaxViewDelegate,MF
         ///登录 按钮 
         
 //                loginButton.setImage(UIImage(named: "login"), forState: .Normal)
-        loginButton.addTarget(self, action: "toLoginView:", forControlEvents: .TouchUpInside)
+        loginButton.addTarget(self, action: #selector(MyMainTableViewController.toLoginView(_:)), forControlEvents: .TouchUpInside)
                 mybkImage.addSubview(loginButton)
         
         loginButton.titleLabel?.font = UIFont(name: "Helvetica Neue", size: 16)
