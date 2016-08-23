@@ -187,9 +187,9 @@ public extension ImageCache {
                 
                 let data: NSData?
                 switch imageFormat {
-                case .PNG: data = UIImagePNGRepresentation(image)
-                case .JPEG: data = UIImageJPEGRepresentation(image, 1.0)
-                case .GIF: data = UIImageGIFRepresentation(image)
+                case .PNG: data = originalData ?? UIImagePNGRepresentation(image)
+                case .JPEG: data = originalData ?? UIImageJPEGRepresentation(image, 1.0)
+                case .GIF: data = originalData ?? UIImageGIFRepresentation(image)
                 case .Unknown: data = originalData ?? UIImagePNGRepresentation(image.kf_normalizedImage())
                 }
                 
@@ -201,10 +201,8 @@ public extension ImageCache {
                     }
                     
                     self.fileManager.createFileAtPath(self.cachePathForKey(key), contents: data, attributes: nil)
-                    callHandlerInMainQueue()
-                } else {
-                    callHandlerInMainQueue()
                 }
+                callHandlerInMainQueue()
             })
         } else {
             callHandlerInMainQueue()
@@ -361,15 +359,9 @@ extension ImageCache {
     /**
     Clear disk cache. This is could be an async or sync operation.
     Specify the way you want it by passing the `sync` parameter.
-     
-    - parameter sync: If `true`, the clear process will be performed in a sync way. Otherwise, async. Default is `false`.
     */
-    public func clearDiskCache(sync: Bool = false) {
-        if sync {
-            clearDiskCacheSync()
-        } else {
-            clearDiskCacheWithCompletionHandler(nil)
-        }
+    public func clearDiskCache() {
+        clearDiskCacheWithCompletionHandler(nil)
     }
     
     /**
@@ -379,21 +371,18 @@ extension ImageCache {
     */
     public func clearDiskCacheWithCompletionHandler(completionHander: (()->())?) {
         dispatch_async(ioQueue, { () -> Void in
-            self.clearDiskCacheSync()
+            do {
+                try self.fileManager.removeItemAtPath(self.diskCachePath)
+                try self.fileManager.createDirectoryAtPath(self.diskCachePath, withIntermediateDirectories: true, attributes: nil)
+            } catch _ {
+            }
+            
             if let completionHander = completionHander {
                 dispatch_async(dispatch_get_main_queue(), { () -> Void in
                     completionHander()
                 })
             }
         })
-    }
-    
-    func clearDiskCacheSync() {
-        do {
-            try self.fileManager.removeItemAtPath(self.diskCachePath)
-            try self.fileManager.createDirectoryAtPath(self.diskCachePath, withIntermediateDirectories: true, attributes: nil)
-        } catch _ {
-        }
     }
     
     /**
@@ -461,16 +450,16 @@ extension ImageCache {
                 let targetSize = self.maxDiskCacheSize / 2
                     
                 // Sort files by last modify date. We want to clean from the oldest files.
-                let sortedFiles = cachedFiles.keysSortedByValue({ (resourceValue1, resourceValue2) -> Bool in
+                let sortedFiles = cachedFiles.keysSortedByValue {
+                    resourceValue1, resourceValue2 -> Bool in
                     
-                    if let date1 = resourceValue1[NSURLContentModificationDateKey] as? NSDate {
-                        if let date2 = resourceValue2[NSURLContentModificationDateKey] as? NSDate {
-                            return date1.compare(date2) == .OrderedAscending
-                        }
+                    if let date1 = resourceValue1[NSURLContentModificationDateKey] as? NSDate,
+                           date2 = resourceValue2[NSURLContentModificationDateKey] as? NSDate {
+                        return date1.compare(date2) == .OrderedAscending
                     }
                     // Not valid date information. This should not happen. Just in case.
                     return true
-                })
+                }
                 
                 for fileURL in sortedFiles {
                     
@@ -495,16 +484,12 @@ extension ImageCache {
             dispatch_async(dispatch_get_main_queue(), { () -> Void in
                 
                 if URLsToDelete.count != 0 {
-                    let cleanedHashes = URLsToDelete.map({ (url) -> String in
-                        return url.lastPathComponent!
-                    })
-                    
+                    let cleanedHashes = URLsToDelete.map( {$0.lastPathComponent!} )
+
                     NSNotificationCenter.defaultCenter().postNotificationName(KingfisherDidCleanDiskCacheNotification, object: self, userInfo: [KingfisherDiskCacheCleanedHashKey: cleanedHashes])
                 }
                 
-                if let completionHandler = completionHandler {
-                    completionHandler()
-                }
+                completionHandler?()
             })
         })
     }
@@ -560,7 +545,12 @@ public extension ImageCache {
         
         let filePath = cachePathForKey(key)
         
-        if fileManager.fileExistsAtPath(filePath) {
+        var diskCached = false
+        dispatch_sync(ioQueue) { () -> Void in
+            diskCached = self.fileManager.fileExistsAtPath(filePath)
+        }
+
+        if diskCached {
             return CacheCheckResult(cached: true, cacheType: .Disk)
         }
         
@@ -584,7 +574,7 @@ public extension ImageCache {
     
     - parameter completionHandler: Called with the calculated size when finishes.
     */
-    public func calculateDiskCacheSizeWithCompletionHandler(completionHandler: ((size: UInt) -> ())?) {
+    public func calculateDiskCacheSizeWithCompletionHandler(completionHandler: ((size: UInt) -> ())) {
         dispatch_async(ioQueue, { () -> Void in
             let diskCacheURL = NSURL(fileURLWithPath: self.diskCachePath)
                 
@@ -613,9 +603,7 @@ public extension ImageCache {
             }
             
             dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                if let completionHandler = completionHandler {
-                    completionHandler(size: diskCacheSize)
-                }
+                completionHandler(size: diskCacheSize)
             })
         })
     }
@@ -657,15 +645,6 @@ extension UIImage {
 
 extension Dictionary {
     func keysSortedByValue(isOrderedBefore: (Value, Value) -> Bool) -> [Key] {
-        var array = Array(self)
-        array.sortInPlace {
-            let (_, lv) = $0
-            let (_, rv) = $1
-            return isOrderedBefore(lv, rv)
-        }
-        return array.map {
-            let (k, _) = $0
-            return k
-        }
+        return Array(self).sort{ isOrderedBefore($0.1, $1.1) }.map{ $0.0 }
     }
 }

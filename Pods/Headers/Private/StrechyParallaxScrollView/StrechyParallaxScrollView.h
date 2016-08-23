@@ -1,1 +1,0 @@
-../../../StrechyParallaxScrollView/StrechyParallaxScrollView/StrechyParallaxScrollView/StrechyParallaxScrollView.h

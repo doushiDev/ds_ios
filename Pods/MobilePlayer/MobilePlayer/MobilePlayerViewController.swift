@@ -134,9 +134,12 @@ public class MobilePlayerViewController: MPMoviePlayerViewController {
     notificationCenter.addObserverForName(
       MPMoviePlayerPlaybackStateDidChangeNotification,
       object: moviePlayer,
-      queue: NSOperationQueue.mainQueue()) { notification in
-        self.handleMoviePlayerPlaybackStateDidChangeNotification()
-        NSNotificationCenter.defaultCenter().postNotificationName(MobilePlayerStateDidChangeNotification, object: self)
+      queue: NSOperationQueue.mainQueue()) { [weak self] notification in
+        guard let slf = self else {
+          return
+        }
+        slf.handleMoviePlayerPlaybackStateDidChangeNotification()
+        NSNotificationCenter.defaultCenter().postNotificationName(MobilePlayerStateDidChangeNotification, object: slf)
     }
     notificationCenter.removeObserver(
       self,
@@ -145,19 +148,22 @@ public class MobilePlayerViewController: MPMoviePlayerViewController {
     notificationCenter.addObserverForName(
       MPMoviePlayerPlaybackDidFinishNotification,
       object: moviePlayer,
-      queue: NSOperationQueue.mainQueue()) { notification in
+      queue: NSOperationQueue.mainQueue()) { [weak self] notification in
+        guard let slf = self else {
+          return
+        }
         if let
           userInfo = notification.userInfo as? [String: AnyObject],
           error = userInfo["error"] as? NSError {
             NSNotificationCenter.defaultCenter().postNotificationName(
               MobilePlayerDidEncounterErrorNotification,
-              object: self,
+              object: slf,
               userInfo: [MobilePlayerErrorUserInfoKey: error])
         }
-        if let postrollVC = self.postrollViewController {
-          self.prerollViewController?.dismiss()
-          self.pauseOverlayViewController?.dismiss()
-          self.showOverlayViewController(postrollVC)
+        if let postrollVC = slf.postrollViewController {
+          slf.prerollViewController?.dismiss()
+          slf.pauseOverlayViewController?.dismiss()
+          slf.showOverlayViewController(postrollVC)
         }
     }
   }
@@ -166,27 +172,37 @@ public class MobilePlayerViewController: MPMoviePlayerViewController {
     (getViewForElementWithIdentifier("playback") as? Slider)?.delegate = self
 
     (getViewForElementWithIdentifier("close") as? Button)?.addCallback(
-      {
-        if let navigationController = self.navigationController {
+      { [weak self] in
+        guard let slf = self else {
+          return
+        }
+        if let navigationController = slf.navigationController {
           navigationController.popViewControllerAnimated(true)
-        } else {
-          self.dismissViewControllerAnimated(true, completion: nil)
+        } else if let presentingController = slf.presentingViewController {
+          presentingController.dismissMoviePlayerViewControllerAnimated()
         }
       },
       forControlEvents: .TouchUpInside)
 
     if let actionButton = getViewForElementWithIdentifier("action") as? Button {
+      actionButton.hidden = true // Initially hidden until 1 or more `activityItems` are set.
       actionButton.addCallback(
-        {
-          self.showContentActions(actionButton)
+        { [weak self] in
+          guard let slf = self else {
+            return
+          }
+          slf.showContentActions(actionButton)
         },
         forControlEvents: .TouchUpInside)
     }
 
     (getViewForElementWithIdentifier("play") as? ToggleButton)?.addCallback(
-      {
-        self.resetHideControlsTimer()
-        self.state == .Playing ? self.pause() : self.play()
+      { [weak self] in
+        guard let slf = self else {
+          return
+        }
+        slf.resetHideControlsTimer()
+        slf.state == .Playing ? slf.pause() : slf.play()
       },
       forControlEvents: .TouchUpInside)
 
@@ -194,10 +210,10 @@ public class MobilePlayerViewController: MPMoviePlayerViewController {
   }
 
   private func initializeControlsViewTapRecognizers() {
-    let singleTapRecognizer = UITapGestureRecognizer(callback: handleContentTap)
+    let singleTapRecognizer = UITapGestureRecognizer { [weak self] in self?.handleContentTap() }
     singleTapRecognizer.numberOfTapsRequired = 1
     controlsView.addGestureRecognizer(singleTapRecognizer)
-    let doubleTapRecognizer = UITapGestureRecognizer(callback: handleContentDoubleTap)
+    let doubleTapRecognizer = UITapGestureRecognizer { [weak self] in self?.handleContentDoubleTap() }
     doubleTapRecognizer.numberOfTapsRequired = 2
     controlsView.addGestureRecognizer(doubleTapRecognizer)
     singleTapRecognizer.requireGestureRecognizerToFail(doubleTapRecognizer)
@@ -218,7 +234,7 @@ public class MobilePlayerViewController: MPMoviePlayerViewController {
     view.addSubview(controlsView)
     playbackInterfaceUpdateTimer = NSTimer.scheduledTimerWithTimeInterval(
       MobilePlayerViewController.playbackInterfaceUpdateInterval,
-      callback: updatePlaybackInterface,
+      callback: { [weak self] in self?.updatePlaybackInterface() },
       repeats: true)
     if let prerollViewController = prerollViewController {
       shouldAutoplay = false
@@ -338,7 +354,12 @@ public class MobilePlayerViewController: MPMoviePlayerViewController {
   /// button is pressed (if it exists). If content is playing, it is paused automatically at presentation and will
   /// continue after the controller is dismissed. Override `showContentActions()` if you want to change the button's
   /// behavior.
-  public var activityItems: [AnyObject]?
+  public var activityItems: [AnyObject]? {
+    didSet {
+      let isEmpty = activityItems?.isEmpty
+      getViewForElementWithIdentifier("action")?.hidden = (isEmpty == nil || isEmpty == true)
+    }
+  }
 
   /// Method that is called when a control interface button with identifier "action" is tapped. Presents a
   /// `UIActivityViewController` with `activityItems` set as its activity items. If content is playing, it is paused
@@ -349,7 +370,7 @@ public class MobilePlayerViewController: MPMoviePlayerViewController {
   ///   - sourceView: On iPads the activity view controller is presented as a popover and a source view needs to
   ///     provided or a crash will occur.
   public func showContentActions(sourceView: UIView? = nil) {
-    guard let activityItems = activityItems else { return }
+    guard let activityItems = activityItems where !activityItems.isEmpty else { return }
     let wasPlaying = (state == .Playing)
     moviePlayer.pause()
     let activityVC = UIActivityViewController(activityItems: activityItems, applicationActivities: nil)
@@ -529,14 +550,14 @@ public class MobilePlayerViewController: MPMoviePlayerViewController {
     if !time.isNormal {
       return "00:00"
     }
-    let hours = UInt(time / 3600)
-    let minutes = UInt((time / 60) % 60)
-    let seconds = UInt(time % 60)
-    let text = NSString(format: "%02lu:%02lu", minutes, seconds) as String
+    let hours = Int(floor(time / 3600))
+    let minutes = Int(floor((time / 60) % 60))
+    let seconds = Int(round(time % 60))
+    let minutesAndSeconds = NSString(format: "%02d:%02d", minutes, seconds) as String
     if hours > 0 {
-      return NSString(format: "%02lu:%@", hours, text) as String
+      return NSString(format: "%02d:%@", hours, minutesAndSeconds) as String
     } else {
-      return text
+      return minutesAndSeconds
     }
   }
 

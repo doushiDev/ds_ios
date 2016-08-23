@@ -1,7 +1,7 @@
 //
 //  IQTextView.swift
 // https://github.com/hackiftekhar/IQKeyboardManager
-// Copyright (c) 2013-15 Iftekhar Qurashi.
+// Copyright (c) 2013-16 Iftekhar Qurashi.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -29,17 +29,17 @@ public class IQTextView : UITextView {
 
     required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "refreshPlaceholder", name: UITextViewTextDidChangeNotification, object: self)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.refreshPlaceholder), name: UITextViewTextDidChangeNotification, object: self)
     }
 
     override init(frame: CGRect, textContainer: NSTextContainer?) {
         super.init(frame: frame, textContainer: textContainer)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "refreshPlaceholder", name: UITextViewTextDidChangeNotification, object: self)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.refreshPlaceholder), name: UITextViewTextDidChangeNotification, object: self)
     }
     
     override public func awakeFromNib() {
          super.awakeFromNib()
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "refreshPlaceholder", name: UITextViewTextDidChangeNotification, object: self)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.refreshPlaceholder), name: UITextViewTextDidChangeNotification, object: self)
     }
     
     deinit {
@@ -49,7 +49,7 @@ public class IQTextView : UITextView {
     private var placeholderLabel: UILabel?
     
     /** @abstract To set textView's placeholder text. Default is ni.    */
-    public var placeholder : String? {
+    @IBInspectable public var placeholder : String? {
 
         get {
             return placeholderLabel?.text
@@ -59,7 +59,7 @@ public class IQTextView : UITextView {
             
             if placeholderLabel == nil {
                 
-                placeholderLabel = UILabel(frame: CGRectInset(self.bounds, 5, 0))
+                placeholderLabel = UILabel()
                 
                 if let unwrappedPlaceholderLabel = placeholderLabel {
                     
@@ -79,7 +79,16 @@ public class IQTextView : UITextView {
         }
     }
     
-    private func refreshPlaceholder() {
+    public override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        if let unwrappedPlaceholderLabel = placeholderLabel {
+            unwrappedPlaceholderLabel.sizeToFit()
+            unwrappedPlaceholderLabel.frame = CGRectMake(8, 8, CGRectGetWidth(self.frame)-16, CGRectGetHeight(unwrappedPlaceholderLabel.frame))
+        }
+    }
+
+    public func refreshPlaceholder() {
         
         if text.characters.count != 0 {
             placeholderLabel?.alpha = 0
@@ -117,7 +126,7 @@ public class IQTextView : UITextView {
         }
         
         set {
-            
+            super.delegate = newValue
         }
     }
 }

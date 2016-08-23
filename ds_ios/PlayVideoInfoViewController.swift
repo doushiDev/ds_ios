@@ -10,7 +10,7 @@ import UIKit
 import Alamofire
 import MJRefresh
 import Kingfisher
-import GoogleMobileAds
+//import GoogleMobileAds
 
 class PlayVideoInfoViewController: UIViewController {
 
@@ -28,23 +28,23 @@ class PlayVideoInfoViewController: UIViewController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 
-		let bannerView = GADBannerView()
-        
-
-//		bannerView.backgroundColor = UIColor.redColor()
-		bannerView.frame = CGRect(x: 0, y: self.view.bounds.width - 80 , width: self.view.bounds.width, height: 80)
-//
-////		        bannerView.frame = self.view.frame
-//
-//        print("bannerView-> \(bannerView.frame)")
+//		let bannerView = GADBannerView()
 //        
-		// 添加Google广告
-		bannerView.adUnitID = "ca-app-pub-7191090490730162/2348155930"
-		bannerView.rootViewController = self;
-		let request = GADRequest()
-//		request.testDevices = ["7fa45ea242e06acf374bbde4d05916e0"]
-		bannerView.loadRequest(request)
-		self.view.addSubview(bannerView)
+//
+////		bannerView.backgroundColor = UIColor.redColor()
+//		bannerView.frame = CGRect(x: 0, y: self.view.bounds.width - 80 , width: self.view.bounds.width, height: 80)
+////
+//////		        bannerView.frame = self.view.frame
+////
+////        print("bannerView-> \(bannerView.frame)")
+////        
+//		// 添加Google广告
+//		bannerView.adUnitID = "ca-app-pub-7191090490730162/9315670338"
+//		bannerView.rootViewController = self;
+//		let request = GADRequest()
+////		request.testDevices = ["7fa45ea242e06acf374bbde4d05916e0"]
+//		bannerView.loadRequest(request)
+//		self.view.addSubview(bannerView)
 
 
 		if DataCenter.shareDataCenter.user.id != 0 {

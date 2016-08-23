@@ -1,7 +1,7 @@
 //
 //  IQUIView+Hierarchy.swift
 // https://github.com/hackiftekhar/IQKeyboardManager
-// Copyright (c) 2013-15 Iftekhar Qurashi.
+// Copyright (c) 2013-16 Iftekhar Qurashi.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -65,7 +65,7 @@ public extension UIView {
         var nextResponder: UIResponder? = self
         
         repeat {
-            nextResponder = nextResponder?.nextResponder()!
+            nextResponder = nextResponder?.nextResponder()
             
             if let viewController = nextResponder as? UIViewController {
                 return viewController
@@ -198,7 +198,9 @@ public extension UIView {
             
             if textField._IQcanBecomeFirstResponder() == true {
                 textfields.append(textField)
-            } else if textField.subviews.count != 0 {
+                
+                //Sometimes there are hidden or disabled views and textField inside them still recorded, so we added some more validations here (Bug ID:
+            } else if textField.subviews.count != 0  && userInteractionEnabled == true && hidden == false && alpha != 0.0 {
                 for deepView in textField.deepResponderViews() {
                     textfields.append(deepView)
                 }
@@ -268,10 +270,12 @@ public extension UIView {
     /**
     Returns current view transform with respect to the 'toView'.
     */
-    public func convertTransformToView(var toView:UIView?)->CGAffineTransform {
+    public func convertTransformToView(toView:UIView?)->CGAffineTransform {
         
-        if toView == nil {
-            toView = window
+        var newView = toView
+        
+        if newView == nil {
+            newView = window
         }
         
         //My Transform
@@ -286,7 +290,7 @@ public extension UIView {
         var viewTransform = CGAffineTransformIdentity
         
         //view Transform
-        if let unwrappedToView = toView {
+        if let unwrappedToView = newView {
             
             if let unwrappedSuperView = unwrappedToView.superview {
                 viewTransform = CGAffineTransformConcat(unwrappedToView.transform, unwrappedSuperView.convertTransformToView(nil))

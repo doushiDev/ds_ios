@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '748083244111F4773702D9F6'
+               BlueprintIdentifier = '7B9A90C12E862B5DF1F21A34B49CDAB0'
                BlueprintName = 'RoundImageView'
                ReferencedContainer = 'container:Pods.xcodeproj'
                BuildableName = 'RoundImageView.framework'>

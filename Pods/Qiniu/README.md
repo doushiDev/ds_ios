@@ -11,14 +11,15 @@
 通过 CocoaPods
 
 ```ruby
-pod "Qiniu", "~> 7.0"
+pod "Qiniu" "~> 7.1"
 ```
 
 ## 运行环境
 
 | Qiniu SDK 版本 | 最低 iOS版本   | 最低 OS X 版本  |                                   Notes                                   |
 |:--------------------:|:---------------------------:|:----------------------------:|:-------------------------------------------------------------------------:|
-|          7.x         |            iOS 6            |           OS X 10.8          | Xcode 最低版本 5.  |
+|          7.1.x / AFNetworking-3.x       |            iOS 7            |           OS X 10.9          | Xcode 最低版本 6.  |
+|          [7.0.x / AFNetworking-2.x](https://github.com/qiniu/objc-sdk/tree/7.0.x/AFNetworking-2.x)         |            iOS 6            |           OS X 10.8          | Xcode 最低版本 5.  |
 |          [7.x / AFNetworking-1.x](https://github.com/qiniu/objc-sdk/tree/AFNetworking-1.x)         |            iOS 5            |         OS X 10.7        |Xcode 最低版本 5. |
 |          [6.x](https://github.com/qiniu/ios-sdk)         |            iOS 6            |         None        |Xcode 最低版本 5. |
 
@@ -52,8 +53,12 @@ $ xctool -workspace QiniuSDK.xcworkspace -scheme "QiniuSDK Mac" -sdk macosx -con
 可以在单元测试上修改, 熟悉 SDK
 
 ``` bash
-$ xctool -workspace QiniuSDK.xcworkspace -scheme "QiniuSDK Mac" -sdk macosx -configuration Debug test -test-sdk macosx -only "QiniuSDK MacTests:QNResumeUploadTest/test500k"
+$ xctool -workspace QiniuSDK.xcworkspace -scheme "QiniuSDK_Mac" -sdk macosx -configuration Debug test -test-sdk macosx -only "QiniuSDK MacTests:QNResumeUploadTest/test500k"
 ```
+
+## 示例代码
+* 完整的demo 见 QiniuDemo 目录下的代码
+* 具体细节的一些配置 可参考 QiniuSDKTests 下面的一些单元测试，以及源代码
 
 ## 常见问题
 

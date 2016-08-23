@@ -2,10 +2,12 @@
 
 MobilePlayer [![CocoaPods](https://img.shields.io/cocoapods/p/MobilePlayer.svg?style=flat)](https://cocoapods.org/pods/MobilePlayer)
 ==================
-[![CocoaPods](http://img.shields.io/cocoapods/v/MobilePlayer.svg?style=flat)](http://cocoapods.org/?q=MobilePlayer) [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
+[![codebeat badge](https://codebeat.co/badges/d9492bce-7a4b-4221-b7e0-9b5abf6dda6a)](https://codebeat.co/projects/github-com-mobileplayer-mobileplayer-ios)
+[![CocoaPods](http://img.shields.io/cocoapods/v/MobilePlayer.svg?style=flat)](http://cocoapods.org/?q=MobilePlayer)
+[![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 [![Dependencies](https://img.shields.io/badge/dependencies-none-brightgreen.svg)](https://github.com/mobileplayer/mobileplayer-ios)
 [![Ready](https://badge.waffle.io/mobileplayer/mobileplayer-ios.png?label=Ready&title=Ready)](https://waffle.io/mobileplayer/mobileplayer-ios)
-[![StackOverflow](https://img.shields.io/badge/StackOverflow-Ask%20a%20question!-blue.svg)](http://stackoverflow.com/questions/ask?tags=mobile player+ios+swift+video player) 
+[![StackOverflow](https://img.shields.io/badge/StackOverflow-Ask%20a%20question!-blue.svg)](http://stackoverflow.com/questions/ask?tags=mobile player+ios+swift+video player)
 [![Join the chat at https://gitter.im/mobileplayer/mobileplayer-ios](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/mobileplayer/mobileplayer-ios?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 A powerful and completely customizable media player for iOS.
@@ -52,7 +54,7 @@ Features
 Installation
 ==================
 
-### [Cocoapods](https://github.com/CocoaPods/CocoaPods)
+### [CocoaPods](https://github.com/CocoaPods/CocoaPods)
 Add the following line in your `Podfile`.
 ```
 pod "MobilePlayer"
@@ -190,7 +192,7 @@ For all available `identifier`s, check the documentation or [here](https://githu
 ![example-skinning](http://i.imgur.com/YyiYJCc.png)
 
 **Example designs**
-![example-designs-skinning](http://i.imgur.com/qNDrx9T.gif)
+![example-design-skinning](http://i.imgur.com/qNDrx9T.gif)
 
 ### Showing overlays
 ```swift
@@ -254,7 +256,7 @@ presentMoviePlayerViewControllerAnimated(playerVC)
 ![example-pause-overlay](http://i.imgur.com/wfC9a7t.gif)
 
 **Example designs**
-![example-designs-pause-overlay](http://i.imgur.com/3Kfi1IZ.gif)
+![example-design-pause-overlay](http://i.imgur.com/ectKEwy.gif)
 
 ### Post-roll
 ```swift
@@ -270,12 +272,12 @@ presentMoviePlayerViewControllerAnimated(playerVC)
 ![example-postroll](http://i.imgur.com/Hp8NEfg.png)
 
 **Example designs**
-![example-designs-postroll](http://i.imgur.com/qnVs7pa.gif)
+![example-design-postroll](http://i.imgur.com/MRVxNAt.gif)
 
 Examples
 ==================
-![examples](http://i.imgur.com/ztOPUW6.gif)
 After cloning the repo, run the `MobilePlayerExamples` target to see examples for many use cases.
+![examples](http://i.imgur.com/ztOPUW6.gif)
 
 Documentation
 ==================

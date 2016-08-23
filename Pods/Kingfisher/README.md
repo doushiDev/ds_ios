@@ -20,13 +20,13 @@
 
 </p>
 
-Kingfisher is a lightweight and pure Swift implemented library for downloading and caching image from the web. This project is heavily inspired by the popular [SDWebImage](https://github.com/rs/SDWebImage). And it provides you a chance to use pure Swift alternation in your next app.
+Kingfisher is a lightweight and pure Swift implemented library for downloading and caching image from the web. This project is heavily inspired by the popular [SDWebImage](https://github.com/rs/SDWebImage). And it provides you a chance to use pure Swift alternative in your next app.
 
 ## Features
 
-* Everything in Kingfisher goes asynchronously, not only downloading, but also caching. That means you will never worry about blocking your UI thread.
-* Multiple-layer cache. Downloaded images will be cached in both memory and disk. So there is no need to download again and this could boost your app dramatically.
-* Cache management. You can set the max duration or size the cache could take. And the cache will also be cleaned automatically to prevent taking too much resource.
+* Everything in Kingfisher is asynchronous, not only downloading, but also caching. That means you never need to worry about blocking your UI thread.
+* Multiple-layer cache. Downloaded images will be cached in both memory and disk. So there is no need to download again,  this could boost your app's perceptual speed dramatically.
+* Cache management. You can set the max duration or size the cache takes. From this, the cache will be cleaned automatically to prevent taking too many resources.
 * Modern framework. Kingfisher uses `NSURLSession` and the latest technology of GCD, which makes it a strong and swift framework. It also provides you easy APIs to use.
 * Cancelable processing task. You can cancel the downloading process if it is not needed anymore.
 * Independent components. You can use the downloader or caching system separately. Or even create your own cache based on Kingfisher's code.
@@ -58,7 +58,7 @@ source 'https://github.com/CocoaPods/Specs.git'
 platform :ios, '8.0'
 use_frameworks!
 
-pod 'Kingfisher', '~> 1.8'
+pod 'Kingfisher', '~> 1.9'
 ```
 
 Then, run the following command:
@@ -83,7 +83,7 @@ $ brew install carthage
 To integrate Kingfisher into your Xcode project using Carthage, specify it in your `Cartfile`:
 
 ``` ogdl
-github "onevcat/Kingfisher" ~> 1.8
+github "onevcat/Kingfisher" ~> 1.9
 ```
 
 Then, run the following command to build the Kingfisher framework:
@@ -215,16 +215,28 @@ imageView.kf_setImageWithURL(NSURL(string: "your_image_url")!,
 
 #### Cancel Task
 
-All `kf_setImageWithURL` methods return a `RetrieveImageTask` object. You can `cancel` the task if the images are not needed.
+You can `cancel` the task if the images are not needed anymore. 
+It could be useful when you use Kingfisher to set an image in a cell of table view or collection view, 
+but users scroll the view and the cells disappeared before downloading finishing.
+
+``` swift
+imageView.kf_setImageWithURL(NSURL(string: "http://your_image_url.png")!)
+
+// The image retrieving will stop.
+imageView.kf_cancelDownloadTask()
+```
+
+All `kf_setImageWithURL` methods return a `RetrieveImageTask` object as well. You can also hold and manage it if you need to apply some check:
 
 ``` swift
 let task = imageView.kf_setImageWithURL(NSURL(string: "http://your_image_url.png")!)
-task.cancel()
 
-// The image retrieving will stop.
+let urlShouldNotBeCancelled: URL = ...
+
+if task.downloadTask?.URL != urlShouldNotBeCancelled {
+    task.cancel()
+}
 ```
-
-There is a category for `UIButton` as well.
 
 ### Downloader & Cache system
 

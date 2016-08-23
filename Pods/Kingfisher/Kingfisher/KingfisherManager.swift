@@ -35,10 +35,13 @@ public class RetrieveImageTask {
     
     // If task is canceled before the download task started (which means the `downloadTask` is nil),
     // the download task should not begin.
-    var cancelled: Bool = false
+    var cancelledBeforeDownlodStarting: Bool = false
     
-    var diskRetrieveTask: RetrieveImageDiskTask?
-    var downloadTask: RetrieveImageDownloadTask?
+    /// The disk retrieve task in this image task. Kingfisher will try to look up in cache first. This task represent the cache search task.
+    public var diskRetrieveTask: RetrieveImageDiskTask?
+    
+    /// The network retrieve task in this image task.
+    public var downloadTask: RetrieveImageDownloadTask?
     
     /**
     Cancel current task. If this task does not begin or already done, do nothing.
@@ -53,9 +56,9 @@ public class RetrieveImageTask {
         
         if let downloadTask = downloadTask {
             downloadTask.cancel()
+        } else {
+            cancelledBeforeDownlodStarting = true
         }
-        
-        cancelled = true
     }
 }
 

@@ -51,7 +51,7 @@ class FindMainTableViewController: UITableViewController,SDCycleScrollViewDelega
         tableHeardView.delegate = self;
         
         
-        tableHeardView.dotColor = UIColor(rgba:"#f0a22a") // 自定义分页控件小圆标颜色
+        tableHeardView.pageDotColor = UIColor(rgba:"#f0a22a") // 自定义分页控件小圆标颜色
         tableHeardView.placeholderImage = UIImage(named: "tutorial_background_03")
         tableHeardView.autoScrollTimeInterval = 5
         

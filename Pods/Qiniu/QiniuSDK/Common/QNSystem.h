@@ -13,4 +13,8 @@ BOOL hasNSURLSession();
 
 BOOL hasAts();
 
+BOOL allowsArbitraryLoads();
+
+BOOL isIpV6FullySupported();
+
 #endif /* QNSystem_h */
