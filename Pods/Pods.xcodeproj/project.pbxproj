@@ -817,7 +817,6 @@
 		9AE2D55D4E64F3782D90EED1B9B1FDFE /* Validator-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Validator-prefix.pch"; sourceTree = "<group>"; };
 		9B0D9096C0E21C5BA580BBA4908FD8AC /* Qiniu-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Qiniu-dummy.m"; sourceTree = "<group>"; };
 		9B40B8C7151960EE521F602333FFD57D /* UIButton+AFNetworking.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIButton+AFNetworking.h"; path = "UIKit+AFNetworking/UIButton+AFNetworking.h"; sourceTree = "<group>"; };
-		9BF50D4BE0A58D13FCF1E9D9E75FFA2E /* GoogleMobileAds.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleMobileAds.framework; path = Frameworks/GoogleMobileAds.framework; sourceTree = "<group>"; };
 		9D54F7CC8344AF2DE5340736FA3BD10D /* SDCycleScrollView.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SDCycleScrollView.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9E8D934BC8A0E6ED2E599CD1F237A7D5 /* QiniuSDK.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = QiniuSDK.h; path = QiniuSDK/QiniuSDK.h; sourceTree = "<group>"; };
 		9EA14C649085528E3B3B1AAD68819A93 /* SDWebImageDownloaderOperation.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SDWebImageDownloaderOperation.m; path = SDWebImage/SDWebImageDownloaderOperation.m; sourceTree = "<group>"; };
@@ -1710,7 +1709,6 @@
 				B7BDF4C5A51068762305076A238F0C3D /* Answers */,
 				AE9D39BF9B0D8D78EAB592B2D2CE4AB2 /* APParallaxHeader */,
 				EF82CF57AB415AA670AB83835CDE738F /* Fabric */,
-				E68BFD6CC5DDDAE86354CE922F53317D /* Google-Mobile-Ads-SDK */,
 				11EF3D3CF8263FC6E050F88512C74B38 /* HappyDNS */,
 				A56FF5868AFEC261D8E05D29A2FFA932 /* IQKeyboardManagerSwift */,
 				FE2CE96BB43F7E1C222800EFE42F05BE /* Kingfisher */,
@@ -1774,14 +1772,6 @@
 			);
 			name = "Support Files";
 			path = "../Target Support Files/MJRefresh";
-			sourceTree = "<group>";
-		};
-		A15464D2ADC1840BF8E106B405E58683 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				9BF50D4BE0A58D13FCF1E9D9E75FFA2E /* GoogleMobileAds.framework */,
-			);
-			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		A56FF5868AFEC261D8E05D29A2FFA932 /* IQKeyboardManagerSwift */ = {
@@ -1971,14 +1961,6 @@
 			);
 			name = "Support Files";
 			path = "../Target Support Files/AFNetworking";
-			sourceTree = "<group>";
-		};
-		E68BFD6CC5DDDAE86354CE922F53317D /* Google-Mobile-Ads-SDK */ = {
-			isa = PBXGroup;
-			children = (
-				A15464D2ADC1840BF8E106B405E58683 /* Frameworks */,
-			);
-			path = "Google-Mobile-Ads-SDK";
 			sourceTree = "<group>";
 		};
 		EF82CF57AB415AA670AB83835CDE738F /* Fabric */ = {

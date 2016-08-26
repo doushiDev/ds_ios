@@ -10,9 +10,9 @@ import UIKit
 import Alamofire
 import MJRefresh
 import Kingfisher
-//import GoogleMobileAds
+import GoogleMobileAds
 
-class PlayVideoInfoViewController: UIViewController {
+class PlayVideoInfoViewController: UIViewController,GADBannerViewDelegate {
 
 
 	@IBOutlet weak var videoTitleLabel: UILabel!
@@ -24,28 +24,42 @@ class PlayVideoInfoViewController: UIViewController {
 	var userId = 0
 
 	@IBOutlet weak var collectUIButton: UIButton!
-
+  
 	override func viewDidLoad() {
 		super.viewDidLoad()
 
 //		let bannerView = GADBannerView()
 //        
 //
-////		bannerView.backgroundColor = UIColor.redColor()
-//		bannerView.frame = CGRect(x: 0, y: self.view.bounds.width - 80 , width: self.view.bounds.width, height: 80)
+//
 ////
-//////		        bannerView.frame = self.view.frame
-////
-////        print("bannerView-> \(bannerView.frame)")
-////        
+//
 //		// 添加Google广告
 //		bannerView.adUnitID = "ca-app-pub-7191090490730162/9315670338"
 //		bannerView.rootViewController = self;
 //		let request = GADRequest()
-////		request.testDevices = ["7fa45ea242e06acf374bbde4d05916e0"]
+//		request.testDevices = ["9b47a493ab7063469109ea3f70443150"]
 //		bannerView.loadRequest(request)
 //		self.view.addSubview(bannerView)
+        
+        
+        let bannerView = GADBannerView(adSize: kGADAdSizeSmartBannerPortrait)
+        
+        bannerView.frame = CGRect(x: 0, y: self.view.bounds.height / 2 - 40 , width: self.view.bounds.width, height: 80)
+        
+        bannerView.rootViewController = self;
 
+        bannerView.adUnitID = "ca-app-pub-7191090490730162/8688484330"
+        
+        let request = GADRequest()
+//        request.testDevices = ["9b47a493ab7063469109ea3f70443150",kGADSimulatorID]
+        bannerView.loadRequest(request)
+
+        
+        bannerView.delegate = self
+        
+        self.view.addSubview(bannerView)
+        
 
 		if DataCenter.shareDataCenter.user.id != 0 {
 			userId = DataCenter.shareDataCenter.user.id
@@ -69,7 +83,21 @@ class PlayVideoInfoViewController: UIViewController {
 			})
 	}
 
+    func adViewDidReceiveAd(bannerView: GADBannerView!) {
+        bannerView.hidden = false
+        bannerView.alpha = 0
+        UIView.animateWithDuration(1, animations: {
+            bannerView.alpha = 1
+        })
 
+    }
+    
+    func adView(bannerView: GADBannerView!,
+                didFailToReceiveAdWithError error: GADRequestError!) {
+        print("adView:didFailToReceiveAdWithError: \(error.localizedDescription)")
+    }
+    
+    
 	override func viewWillAppear(animated: Bool) {
 		super.viewWillAppear(animated)
 		let user = userDefaults.objectForKey("userInfo")
@@ -77,6 +105,7 @@ class PlayVideoInfoViewController: UIViewController {
 		if user != nil {
 			userId = user!.objectForKey("id") as! Int
 		}
+        
 	}
 
 

@@ -34,7 +34,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>1.3.160713</string>
+	<string>1.3.1600825</string>
 	<key>Fabric</key>
 	<dict>
 		<key>APIKey</key>
@@ -57,6 +57,7 @@
 	</dict>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
+		<string>openapp.jdmobile</string>
 		<string>wechat</string>
 		<string>weixin</string>
 		<string>sinaweibohd</string>

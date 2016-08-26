@@ -64,7 +64,8 @@ class VideoTableViewController: UITableViewController {
             self.loadMoreData()
             
         })
-        self.tableView.mj_footer.hidden = true
+        
+        self.tableView.mj_footer.hidden = false
         
         
         ti = NSTimer.scheduledTimerWithTimeInterval(10, target: self, selector: #selector(VideoTableViewController.isLoading), userInfo: "isLoading", repeats: true)
@@ -72,7 +73,6 @@ class VideoTableViewController: UITableViewController {
         
         //注册3DTouch
         registerForPreviewingWithDelegate(self, sourceView: view)
-
         
     }
     
@@ -297,7 +297,6 @@ class VideoTableViewController: UITableViewController {
             //            let playVideoViewController =  segue.destinationViewController as! PlayVideoViewController
             
         }
-    } 
-    
+    }
 }
 

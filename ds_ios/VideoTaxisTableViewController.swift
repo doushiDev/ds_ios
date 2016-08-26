@@ -35,7 +35,7 @@ class VideoTaxisTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.navigationController?.title = "排行榜"
+//        self.navigationController?.title = "排行榜"
         self.navigationController?.navigationBar.tintColor = UIColor(rgba:"#f0a22a")
         
         setNav()

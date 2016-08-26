@@ -190,7 +190,7 @@ class FindMainTableViewController: UITableViewController,SDCycleScrollViewDelega
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 1
+        return 2
     }
 
     
@@ -207,6 +207,12 @@ class FindMainTableViewController: UITableViewController,SDCycleScrollViewDelega
         if indexPath.row == 0 {
             cell.titleLabel.text = "排行榜"
             cell.cellImageView.image =  UIImage(named: "sort")
+        }
+        
+        if indexPath.row == 1 {
+            cell.titleLabel.text = "商品推广"
+            cell.cellImageView.image =  UIImage(named: "store")
+            
         }
         
 //        if indexPath.row == 2 {
@@ -235,6 +241,33 @@ class FindMainTableViewController: UITableViewController,SDCycleScrollViewDelega
         super.viewWillAppear(animated)
         
          self.navigationController?.navigationBar.hidden = false
+        
+    }
+    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        
+//        ViewControllerOne *oneController = [[self storyboard]instantiateViewControllerWithIdentifier:@"ViewOne"];
+
+        
+        
+        if indexPath.row == 0 {
+            let videoTaxisTableViewController =  self.storyboard?.instantiateViewControllerWithIdentifier("VideoTaxisTableViewController")
+            videoTaxisTableViewController!.title = "排行榜"
+
+            self.navigationController?.pushViewController(videoTaxisTableViewController!, animated: true)
+            
+        }
+        
+        if indexPath.row == 1 {
+//            performSegueWithIdentifier("toAds", sender: self)
+            
+            let videoAdsTableViewController =  self.storyboard?.instantiateViewControllerWithIdentifier("AdsTableViewController")
+            videoAdsTableViewController!.title = "商品推广"
+            
+            self.navigationController?.pushViewController(videoAdsTableViewController!, animated: true)
+            
+        }
+
         
     }
 
@@ -285,12 +318,20 @@ class FindMainTableViewController: UITableViewController,SDCycleScrollViewDelega
 //            
 //        }
         
-        if segue.identifier == "toVideoTaxis" {
-            
-          let videoTaxisTableViewController =  segue.destinationViewController as! VideoTaxisTableViewController
-            videoTaxisTableViewController.title = "排行榜"
-         }
-        
+//        if segue.identifier == "toVideoTaxis" {
+//            
+//          let videoTaxisTableViewController =  segue.destinationViewController as! VideoTaxisTableViewController
+//            videoTaxisTableViewController.title = "排行榜"
+//         }
+//        
+//        
+//        
+//        if segue.identifier == "toAds" {
+//            
+//            let videoTaxisTableViewController =  segue.destinationViewController as! VideoTaxisTableViewController
+//            videoTaxisTableViewController.title = "商品推广"
+//        }
+//
         
     }
 

@@ -36,8 +36,8 @@ def shared_pods
     
     pod 'MobilePlayer'
 
-    pod 'Google-Mobile-Ads-SDK', '~> 7.0'
-    
+#    pod 'Google-Mobile-Ads-SDK', '~> 7.0'
+
     pod 'Fabric'
     pod 'Answers'
 #    pod 'Crashlytics'

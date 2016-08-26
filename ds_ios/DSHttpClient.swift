@@ -220,6 +220,8 @@ struct HttpClientByVideo {
         case VideosByType(Int,Int,Int,Int) //根据类型获取视频
         case getVideosByBanner(Int) //获取发现Banner视频
         case getVideoTaxis(Int) //获取排行榜
+        case getAds(Int) //获取广告
+
         case getVideosById(String,Int) //根据视频id获取视频信息
         
         // 不同请求，对应不同请求类型
@@ -230,6 +232,8 @@ struct HttpClientByVideo {
             case .getVideosByBanner:
                 return .GET
             case .getVideoTaxis:
+                return .GET
+            case .getAds:
                 return .GET
             case .getVideosById:
                 return .GET
@@ -247,6 +251,8 @@ struct HttpClientByVideo {
                     return "getVideosByBanner/\(userId)"
                 case .getVideoTaxis(let userId):
                     return "getVideoTaxis/\(userId)"
+                case .getAds(let type):
+                    return "getAds/\(type)"
                 case .getVideosById(let videoId,let userId):
                     return "getVideosById/\(videoId)/\(userId)"
                 }

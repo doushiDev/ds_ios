@@ -13,7 +13,7 @@ class ExceptionsViewController: UIViewController {
     @IBOutlet weak var exceptionsWebView: UIWebView!
     override func viewDidLoad() {
         super.viewDidLoad()
-        let request = NSURLRequest(URL: NSURL(string: "https://api.doushi.me/mzsm.html?")!)
+        let request = NSURLRequest(URL: NSURL(string: "https://ds.itjh.net/mzsm.html?")!)
          exceptionsWebView.loadRequest(request)
      }
     
