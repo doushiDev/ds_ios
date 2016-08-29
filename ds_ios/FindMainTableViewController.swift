@@ -115,6 +115,8 @@ class FindMainTableViewController: UITableViewController,SDCycleScrollViewDelega
                 self.imageURL1.removeAll()
                 self.titles1.removeAll()
                 
+                self.videos.removeAllObjects()
+
                 self.videos.addObjectsFromArray(videoInfos!)
                 
                 self.navigationController?.navigationBar.stopLoadingAnimationWithView(view)

@@ -91,6 +91,8 @@ class VideoTaxisTableViewController: UITableViewController {
         HttpController.getVideos(HttpClientByVideo.DSRouter.getVideoTaxis(userId)) { videoInfos in
             
             if videoInfos != nil {
+                self.videos.removeAllObjects()
+
                 self.videos.addObjectsFromArray(videoInfos!)
                 self.tableView.reloadData()
 
