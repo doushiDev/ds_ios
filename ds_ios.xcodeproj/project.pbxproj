@@ -21,6 +21,7 @@
 		AB562C7E1D6E939800FBE953 /* GoogleMobileAds.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB562C7D1D6E939800FBE953 /* GoogleMobileAds.framework */; };
 		AB562C821D6EC49000FBE953 /* VideoAdsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB562C811D6EC49000FBE953 /* VideoAdsTableViewController.swift */; };
 		AB562C841D6ECE9A00FBE953 /* CCWebViewSController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB562C831D6ECE9A00FBE953 /* CCWebViewSController.swift */; };
+		AB8109831D76DBE000CA0912 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AB8109821D76DBE000CA0912 /* Images.xcassets */; };
 		AB86EA631C09CD860095412C /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB86EA621C09CD860095412C /* Security.framework */; };
 		AB86EA651C09CD950095412C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB86EA641C09CD950095412C /* Foundation.framework */; };
 		AB86EA671C09CDD30095412C /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB86EA661C09CDD30095412C /* CoreGraphics.framework */; };
@@ -172,6 +173,7 @@
 		AB562C811D6EC49000FBE953 /* VideoAdsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoAdsTableViewController.swift; sourceTree = "<group>"; };
 		AB562C831D6ECE9A00FBE953 /* CCWebViewSController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CCWebViewSController.swift; sourceTree = "<group>"; };
 		AB70CBB01C083A9D0087F086 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = "Pods/../build/Debug-iphoneos/Alamofire.framework"; sourceTree = "<group>"; };
+		AB8109821D76DBE000CA0912 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		AB86EA621C09CD860095412C /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		AB86EA641C09CD950095412C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		AB86EA661C09CDD30095412C /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -667,6 +669,7 @@
 				ABC79F2D1C083844005FA420 /* Assets.xcassets */,
 				ABC79F321C083844005FA420 /* Info.plist */,
 				ABC79F2A1C083844005FA420 /* ds_ios.xcdatamodeld */,
+				AB8109821D76DBE000CA0912 /* Images.xcassets */,
 			);
 			path = ds_ios;
 			sourceTree = "<group>";
@@ -914,6 +917,7 @@
 				AB4BBF331C1556D0002F94A5 /* Play.storyboard in Resources */,
 				AB4BBF301C1556D0002F94A5 /* Find.storyboard in Resources */,
 				AB86EB791C0A9CFD0095412C /* kr-video-player-fullscreen@2x.png in Resources */,
+				AB8109831D76DBE000CA0912 /* Images.xcassets in Resources */,
 				AB86EC091C0ADC410095412C /* UMSocialSDKResourcesNew.bundle in Resources */,
 				AB86EBFD1C0ADC410095412C /* UMSCommentInputControlleriPad.xib in Resources */,
 				AB4BBF2F1C1556D0002F94A5 /* AboutView.storyboard in Resources */,
@@ -1255,6 +1259,7 @@
 			baseConfigurationReference = C1D21E5F3D2E7E4BB647565B /* Pods-ds_ios.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				ENABLE_BITCODE = NO;
@@ -1375,6 +1380,7 @@
 			baseConfigurationReference = FEDEBF656931BE317F592E57 /* Pods-ds_ios.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				ENABLE_BITCODE = NO;
