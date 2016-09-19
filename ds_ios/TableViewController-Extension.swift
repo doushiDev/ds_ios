@@ -24,17 +24,17 @@ extension VideoTableViewController: UIViewControllerPreviewingDelegate{
     
     - returns: 文章详情页  浮动页
     */
-    func previewingContext(previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
+    func previewingContext(_ previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
         
         
         // Get indexPath for location (CGPoint) + cell (for sourceRect)
-        guard let indexPath = tableView.indexPathForRowAtPoint(location),
-            _ = tableView.cellForRowAtIndexPath(indexPath) else { return nil }
+        guard let indexPath = tableView.indexPathForRow(at: location),
+            let _ = tableView.cellForRow(at: indexPath) else { return nil }
         
         // Instantiate VC with Identifier (Storyboard ID)
-        guard let playVideoViewController = storyboard?.instantiateViewControllerWithIdentifier("playVideoView") as? PlayVideoViewController else { return nil }
+        guard let playVideoViewController = storyboard?.instantiateViewController(withIdentifier: "playVideoView") as? PlayVideoViewController else { return nil }
         
-        let videoInfo = self.videoInfos[indexPath.row]
+        let videoInfo = self.videoInfos[(indexPath as NSIndexPath).row]
         
         DataCenter.shareDataCenter.videoInfo = videoInfo
 
@@ -46,9 +46,9 @@ extension VideoTableViewController: UIViewControllerPreviewingDelegate{
 //        playVideoViewController.videoId = videoInfo.id
 //        playVideoViewController.videoPic = videoInfo.pic
 
-        let cellFrame = tableView.cellForRowAtIndexPath(indexPath)!.frame
+        let cellFrame = tableView.cellForRow(at: indexPath)!.frame
         
-        previewingContext.sourceRect = view.convertRect(cellFrame, fromView: tableView)
+        previewingContext.sourceRect = view.convert(cellFrame, from: tableView)
         
         return playVideoViewController
     }
@@ -60,8 +60,8 @@ extension VideoTableViewController: UIViewControllerPreviewingDelegate{
      - parameter previewingContext:      previewingContext description
      - parameter viewControllerToCommit: viewControllerToCommit description
      */
-    func previewingContext(previewingContext: UIViewControllerPreviewing, commitViewController viewControllerToCommit: UIViewController) {
-        self.showViewController(viewControllerToCommit, sender: self)
+    func previewingContext(_ previewingContext: UIViewControllerPreviewing, commit viewControllerToCommit: UIViewController) {
+        self.show(viewControllerToCommit, sender: self)
         
     }
     
@@ -71,16 +71,16 @@ extension VideoTableViewController: UIViewControllerPreviewingDelegate{
      */
     func check3DTouch(){
         
-        if self.traitCollection.forceTouchCapability == UIForceTouchCapability.Available {
+        if self.traitCollection.forceTouchCapability == UIForceTouchCapability.available {
             
-            self.registerForPreviewingWithDelegate(self, sourceView: self.view)
+            self.registerForPreviewing(with: self, sourceView: self.view)
             print("3D Touch 开启")
             //长按停止
-            UILongPressGestureRecognizer().enabled = false
+            UILongPressGestureRecognizer().isEnabled = false
             
         } else {
             print("3D Touch 没有开启")
-            UILongPressGestureRecognizer().enabled = true
+            UILongPressGestureRecognizer().isEnabled = true
         }
     }
     

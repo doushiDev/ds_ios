@@ -56,12 +56,12 @@ class FindMainTableViewController: UITableViewController,SDCycleScrollViewDelega
         tableHeardView.autoScrollTimeInterval = 5
         
         
-        self.tableView.addParallaxWithView(tableHeardView, andHeight: self.view.frame.height / 2 - 80)
+        self.tableView.addParallax(with: tableHeardView, andHeight: self.view.frame.height / 2 - 80)
         self.tableView.parallaxView.delegate = self
         
  
         
-        let titleView = PeriscopyTitleView(frame: CGRect(x: 0.0, y: 0.0, width: 160.0, height: CGRectGetHeight((self.navigationController?.navigationBar.frame)!)),
+        let titleView = PeriscopyTitleView(frame: CGRect(x: 0.0, y: 0.0, width: 160.0, height: (self.navigationController?.navigationBar.frame)!.height),
             attachToScrollView: tableView, refreshAction: { [unowned self] in
                 
 //                 self.navigationController!.navigationBar.startLoadingAnimation()
@@ -77,21 +77,21 @@ class FindMainTableViewController: UITableViewController,SDCycleScrollViewDelega
     }
     
     var userId = 0
-    let user =  userDefaults.objectForKey("userInfo")
+    let user =  userDefaults.object(forKey: "userInfo")
     
-    func cycleScrollView(cycleScrollView: SDCycleScrollView!, didSelectItemAtIndex index: Int) {
+    func cycleScrollView(_ cycleScrollView: SDCycleScrollView!, didSelectItemAt index: Int) {
 //        print("点击了\(index) 张图片")
-        let videoInfo = (self.videos.objectAtIndex(index) as! VideoInfo)
+        let videoInfo = (self.videos.object(at: index) as! VideoInfo)
         
         DataCenter.shareDataCenter.videoInfo = videoInfo
 
         if (user != nil) {
-            userId = user!.objectForKey("id") as! Int
+            userId = user!.object(forKey: "id") as! Int
 
         }
         //播放
-        let aStoryboard = UIStoryboard(name: "Home", bundle:NSBundle.mainBundle())
-        let playVideoViewController = aStoryboard.instantiateViewControllerWithIdentifier("playVideoView") as! PlayVideoViewController
+        let aStoryboard = UIStoryboard(name: "Home", bundle:Bundle.main)
+        let playVideoViewController = aStoryboard.instantiateViewController(withIdentifier: "playVideoView") as! PlayVideoViewController
         
         playVideoViewController.userId = userId
         self.navigationController?.pushViewController(playVideoViewController, animated: true)
@@ -103,7 +103,7 @@ class FindMainTableViewController: UITableViewController,SDCycleScrollViewDelega
         
         let view = self.navigationController!.navigationBar.startLoadingAnimation()
         if (user != nil) {
-            userId = user!.objectForKey("id") as! Int
+            userId = user!.object(forKey: "id") as! Int
             
         }
         
@@ -117,12 +117,12 @@ class FindMainTableViewController: UITableViewController,SDCycleScrollViewDelega
                 
                 self.videos.removeAllObjects()
 
-                self.videos.addObjectsFromArray(videoInfos!)
+                self.videos.addObjects(from: videoInfos!)
                 
                 self.navigationController?.navigationBar.stopLoadingAnimationWithView(view)
                 for index in 0...4 {
                     
-                    let videoInfo = (self.videos.objectAtIndex(index) as! VideoInfo)
+                    let videoInfo = (self.videos.object(at: index) as! VideoInfo)
                     
                     self.imageURL1.append(videoInfo.pic)
                     self.titles1.append(videoInfo.title)
@@ -170,11 +170,11 @@ class FindMainTableViewController: UITableViewController,SDCycleScrollViewDelega
 //        }
     }
     
-    func parallaxView(view: APParallaxView!, willChangeFrame frame: CGRect) {
+    func parallaxView(_ view: APParallaxView!, willChangeFrame frame: CGRect) {
     
     }
     
-    func parallaxView(view: APParallaxView!, didChangeFrame frame: CGRect) {
+    func parallaxView(_ view: APParallaxView!, didChangeFrame frame: CGRect) {
         
     }
 
@@ -185,19 +185,19 @@ class FindMainTableViewController: UITableViewController,SDCycleScrollViewDelega
 
     // MARK: - Table view data source
 
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return 1
     }
 
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         return 2
     }
 
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("findTableCell", forIndexPath: indexPath) as! FindTableViewCell
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "findTableCell", for: indexPath) as! FindTableViewCell
         
         cell.titleLabel.textColor = UIColor(rgba:"#f0a22a")
         
@@ -206,12 +206,12 @@ class FindMainTableViewController: UITableViewController,SDCycleScrollViewDelega
 //            cell.cellImageView.image =  UIImage(named: "tag")
 //        }
 //        
-        if indexPath.row == 0 {
+        if (indexPath as NSIndexPath).row == 0 {
             cell.titleLabel.text = "排行榜"
             cell.cellImageView.image =  UIImage(named: "sort")
         }
         
-        if indexPath.row == 1 {
+        if (indexPath as NSIndexPath).row == 1 {
             cell.titleLabel.text = "商品推广"
             cell.cellImageView.image =  UIImage(named: "store")
             
@@ -224,46 +224,46 @@ class FindMainTableViewController: UITableViewController,SDCycleScrollViewDelega
         
 
         //分割线
-        tableView.tableFooterView = UIView(frame: CGRectZero)
+        tableView.tableFooterView = UIView(frame: CGRect.zero)
         
         return cell
     }
  
     
-    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 90
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-         self.navigationController?.navigationBar.hidden = false
+         self.navigationController?.navigationBar.isHidden = false
         
     }
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
 //        ViewControllerOne *oneController = [[self storyboard]instantiateViewControllerWithIdentifier:@"ViewOne"];
 
         
         
-        if indexPath.row == 0 {
-            let videoTaxisTableViewController =  self.storyboard?.instantiateViewControllerWithIdentifier("VideoTaxisTableViewController")
+        if (indexPath as NSIndexPath).row == 0 {
+            let videoTaxisTableViewController =  self.storyboard?.instantiateViewController(withIdentifier: "VideoTaxisTableViewController")
             videoTaxisTableViewController!.title = "排行榜"
 
             self.navigationController?.pushViewController(videoTaxisTableViewController!, animated: true)
             
         }
         
-        if indexPath.row == 1 {
+        if (indexPath as NSIndexPath).row == 1 {
 //            performSegueWithIdentifier("toAds", sender: self)
             
-            let videoAdsTableViewController =  self.storyboard?.instantiateViewControllerWithIdentifier("AdsTableViewController")
+            let videoAdsTableViewController =  self.storyboard?.instantiateViewController(withIdentifier: "AdsTableViewController")
             videoAdsTableViewController!.title = "商品推广"
             
             self.navigationController?.pushViewController(videoAdsTableViewController!, animated: true)
@@ -312,7 +312,7 @@ class FindMainTableViewController: UITableViewController,SDCycleScrollViewDelega
     // MARK: - Navigation
  */
     // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
 //        if segue.identifier == "toHotApp" { //点击了热门app
 //            

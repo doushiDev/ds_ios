@@ -53,7 +53,7 @@ class PlayVideoInfoViewController: UIViewController,GADBannerViewDelegate {
         
         let request = GADRequest()
 //        request.testDevices = ["9b47a493ab7063469109ea3f70443150",kGADSimulatorID]
-        bannerView.loadRequest(request)
+        bannerView.load(request)
 
         
         bannerView.delegate = self
@@ -69,41 +69,41 @@ class PlayVideoInfoViewController: UIViewController,GADBannerViewDelegate {
 
 
 
-		self.collectUIButton.enabled = false
+		self.collectUIButton.isEnabled = false
 
 		//判断用户是否收藏过
 		HttpController.getVideoById(HttpClientByVideo.DSRouter.getVideosById(DataCenter.shareDataCenter.videoInfo.id, self.userId), callback: {videoInfo -> Void in
 
 				if videoInfo?.isCollectStatus == 1 {
 					self.isC = true
-					self.collectUIButton.setImage(UIImage(named: "cloud"), forState: .Normal)
+					self.collectUIButton.setImage(UIImage(named: "cloud"), for: UIControlState())
 
 				}
-				self.collectUIButton.enabled = true
+				self.collectUIButton.isEnabled = true
 			})
 	}
 
-    func adViewDidReceiveAd(bannerView: GADBannerView!) {
-        bannerView.hidden = false
+    func adViewDidReceiveAd(_ bannerView: GADBannerView!) {
+        bannerView.isHidden = false
         bannerView.alpha = 0
-        UIView.animateWithDuration(1, animations: {
+        UIView.animate(withDuration: 1, animations: {
             bannerView.alpha = 1
         })
 
     }
     
-    func adView(bannerView: GADBannerView!,
+    func adView(_ bannerView: GADBannerView!,
                 didFailToReceiveAdWithError error: GADRequestError!) {
         print("adView:didFailToReceiveAdWithError: \(error.localizedDescription)")
     }
     
     
-	override func viewWillAppear(animated: Bool) {
+	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
-		let user = userDefaults.objectForKey("userInfo")
+		let user = userDefaults.object(forKey: "userInfo")
 
 		if user != nil {
-			userId = user!.objectForKey("id") as! Int
+			userId = user!.object(forKey: "id") as! Int
 		}
         
 	}
@@ -125,13 +125,13 @@ class PlayVideoInfoViewController: UIViewController,GADBannerViewDelegate {
 
 	 - parameter sender: sender description
 	 */
-	@IBAction func collectVideo(sender: UIButton) {
+	@IBAction func collectVideo(_ sender: UIButton) {
 		print("点击了收藏")
 
 		//判断当前是否登录状态
 
-		let user = userDefaults.objectForKey("userInfo")
-		let aStoryboard = UIStoryboard(name: "My", bundle: NSBundle.mainBundle())
+		let user = userDefaults.object(forKey: "userInfo")
+		let aStoryboard = UIStoryboard(name: "My", bundle: Bundle.main)
 
 		if (user == nil) {
 			//弹窗登录
@@ -140,16 +140,16 @@ class PlayVideoInfoViewController: UIViewController,GADBannerViewDelegate {
 			let cancelButtonTitle = "看得正起劲"
 			let otherButtonTitle = "去登录"
 
-			let alertCotroller = DOAlertController(title: title, message: message, preferredStyle: .Alert)
+			let alertCotroller = DOAlertController(title: title, message: message, preferredStyle: .alert)
 
 			// Create the actions.
-			let cancelAction = DOAlertAction(title: cancelButtonTitle, style: .Cancel) {action in
+			let cancelAction = DOAlertAction(title: cancelButtonTitle, style: .cancel) {action in
 				NSLog("The \"Okay/Cancel\" alert's cancel action occured.")
 			}
 
-			let otherAction = DOAlertAction(title: otherButtonTitle, style: .Default) {action in
+			let otherAction = DOAlertAction(title: otherButtonTitle, style: .default) {action in
 				print("登录")
-				let loginTableView = aStoryboard.instantiateViewControllerWithIdentifier("LoginView")
+				let loginTableView = aStoryboard.instantiateViewController(withIdentifier: "LoginView")
 				self.navigationController?.pushViewController(loginTableView, animated: true)
 
 			}
@@ -158,12 +158,12 @@ class PlayVideoInfoViewController: UIViewController,GADBannerViewDelegate {
 			alertCotroller.addAction(cancelAction)
 			alertCotroller.addAction(otherAction)
 
-			presentViewController(alertCotroller, animated: true, completion: nil)
+			present(alertCotroller, animated: true, completion: nil)
 
 		} else {
 
 			if user != nil {
-				userId = user!.objectForKey("id") as! Int
+				userId = user!.object(forKey: "id") as! Int
 			}
 
 			let userFavorite: UserFavorite = UserFavorite(id: 0, userId: userId, videoId: DataCenter.shareDataCenter.videoInfo.id, status: 1)
@@ -172,8 +172,8 @@ class PlayVideoInfoViewController: UIViewController,GADBannerViewDelegate {
 				//请求收藏
 				HttpController.onUserAndMovie(HttpClientByUserAndVideo.DSRouter.addUserFavoriteVideo(userFavorite), callback: {(statusCode) -> Void in
 						if statusCode == 201 {
-							sender.setImage(UIImage(named: "cloud"), forState:
-									.Normal)
+							sender.setImage(UIImage(named: "cloud"), for:
+									UIControlState())
 							self.isC = true
 							print("收藏成功")
 						}
@@ -184,8 +184,8 @@ class PlayVideoInfoViewController: UIViewController,GADBannerViewDelegate {
 				//请求取消收藏
 				HttpController.onUserAndMovie(HttpClientByUserAndVideo.DSRouter.deleteByUserIdAndVideoId(userId, DataCenter.shareDataCenter.videoInfo.id), callback: {(statusCode) -> Void in
 						if statusCode == 200 {
-							sender.setImage(UIImage(named: "cloud_d"), forState:
-									.Normal)
+							sender.setImage(UIImage(named: "cloud_d"), for:
+									UIControlState())
 							self.isC = false
 							print("取消收藏成功")
 						}
@@ -199,16 +199,16 @@ class PlayVideoInfoViewController: UIViewController,GADBannerViewDelegate {
 
 	 - parameter sender: sender description
 	 */
-	@IBAction func shareAction(sender: UIButton) {
+	@IBAction func shareAction(_ sender: UIButton) {
 
 
 		print("点击了分享")
 		let share = "https://api.ds.itjh.net/share.html?id=\(DataCenter.shareDataCenter.videoInfo.id)"
 
 
-		let saimg = UIImage(data: NSData(contentsOfURL: NSURL(string: DataCenter.shareDataCenter.videoInfo.pic)!)!)
+		let saimg = UIImage(data: try! Data(contentsOf: URL(string: DataCenter.shareDataCenter.videoInfo.pic)!))
 
-		UMSocialData.defaultData().extConfig.title = DataCenter.shareDataCenter.videoInfo.title
+		UMSocialData.default().extConfig.title = DataCenter.shareDataCenter.videoInfo.title
 
 		UMSocialWechatHandler.setWXAppId("wxfd23fac852a54c97", appSecret: "d4624c36b6795d1d99dcf0547af5443d", url: "\(share)")
 

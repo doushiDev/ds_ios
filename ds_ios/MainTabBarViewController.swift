@@ -47,7 +47,7 @@ class MainTabBarViewController: UITabBarController,UITabBarControllerDelegate {
 //    }
 //    }
     
-    func tabBarController(tabBarController: UITabBarController, didSelectViewController viewController: UIViewController) {
+    func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
         
         if (viewController.tabBarItem.tag==1) {
             let navigation = viewController as! UINavigationController

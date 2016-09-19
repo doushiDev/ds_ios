@@ -16,7 +16,7 @@ import SwiftyJSON
 //定义http协议
 protocol HttpProtocol{
     //定义一个方法，接收一个参数：AnyObject
-    func didRecieveResults(results:AnyObject)
+    func didRecieveResults(_ results:AnyObject)
 }
 
 class HttpController: NSObject {
@@ -26,7 +26,7 @@ class HttpController: NSObject {
     //定义一个方法，接收网址，请求数据，回调代理的方法，传回数据
     
     // ds api
-    func onDSResource(urlRequestConvertible:URLRequestConvertible){
+    func onDSResource(_ urlRequestConvertible:URLRequestConvertible){
         Alamofire.request(urlRequestConvertible).responseJSON { response in
             if let JSON = response.result.value {
                 self.delegate?.didRecieveResults(JSON)
@@ -42,17 +42,17 @@ class HttpController: NSObject {
      - parameter urlRequestConvertible: 请求
      - parameter callback:              返回视频资源
      */
-    class func getVideos(urlRequestConvertible:URLRequestConvertible, callback:[VideoInfo]?->Void ){
+    class func getVideos(_ urlRequestConvertible:URLRequestConvertible, callback:@escaping ([VideoInfo]?)->Void ){
         alamofireManager.request(urlRequestConvertible).responseJSON { response in
             
             switch response.result {
                 
-            case .Success:
+            case .success:
                 //判断http状态码
                 if response.response?.statusCode == 200 {
                     if let JSON = response.result.value {
                         let videoInfos:[VideoInfo];
-                        videoInfos = ((JSON as! NSDictionary).valueForKey("content") as! [NSDictionary]).map { VideoInfo(id: $0["id"] as! String,title: $0["title"] as! String,pic: $0["pic"] as! String,url: $0["videoUrl"] as! String,cTime: $0["pushTime"] as! String,isCollectStatus: $0["isCollectStatus"] as! Int)}
+                        videoInfos = ((JSON as! NSDictionary).value(forKey: "content") as! [NSDictionary]).map { VideoInfo(id: $0["id"] as! String,title: $0["title"] as! String,pic: $0["pic"] as! String,url: $0["videoUrl"] as! String,cTime: $0["pushTime"] as! String,isCollectStatus: $0["isCollectStatus"] as! Int)}
                         
                         callback(videoInfos)
                     }
@@ -60,7 +60,7 @@ class HttpController: NSObject {
                 }else{
                     callback(nil)
                 }
-            case .Failure(let error):
+            case .failure(let error):
                 print(error)
                 callback(nil)
             }
@@ -75,15 +75,15 @@ class HttpController: NSObject {
      - parameter urlRequestConvertible: 请求
      - parameter callback:              视频信息
      */
-    class func getVideoById(urlRequestConvertible:URLRequestConvertible, callback:VideoInfo?->Void ){
+    class func getVideoById(_ urlRequestConvertible:URLRequestConvertible, callback:@escaping (VideoInfo?)->Void ){
         alamofireManager.request(urlRequestConvertible).responseJSON { response in
             switch response.result {
-            case .Success:
+            case .success:
                 //判断http状态码
                 if response.response?.statusCode == 200 {
                     if let JSON = response.result.value {
                         
-                        let videoDict = (JSON as! NSDictionary).valueForKey("content") as! NSDictionary
+                        let videoDict = (JSON as! NSDictionary).value(forKey: "content") as! NSDictionary
                         
                         let videoInfo = VideoInfo(id: videoDict["id"] as! String,
                             title:  videoDict["title"] as! String,
@@ -97,7 +97,7 @@ class HttpController: NSObject {
                 }else{
                     callback(nil)
                 }
-            case .Failure(let error):
+            case .failure(let error):
                 print(error)
                 callback(nil)
             }
@@ -111,17 +111,17 @@ class HttpController: NSObject {
      - parameter urlRequestConvertible: 请求
      - parameter callback:              callback description
      */
-    class func onUserAndMovie(urlRequestConvertible:URLRequestConvertible, callback:Int?->Void ){
+    class func onUserAndMovie(_ urlRequestConvertible:URLRequestConvertible, callback:@escaping (Int?)->Void ){
         alamofireManager.request(urlRequestConvertible).responseJSON { response in
             switch response.result {
-            case .Success:
+            case .success:
                 let statusCode = response.response?.statusCode
                 if  statusCode == 201 || statusCode == 200 {
                     callback(statusCode)
                 }else{
                     callback(0)
                 }
-            case .Failure(let error):
+            case .failure(let error):
                 print(error)
                 callback(0)
             }
@@ -135,18 +135,18 @@ class HttpController: NSObject {
      - parameter urlRequestConvertible: 请求
      - parameter callback:              callback description
      */
-    class func onUser(urlRequestConvertible:URLRequestConvertible, callback:User?->Void ){
+    class func onUser(_ urlRequestConvertible:URLRequestConvertible, callback:@escaping (User?)->Void ){
         alamofireManager.request(urlRequestConvertible).responseJSON { response in
             switch response.result {
-            case .Success:
+            case .success:
                 let statusCode = response.response?.statusCode
                 if  statusCode == 201 || statusCode == 200 {
                     
                     if let JSON = response.result.value {
                         
-                        let userDictionary = (JSON as! NSDictionary).valueForKey("content") as! NSDictionary
+                        let userDictionary = (JSON as! NSDictionary).value(forKey: "content") as! NSDictionary
                         
-                        userDefaults.setObject(userDictionary, forKey: "userInfo")
+                        userDefaults.set(userDictionary, forKey: "userInfo")
 
                         
                         let userInfo = User(id: userDictionary["id"] as! Int,
@@ -174,7 +174,7 @@ class HttpController: NSObject {
                 }else{
                     callback(nil)
                 }
-            case .Failure(let error):
+            case .failure(let error):
                 print(error)
 //                callback(0)
             }
@@ -192,11 +192,11 @@ extension Alamofire.Manager{
     
     /// 请求规则
     static let sharedInstanceAndTimeOut: Manager = {
-        let configuration = NSURLSessionConfiguration.defaultSessionConfiguration()
+        let configuration = URLSessionConfiguration.default
         //请求超时 时间
         configuration.timeoutIntervalForRequest = 10 // 秒
         
-        configuration.HTTPAdditionalHeaders = Manager.defaultHTTPHeaders
+        configuration.httpAdditionalHeaders = Manager.defaultHTTPHeaders
         return Manager(configuration: configuration)
     }()
     
@@ -217,7 +217,7 @@ struct HttpClientByVideo {
 
         
         // 请求方法
-        case VideosByType(Int,Int,Int,Int) //根据类型获取视频
+        case videosByType(Int,Int,Int,Int) //根据类型获取视频
         case getVideosByBanner(Int) //获取发现Banner视频
         case getVideoTaxis(Int) //获取排行榜
         case getAds(Int) //获取广告
@@ -227,7 +227,7 @@ struct HttpClientByVideo {
         // 不同请求，对应不同请求类型
         var method: Alamofire.Method {
             switch self {
-            case .VideosByType:
+            case .videosByType:
                 return .GET
             case .getVideosByBanner:
                 return .GET
@@ -245,7 +245,7 @@ struct HttpClientByVideo {
             let (path) : (String) = {
                 
                 switch self {
-                case .VideosByType(let vid, let count, let type,let userId):
+                case .videosByType(let vid, let count, let type,let userId):
                     return ("getVideosByType/\(vid)/\(count)/\(type)/\(userId)")
                 case .getVideosByBanner(let userId):
                     return "getVideosByBanner/\(userId)"
@@ -258,14 +258,14 @@ struct HttpClientByVideo {
                 }
             }()
             
-            let URL = NSURL(string: DSRouter.baseURLString)
-            let URLRequest = NSMutableURLRequest(URL: URL!.URLByAppendingPathComponent(path))
+            let URL = Foundation.URL(string: DSRouter.baseURLString)
+            let URLRequest = NSMutableURLRequest(url: URL!.appendingPathComponent(path))
             
-            URLRequest.HTTPMethod = method.rawValue
+            URLRequest.httpMethod = method.rawValue
             
             
             
-            let encoding = Alamofire.ParameterEncoding.URL
+            let encoding = Alamofire.ParameterEncoding.url
             return encoding.encode(URLRequest, parameters: nil).0
         }
     }
@@ -312,24 +312,24 @@ struct HttpClientByUser {
                 
             }()
             
-            let URL = NSURL(string: DSRouter.baseURLString)
-            let URLRequest = NSMutableURLRequest(URL: URL!.URLByAppendingPathComponent(path))
-            URLRequest.HTTPMethod = method.rawValue
+            let URL = Foundation.URL(string: DSRouter.baseURLString)
+            let URLRequest = NSMutableURLRequest(url: URL!.appendingPathComponent(path))
+            URLRequest.httpMethod = method.rawValue
             
             switch self {
             case .registerUser(let user):
                 URLRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
                 //用户参数
-                let parameters = ["nickName": user.nickName,"headImage": user.headImage,"phone":user.phone,"platformId":user.platformId,"platformName":user.platformName,"password":user.password,"gender":user.gender]
+                let parameters = ["nickName": user.nickName,"headImage": user.headImage,"phone":user.phone,"platformId":user.platformId,"platformName":user.platformName,"password":user.password,"gender":user.gender] as [String : Any]
                 do {
-                    URLRequest.HTTPBody = try NSJSONSerialization.dataWithJSONObject(parameters, options: NSJSONWritingOptions())
+                    URLRequest.httpBody = try JSONSerialization.data(withJSONObject: parameters, options: JSONSerialization.WritingOptions())
                 } catch {
                 }
             default: break
                 
             }
             
-            let encoding = Alamofire.ParameterEncoding.URL
+            let encoding = Alamofire.ParameterEncoding.url
             return encoding.encode(URLRequest, parameters: nil).0
         }
     }
@@ -368,12 +368,12 @@ struct HttpClientByUtil {
                 }
             }()
             
-            let URL = NSURL(string: DSRouter.baseURLString)
-            let URLRequest = NSMutableURLRequest(URL: URL!.URLByAppendingPathComponent(path))
+            let URL = Foundation.URL(string: DSRouter.baseURLString)
+            let URLRequest = NSMutableURLRequest(url: URL!.appendingPathComponent(path))
             
-            URLRequest.HTTPMethod = method.rawValue
+            URLRequest.httpMethod = method.rawValue
             
-            let encoding = Alamofire.ParameterEncoding.URL
+            let encoding = Alamofire.ParameterEncoding.url
             return encoding.encode(URLRequest, parameters: nil).0
         }
     }
@@ -427,9 +427,9 @@ struct HttpClientByUserAndVideo {
             }()
             
             
-            let URL = NSURL(string: DSRouter.baseURLString)
-            let URLRequest = NSMutableURLRequest(URL: URL!.URLByAppendingPathComponent(path))
-            URLRequest.HTTPMethod = method.rawValue
+            let URL = Foundation.URL(string: DSRouter.baseURLString)
+            let URLRequest = NSMutableURLRequest(url: URL!.appendingPathComponent(path))
+            URLRequest.httpMethod = method.rawValue
             
             
             
@@ -438,9 +438,9 @@ struct HttpClientByUserAndVideo {
                 
                 URLRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
                 //用户参数
-                let parameters = ["userId": userFavorite.userId,"videoId": userFavorite.videoId,"status":userFavorite.status]
+                let parameters = ["userId": userFavorite.userId,"videoId": userFavorite.videoId,"status":userFavorite.status] as [String : Any]
                 do {
-                    URLRequest.HTTPBody = try NSJSONSerialization.dataWithJSONObject(parameters, options: NSJSONWritingOptions())
+                    URLRequest.httpBody = try JSONSerialization.data(withJSONObject: parameters, options: JSONSerialization.WritingOptions())
                 } catch {
                 }
                 
@@ -448,7 +448,7 @@ struct HttpClientByUserAndVideo {
                 
             }
             
-            let encoding = Alamofire.ParameterEncoding.URL
+            let encoding = Alamofire.ParameterEncoding.url
             return encoding.encode(URLRequest, parameters: nil).0
         }
     }

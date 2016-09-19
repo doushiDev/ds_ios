@@ -16,7 +16,7 @@ class VideoTableViewController: UITableViewController {
     @IBOutlet var otherView: UIView!
     
     //加载超时操作
-    var ti:NSTimer?
+    var ti:Timer?
     
     
     
@@ -38,20 +38,20 @@ class VideoTableViewController: UITableViewController {
     var videoInfos:[VideoInfo] = []
     
     //用户信息
-    let user =  userDefaults.objectForKey("userInfo")
+    let user =  userDefaults.object(forKey: "userInfo")
     var userId = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
         //
-        otherView.frame = CGRectMake(0.0, (self.view.frame.maxY - 220) / 2, self.view.frame.width, 100)
-        otherView.hidden = true
+        otherView.frame = CGRect(x: 0.0, y: (self.view.frame.maxY - 220) / 2, width: self.view.frame.width, height: 100)
+        otherView.isHidden = true
         self.view.addSubview(otherView)
         
         //调整tableview frame
         //        print(self.view.frame)
         
-        self.view.frame = CGRectMake(0, 64, self.tableView.frame.width, self.tableView.frame.height)
+        self.view.frame = CGRect(x: 0, y: 64, width: self.tableView.frame.width, height: self.tableView.frame.height)
         
         //设置回调（一旦进入刷新状态就会调用这个refreshingBlock）
         self.tableView.mj_header = MJRefreshNormalHeader(refreshingBlock: { () -> Void in
@@ -65,40 +65,40 @@ class VideoTableViewController: UITableViewController {
             
         })
         
-        self.tableView.mj_footer.hidden = false
+        self.tableView.mj_footer.isHidden = false
         
         
-        ti = NSTimer.scheduledTimerWithTimeInterval(10, target: self, selector: #selector(VideoTableViewController.isLoading), userInfo: "isLoading", repeats: true)
+        ti = Timer.scheduledTimer(timeInterval: 10, target: self, selector: #selector(VideoTableViewController.isLoading), userInfo: "isLoading", repeats: true)
         
         
         //注册3DTouch
-        registerForPreviewingWithDelegate(self, sourceView: view)
+        registerForPreviewing(with: self, sourceView: view)
         
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
     }
     
-    @IBAction func restartData(sender: AnyObject) {
-        ti = NSTimer.scheduledTimerWithTimeInterval(10, target: self, selector: #selector(VideoTableViewController.isLoading), userInfo: "isLoading", repeats: true)
+    @IBAction func restartData(_ sender: AnyObject) {
+        ti = Timer.scheduledTimer(timeInterval: 10, target: self, selector: #selector(VideoTableViewController.isLoading), userInfo: "isLoading", repeats: true)
         
         self.tableView.mj_header.beginRefreshing()
         self.loadNewData()
         
-        otherView.hidden = true
+        otherView.isHidden = true
         
         
     }
     
     
     func restartData() {
-        ti = NSTimer.scheduledTimerWithTimeInterval(10, target: self, selector: #selector(VideoTableViewController.isLoading), userInfo: "isLoading", repeats: true)
+        ti = Timer.scheduledTimer(timeInterval: 10, target: self, selector: #selector(VideoTableViewController.isLoading), userInfo: "isLoading", repeats: true)
         
         self.tableView.mj_header.beginRefreshing()
         self.loadNewData()
         
-        otherView.hidden = true
+        otherView.isHidden = true
     }
     
     
@@ -113,11 +113,11 @@ class VideoTableViewController: UITableViewController {
             
             //            self.tableView.reloadData()
             if self.videos.count == 0{
-                otherView.hidden = false
+                otherView.isHidden = false
             }
         }else{
             self.tableView.mj_footer.endRefreshing()
-            otherView.hidden = true
+            otherView.isHidden = true
         }
         //停止
         ti?.invalidate()
@@ -129,7 +129,7 @@ class VideoTableViewController: UITableViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         // 隐藏scroll indicators
         self.tableView.showsHorizontalScrollIndicator = false
@@ -137,7 +137,7 @@ class VideoTableViewController: UITableViewController {
         
         //判断用户缓存中是否存在
         if (user != nil) {
-            userId = user!.objectForKey("id") as! Int
+            userId = user!.object(forKey: "id") as! Int
             
         }
         //检测3D Touch
@@ -157,11 +157,11 @@ class VideoTableViewController: UITableViewController {
         }
         populatingVideo = true
         
-        HttpController.getVideos(HttpClientByVideo.DSRouter.VideosByType(0, 20,type,DataCenter.shareDataCenter.user.id)) { videoInfos  in
+        HttpController.getVideos(HttpClientByVideo.DSRouter.videosByType(0, 20,type,DataCenter.shareDataCenter.user.id)) { videoInfos  in
             
             if videoInfos != nil {
                 
-                self.otherView.hidden = true
+                self.otherView.isHidden = true
                 
                 self.videoInfos = videoInfos!
                 
@@ -180,7 +180,7 @@ class VideoTableViewController: UITableViewController {
                 self.tableView.mj_header.endRefreshing()
                 //没有数据时显示
                 if self.videoInfos.count == 0 {
-                    self.otherView.hidden = false
+                    self.otherView.isHidden = false
                 }
                 
             }
@@ -207,11 +207,11 @@ class VideoTableViewController: UITableViewController {
         
         print("currentPage-> \(self.currentPage)")
         
-        HttpController.getVideos(HttpClientByVideo.DSRouter.VideosByType(self.currentPage, 20,type,DataCenter.shareDataCenter.user.id)) { videoInfos  in
+        HttpController.getVideos(HttpClientByVideo.DSRouter.videosByType(self.currentPage, 20,type,DataCenter.shareDataCenter.user.id)) { videoInfos  in
             
             if videoInfos != nil {
                 
-                self.otherView.hidden = true
+                self.otherView.isHidden = true
                 
                 self.videoInfos += videoInfos!
                 
@@ -229,7 +229,7 @@ class VideoTableViewController: UITableViewController {
                 self.tableView.mj_footer.endRefreshing()
                 //没有数据时显示
                 if self.videoInfos.count == 0 {
-                    self.otherView.hidden = false
+                    self.otherView.isHidden = false
                 }
             }
             
@@ -240,43 +240,43 @@ class VideoTableViewController: UITableViewController {
     }
     
     // MARK: - Table view data source
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return 1
     }
     
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         return self.videoInfos.count
     }
     
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         
         
-        let cell = tableView.dequeueReusableCellWithIdentifier("VideoTableViewCell", forIndexPath: indexPath) as! VideoTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "VideoTableViewCell", for: indexPath) as! VideoTableViewCell
         
         if self.videoInfos.count > 0 {
             
-            let videoInfo = self.videoInfos[indexPath.row]
+            let videoInfo = self.videoInfos[(indexPath as NSIndexPath).row]
             
             cell.titleLabel.text = videoInfo.title
             cell.timeLabel.text = videoInfo.cTime
-            cell.picImageView.kf_setImageWithURL(NSURL(string: videoInfo.pic)!)
+            cell.picImageView.kf_setImageWithURL(URL(string: videoInfo.pic)!)
             
         }
         return cell
     }
     
     
-    override  func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat{
+    override  func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat{
         return 100
     }
     
     
     
-    override func scrollViewDidScroll(scrollView: UIScrollView) {
+    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
         
         // 滑动显示scroll indicators
         self.tableView.showsHorizontalScrollIndicator = true
@@ -285,11 +285,11 @@ class VideoTableViewController: UITableViewController {
     
     
     // MARK: - Navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "toPlayVideo" {
             
             let path = self.tableView.indexPathForSelectedRow!
-            let videoInfo = self.videoInfos[path.row]
+            let videoInfo = self.videoInfos[(path as NSIndexPath).row]
             
             DataCenter.shareDataCenter.videoInfo = videoInfo
             

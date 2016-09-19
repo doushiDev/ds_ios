@@ -8,20 +8,20 @@
 
 import UIKit
 
-@IBDesignable public class RoundImageView: UIImageView {
+@IBDesignable open class RoundImageView: UIImageView {
 
     //
     // MARK: - Properties
     
-    @IBInspectable public var borderWidth: CGFloat = 0.0 {
+    @IBInspectable open var borderWidth: CGFloat = 0.0 {
         didSet {
             self.layer.borderWidth = borderWidth
         }
     }
     
-    @IBInspectable public var borderColor: UIColor = UIColor.blackColor() {
+    @IBInspectable open var borderColor: UIColor = UIColor.black {
         didSet {
-            self.layer.borderColor = borderColor.CGColor
+            self.layer.borderColor = borderColor.cgColor
         }
     }
     
@@ -56,7 +56,7 @@ import UIKit
         self.layer.masksToBounds = true
     }
     
-    override public func prepareForInterfaceBuilder() {
+    override open func prepareForInterfaceBuilder() {
         setup()
     }
 

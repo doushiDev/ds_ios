@@ -23,17 +23,17 @@ class HomeViewController: UIViewController {
         var controllerArray : [UIViewController] = []
 
         // Do any additional setup after loading the view.
-        let aStoryboard = UIStoryboard(name: "Home", bundle:NSBundle.mainBundle())
+        let aStoryboard = UIStoryboard(name: "Home", bundle:Bundle.main)
 
         
-        let newVideoTableViewController = aStoryboard.instantiateViewControllerWithIdentifier("VideoTableViewController") as! VideoTableViewController
+        let newVideoTableViewController = aStoryboard.instantiateViewController(withIdentifier: "VideoTableViewController") as! VideoTableViewController
         
         newVideoTableViewController.type = 0
         
         newVideoTableViewController.videoInfos =
             DataCenter.shareDataCenter.getVideosFromType(0)
         
-        let hotVideoTableViewController = aStoryboard.instantiateViewControllerWithIdentifier("VideoTableViewController") as! VideoTableViewController
+        let hotVideoTableViewController = aStoryboard.instantiateViewController(withIdentifier: "VideoTableViewController") as! VideoTableViewController
         
         hotVideoTableViewController.type = 2
         hotVideoTableViewController.title = "热门"
@@ -42,7 +42,7 @@ class HomeViewController: UIViewController {
             DataCenter.shareDataCenter.getVideosFromType(2)
         
         
-        let popVideoTableViewController = aStoryboard.instantiateViewControllerWithIdentifier("VideoTableViewController") as! VideoTableViewController
+        let popVideoTableViewController = aStoryboard.instantiateViewController(withIdentifier: "VideoTableViewController") as! VideoTableViewController
         popVideoTableViewController.type = 1
         popVideoTableViewController.title = "精华"
         
@@ -54,27 +54,27 @@ class HomeViewController: UIViewController {
         controllerArray.append(popVideoTableViewController)
       
         let parameters: [CAPSPageMenuOption] = [
-            .SelectedMenuItemLabelColor(UIColor(rgba:"#f0a22a")),
-            .UnselectedMenuItemLabelColor(UIColor(rgba:"#939395")),
-            .ScrollMenuBackgroundColor(UIColor(rgba: "#f2f2f2")),
-            .ViewBackgroundColor(UIColor.whiteColor()),
-            .SelectionIndicatorColor(UIColor(rgba:"#fea113")),
-            .BottomMenuHairlineColor(UIColor(rgba:"#f2f2f2")),
+            .selectedMenuItemLabelColor(UIColor(rgba:"#f0a22a")),
+            .unselectedMenuItemLabelColor(UIColor(rgba:"#939395")),
+            .scrollMenuBackgroundColor(UIColor(rgba: "#f2f2f2")),
+            .viewBackgroundColor(UIColor.white),
+            .selectionIndicatorColor(UIColor(rgba:"#fea113")),
+            .bottomMenuHairlineColor(UIColor(rgba:"#f2f2f2")),
             
-            .MenuItemFont(UIFont(name: "AvenirNextCondensed-DemiBold", size: 13.0)!),
-            .MenuHeight(40.0),
-            .MenuItemWidth(90.0),
+            .menuItemFont(UIFont(name: "AvenirNextCondensed-DemiBold", size: 13.0)!),
+            .menuHeight(40.0),
+            .menuItemWidth(90.0),
             
             
-            .CenterMenuItems(true)
+            .centerMenuItems(true)
         ]
         
-        pageMenu = CAPSPageMenu(viewControllers: controllerArray, frame: CGRectMake(0.0, 64, self.view.frame.width, self.view.frame.height - 112), pageMenuOptions: parameters)
+        pageMenu = CAPSPageMenu(viewControllers: controllerArray, frame: CGRect(x: 0.0, y: 64, width: self.view.frame.width, height: self.view.frame.height - 112), pageMenuOptions: parameters)
         
         self.addChildViewController(pageMenu!)
         self.view.addSubview(pageMenu!.view)
         
-        pageMenu!.didMoveToParentViewController(self)
+        pageMenu!.didMove(toParentViewController: self)
  
         
     }
@@ -89,7 +89,7 @@ class HomeViewController: UIViewController {
     
     - parameter animated: animated description
     */
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 //        print("viewWillAppear")
 //        self.navigationController?.navigationBar.hidden = false
@@ -101,9 +101,9 @@ class HomeViewController: UIViewController {
     
     - parameter animated: animated description
     */
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        self.navigationController?.navigationBar.hidden = false
+        self.navigationController?.navigationBar.isHidden = false
 
     }
 

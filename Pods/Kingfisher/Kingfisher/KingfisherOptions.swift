@@ -29,7 +29,7 @@ import Foundation
 /**
 *  Options to control Kingfisher behaviors.
 */
-public struct KingfisherOptions: OptionSetType {
+public struct KingfisherOptions: OptionSet {
 
     public let rawValue: UInt
     

@@ -31,7 +31,7 @@ class PlayVideoViewController: UIViewController {
         
         addPageMenu()
         
-        let url = NSURL(string: DataCenter.shareDataCenter.videoInfo.url)
+        let url = URL(string: DataCenter.shareDataCenter.videoInfo.url)
         self.addVideoPlayerWithURL(url!)
         
         //判断用户是否收藏过
@@ -44,21 +44,21 @@ class PlayVideoViewController: UIViewController {
     }
     
     //完全进入视图 才播放
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         self.videoController.play()
     }
     
     //离开视图暂停播放
-    override func viewWillDisappear(animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         self.videoController.pause()
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         
         super.viewWillAppear(animated)
-        self.navigationController?.navigationBar.hidden = true
+        self.navigationController?.navigationBar.isHidden = true
         
         if  DataCenter.shareDataCenter.user.id != 0{
             userId = DataCenter.shareDataCenter.user.id
@@ -74,17 +74,17 @@ class PlayVideoViewController: UIViewController {
      添加播放器
      - parameter url: 视频url
      */
-    func addVideoPlayerWithURL(url: NSURL){
+    func addVideoPlayerWithURL(_ url: URL){
         
         
         self.videoController =  KrVideoPlayerController(frame: CGRect(x: 0, y: 20, width: width, height: width*(9.0/16.0)))
         
         let willBackOrientationPortrait:() -> Void = {
-            self.pageMenu?.view.hidden = false
+            self.pageMenu?.view.isHidden = false
         }
         
         let willChangeToFullscreenMode:() -> Void = {
-            self.pageMenu?.view.hidden = true
+            self.pageMenu?.view.isHidden = true
         }
         
         self.videoController.willBackOrientationPortrait = willBackOrientationPortrait
@@ -94,7 +94,7 @@ class PlayVideoViewController: UIViewController {
         
     }
     
-    override func viewDidDisappear(animated: Bool) {
+    override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         self.videoController.stop()
     }
@@ -105,9 +105,9 @@ class PlayVideoViewController: UIViewController {
         var controllerArray : [UIViewController] = []
         
         // Do any additional setup after loading the view.
-        let aStoryboard = UIStoryboard(name: "Play", bundle:NSBundle.mainBundle())
+        let aStoryboard = UIStoryboard(name: "Play", bundle:Bundle.main)
         
-        let playVideoInfoViewController = aStoryboard.instantiateViewControllerWithIdentifier("PlayVideoInfoViewController") as! PlayVideoInfoViewController
+        let playVideoInfoViewController = aStoryboard.instantiateViewController(withIdentifier: "PlayVideoInfoViewController") as! PlayVideoInfoViewController
         
         
         
@@ -121,27 +121,27 @@ class PlayVideoViewController: UIViewController {
         //        controllerArray.append(playVideoRecommendTableViewController)
         
         let parameters: [CAPSPageMenuOption] = [
-            .SelectedMenuItemLabelColor(UIColor(rgba:"#f0a22a")),
-            .UnselectedMenuItemLabelColor(UIColor(rgba:"#939395")),
-            .ScrollMenuBackgroundColor(UIColor(rgba: "#f2f2f2")),
-            .ViewBackgroundColor(UIColor(rgba:"#e6e7ec")),
-            .SelectionIndicatorColor(UIColor(rgba:"#fea113")),
-            .BottomMenuHairlineColor(UIColor(rgba:"#f5f5f7")),
+            .selectedMenuItemLabelColor(UIColor(rgba:"#f0a22a")),
+            .unselectedMenuItemLabelColor(UIColor(rgba:"#939395")),
+            .scrollMenuBackgroundColor(UIColor(rgba: "#f2f2f2")),
+            .viewBackgroundColor(UIColor(rgba:"#e6e7ec")),
+            .selectionIndicatorColor(UIColor(rgba:"#fea113")),
+            .bottomMenuHairlineColor(UIColor(rgba:"#f5f5f7")),
             
-            .MenuItemFont(UIFont(name: "ChalkboardSE-Light", size: 13.0)!),
-            .MenuHeight(40.0),
-            .MenuItemWidth(90.0),
-            .CenterMenuItems(true)
+            .menuItemFont(UIFont(name: "ChalkboardSE-Light", size: 13.0)!),
+            .menuHeight(40.0),
+            .menuItemWidth(90.0),
+            .centerMenuItems(true)
         ]
         
-        pageMenu = CAPSPageMenu(viewControllers: controllerArray, frame: CGRectMake(0.0, width*(9.0/16.0)+20, self.view.frame.width, self.view.frame.height -  width*(9.0/16.0) - 20), pageMenuOptions: parameters)
+        pageMenu = CAPSPageMenu(viewControllers: controllerArray, frame: CGRect(x: 0.0, y: width*(9.0/16.0)+20, width: self.view.frame.width, height: self.view.frame.height -  width*(9.0/16.0) - 20), pageMenuOptions: parameters)
         
         print("pageMenu frame -> \( pageMenu?.view.frame)")
         
         self.addChildViewController(pageMenu!)
         self.view.addSubview(pageMenu!.view)
         
-        pageMenu!.didMoveToParentViewController(self)
+        pageMenu!.didMove(toParentViewController: self)
         
     }
     
@@ -150,7 +150,7 @@ class PlayVideoViewController: UIViewController {
      检测3D Touch
      */
     func check3DTouch() {
-        if self.traitCollection.forceTouchCapability != UIForceTouchCapability.Available {
+        if self.traitCollection.forceTouchCapability != UIForceTouchCapability.available {
             let tap = UITapGestureRecognizer(target: self, action: "dismissMe:")
             self.view.addGestureRecognizer(tap)
         }
@@ -160,14 +160,14 @@ class PlayVideoViewController: UIViewController {
     
     func dismissMe(){
         
-        self.dismissViewControllerAnimated(true, completion: nil)
+        self.dismiss(animated: true, completion: nil)
     }
     
     
     
     // MARK: - Preview action items.
     lazy var previewDetailsActions: [UIPreviewActionItem] = {
-        func previewActionForTitle(title: String, style: UIPreviewActionStyle = .Default) -> UIPreviewAction {
+        func previewActionForTitle(_ title: String, style: UIPreviewActionStyle = .default) -> UIPreviewAction {
             return UIPreviewAction(title: title, style: style) { previewAction, viewController in
                 
                 
@@ -181,18 +181,18 @@ class PlayVideoViewController: UIViewController {
                 }
                 
                 guard let detailViewController = viewController as? PlayVideoViewController,
-                    item = detailViewController.detailTitle else { return }
+                    let item = detailViewController.detailTitle else { return }
                 
                 print("\(previewAction.title) triggered from `DetailsViewController` for item: \(item)")
             }
         }
         
         let actionDefault = previewActionForTitle("收藏")
-        let actionShare = previewActionForTitle("分享", style: .Destructive)
+        let actionShare = previewActionForTitle("分享", style: .destructive)
         let subActionQQ = previewActionForTitle("QQ")
         let subActionWb = previewActionForTitle("微博")
         
-        let groupedOptionsActions = UIPreviewActionGroup(title: "分享", style: .Default, actions: [subActionQQ, subActionWb] )
+        let groupedOptionsActions = UIPreviewActionGroup(title: "分享", style: .default, actions: [subActionQQ, subActionWb] )
         
         return [actionDefault]
         
@@ -248,7 +248,7 @@ typealias PreviewActions = PlayVideoViewController
 extension PreviewActions  {
     
     /// User swipes upward on a 3D Touch preview
-    override func previewActionItems() -> [UIPreviewActionItem] {
+    override var previewActionItems : [UIPreviewActionItem] {
         return previewDetailsActions
     }
 }

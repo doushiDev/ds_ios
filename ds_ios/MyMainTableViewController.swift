@@ -17,10 +17,10 @@ class MyMainTableViewController: UITableViewController,APParallaxViewDelegate,MF
     var mybkImage: UIImageView!
     @IBOutlet weak var loginStatusLabel: UILabel!
 
-    let userCircle = UIImageView(frame: CGRectMake(0,0,70,70))
+    let userCircle = UIImageView(frame: CGRect(x: 0,y: 0,width: 70,height: 70))
     
     
-    let loginButton = UIButton(frame: CGRectMake(0, 200, 80, 20))
+    let loginButton = UIButton(frame: CGRect(x: 0, y: 200, width: 80, height: 20))
  
 
     
@@ -29,13 +29,13 @@ class MyMainTableViewController: UITableViewController,APParallaxViewDelegate,MF
       
         
         
-        self.navigationController?.navigationBar.hidden  = true
+        self.navigationController?.navigationBar.isHidden  = true
         
-        self.navigationController?.navigationBar.barStyle = UIBarStyle.Black
+        self.navigationController?.navigationBar.barStyle = UIBarStyle.black
         
         mybkImage = UIImageView(image: UIImage(named: "mybk1"))
-        mybkImage.frame = CGRectMake(0, 0, self.view.frame.width, 200)
-        mybkImage.userInteractionEnabled = true
+        mybkImage.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: 200)
+        mybkImage.isUserInteractionEnabled = true
         
         
        
@@ -44,14 +44,14 @@ class MyMainTableViewController: UITableViewController,APParallaxViewDelegate,MF
         userCircle.center = mybkImage.center
         userCircle.layer.masksToBounds = true
         userCircle.layer.cornerRadius = 35
-        userCircle.layer.borderColor = UIColor(rgba:"#f0a22a").CGColor
+        userCircle.layer.borderColor = UIColor(rgba:"#f0a22a").cgColor
         userCircle.layer.borderWidth = 2
         mybkImage.addSubview(userCircle)
         
         ///登录 按钮 
         
 //                loginButton.setImage(UIImage(named: "login"), forState: .Normal)
-        loginButton.addTarget(self, action: #selector(MyMainTableViewController.toLoginView(_:)), forControlEvents: .TouchUpInside)
+        loginButton.addTarget(self, action: #selector(MyMainTableViewController.toLoginView(_:)), for: .touchUpInside)
                 mybkImage.addSubview(loginButton)
         
         loginButton.titleLabel?.font = UIFont(name: "Helvetica Neue", size: 16)
@@ -70,7 +70,7 @@ class MyMainTableViewController: UITableViewController,APParallaxViewDelegate,MF
         }
         
         //添加tableHeaderView
-        let headerView_v: ParallaxHeaderView = ParallaxHeaderView.parallaxHeaderViewWithSubView(mybkImage) as! ParallaxHeaderView
+        let headerView_v: ParallaxHeaderView = ParallaxHeaderView.parallaxHeaderView(withSubView: mybkImage) as! ParallaxHeaderView
         
         
         self.tableView.tableHeaderView = headerView_v
@@ -80,14 +80,14 @@ class MyMainTableViewController: UITableViewController,APParallaxViewDelegate,MF
     }
 
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.navigationController?.navigationBar.barStyle = UIBarStyle.Black
-        self.navigationController?.navigationBar.hidden = true
+        self.navigationController?.navigationBar.barStyle = UIBarStyle.black
+        self.navigationController?.navigationBar.isHidden = true
        setHeadImage()
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         //添加tableHeaderView
         let header: ParallaxHeaderView = self.tableView.tableHeaderView as! ParallaxHeaderView
@@ -100,10 +100,10 @@ class MyMainTableViewController: UITableViewController,APParallaxViewDelegate,MF
     /**
      跳转登录页面
      */
-    func toLoginView(sender: UIButton!){
-        let aStoryboard = UIStoryboard(name: "My", bundle:NSBundle.mainBundle())
+    func toLoginView(_ sender: UIButton!){
+        let aStoryboard = UIStoryboard(name: "My", bundle:Bundle.main)
         
-        let loginTableView = aStoryboard.instantiateViewControllerWithIdentifier("LoginView")
+        let loginTableView = aStoryboard.instantiateViewController(withIdentifier: "LoginView")
         self.navigationController?.pushViewController(loginTableView, animated: true)
         
         print("点击了登录")
@@ -111,10 +111,10 @@ class MyMainTableViewController: UITableViewController,APParallaxViewDelegate,MF
     
     
     //MARK: 滑动操作
-    override func  scrollViewDidScroll(scrollView: UIScrollView) {
+    override func  scrollViewDidScroll(_ scrollView: UIScrollView) {
         if (scrollView == self.tableView){
             let header: ParallaxHeaderView = self.tableView.tableHeaderView as! ParallaxHeaderView
-            header.layoutHeaderViewForScrollViewOffset(scrollView.contentOffset)
+            header.layoutHeaderView(forScrollOffset: scrollView.contentOffset)
             self.tableView.tableHeaderView = header
         }
     }
@@ -126,7 +126,7 @@ class MyMainTableViewController: UITableViewController,APParallaxViewDelegate,MF
     }
     
     
-    override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         
         if section == 1 {
             return 20
@@ -138,26 +138,26 @@ class MyMainTableViewController: UITableViewController,APParallaxViewDelegate,MF
     
     func setHeadImage(){
         
-        let user =  userDefaults.objectForKey("userInfo")
+        let user =  userDefaults.object(forKey: "userInfo")
 
         if (user != nil) {
-            let headImageUrl = user!.objectForKey("headImage") as! String
-            let nickName = user!.objectForKey("nickName") as! String
+            let headImageUrl = user!.object(forKey: "headImage") as! String
+            let nickName = user!.object(forKey: "nickName") as! String
           
-                userCircle.kf_setImageWithURL(NSURL(string: headImageUrl)!)
-                loginButton.setTitle(nickName, forState: .Normal)
+                userCircle.kf_setImageWithURL(URL(string: headImageUrl)!)
+                loginButton.setTitle(nickName, for: UIControlState())
                 //禁止点击
-                loginButton.enabled = false
+                loginButton.isEnabled = false
             loginStatusLabel.text = "退出当前用户"
-            loginStatusLabel.textColor = UIColor.redColor()
+            loginStatusLabel.textColor = UIColor.red
             
  
         }else{
-            loginButton.setTitle("立即登录", forState: .Normal)
-            loginButton.enabled = true
+            loginButton.setTitle("立即登录", for: UIControlState())
+            loginButton.isEnabled = true
             userCircle.image = UIImage(named: "picture-default")
             loginStatusLabel.text = "立即登录"
-            loginStatusLabel.textColor = UIColor.greenColor()
+            loginStatusLabel.textColor = UIColor.green
             
         }
         
@@ -165,85 +165,85 @@ class MyMainTableViewController: UITableViewController,APParallaxViewDelegate,MF
     }
     
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        if indexPath.section == 0 && indexPath.row == 0{
+        if (indexPath as NSIndexPath).section == 0 && (indexPath as NSIndexPath).row == 0{
             print("点击了我的收藏")
             //判断用户是否登录
-            let user =  userDefaults.objectForKey("userInfo")
-            let aStoryboard = UIStoryboard(name: "My", bundle:NSBundle.mainBundle())
+            let user =  userDefaults.object(forKey: "userInfo")
+            let aStoryboard = UIStoryboard(name: "My", bundle:Bundle.main)
             
             if (user == nil) {
                 //弹窗登录
                
-                let loginTableView = aStoryboard.instantiateViewControllerWithIdentifier("LoginView")
+                let loginTableView = aStoryboard.instantiateViewController(withIdentifier: "LoginView")
                 self.navigationController?.pushViewController(loginTableView, animated: true)
                 
             }else{
                 
-                let myUserFavoriteTableViewController =  aStoryboard.instantiateViewControllerWithIdentifier("MyCollect") as! MyUserFavoriteTableViewController
-                myUserFavoriteTableViewController.userId = user!.objectForKey("id") as! Int
+                let myUserFavoriteTableViewController =  aStoryboard.instantiateViewController(withIdentifier: "MyCollect") as! MyUserFavoriteTableViewController
+                myUserFavoriteTableViewController.userId = user!.object(forKey: "id") as! Int
                  self.navigationController?.pushViewController(myUserFavoriteTableViewController, animated: true)
 
             }
         }
-        if indexPath.section == 1 && indexPath.row == 1{
+        if (indexPath as NSIndexPath).section == 1 && (indexPath as NSIndexPath).row == 1{
             print("意见反馈")
             sendEmailAction()
         }
         
-        if indexPath.section == 1 && indexPath.row == 0{
+        if (indexPath as NSIndexPath).section == 1 && (indexPath as NSIndexPath).row == 0{
             print("给个笑脸")
             let evaluateString = "http://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?id=1044917946&pageNumber=0&sortOrdering=2&type=Purple+Software&mt=8"
-            UIApplication.sharedApplication().openURL(NSURL(string: evaluateString)!)
+            UIApplication.shared.openURL(URL(string: evaluateString)!)
             
         }
         
-        if indexPath.section == 3 && indexPath.row == 0 {
-            let user =  userDefaults.objectForKey("userInfo")
+        if (indexPath as NSIndexPath).section == 3 && (indexPath as NSIndexPath).row == 0 {
+            let user =  userDefaults.object(forKey: "userInfo")
 
             if user != nil{
                 print("登出")
                 //确定按钮
-                let alertController = UIAlertController(title: "确定要退出吗？", message: "", preferredStyle: .Alert)
+                let alertController = UIAlertController(title: "确定要退出吗？", message: "", preferredStyle: .alert)
                 
-                let cancelAction = UIAlertAction(title: "取消", style: .Cancel) { (action) in
+                let cancelAction = UIAlertAction(title: "取消", style: .cancel) { (action) in
                  }
                 alertController.addAction(cancelAction)
                 
-                let OKAction = UIAlertAction(title: "确定", style: .Default) { (action) in
+                let OKAction = UIAlertAction(title: "确定", style: .default) { (action) in
                     
                     self.loginStatusLabel.text = "立即登录"
-                    self.loginStatusLabel.textColor = UIColor.greenColor()
-                    userDefaults.removeObjectForKey("userInfo")
+                    self.loginStatusLabel.textColor = UIColor.green
+                    userDefaults.removeObject(forKey: "userInfo")
                     DataCenter.shareDataCenter.user = User()
                     self.setHeadImage()
 
                 }
                 alertController.addAction(OKAction)
                 
-                self.presentViewController(alertController, animated: true) {
+                self.present(alertController, animated: true) {
                  }
             }else{
                 print("登录")
                 loginStatusLabel.text = "退出当前用户"
-                loginStatusLabel.textColor = UIColor.redColor()
-                let aStoryboard = UIStoryboard(name: "My", bundle:NSBundle.mainBundle())
+                loginStatusLabel.textColor = UIColor.red
+                let aStoryboard = UIStoryboard(name: "My", bundle:Bundle.main)
                 
-                let loginTableView = aStoryboard.instantiateViewControllerWithIdentifier("LoginView")
+                let loginTableView = aStoryboard.instantiateViewController(withIdentifier: "LoginView")
                 self.navigationController?.pushViewController(loginTableView, animated: true)
                 setHeadImage()
 
             }
         }
         
-        if indexPath.section == 2 && indexPath.row == 1 {
+        if (indexPath as NSIndexPath).section == 2 && (indexPath as NSIndexPath).row == 1 {
             print("朋友推荐")
             let share = "https://itunes.apple.com/cn/app/id1044917946"
             
             
             
-            UMSocialData.defaultData().extConfig.title = "搞笑,恶搞视频全聚合,尽在逗视App"
+            UMSocialData.default().extConfig.title = "搞笑,恶搞视频全聚合,尽在逗视App"
             
             UMSocialWechatHandler.setWXAppId("wxfd23fac852a54c97", appSecret: "d4624c36b6795d1d99dcf0547af5443d", url: "\(share)")
             
@@ -264,7 +264,7 @@ class MyMainTableViewController: UITableViewController,APParallaxViewDelegate,MF
     func sendEmailAction(){
         let mailComposeViewController = configuredMailComposeViewController()
         if MFMailComposeViewController.canSendMail() {
-            self.presentViewController(mailComposeViewController, animated: true, completion: nil)
+            self.present(mailComposeViewController, animated: true, completion: nil)
         }
     }
     
@@ -276,15 +276,15 @@ class MyMainTableViewController: UITableViewController,APParallaxViewDelegate,MF
         //设置主题
         mailComposerVC.setSubject("逗视意见反馈")
         //邮件内容
-        let info:Dictionary = NSBundle.mainBundle().infoDictionary!
+        let info:Dictionary = Bundle.main.infoDictionary!
         let appName = info["CFBundleName"] as! String
         let appVersion = info["CFBundleShortVersionString"] as! String
-        mailComposerVC.setMessageBody("</br></br></br></br></br>基本信息：</br></br>\(appName)  \(appVersion)</br> \(UIDevice.currentDevice().name)</br>iOS \(UIDevice.currentDevice().systemVersion)", isHTML: true)
+        mailComposerVC.setMessageBody("</br></br></br></br></br>基本信息：</br></br>\(appName)  \(appVersion)</br> \(UIDevice.current.name)</br>iOS \(UIDevice.current.systemVersion)", isHTML: true)
         return mailComposerVC
     }
     // MARK: MFMailComposeViewControllerDelegate Method
-    func mailComposeController(controller: MFMailComposeViewController, didFinishWithResult result: MFMailComposeResult, error: NSError?) {
-        controller.dismissViewControllerAnimated(true, completion: nil)
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+        controller.dismiss(animated: true, completion: nil)
     }
 
 
@@ -350,7 +350,7 @@ class MyMainTableViewController: UITableViewController,APParallaxViewDelegate,MF
     // MARK: - Navigation
     */
     // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         if segue.identifier == "toUserFavorite" {
             

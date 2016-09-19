@@ -40,10 +40,10 @@ Item could be added into KingfisherOptionsInfo
 - Transition:  Item for animation transition when using UIImageView. Kingfisher will use the `ImageTransition` of this enum to animate the image in if it is downloaded from web. The transition will not happen when the image is retrieved from either memory or disk cache.
 */
 public enum KingfisherOptionsInfoItem {
-    case Options(KingfisherOptions)
-    case TargetCache(ImageCache)
-    case Downloader(ImageDownloader)
-    case Transition(ImageTransition)
+    case options(KingfisherOptions)
+    case targetCache(ImageCache)
+    case downloader(ImageDownloader)
+    case transition(ImageTransition)
 }
 
 infix operator <== {
@@ -54,17 +54,17 @@ infix operator <== {
 // This operator returns true if two `KingfisherOptionsInfoItem` enum is the same, without considering the associated values.
 func <== (lhs: KingfisherOptionsInfoItem, rhs: KingfisherOptionsInfoItem) -> Bool {
     switch (lhs, rhs) {
-    case (.Options(_), .Options(_)): return true
-    case (.TargetCache(_), .TargetCache(_)): return true
-    case (.Downloader(_), .Downloader(_)): return true
-    case (.Transition(_), .Transition(_)): return true
+    case (.options(_), .options(_)): return true
+    case (.targetCache(_), .targetCache(_)): return true
+    case (.downloader(_), .downloader(_)): return true
+    case (.transition(_), .transition(_)): return true
     default: return false
     }
 }
 
-extension CollectionType where Generator.Element == KingfisherOptionsInfoItem {
+extension Collection where Iterator.Element == KingfisherOptionsInfoItem {
     
-    func kf_firstMatchIgnoringAssociatedValue(target: Generator.Element) -> Generator.Element? {
-        return indexOf { $0 <== target }.flatMap { self[$0] }
+    func kf_firstMatchIgnoringAssociatedValue(_ target: Iterator.Element) -> Iterator.Element? {
+        return index { $0 <== target }.flatMap { self[$0] }
     }
 }

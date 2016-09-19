@@ -12,7 +12,7 @@
                         <viewControllerLayoutGuide type="top" id="gc9-ys-IRM"/>
                         <viewControllerLayoutGuide type="bottom" id="IIw-px-VxW"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="4cf-xq-8lC">
+                    <view key="view" contentMode="scaleToFill" restorationIdentifier="LaunchScreen" id="4cf-xq-8lC">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>

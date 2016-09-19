@@ -8,16 +8,16 @@ import Kingfisher
 //登录状态
 var loginState:Bool  = false
 //缓存用户信息
-var userDefaults:NSUserDefaults = NSUserDefaults.standardUserDefaults()
+var userDefaults:UserDefaults = UserDefaults.standard
 
-let user =  userDefaults.objectForKey("userInfo")
+let user =  userDefaults.object(forKey: "userInfo")
 
 
 
 var alamofireManager : Manager = Manager.sharedInstanceAndTimeOut
 
-let width = UIScreen.mainScreen().bounds.size.width
-let height = UIScreen.mainScreen().bounds.size.height
+let width = UIScreen.main.bounds.size.width
+let height = UIScreen.main.bounds.size.height
 
 
 

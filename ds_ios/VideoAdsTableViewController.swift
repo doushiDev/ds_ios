@@ -21,7 +21,7 @@ class VideoAdsTableViewController: UITableViewController {
     var populatingVideo = false
     
     
-    let config = NSURLSessionConfiguration.defaultSessionConfiguration()
+    let config = URLSessionConfiguration.default
     
     // 视频分类
     var type = 0
@@ -52,11 +52,11 @@ class VideoAdsTableViewController: UITableViewController {
         
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        self.navigationController?.navigationBar.barStyle = UIBarStyle.Default
-        self.navigationController?.navigationBar.hidden = false
+        self.navigationController?.navigationBar.barStyle = UIBarStyle.default
+        self.navigationController?.navigationBar.isHidden = false
 
      }
     
@@ -65,13 +65,13 @@ class VideoAdsTableViewController: UITableViewController {
      
      - parameter animated: animated description
      */
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated) 
         
         
     }
 
-    let user =  userDefaults.objectForKey("userInfo")
+    let user =  userDefaults.object(forKey: "userInfo")
 
     
     // MARK: - Table view data source
@@ -91,7 +91,7 @@ class VideoAdsTableViewController: UITableViewController {
                 
                 self.videos.removeAllObjects()
                 
-                self.videos.addObjectsFromArray(videoInfos!)
+                self.videos.addObjects(from: videoInfos!)
                 self.tableView.reloadData()
 
             }
@@ -112,28 +112,28 @@ class VideoAdsTableViewController: UITableViewController {
     
     // MARK: - Table view data source
     
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return 1
     }
     
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         return self.videos.count
     }
     
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         
         
-        let cell = tableView.dequeueReusableCellWithIdentifier("VideoTableViewCell", forIndexPath: indexPath) as! VideoTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "VideoTableViewCell", for: indexPath) as! VideoTableViewCell
         
         if videos.count > 0 {
-            let videoInfo = (videos.objectAtIndex(indexPath.row) as! VideoInfo)
+            let videoInfo = (videos.object(at: (indexPath as NSIndexPath).row) as! VideoInfo)
             
             cell.titleLabel.text = videoInfo.title
-            cell.picImageView.kf_setImageWithURL(NSURL(string: videoInfo.pic)!)
+            cell.picImageView.kf_setImageWithURL(URL(string: videoInfo.pic)!)
             
         }
         
@@ -143,24 +143,24 @@ class VideoAdsTableViewController: UITableViewController {
     
     
     
-    override  func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat{
+    override  func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat{
         return 100
     }
     
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        let videoInfo = (videos.objectAtIndex(indexPath.row) as! VideoInfo)
+        let videoInfo = (videos.object(at: (indexPath as NSIndexPath).row) as! VideoInfo)
 
         
 //        CCWebViewSController.showWithContro(self, withUrlStr: videoInfo.url, withTitle: videoInfo.title)
 
       
         
-        let url = NSURL(string: videoInfo.url)
+        let url = URL(string: videoInfo.url)
         
-        if UIApplication.sharedApplication().canOpenURL(url!) {
-            UIApplication.sharedApplication().openURL(url!)
+        if UIApplication.shared.canOpenURL(url!) {
+            UIApplication.shared.openURL(url!)
         }
     }
     
@@ -203,14 +203,14 @@ class VideoAdsTableViewController: UITableViewController {
     /*
     // MARK: - Navigation
     */
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
         // 播放页面隐藏tabbar
         if segue.identifier == "toPlayVideo" {
             
             let path = self.tableView.indexPathForSelectedRow!
-            let videoInfo = (videos.objectAtIndex(path.row) as! VideoInfo)
+            let videoInfo = (videos.object(at: (path as NSIndexPath).row) as! VideoInfo)
             
 //            DataCenter.shareDataCenter.videoInfo = videoInfo
 

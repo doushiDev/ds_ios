@@ -13,14 +13,14 @@ class ExceptionsViewController: UIViewController {
     @IBOutlet weak var exceptionsWebView: UIWebView!
     override func viewDidLoad() {
         super.viewDidLoad()
-        let request = NSURLRequest(URL: NSURL(string: "https://ds.itjh.net/mzsm.html?")!)
+        let request = URLRequest(url: URL(string: "https://ds.itjh.net/mzsm.html?")!)
          exceptionsWebView.loadRequest(request)
      }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        self.navigationController?.navigationBar.barStyle = UIBarStyle.Default
+        self.navigationController?.navigationBar.barStyle = UIBarStyle.default
     }
     
 

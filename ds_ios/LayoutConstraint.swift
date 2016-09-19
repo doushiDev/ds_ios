@@ -30,11 +30,11 @@ import AppKit
 /**
     Used to add extra information to the actual `NSLayoutConstraint`'s that will UIKit/AppKit will utilize
 */
-public class LayoutConstraint: NSLayoutConstraint {
+open class LayoutConstraint: NSLayoutConstraint {
     
     internal var snp_constraint: Constraint? = nil
     
-    public var snp_location: SourceLocation? {
+    open var snp_location: SourceLocation? {
         return snp_constraint?.location
     }
 }

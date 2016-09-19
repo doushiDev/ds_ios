@@ -39,7 +39,7 @@ public struct Validator {
     
     public static func validate<T>(input i: T?, rules rs: ValidationRuleSet<T>) -> ValidationResult {
         let errors = rs.rules.filter { !$0.validateInput(i) }.map { $0.failureError }
-        return errors.isEmpty ? ValidationResult.Valid : ValidationResult.Invalid(errors)
+        return errors.isEmpty ? ValidationResult.valid : ValidationResult.invalid(errors)
     }
     
 }

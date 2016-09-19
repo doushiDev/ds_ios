@@ -22,13 +22,13 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         pwdTextField.delegate = self
         
         
-        phoneTextField.addTarget(self, action: #selector(LoginViewController.textFieldDidChange(_:)), forControlEvents: UIControlEvents.EditingChanged)
+        phoneTextField.addTarget(self, action: #selector(LoginViewController.textFieldDidChange(_:)), for: UIControlEvents.editingChanged)
         
-        pwdTextField.addTarget(self, action: #selector(LoginViewController.textFieldDidChange(_:)), forControlEvents: UIControlEvents.EditingChanged)
+        pwdTextField.addTarget(self, action: #selector(LoginViewController.textFieldDidChange(_:)), for: UIControlEvents.editingChanged)
         
         
         //设置登录按钮一开始为不可点击
-        loginUIButton.enabled = false
+        loginUIButton.isEnabled = false
         loginUIButton.alpha = 0.6
         
     }
@@ -52,7 +52,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
      
      - parameter textField: textField description
      */
-    func textFieldDidChange(textField: UITextField){
+    func textFieldDidChange(_ textField: UITextField){
         
         
 //        print("我正在输入 \(textField.tag)")
@@ -86,7 +86,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         
         //        //判断状态OK 恢复登录按钮点击时间
         if (phoneResultUILabel.text == "😀" &&  pwdResultUILabel.text == "😀") {
-            loginUIButton.enabled = true
+            loginUIButton.isEnabled = true
             loginUIButton.alpha = 1
         }
         
@@ -102,22 +102,22 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         //这是点击背景触发的事件 用.调用方法
     }
     
-    @IBAction func loginButton(sender: UIButton) {
+    @IBAction func loginButton(_ sender: UIButton) {
         
         print("点击了登录")
         
         self.alamofireManager!.request(HttpClientByUser.DSRouter.loginUser(phoneTextField.text!, pwdTextField.text!)).responseJSON(completionHandler: { response in
             
             switch response.result {
-            case .Success:
+            case .success:
                 let JSON = response.result.value
                 
                 print("HTTP 状态码->\(response.response!.statusCode)")
                 if response.response!.statusCode == 201{
                     print("登录成功")
-                    let userDictionary = (JSON as! NSDictionary).valueForKey("content") as! NSDictionary
+                    let userDictionary = (JSON as! NSDictionary).value(forKey: "content") as! NSDictionary
                     //将用户信息保存到内存中
-                    userDefaults.setObject(userDictionary, forKey: "userInfo")
+                    userDefaults.set(userDictionary, forKey: "userInfo")
                     let userInfo = User(id: userDictionary["id"] as! Int,
                         
                         nickName: userDictionary["nickName"] as! String,
@@ -130,34 +130,34 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                     
                     DataCenter.shareDataCenter.user = userInfo
                     //返回my页面
-                    self.navigationController?.popToRootViewControllerAnimated(true)
+                    self.navigationController?.popToRootViewController(animated: true)
 //
                 }else{
                     print("登录失败")
-                    let error_detail = (JSON as! NSDictionary).valueForKey("error_detail") as! String
+                    let error_detail = (JSON as! NSDictionary).value(forKey: "error_detail") as! String
                     
-                    let error = (JSON as! NSDictionary).valueForKey("error") as! String
+                    let error = (JSON as! NSDictionary).value(forKey: "error") as! String
 //                    print("\(error_detail)")
                     
                     let title = error
                     let message = error_detail
                     let cancelButtonTitle = "OK"
                     
-                    let alertController = DOAlertController(title: title, message: message, preferredStyle: .Alert)
+                    let alertController = DOAlertController(title: title, message: message, preferredStyle: .alert)
                     
                     // Create the action.
-                    let cancelAction = DOAlertAction(title: cancelButtonTitle, style: .Destructive) { action in
+                    let cancelAction = DOAlertAction(title: cancelButtonTitle, style: .destructive) { action in
                         NSLog("The simple alert's cancel action occured.")
                     }
                     
                     // Add the action.
                     alertController.addAction(cancelAction)
                     
-                   self.presentViewController(alertController, animated: true, completion: nil)
+                   self.present(alertController, animated: true, completion: nil)
                     
                 }
                 
-            case .Failure(let error):
+            case .failure(let error):
                 print(error)
             }
         })
@@ -170,14 +170,14 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
      
      - parameter sender: 按钮
      */
-    @IBAction func qqLogin(sender: UIButton) {
+    @IBAction func qqLogin(_ sender: UIButton) {
         print("点击了QQ登录")
         self.phoneTextField?.resignFirstResponder()
         self.pwdTextField?.resignFirstResponder()
         //授权
-        let snsPlatform = UMSocialSnsPlatformManager.getSocialPlatformWithName(UMShareToQQ)
+        let snsPlatform = UMSocialSnsPlatformManager.getSocialPlatform(withName: UMShareToQQ)
         
-        snsPlatform.loginClickHandler(self,UMSocialControllerService.defaultControllerService(),true,{(response :UMSocialResponseEntity!) ->Void in
+        snsPlatform?.loginClickHandler(self,UMSocialControllerService.default(),true,{(response :UMSocialResponseEntity!) ->Void in
             if response.responseCode.rawValue == UMSResponseCodeSuccess.rawValue {
                 
                 var snsAccount = UMSocialAccountManager.socialAccountDictionary()
@@ -203,14 +203,14 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                     self.alamofireManager!.request(HttpClientByUser.DSRouter.registerUser(user)).responseJSON(completionHandler: { response -> Void in
                         
                         switch response.result {
-                        case .Success:
+                        case .success:
 //                            print("HTTP 状态码->\(response?.statusCode)")
                             print("注册成功")
 //                            print(result.value)
                             let JSON = response.result.value
-                            let userDictionary = (JSON as! NSDictionary).valueForKey("content") as! NSDictionary
+                            let userDictionary = (JSON as! NSDictionary).value(forKey: "content") as! NSDictionary
                             //将用户信息保存到内存中
-                            userDefaults.setObject(userDictionary, forKey: "userInfo")
+                            userDefaults.set(userDictionary, forKey: "userInfo")
 
                             
                             let userInfo = User(id: userDictionary["id"] as! Int,
@@ -226,9 +226,9 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                     
                             DataCenter.shareDataCenter.user = userInfo
                             //返回my页面
-                            self.navigationController?.popToRootViewControllerAnimated(true)
+                            self.navigationController?.popToRootViewController(animated: true)
                             
-                        case .Failure(let error):
+                        case .failure(let error):
                             print(error)
                         }
                     })
@@ -236,21 +236,21 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                     
                 }
             }
-            UIApplication.sharedApplication().networkActivityIndicatorVisible = false
+            UIApplication.shared.isNetworkActivityIndicatorVisible = false
             
         });
     }
     
     
-    @IBAction func weiboLogin(sender: UIButton) {
+    @IBAction func weiboLogin(_ sender: UIButton) {
         print("点击了微博登录")
         self.phoneTextField?.resignFirstResponder()
         self.pwdTextField?.resignFirstResponder()
         //授权
         
-        let snsPlatform = UMSocialSnsPlatformManager.getSocialPlatformWithName(UMShareToSina)
+        let snsPlatform = UMSocialSnsPlatformManager.getSocialPlatform(withName: UMShareToSina)
         
-        snsPlatform.loginClickHandler(self,UMSocialControllerService.defaultControllerService(),true,{(response :UMSocialResponseEntity!) ->Void in
+        snsPlatform?.loginClickHandler(self,UMSocialControllerService.default(),true,{(response :UMSocialResponseEntity!) ->Void in
             
             
             if response.responseCode.rawValue == UMSResponseCodeSuccess.rawValue {
@@ -277,14 +277,14 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                     self.alamofireManager!.request(HttpClientByUser.DSRouter.registerUser(user)).responseJSON(completionHandler: { response in
                         
                         switch response.result {
-                        case .Success:
+                        case .success:
 //                            print("HTTP 状态码->\(response?.statusCode)")
                             print("注册成功")
                             print(response.result.value)
                             let JSON = response.result.value
-                            let userDictionary = (JSON as! NSDictionary).valueForKey("content") as! NSDictionary
+                            let userDictionary = (JSON as! NSDictionary).value(forKey: "content") as! NSDictionary
                             //将用户信息保存到内存中
-                            userDefaults.setObject(userDictionary, forKey: "userInfo")
+                            userDefaults.set(userDictionary, forKey: "userInfo")
                            
                             let userInfo = User(id: userDictionary["id"] as! Int,
                                 
@@ -300,9 +300,9 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                             DataCenter.shareDataCenter.user = userInfo
                             
                             //返回my页面
-                            self.navigationController?.popToRootViewControllerAnimated(true)
+                            self.navigationController?.popToRootViewController(animated: true)
                             
-                        case .Failure(let error):
+                        case .failure(let error):
                             print(error)
                         }
                     })
@@ -310,16 +310,16 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                     
                 }
             }
-            UIApplication.sharedApplication().networkActivityIndicatorVisible = false
+            UIApplication.shared.isNetworkActivityIndicatorVisible = false
             
         });
         
     }
     
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.navigationController?.navigationBar.barStyle = UIBarStyle.Default
+        self.navigationController?.navigationBar.barStyle = UIBarStyle.default
     }
     
     override func didReceiveMemoryWarning() {

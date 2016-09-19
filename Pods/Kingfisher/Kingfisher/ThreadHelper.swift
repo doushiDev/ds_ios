@@ -26,11 +26,11 @@
 
 import Foundation
 
-func dispatch_async_safely_main_queue(block: ()->()) {
-    if NSThread.isMainThread() {
+func dispatch_async_safely_main_queue(_ block: @escaping ()->()) {
+    if Thread.isMainThread {
         block()
     } else {
-        dispatch_async(dispatch_get_main_queue()) {
+        DispatchQueue.main.async {
             block()
         }
     }

@@ -18,7 +18,7 @@ class VideoTableViewCell: UITableViewCell {
         // Initialization code
     }
     
-    func videlInit(picImageView: UIImageView!,titleLabel: UILabel!,timeLabel: UILabel!){
+    func videlInit(_ picImageView: UIImageView!,titleLabel: UILabel!,timeLabel: UILabel!){
         
         self.picImageView = picImageView
         self.timeLabel = timeLabel
@@ -26,7 +26,7 @@ class VideoTableViewCell: UITableViewCell {
         
     }
 
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state

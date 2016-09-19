@@ -12,16 +12,18 @@ import Foundation
 /// 数据中心
 class DataCenter: NSObject {
     
+    private static var __once: () = { () -> Void in
+            Static.instance = DataCenter()
+        }()
+    
     //单例
     class var shareDataCenter:DataCenter{
         struct Static {
-            static var onceToken : dispatch_once_t = 0
+            static var onceToken : Int = 0
             static var instance: DataCenter? = nil
         }
         
-        dispatch_once(&Static.onceToken) { () -> Void in
-            Static.instance = DataCenter()
-        }
+        _ = DataCenter.__once
         return Static.instance!
     }
     
@@ -30,7 +32,7 @@ class DataCenter: NSObject {
     var user:User = User()
     
     
-    func getVideosFromType(type:Int) -> [VideoInfo]{
+    func getVideosFromType(_ type:Int) -> [VideoInfo]{
         
         switch type{
         case 0:

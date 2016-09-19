@@ -11,7 +11,7 @@ import UIKit
 extension UIDevice {
     
     func isIpad() -> Bool {
-        if userInterfaceIdiom == .Pad {
+        if userInterfaceIdiom == .pad {
             return true
         }
         return false

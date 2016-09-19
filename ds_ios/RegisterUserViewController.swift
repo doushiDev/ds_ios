@@ -39,7 +39,7 @@ class RegisterUserViewController: UIViewController,UIImagePickerControllerDelega
     override func viewDidLoad() {
         super.viewDidLoad()
         self.alamofireManager =  Manager.sharedInstanceAndTimeOut
-        headImageView.userInteractionEnabled = true
+        headImageView.isUserInteractionEnabled = true
         
         let tapGestureRecognizer  = UITapGestureRecognizer(target: self, action: #selector(RegisterUserViewController.uploadHeadImage(_:)))
         headImageView.addGestureRecognizer(tapGestureRecognizer)
@@ -48,13 +48,13 @@ class RegisterUserViewController: UIViewController,UIImagePickerControllerDelega
         passwordTextField.delegate = self
         
         
-         phoneTextField.addTarget(self, action: #selector(RegisterUserViewController.textFieldDidChange(_:)), forControlEvents: UIControlEvents.EditingChanged)
+         phoneTextField.addTarget(self, action: #selector(RegisterUserViewController.textFieldDidChange(_:)), for: UIControlEvents.editingChanged)
         
-         passwordTextField.addTarget(self, action: #selector(RegisterUserViewController.textFieldDidChange(_:)), forControlEvents: UIControlEvents.EditingChanged)
+         passwordTextField.addTarget(self, action: #selector(RegisterUserViewController.textFieldDidChange(_:)), for: UIControlEvents.editingChanged)
         
         
         //设置注册按钮一开始为不可点击
-        registerUserButton.enabled = false
+        registerUserButton.isEnabled = false
         registerUserButton.alpha = 0.6
         
     }
@@ -65,7 +65,7 @@ class RegisterUserViewController: UIViewController,UIImagePickerControllerDelega
      
      - parameter textField: textField description
      */
-    func textFieldDidChange(textField: UITextField){
+    func textFieldDidChange(_ textField: UITextField){
         
         
 //        print("我正在输入 \(textField.tag)")
@@ -103,7 +103,7 @@ class RegisterUserViewController: UIViewController,UIImagePickerControllerDelega
         
 //        //判断状态OK 恢复注册按钮点击时间
         if (resultUILabel.text == "😀" &&  pwdResultUILabel.text == "😀") {
-            registerUserButton.enabled = true
+            registerUserButton.isEnabled = true
             registerUserButton.alpha = 1
         }
 
@@ -119,10 +119,10 @@ class RegisterUserViewController: UIViewController,UIImagePickerControllerDelega
         super.didReceiveMemoryWarning()
     }
     
-    private var timer: NSTimer?
-    private var timeLabel: UILabel!
-    private var disabledText: String!
-    private var remainingSeconds = 60
+    fileprivate var timer: Timer?
+    fileprivate var timeLabel: UILabel!
+    fileprivate var disabledText: String!
+    fileprivate var remainingSeconds = 60
 
     
     /**
@@ -130,35 +130,35 @@ class RegisterUserViewController: UIViewController,UIImagePickerControllerDelega
      
      - parameter sender: sender description
      */
-    @IBAction func getCode(sender: BackgroundColorButton) {
+    @IBAction func getCode(_ sender: BackgroundColorButton) {
         //发送验证码
-        SMSSDK.getVerificationCodeByMethod(SMSGetCodeMethodSMS, phoneNumber: self.phoneTextField.text, zone: "+86", customIdentifier: nil) { (error) -> Void in
+        SMSSDK.getVerificationCode(by: SMSGetCodeMethodSMS, phoneNumber: self.phoneTextField.text, zone: "+86", customIdentifier: nil) { (error) -> Void in
                         
             if ((error == nil)) {
                 print("发送成功")
                 
-                sender.enabled = false
+                sender.isEnabled = false
                 sender.alpha = 0.6
                 
-                self.timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: #selector(RegisterUserViewController.updateTimer(_:)), userInfo: nil, repeats: true)
-                self.sendCodeButton.setTitle("\(self.remainingSeconds)s", forState: .Disabled)
+                self.timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(RegisterUserViewController.updateTimer(_:)), userInfo: nil, repeats: true)
+                self.sendCodeButton.setTitle("\(self.remainingSeconds)s", for: .disabled)
             }
         }
         
     }
     
-    func updateTimer(timer: NSTimer) {
+    func updateTimer(_ timer: Timer) {
         remainingSeconds -= 1
         
         if remainingSeconds <= 0 {
              self.remainingSeconds = 0
             self.timer!.invalidate()
-            sendCodeButton.enabled = true
+            sendCodeButton.isEnabled = true
             sendCodeButton.alpha = 1
             remainingSeconds = 60
 
         }
-        sendCodeButton.setTitle("\(remainingSeconds)s", forState: .Disabled)
+        sendCodeButton.setTitle("\(remainingSeconds)s", for: .disabled)
     }
     
     
@@ -167,7 +167,7 @@ class RegisterUserViewController: UIViewController,UIImagePickerControllerDelega
      
      - parameter sender: sender description
      */
-    @IBAction func registerUser(sender: UIButton) {
+    @IBAction func registerUser(_ sender: UIButton) {
         
         //验证 验证码 
         SMSSDK.commitVerificationCode(self.code.text, phoneNumber: phoneTextField.text, zone: "+86") { (error) -> Void in
@@ -177,12 +177,12 @@ class RegisterUserViewController: UIViewController,UIImagePickerControllerDelega
                 let user = User()
                 user.nickName = "我是逗视 \(Int(arc4random()%1000)+1)"
                 
-                if (userDefaults.stringForKey("userHeadImage") == nil){
+                if (userDefaults.string(forKey: "userHeadImage") == nil){
                     
-                    userDefaults.setObject("http://img.itjh.com.cn/FtXmR6PCXm1WgUyl4kvI6zJIFY6C", forKey: "userHeadImage")
+                    userDefaults.set("http://img.itjh.com.cn/FtXmR6PCXm1WgUyl4kvI6zJIFY6C", forKey: "userHeadImage")
                 }
                 
-                user.headImage = userDefaults.stringForKey("userHeadImage")!
+                user.headImage = userDefaults.string(forKey: "userHeadImage")!
                 user.phone = self.phoneTextField.text!
                 user.platformId = "9"
                 user.platformName = "逗视"
@@ -193,33 +193,33 @@ class RegisterUserViewController: UIViewController,UIImagePickerControllerDelega
                 self.alamofireManager!.request(HttpClientByUser.DSRouter.registerUser(user)).responseJSON(completionHandler: {  response in
                     
                     switch response.result {
-                    case .Success:
+                    case .success:
 //                        print(result.value)
                         let JSON = response.result.value
                         print("HTTP 状态码->\(response.response?.statusCode)")
                         if response.response?.statusCode == 401 {
                             print("此手机号已经注册")
-                             let message = (JSON as! NSDictionary).valueForKey("message") as! String
+                             let message = (JSON as! NSDictionary).value(forKey: "message") as! String
                             
                             let cancelButtonTitle = "OK"
                             
-                            let alertController = DOAlertController(title: message, message: "此手机号已经注册,请更换其他手机号", preferredStyle: .Alert)
+                            let alertController = DOAlertController(title: message, message: "此手机号已经注册,请更换其他手机号", preferredStyle: .alert)
                             
                             // Create the action.
-                            let cancelAction = DOAlertAction(title: cancelButtonTitle, style: .Destructive) { action in
+                            let cancelAction = DOAlertAction(title: cancelButtonTitle, style: .destructive) { action in
                                 NSLog("The simple alert's cancel action occured.")
                             }
                             
                             // Add the action.
                             alertController.addAction(cancelAction)
                             
-                            self.presentViewController(alertController, animated: true, completion: nil)
+                            self.present(alertController, animated: true, completion: nil)
                             
                         }else{
                             print("注册成功")
-                            let userDictionary = (JSON as! NSDictionary).valueForKey("content") as! NSDictionary
+                            let userDictionary = (JSON as! NSDictionary).value(forKey: "content") as! NSDictionary
                             //将用户信息保存到内存中
-                            userDefaults.setObject(userDictionary, forKey: "userInfo")
+                            userDefaults.set(userDictionary, forKey: "userInfo")
                             
                             
                             let userInfo = User(id: userDictionary["id"] as! Int,
@@ -235,11 +235,11 @@ class RegisterUserViewController: UIViewController,UIImagePickerControllerDelega
                             DataCenter.shareDataCenter.user = userInfo
                             
                             //返回my页面
-                            self.navigationController?.popToRootViewControllerAnimated(true)
+                            self.navigationController?.popToRootViewController(animated: true)
                         }
                         
                         
-                    case .Failure(let error):
+                    case .failure(let error):
                         print(error)
                         
                     }
@@ -250,17 +250,17 @@ class RegisterUserViewController: UIViewController,UIImagePickerControllerDelega
                 
                 let cancelButtonTitle = "OK"
                 
-                let alertController = DOAlertController(title: message, message: "", preferredStyle: .Alert)
+                let alertController = DOAlertController(title: message, message: "", preferredStyle: .alert)
                 
                 // Create the action.
-                let cancelAction = DOAlertAction(title: cancelButtonTitle, style: .Destructive) { action in
+                let cancelAction = DOAlertAction(title: cancelButtonTitle, style: .destructive) { action in
                     NSLog("The simple alert's cancel action occured.")
                 }
                 
                 // Add the action.
                 alertController.addAction(cancelAction)
                 
-                self.presentViewController(alertController, animated: true, completion: nil)
+                self.present(alertController, animated: true, completion: nil)
             }
         }
     }
@@ -276,24 +276,24 @@ class RegisterUserViewController: UIViewController,UIImagePickerControllerDelega
     
     - parameter sender: sender description
     */
-    func uploadHeadImage(recognizer: UITapGestureRecognizer) {
+    func uploadHeadImage(_ recognizer: UITapGestureRecognizer) {
         
         
-        let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .ActionSheet)
+        let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         
-        let cancelAction = UIAlertAction(title: "取消", style: .Cancel) { (action) in
+        let cancelAction = UIAlertAction(title: "取消", style: .cancel) { (action) in
             
         }
         alertController.addAction(cancelAction)
         
-        let OKAction = UIAlertAction(title: "拍照", style: .Default) { (action) in
+        let OKAction = UIAlertAction(title: "拍照", style: .default) { (action) in
             // ...
             self .initWithImagePickView("拍照")
             
         }
         alertController.addAction(OKAction)
         
-        let destroyAction = UIAlertAction(title: "从相册上传", style: .Default) { (action) in
+        let destroyAction = UIAlertAction(title: "从相册上传", style: .default) { (action) in
             print(action)
             self .initWithImagePickView("相册")
             
@@ -335,14 +335,14 @@ class RegisterUserViewController: UIViewController,UIImagePickerControllerDelega
             popPresenter.sourceRect = (recognizer.view?.bounds)!;
         }
         
-        self.presentViewController(alertController, animated: true) {
+        self.present(alertController, animated: true) {
             
                             }
         
      }
     
     
-    func initWithImagePickView(type:NSString){
+    func initWithImagePickView(_ type:NSString){
         
         self.imagePicker = UIImagePickerController()
         self.imagePicker.delegate   = self;
@@ -350,40 +350,40 @@ class RegisterUserViewController: UIViewController,UIImagePickerControllerDelega
         
         switch type{
         case "拍照":
-            self.imagePicker.sourceType = .Camera
+            self.imagePicker.sourceType = .camera
          case "相册":
-            self.imagePicker.sourceType = .PhotoLibrary
+            self.imagePicker.sourceType = .photoLibrary
          case "录像":
-            self.imagePicker.sourceType = .Camera
+            self.imagePicker.sourceType = .camera
             self.imagePicker.videoMaximumDuration = 60 * 3
-            self.imagePicker.videoQuality = .Type640x480
+            self.imagePicker.videoQuality = .type640x480
             self.imagePicker.mediaTypes = [String(kUTTypeMovie)]
             
         default:
             print("error")
         }
         
-        presentViewController(self.imagePicker, animated: true, completion: nil)
+        present(self.imagePicker, animated: true, completion: nil)
     }
     
     // 选择之后获取数据
-    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         
         let mediaType = info[UIImagePickerControllerMediaType] as! String
         
-        let compareResult = CFStringCompare(mediaType as NSString!, kUTTypeMovie, CFStringCompareFlags.CompareCaseInsensitive)
+        let compareResult = CFStringCompare(mediaType as NSString!, kUTTypeMovie, CFStringCompareFlags.compareCaseInsensitive)
         
         //判读是否是视频还是图片
-        if compareResult == CFComparisonResult.CompareEqualTo {
+        if compareResult == CFComparisonResult.compareEqualTo {
             
-            let moviePath = info[UIImagePickerControllerMediaURL] as? NSURL
+            let moviePath = info[UIImagePickerControllerMediaURL] as? URL
             
             //获取路径
             let moviePathString = moviePath!.relativePath
             
-            if UIVideoAtPathIsCompatibleWithSavedPhotosAlbum(moviePathString!){
+            if UIVideoAtPathIsCompatibleWithSavedPhotosAlbum(moviePathString){
                 
-                UISaveVideoAtPathToSavedPhotosAlbum(moviePathString!, nil, nil, nil)
+                UISaveVideoAtPathToSavedPhotosAlbum(moviePathString, nil, nil, nil)
                 
             }
             print("视频")
@@ -403,9 +403,9 @@ class RegisterUserViewController: UIViewController,UIImagePickerControllerDelega
             self.alamofireManager!.request(HttpClientByUtil.DSRouter.getQiNiuUpToken()).responseJSON(completionHandler: { response in
                 
                 switch response.result {
-                case .Success:
+                case .success:
                     if let JSON = response.result.value {
-                        upManager.putData(imageData, key: nil, token:((JSON as! NSDictionary).valueForKey("content") as! String) , complete: { (info, key, resp) -> Void in
+                        upManager.put(imageData, key: nil, token:((JSON as! NSDictionary).value(forKey: "content") as! String) , complete: { (info, key, resp) -> Void in
                             
                             if info.statusCode == 200 {
 //                                print("图片上传成功 key－> \(resp["key"] as! String)" )
@@ -421,14 +421,14 @@ class RegisterUserViewController: UIViewController,UIImagePickerControllerDelega
 
                     }
                     
-                case .Failure(let error):
+                case .failure(let error):
                     print(error)
                     
                 }
             })
             headImageView.image = image
         }
-        imagePicker.dismissViewControllerAnimated(true, completion: nil)
+        imagePicker.dismiss(animated: true, completion: nil)
     }
     
     /*

@@ -12,6 +12,7 @@ import IQKeyboardManagerSwift
 import Alamofire
 import Fabric
 import Answers
+import GoogleMobileAds
 
 
 @UIApplicationMain
@@ -20,7 +21,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     
     
-    func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+    var interstitial: GADInterstitial!
+    
+//    @property (strong, nonatomic) UIView *launchView;
+//    @property (nonatomic,strong) UIImageView * imgBg;
+
+    
+    var launchView:UIView?
+    var imgBg:UIImageView?
+    var oldLaunchView:UIImageView?
+
+    
+    
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+        
+        
+//        Ad unit ID: ca-app-pub-7191090490730162/5860625531
+        
+        
+//        initAd()
+
         
         
         // Override point for customization after application launch.
@@ -29,9 +49,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         //判断用户是否登录
         
-        if userDefaults.objectForKey("userInfo") != nil {
+        if userDefaults.object(forKey: "userInfo") != nil {
             
-            let userDictionary = userDefaults.objectForKey("userInfo") as! NSDictionary
+            let userDictionary = userDefaults.object(forKey: "userInfo") as! NSDictionary
             
             let userInfo = User(id: userDictionary["id"] as! Int,
                 
@@ -48,7 +68,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         
-        NSThread.sleepForTimeInterval(1.0)
+        Thread.sleep(forTimeInterval: 1.0)
         //设置TabBar 选中背景色
         UITabBar.appearance().tintColor = UIColor(rgba:"#f0a22a")
         
@@ -62,7 +82,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         UMSocialQQHandler.setSupportWebView(true)
         
-        UMSocialSinaHandler.openSSOWithRedirectURL("http://sns.whalecloud.com/sina2/callback")
+        UMSocialSinaHandler.openSSO(withRedirectURL: "http://sns.whalecloud.com/sina2/callback")
         
         UMSocialWechatHandler.setWXAppId("wxfd23fac852a54c97", appSecret: "d4624c36b6795d1d99dcf0547af5443d", url: "www.doushi.me")
         
@@ -71,7 +91,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         
         
-        MobClick.startWithAppkey("563b6bdc67e58e73ee002acd")
+        MobClick.start(withAppkey: "563b6bdc67e58e73ee002acd")
         
         
         //Share SMS
@@ -81,8 +101,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         
         
-        UIApplication.sharedApplication().applicationIconBadgeNumber = 1
-        UIApplication.sharedApplication().applicationIconBadgeNumber = 0
+        UIApplication.shared.applicationIconBadgeNumber = 1
+        UIApplication.shared.applicationIconBadgeNumber = 0
         
         
         
@@ -90,11 +110,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // Required
         
-        APService.registerForRemoteNotificationTypes(UIUserNotificationType.Badge.rawValue | UIUserNotificationType.Sound.rawValue | UIUserNotificationType.Alert.rawValue , categories: nil)
+        APService.register(forRemoteNotificationTypes: UIUserNotificationType.badge.rawValue | UIUserNotificationType.sound.rawValue | UIUserNotificationType.alert.rawValue , categories: nil)
         
         
         // Required
-        APService.setupWithOption(launchOptions)
+        APService.setup(withOption: launchOptions)
         
         APService.setLogOFF()
         
@@ -126,6 +146,56 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     
+    // MARK: 加载广告
+    
+    func initAd()  {
+        
+        
+        self.oldLaunchView = UIImageView(image: UIImage(named: "LaunchImage"))
+        
+        self.oldLaunchView?.frame = (self.window?.bounds)!
+        
+        self.oldLaunchView?.contentMode = .scaleAspectFill
+        
+        self.window?.addSubview(oldLaunchView!)
+        
+        self.loadLaunchAd()
+        
+        
+        
+    }
+    
+    
+    func loadLaunchAd() {
+        
+        Timer.scheduledTimer(timeInterval: 3, target: self, selector: Selector(handleTimer()), userInfo: nil, repeats: false)
+        
+        let launchScreenStoryboard = UIStoryboard(name: "LaunchScreen", bundle: nil)
+        
+        let launchScreenViewController = launchScreenStoryboard.instantiateViewController(withIdentifier: "launchScreen")
+        
+        self.launchView = launchScreenViewController.view
+        
+        self.window?.addSubview(self.launchView!)
+        
+        self.imgBg!.frame = (self.window?.frame)!
+        
+        self.launchView!.addSubview(self.imgBg!)
+        
+        self.window?.bringSubview(toFront: self.launchView!)
+        
+        
+        
+        
+    }
+  
+    
+    func handleTimer() {
+//        self.imgBg!.removeFromSuperview()
+//        self.launchView!.removeFromSuperview()
+    }
+    
+    
     /**
      3D Touch 跳转
      
@@ -133,7 +203,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
      - parameter shortcutItem:      item
      - parameter completionHandler: handler
      */
-    func application(application: UIApplication, performActionForShortcutItem shortcutItem: UIApplicationShortcutItem, completionHandler: (Bool) -> Void) {
+    func application(_ application: UIApplication, performActionFor shortcutItem: UIApplicationShortcutItem, completionHandler: @escaping (Bool) -> Void) {
         
         let handledShortCutItem = handleShortCutItem(shortcutItem)
         completionHandler(handledShortCutItem)
@@ -141,11 +211,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     
-    func handleShortCutItem(shortcutItem: UIApplicationShortcutItem) -> Bool {
+    func handleShortCutItem(_ shortcutItem: UIApplicationShortcutItem) -> Bool {
         var handled = false
         //Get type string from shortcutItem
         // 获取当前页面TabBar
-        let tabBar = UIApplication.sharedApplication().keyWindow?.rootViewController as! UITabBarController
+        let tabBar = UIApplication.shared.keyWindow?.rootViewController as! UITabBarController
         
         // 获取当前TabBar Nav
         let nav = tabBar.selectedViewController as! UINavigationController
@@ -156,7 +226,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             let storyMy = UIStoryboard(name: "My", bundle: nil)
             
             // 收藏列表页
-            let myCollectView = storyMy.instantiateViewControllerWithIdentifier("MyCollect") as! MyUserFavoriteTableViewController
+            let myCollectView = storyMy.instantiateViewController(withIdentifier: "MyCollect") as! MyUserFavoriteTableViewController
             myCollectView.title = "我的收藏"
             // 跳转
             nav.pushViewController(myCollectView, animated: true)
@@ -169,7 +239,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             let storyMy = UIStoryboard(name: "Find", bundle: nil)
             
             // 排行榜列表页
-            let videoTaxisView = storyMy.instantiateViewControllerWithIdentifier("VideoTaxisTableViewController") as! VideoTaxisTableViewController
+            let videoTaxisView = storyMy.instantiateViewController(withIdentifier: "VideoTaxisTableViewController") as! VideoTaxisTableViewController
             videoTaxisView.title = "排行榜"
             // 跳转
             nav.pushViewController(videoTaxisView, animated: true)
@@ -180,7 +250,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     
-    func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
+    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
         APService.registerDeviceToken(deviceToken)
     }
     
@@ -190,11 +260,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     
     
-    func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject]) {
-        let tabBar = UIApplication.sharedApplication().keyWindow?.rootViewController as! UITabBarController
+    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any]) {
+        let tabBar = UIApplication.shared.keyWindow?.rootViewController as! UITabBarController
         
         
-        UIApplication.sharedApplication().applicationIconBadgeNumber += 1
+        UIApplication.shared.applicationIconBadgeNumber += 1
 
 
         // 获取当前TabBar Nav
@@ -206,7 +276,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         //        UIRemoteNotificationType type = [[UIApplication sharedApplication] enabledRemoteNotificationTypes];
         
-        let applicationState = UIApplication.sharedApplication().applicationState.rawValue
+        let applicationState = UIApplication.shared.applicationState.rawValue
         
         let userInfoDict =  userInfo as NSDictionary
         
@@ -214,13 +284,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         if applicationState == 0 {
             print("程序正在前台运行")
-            let alertController = UIAlertController(title: aps["alert"] as? String, message: "搞笑视频来了! 是否查看", preferredStyle: .Alert)
+            let alertController = UIAlertController(title: aps["alert"] as? String, message: "搞笑视频来了! 是否查看", preferredStyle: .alert)
             
-            let cancelAction = UIAlertAction(title: "取消", style: .Cancel) { (action) in
+            let cancelAction = UIAlertAction(title: "取消", style: .cancel) { (action) in
             }
             alertController.addAction(cancelAction)
             
-            let OKAction = UIAlertAction(title: "确定", style: .Default) { (action) in
+            let OKAction = UIAlertAction(title: "确定", style: .default) { (action) in
                 
                 self.goPlayVideo(userInfoDict)
             }
@@ -230,7 +300,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             //
             //            }
             
-            nav.presentViewController(alertController, animated: true, completion: { () -> Void in
+            nav.present(alertController, animated: true, completion: { () -> Void in
                 
                 
             })
@@ -252,23 +322,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
      
      - parameter userInfoDict: userInfoDict description
      */
-    func goPlayVideo(userInfoDict:NSDictionary){
-        let tabBar = UIApplication.sharedApplication().keyWindow?.rootViewController as! UITabBarController
+    func goPlayVideo(_ userInfoDict:NSDictionary){
+        let tabBar = UIApplication.shared.keyWindow?.rootViewController as! UITabBarController
         
         // 获取当前TabBar Nav
         let nav = tabBar.selectedViewController as! UINavigationController
         
         
         //播放
-        let aStoryboard = UIStoryboard(name: "Home", bundle:NSBundle.mainBundle())
-        let playVideoViewController = aStoryboard.instantiateViewControllerWithIdentifier("playVideoView") as! PlayVideoViewController
+        let aStoryboard = UIStoryboard(name: "Home", bundle:Bundle.main)
+        let playVideoViewController = aStoryboard.instantiateViewController(withIdentifier: "playVideoView") as! PlayVideoViewController
         
         let videoId =  userInfoDict["videoId"] as! String
         
         var userId = 0
         
         if (user != nil) {
-            userId = user!.objectForKey("id") as! Int
+            userId = user!.object(forKey: "id") as! Int
         }
         
         HttpController.getVideoById(HttpClientByVideo.DSRouter.getVideosById(videoId, userId), callback: { videoInfo -> Void in
@@ -314,7 +384,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        }
     }
     
-    func application(application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: NSError) {
+    func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
         
         print("application:didFailToRegisterForRemoteNotificationsWithError: \(error)");
         
@@ -323,28 +393,28 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     
     
-    func applicationWillResignActive(application: UIApplication) {
+    func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
         // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
     }
     
-    func applicationDidEnterBackground(application: UIApplication) {
+    func applicationDidEnterBackground(_ application: UIApplication) {
         // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
         // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
     }
     
-    func applicationWillEnterForeground(application: UIApplication) {
+    func applicationWillEnterForeground(_ application: UIApplication) {
         // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
-        UIApplication.sharedApplication().applicationIconBadgeNumber = 1
-        UIApplication.sharedApplication().applicationIconBadgeNumber = 0
+        UIApplication.shared.applicationIconBadgeNumber = 1
+        UIApplication.shared.applicationIconBadgeNumber = 0
         
     }
     
-    func applicationDidBecomeActive(application: UIApplication) {
+    func applicationDidBecomeActive(_ application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
     }
     
-    func applicationWillTerminate(application: UIApplication) {
+    func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
         // Saves changes in the application's managed object context before the application terminates.
         self.saveContext()
@@ -352,31 +422,31 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     // MARK: - Core Data stack
     
-    lazy var applicationDocumentsDirectory: NSURL = {
+    lazy var applicationDocumentsDirectory: URL = {
         // The directory the application uses to store the Core Data store file. This code uses a directory named "me.doushi.ds_ios" in the application's documents Application Support directory.
-        let urls = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)
+        let urls = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
         return urls[urls.count-1]
     }()
     
     lazy var managedObjectModel: NSManagedObjectModel = {
         // The managed object model for the application. This property is not optional. It is a fatal error for the application not to be able to find and load its model.
-        let modelURL = NSBundle.mainBundle().URLForResource("ds_ios", withExtension: "momd")!
-        return NSManagedObjectModel(contentsOfURL: modelURL)!
+        let modelURL = Bundle.main.url(forResource: "ds_ios", withExtension: "momd")!
+        return NSManagedObjectModel(contentsOf: modelURL)!
     }()
     
     lazy var persistentStoreCoordinator: NSPersistentStoreCoordinator = {
         // The persistent store coordinator for the application. This implementation creates and returns a coordinator, having added the store for the application to it. This property is optional since there are legitimate error conditions that could cause the creation of the store to fail.
         // Create the coordinator and store
         let coordinator = NSPersistentStoreCoordinator(managedObjectModel: self.managedObjectModel)
-        let url = self.applicationDocumentsDirectory.URLByAppendingPathComponent("SingleViewCoreData.sqlite")
+        let url = self.applicationDocumentsDirectory.appendingPathComponent("SingleViewCoreData.sqlite")
         var failureReason = "There was an error creating or loading the application's saved data."
         do {
-            try coordinator.addPersistentStoreWithType(NSSQLiteStoreType, configuration: nil, URL: url, options: nil)
+            try coordinator.addPersistentStore(ofType: NSSQLiteStoreType, configurationName: nil, at: url, options: nil)
         } catch {
             // Report any error we got.
             var dict = [String: AnyObject]()
-            dict[NSLocalizedDescriptionKey] = "Failed to initialize the application's saved data"
-            dict[NSLocalizedFailureReasonErrorKey] = failureReason
+            dict[NSLocalizedDescriptionKey] = "Failed to initialize the application's saved data" as AnyObject?
+            dict[NSLocalizedFailureReasonErrorKey] = failureReason as AnyObject?
             
             dict[NSUnderlyingErrorKey] = error as NSError
             let wrappedError = NSError(domain: "YOUR_ERROR_DOMAIN", code: 9999, userInfo: dict)
@@ -392,7 +462,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     lazy var managedObjectContext: NSManagedObjectContext = {
         // Returns the managed object context for the application (which is already bound to the persistent store coordinator for the application.) This property is optional since there are legitimate error conditions that could cause the creation of the context to fail.
         let coordinator = self.persistentStoreCoordinator
-        var managedObjectContext = NSManagedObjectContext(concurrencyType: .MainQueueConcurrencyType)
+        var managedObjectContext = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
         managedObjectContext.persistentStoreCoordinator = coordinator
         return managedObjectContext
     }()
@@ -413,11 +483,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
     
-    func application(application: UIApplication, handleOpenURL url: NSURL) -> Bool {
-        return UMSocialSnsService.handleOpenURL(url)
+    func application(_ application: UIApplication, handleOpen url: URL) -> Bool {
+        return UMSocialSnsService.handleOpen(url)
     }
-    func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject) -> Bool {
-        return UMSocialSnsService.handleOpenURL(url)
+    func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
+        return UMSocialSnsService.handleOpen(url)
     }
     
 }

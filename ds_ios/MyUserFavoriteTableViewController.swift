@@ -25,7 +25,7 @@ class MyUserFavoriteTableViewController: UITableViewController {
 
 	@IBOutlet var topView: UIView!
 
-	let config = NSURLSessionConfiguration.defaultSessionConfiguration()
+	let config = URLSessionConfiguration.default
 
 	// 视频分类
 	var type = 0
@@ -43,8 +43,8 @@ class MyUserFavoriteTableViewController: UITableViewController {
 
 		setNav()
 
-		let user = userDefaults.objectForKey("userInfo")
-		let aStoryboard = UIStoryboard(name: "My", bundle: NSBundle.mainBundle())
+		let user = userDefaults.object(forKey: "userInfo")
+		let aStoryboard = UIStoryboard(name: "My", bundle: Bundle.main)
 
 		if (user == nil) {
 			//弹窗登录
@@ -53,12 +53,12 @@ class MyUserFavoriteTableViewController: UITableViewController {
 
 			let otherButtonTitle = "去登录"
 
-			let alertCotroller = DOAlertController(title: title, message: message, preferredStyle: .Alert)
+			let alertCotroller = DOAlertController(title: title, message: message, preferredStyle: .alert)
 
 
-			let otherAction = DOAlertAction(title: otherButtonTitle, style: .Default) {action in
+			let otherAction = DOAlertAction(title: otherButtonTitle, style: .default) {action in
 				print("登录")
-				let loginTableView = aStoryboard.instantiateViewControllerWithIdentifier("LoginView")
+				let loginTableView = aStoryboard.instantiateViewController(withIdentifier: "LoginView")
 				self.navigationController?.pushViewController(loginTableView, animated: true)
 
 			}
@@ -67,12 +67,12 @@ class MyUserFavoriteTableViewController: UITableViewController {
 			//            alertCotroller.addAction(cancelAction)
 			alertCotroller.addAction(otherAction)
 
-			presentViewController(alertCotroller, animated: true, completion: nil)
+			present(alertCotroller, animated: true, completion: nil)
 
 		} else {
 
 			if user != nil {
-				userId = user!.objectForKey("id") as! Int
+				userId = user!.object(forKey: "id") as! Int
 			}
 
 			//设置回调（一旦进入刷新状态就会调用这个refreshingBlock）
@@ -87,7 +87,7 @@ class MyUserFavoriteTableViewController: UITableViewController {
 					self.loadMoreData()
 
 				})
-			self.tableView.mj_footer.hidden = true
+			self.tableView.mj_footer.isHidden = true
 		}
 
 
@@ -96,11 +96,11 @@ class MyUserFavoriteTableViewController: UITableViewController {
 
 	}
 
-	override func viewWillAppear(animated: Bool) {
+	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
 
-		self.navigationController?.navigationBar.barStyle = UIBarStyle.Default
-		self.navigationController?.navigationBar.hidden = false
+		self.navigationController?.navigationBar.barStyle = UIBarStyle.default
+		self.navigationController?.navigationBar.isHidden = false
 
 	}
 
@@ -109,7 +109,7 @@ class MyUserFavoriteTableViewController: UITableViewController {
 
 	 - parameter animated: animated description
 	 */
-	override func viewDidAppear(animated: Bool) {
+	override func viewDidAppear(_ animated: Bool) {
 		super.viewDidAppear(animated)
 
 	}
@@ -131,7 +131,7 @@ class MyUserFavoriteTableViewController: UITableViewController {
 
 			if videoInfos != nil {
 				self.videos = []
-				self.videos.addObjectsFromArray(videoInfos!)
+				self.videos.addObjects(from: videoInfos!)
 
 				self.tableView.reloadData()
 
@@ -164,7 +164,7 @@ class MyUserFavoriteTableViewController: UITableViewController {
 
 			if videoInfos != nil {
 
-				self.videos.addObjectsFromArray(videoInfos!)
+				self.videos.addObjects(from: videoInfos!)
 
 				self.tableView.reloadData()
 
@@ -185,28 +185,28 @@ class MyUserFavoriteTableViewController: UITableViewController {
 
 	// MARK: - Table view data source
 
-	override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+	override func numberOfSections(in tableView: UITableView) -> Int {
 		// #warning Incomplete implementation, return the number of sections
 		return 1
 	}
 
-	override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+	override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 		// #warning Incomplete implementation, return the number of rows
 		return self.videos.count
 	}
 
 
-	override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+	override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
 
 
-		let cell = tableView.dequeueReusableCellWithIdentifier("VideoTableViewCell", forIndexPath: indexPath) as! VideoTableViewCell
+		let cell = tableView.dequeueReusableCell(withIdentifier: "VideoTableViewCell", for: indexPath) as! VideoTableViewCell
 
 		if videos.count > 0 {
-			let videoInfo = (videos.objectAtIndex(indexPath.row) as! VideoInfo)
+			let videoInfo = (videos.object(at: (indexPath as NSIndexPath).row) as! VideoInfo)
 
 			cell.titleLabel.text = videoInfo.title
-			cell.picImageView.kf_setImageWithURL(NSURL(string: videoInfo.pic)!)
+			cell.picImageView.kf_setImageWithURL(URL(string: videoInfo.pic)!)
 
 		}
 
@@ -215,7 +215,7 @@ class MyUserFavoriteTableViewController: UITableViewController {
 	}
 
 
-	override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+	override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
 		return 100
 	}
 
@@ -260,16 +260,16 @@ class MyUserFavoriteTableViewController: UITableViewController {
 	/*
 	 // MARK: - Navigation
 	 */
-	override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 
 		if segue.identifier == "toPlayVideo" {
 
 			let path = self.tableView.indexPathForSelectedRow!
-			let videoInfo = (videos.objectAtIndex(path.row) as! VideoInfo)
+			let videoInfo = (videos.object(at: (path as NSIndexPath).row) as! VideoInfo)
 
 			DataCenter.shareDataCenter.videoInfo = videoInfo
 
-			let playVideoViewController = segue.destinationViewController as! PlayVideoViewController
+			let playVideoViewController = segue.destination as! PlayVideoViewController
 			playVideoViewController.userId = userId
 		}
 	}

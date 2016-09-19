@@ -19,7 +19,6 @@ PODS:
     - Fabric (~> 1.6.3)
   - APParallaxHeader (0.1.6)
   - Fabric (1.6.7)
-  - Google-Mobile-Ads-SDK (7.9.1)
   - HappyDNS (0.3.9)
   - IQKeyboardManagerSwift (4.0.4)
   - Kingfisher (1.9.3)
@@ -44,7 +43,6 @@ DEPENDENCIES:
   - Answers
   - APParallaxHeader
   - Fabric
-  - Google-Mobile-Ads-SDK (~> 7.0)
   - IQKeyboardManagerSwift
   - Kingfisher (~> 1.6)
   - MJRefresh
@@ -72,7 +70,6 @@ SPEC CHECKSUMS:
   Answers: 57ee6bcc9bd3c6710862065c9251365a2a404920
   APParallaxHeader: 854bc48a2487ca12c702f8a236fec0d89cdac5c3
   Fabric: caf7580c725e64db144f610ac65cd60956911dc7
-  Google-Mobile-Ads-SDK: 575583d7eae25793bb81ad8673737d1b4ecbedc5
   HappyDNS: 17be04178df2dd09f0ee6ac33628589b7f9910e8
   IQKeyboardManagerSwift: e0964d04d6a29b71016fd346dca13ecb80a2823a
   Kingfisher: 9e37d2a78a082dc123bfe8a16de65de85518daae
@@ -87,6 +84,6 @@ SPEC CHECKSUMS:
   TextFieldEffects: bc4fd3bd557321bd61a0762f3f50965477a36f62
   Validator: 3fa8a561459004f4629a698258ee365fc0b82406
 
-PODFILE CHECKSUM: ff2f3c45513eb959e13e03cbf3ceafd6833deee7
+PODFILE CHECKSUM: 36a96e926944f459f323b8eeca01c50b5c1d2d96
 
-COCOAPODS: 1.0.0.beta.6
+COCOAPODS: 1.0.0
