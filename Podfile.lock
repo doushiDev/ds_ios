@@ -14,32 +14,32 @@ PODS:
   - AFNetworking/Serialization (3.1.0)
   - AFNetworking/UIKit (3.1.0):
     - AFNetworking/NSURLSession
-  - Alamofire (3.4.1)
-  - Answers (1.2.1):
+  - Alamofire (4.0.0)
+  - Answers (1.3.1):
     - Fabric (~> 1.6.3)
   - APParallaxHeader (0.1.6)
-  - Fabric (1.6.7)
-  - HappyDNS (0.3.9)
-  - IQKeyboardManagerSwift (4.0.4)
+  - Fabric (1.6.8)
+  - HappyDNS (0.3.10)
+  - IQKeyboardManagerSwift (4.0.6)
   - Kingfisher (1.9.3)
   - MJRefresh (3.1.12)
   - MobilePlayer (1.1.5)
-  - Qiniu (7.1.0.1):
+  - Qiniu (7.1.1):
     - AFNetworking (~> 3)
     - HappyDNS (~> 0.3)
   - RoundImageView (1.0.1)
   - SDCycleScrollView (1.65):
     - SDWebImage (~> 3.7)
-  - SDWebImage (3.8.1):
-    - SDWebImage/Core (= 3.8.1)
-  - SDWebImage/Core (3.8.1)
+  - SDWebImage (3.8.2):
+    - SDWebImage/Core (= 3.8.2)
+  - SDWebImage/Core (3.8.2)
   - StrechyParallaxScrollView (0.1)
   - SwiftyJSON (2.3.2)
   - TextFieldEffects (1.2.0)
-  - Validator (1.1.2)
+  - Validator (1.2.0)
 
 DEPENDENCIES:
-  - Alamofire (~> 3.0)
+  - Alamofire (~> 4.0)
   - Answers
   - APParallaxHeader
   - Fabric
@@ -66,24 +66,24 @@ CHECKOUT OPTIONS:
 
 SPEC CHECKSUMS:
   AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
-  Alamofire: 01a82e2f6c0f860ade35534c8dd88be61bdef40c
-  Answers: 57ee6bcc9bd3c6710862065c9251365a2a404920
+  Alamofire: fef59f00388f267e52d9b432aa5d93dc97190f14
+  Answers: 1fe248e77604507ad576b30c53829f4d5ef48da3
   APParallaxHeader: 854bc48a2487ca12c702f8a236fec0d89cdac5c3
-  Fabric: caf7580c725e64db144f610ac65cd60956911dc7
-  HappyDNS: 17be04178df2dd09f0ee6ac33628589b7f9910e8
-  IQKeyboardManagerSwift: e0964d04d6a29b71016fd346dca13ecb80a2823a
+  Fabric: 5755268d0171435ab167e3d0878a28a777deaf10
+  HappyDNS: 06a9fed2796663fd87626dbf02552933265bf059
+  IQKeyboardManagerSwift: b3015e819559ca76381f87a0833f44d178564603
   Kingfisher: 9e37d2a78a082dc123bfe8a16de65de85518daae
   MJRefresh: b96cdb21c4aa75a7b07654311ab2f315c497e806
   MobilePlayer: 2fdc07a564fa89da65ff660f8fdcf06ab75f775d
-  Qiniu: 0e92ff0d1b9afbc55275306671284e4ebeb08d03
+  Qiniu: 5e5d7d759d22393bb4b87cdfacf8fab951260f3e
   RoundImageView: af3ea25d9b69456749c5b4da68e513060ddbd428
   SDCycleScrollView: f72904c77698a7f93a41bcbbc2d78b073bf7326c
-  SDWebImage: 35f9627a3e44b4f292a8a8ce6a531fa488239b91
+  SDWebImage: 098e97e6176540799c27e804c96653ee0833d13c
   StrechyParallaxScrollView: 81988959c814063eae05264e4cf4cd1dbbd32e2e
   SwiftyJSON: 04ccea08915aa0109039157c7974cf0298da292a
   TextFieldEffects: bc4fd3bd557321bd61a0762f3f50965477a36f62
-  Validator: 3fa8a561459004f4629a698258ee365fc0b82406
+  Validator: 4015c0fcaacd165100b337dc4198ba308fb567fb
 
-PODFILE CHECKSUM: 36a96e926944f459f323b8eeca01c50b5c1d2d96
+PODFILE CHECKSUM: 4f7cc3334f28872d31b2a7962fd42916e038e3bb
 
-COCOAPODS: 1.0.0
+COCOAPODS: 1.0.1
