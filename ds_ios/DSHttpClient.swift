@@ -29,7 +29,7 @@ class HttpController: NSObject {
     func onDSResource(_ urlRequestConvertible:URLRequestConvertible){
         Alamofire.request(urlRequestConvertible).responseJSON { response in
             if let JSON = response.result.value {
-                self.delegate?.didRecieveResults(JSON)
+                self.delegate?.didRecieveResults(JSON as AnyObject)
             }else{
                 
             }

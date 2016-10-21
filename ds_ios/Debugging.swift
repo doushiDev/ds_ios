@@ -57,7 +57,7 @@ public extension LayoutConstraint {
         }
     }
 
-    override public var description: String {
+    override open var description: String {
         var description = "<"
         
         description += descriptionForObject(self)

@@ -338,7 +338,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         var userId = 0
         
         if (user != nil) {
-            userId = user!.object(forKey: "id") as! Int
+            userId = (user! as AnyObject).object(forKey: "id") as! Int
         }
         
         HttpController.getVideoById(HttpClientByVideo.DSRouter.getVideosById(videoId, userId), callback: { videoInfo -> Void in
