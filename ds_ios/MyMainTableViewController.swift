@@ -141,8 +141,8 @@ class MyMainTableViewController: UITableViewController,APParallaxViewDelegate,MF
         let user =  userDefaults.object(forKey: "userInfo")
 
         if (user != nil) {
-            let headImageUrl = user!.object(forKey: "headImage") as! String
-            let nickName = user!.object(forKey: "nickName") as! String
+            let headImageUrl = (user! as AnyObject).object(forKey: "headImage") as! String
+            let nickName = (user! as AnyObject).object(forKey: "nickName") as! String
           
                 userCircle.kf_setImageWithURL(URL(string: headImageUrl)!)
                 loginButton.setTitle(nickName, for: UIControlState())
@@ -182,7 +182,7 @@ class MyMainTableViewController: UITableViewController,APParallaxViewDelegate,MF
             }else{
                 
                 let myUserFavoriteTableViewController =  aStoryboard.instantiateViewController(withIdentifier: "MyCollect") as! MyUserFavoriteTableViewController
-                myUserFavoriteTableViewController.userId = user!.object(forKey: "id") as! Int
+                myUserFavoriteTableViewController.userId = (user! as AnyObject).object(forKey: "id") as! Int
                  self.navigationController?.pushViewController(myUserFavoriteTableViewController, animated: true)
 
             }

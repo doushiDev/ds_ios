@@ -86,7 +86,7 @@ class FindMainTableViewController: UITableViewController,SDCycleScrollViewDelega
         DataCenter.shareDataCenter.videoInfo = videoInfo
 
         if (user != nil) {
-            userId = user!.object(forKey: "id") as! Int
+            userId = (user! as AnyObject).object(forKey: "id") as! Int
 
         }
         //播放
@@ -103,7 +103,7 @@ class FindMainTableViewController: UITableViewController,SDCycleScrollViewDelega
         
         let view = self.navigationController!.navigationBar.startLoadingAnimation()
         if (user != nil) {
-            userId = user!.object(forKey: "id") as! Int
+            userId = (user! as AnyObject).object(forKey: "id") as! Int
             
         }
         

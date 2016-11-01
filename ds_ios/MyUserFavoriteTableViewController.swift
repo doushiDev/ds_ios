@@ -72,7 +72,7 @@ class MyUserFavoriteTableViewController: UITableViewController {
 		} else {
 
 			if user != nil {
-				userId = user!.object(forKey: "id") as! Int
+				userId = (user! as AnyObject).object(forKey: "id") as! Int
 			}
 
 			//设置回调（一旦进入刷新状态就会调用这个refreshingBlock）
