@@ -84,7 +84,7 @@ class VideoTaxisTableViewController: UITableViewController {
         populatingVideo = true
         
         if (user != nil) {
-            userId = user!.object(forKey: "id") as! Int
+            userId = (user! as AnyObject).object(forKey: "id") as! Int
             
         }
         

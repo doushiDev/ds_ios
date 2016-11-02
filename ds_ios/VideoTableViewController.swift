@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import Alamofire
+//import Alamofire
 import MJRefresh
 import Kingfisher
 
@@ -137,7 +137,7 @@ class VideoTableViewController: UITableViewController {
         
         //判断用户缓存中是否存在
         if (user != nil) {
-            userId = user!.object(forKey: "id") as! Int
+            userId = (user! as AnyObject).object(forKey: "id") as! Int
             
         }
         //检测3D Touch

@@ -834,15 +834,15 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = ABC79F351C083844005FA420 /* Build configuration list for PBXNativeTarget "ds_ios" */;
 			buildPhases = (
-				0D90DAB8A72A0576AC133F3C /* 📦 Check Pods Manifest.lock */,
+				0D90DAB8A72A0576AC133F3C /* [CP] Check Pods Manifest.lock */,
 				ABC79F1C1C083844005FA420 /* Sources */,
 				ABC79F1D1C083844005FA420 /* Frameworks */,
 				ABC79F1E1C083844005FA420 /* Resources */,
 				ABC79F601C083968005FA420 /* Embed Watch Content */,
 				AB87985A1C868D3C002CAF46 /* ShellScript */,
 				ABBE5E731C8697D00073934B /* ShellScript */,
-				7C848C8944065229236B5B33 /* 📦 Embed Pods Frameworks */,
-				85364D2CED51AB89E7030354 /* 📦 Copy Pods Resources */,
+				7C848C8944065229236B5B33 /* [CP] Embed Pods Frameworks */,
+				85364D2CED51AB89E7030354 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -943,14 +943,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		0D90DAB8A72A0576AC133F3C /* 📦 Check Pods Manifest.lock */ = {
+		0D90DAB8A72A0576AC133F3C /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Check Pods Manifest.lock";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -958,14 +958,14 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		7C848C8944065229236B5B33 /* 📦 Embed Pods Frameworks */ = {
+		7C848C8944065229236B5B33 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Embed Pods Frameworks";
+			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -973,14 +973,14 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ds_ios/Pods-ds_ios-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		85364D2CED51AB89E7030354 /* 📦 Copy Pods Resources */ = {
+		85364D2CED51AB89E7030354 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Copy Pods Resources";
+			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1373,7 +1373,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "ds_ios/ds_ios-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 2.3;
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -1494,7 +1494,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "me.doushi.ds-ios";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "ds_ios/ds_ios-Bridging-Header.h";
-				SWIFT_VERSION = 2.3;
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};

@@ -103,7 +103,7 @@ class PlayVideoInfoViewController: UIViewController,GADBannerViewDelegate {
 		let user = userDefaults.object(forKey: "userInfo")
 
 		if user != nil {
-			userId = user!.object(forKey: "id") as! Int
+			userId = (user! as AnyObject).object(forKey: "id") as! Int
 		}
         
 	}
@@ -163,7 +163,7 @@ class PlayVideoInfoViewController: UIViewController,GADBannerViewDelegate {
 		} else {
 
 			if user != nil {
-				userId = user!.object(forKey: "id") as! Int
+				userId = (user! as AnyObject).object(forKey: "id") as! Int
 			}
 
 			let userFavorite: UserFavorite = UserFavorite(id: 0, userId: userId, videoId: DataCenter.shareDataCenter.videoInfo.id, status: 1)
