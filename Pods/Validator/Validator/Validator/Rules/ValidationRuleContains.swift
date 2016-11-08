@@ -29,7 +29,7 @@
 
 import Foundation
 
-public struct ValidationRuleContains<T: Equatable, S: SequenceType where S.Generator.Element == T>: ValidationRule {
+public struct ValidationRuleContains<T: Equatable, S: Sequence>: ValidationRule where S.Iterator.Element == T {
     
     public typealias InputType = T
     
@@ -41,7 +41,7 @@ public struct ValidationRuleContains<T: Equatable, S: SequenceType where S.Gener
         self.failureError = failureError
     }
     
-    public func validateInput(input: T?) -> Bool {
+    public func validateInput(_ input: T?) -> Bool {
         guard let input = input else { return false }
         return sequence.contains(input)
     }

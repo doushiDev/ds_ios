@@ -22,7 +22,6 @@
 // THE SOFTWARE.
 
 
-import Foundation
 import UIKit
 
 private var kIQIsAskingCanBecomeFirstResponder = "kIQIsAskingCanBecomeFirstResponder"
@@ -40,16 +39,11 @@ public extension UIView {
     Returns YES if IQKeyboardManager asking for `canBecomeFirstResponder. Useful when doing custom work in `textFieldShouldBeginEditing:` delegate.
     */
     public var isAskingCanBecomeFirstResponder: Bool {
-        get {
-            
-            if let aValue = objc_getAssociatedObject(self, &kIQIsAskingCanBecomeFirstResponder) as? Bool {
-                return aValue
-            } else {
-                return false
-            }
-        }
-        set(newValue) {
-            objc_setAssociatedObject(self, &kIQIsAskingCanBecomeFirstResponder, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+        
+        if let aValue = objc_getAssociatedObject(self, &kIQIsAskingCanBecomeFirstResponder) as? Bool {
+            return aValue
+        } else {
+            return false
         }
     }
 
@@ -172,29 +166,10 @@ public extension UIView {
     */
     public func deepResponderViews()->[UIView] {
         
-        //subviews are returning in opposite order. So I sorted it according the frames 'y'.
-        
-        let subViews = subviews.sorted(by: { (obj1 : AnyObject, obj2 : AnyObject) -> Bool in
-            
-            let view1 = obj1 as! UIView
-            let view2 = obj2 as! UIView
-            
-            let x1 = view1.frame.minX
-            let y1 = view1.frame.minY
-            let x2 = view2.frame.minX
-            let y2 = view2.frame.minY
-            
-            if y1 != y2 {
-                return y1 < y2
-            } else {
-                return x1 < x2
-            }
-        })
-
         //Array of (UITextField/UITextView's).
         var textfields = [UIView]()
         
-        for textField in subViews {
+        for textField in subviews {
             
             if textField._IQcanBecomeFirstResponder() == true {
                 textfields.append(textField)
@@ -207,12 +182,28 @@ public extension UIView {
             }
         }
         
-        return textfields
+        //subviews are returning in opposite order. Sorting according the frames 'y'.
+        return textfields.sorted(by: { (view1 : UIView, view2 : UIView) -> Bool in
+            
+            let frame1 = view1.convert(view1.bounds, to: self)
+            let frame2 = view2.convert(view2.bounds, to: self)
+
+            let x1 = frame1.minX
+            let y1 = frame1.minY
+            let x2 = frame2.minX
+            let y2 = frame2.minY
+            
+            if y1 != y2 {
+                return y1 < y2
+            } else {
+                return x1 < x2
+            }
+        })
     }
     
     fileprivate func _IQcanBecomeFirstResponder() -> Bool {
         
-        isAskingCanBecomeFirstResponder = true
+        objc_setAssociatedObject(self, &kIQIsAskingCanBecomeFirstResponder, true, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN_NONATOMIC)
         
         var _IQcanBecomeFirstResponder = (canBecomeFirstResponder == true && isUserInteractionEnabled == true && isHidden == false && alpha != 0.0 && isAlertViewTextField() == false && isSearchBarTextField() == false) as Bool
 
@@ -225,7 +216,7 @@ public extension UIView {
             }
         }
 
-        isAskingCanBecomeFirstResponder = false
+        objc_setAssociatedObject(self, &kIQIsAskingCanBecomeFirstResponder, false, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN_NONATOMIC)
 
         return _IQcanBecomeFirstResponder
     }

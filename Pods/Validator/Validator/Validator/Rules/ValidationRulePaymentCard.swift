@@ -35,41 +35,41 @@ import Foundation
 
 public enum PaymentCardType: Int {
 
-    case Amex, Mastercard, Visa, Maestro, DinersClub, JCB, Discover, UnionPay
+    case amex, mastercard, visa, maestro, dinersClub, jcb, discover, unionPay
 
-    public static var all: [PaymentCardType] = [.Amex, .Mastercard, .Visa, .Maestro, .DinersClub, .JCB, .Discover, .UnionPay]
+    public static var all: [PaymentCardType] = [.amex, .mastercard, .visa, .maestro, .dinersClub, .jcb, .discover, .unionPay]
     
     public var name: String {
         switch self {
-        case .Amex: return "American Express"
-        case .Mastercard: return "Mastercard"
-        case .Visa: return "Visa"
-        case .Maestro: return "Maestro"
-        case .DinersClub: return "Diners Club"
-        case .JCB: return "JCB"
-        case .Discover: return "Discover"
-        case .UnionPay: return "Union Pay"
+        case .amex: return "American Express"
+        case .mastercard: return "Mastercard"
+        case .visa: return "Visa"
+        case .maestro: return "Maestro"
+        case .dinersClub: return "Diners Club"
+        case .jcb: return "JCB"
+        case .discover: return "Discover"
+        case .unionPay: return "Union Pay"
         }
     }
     
-    private var identifyingExpression: String {
+    fileprivate var identifyingExpression: String {
         switch self {
-        case .Amex: return "^3[47][0-9]{5,}$"
-        case .Mastercard: return "^5[1-5][0-9]{5,}$"
-        case .Visa: return "^4[0-9]{6,}$"
-        case .Maestro: return "^(?:5[0678]\\d\\d|6304|6390|67\\d\\d)\\d{8,15}$"
-        case .DinersClub: return "^3(?:0[0-5]|[68][0-9])[0-9]{4,}$"
-        case .JCB: return "^(?:2131|1800|35[0-9]{3})[0-9]{3,}$"
-        case .Discover: return "^6(?:011|5[0-9]{2})[0-9]{3,}$"
-        case .UnionPay: return "^62[0-5]\\d{13,16}$"
+        case .amex: return "^3[47][0-9]{5,}$"
+        case .mastercard: return "^5[1-5][0-9]{5,}$"
+        case .visa: return "^4[0-9]{6,}$"
+        case .maestro: return "^(?:5[0678]\\d\\d|6304|6390|67\\d\\d)\\d{8,15}$"
+        case .dinersClub: return "^3(?:0[0-5]|[68][0-9])[0-9]{4,}$"
+        case .jcb: return "^(?:2131|1800|35[0-9]{3})[0-9]{3,}$"
+        case .discover: return "^6(?:011|5[0-9]{2})[0-9]{3,}$"
+        case .unionPay: return "^62[0-5]\\d{13,16}$"
         }
     }
     
-    private static func typeForCardNumber(string: String?) -> PaymentCardType? {
+    fileprivate static func typeForCardNumber(_ string: String?) -> PaymentCardType? {
         guard let string = string else { return nil }
         for type in PaymentCardType.all {
             let predicate = NSPredicate(format: "SELF MATCHES %@", type.identifyingExpression)
-            if predicate.evaluateWithObject(string) {
+            if predicate.evaluate(with: string) {
                 return type
             }
         }
@@ -98,17 +98,17 @@ public struct ValidationRulePaymentCard: ValidationRule {
         self.init(acceptedTypes: PaymentCardType.all, failureError: failureError)
     }
     
-    public func validateInput(input: String?) -> Bool {
+    public func validateInput(_ input: String?) -> Bool {
         guard let cardNum = input else { return false }
         guard ValidationRulePaymentCard.luhnCheck(cardNum) else { return false }
         guard let cardType = PaymentCardType(cardNumber: cardNum) else { return false }
         return acceptedTypes.contains(cardType)
     }
     
-    private static func luhnCheck(cardNumber: String) -> Bool {
+    fileprivate static func luhnCheck(_ cardNumber: String) -> Bool {
         var sum = 0
-        let reversedCharacters = cardNumber.characters.reverse().map { String($0) }
-        for (idx, element) in reversedCharacters.enumerate() {
+        let reversedCharacters = cardNumber.characters.reversed().map { String($0) }
+        for (idx, element) in reversedCharacters.enumerated() {
             guard let digit = Int(element) else { return false }
             switch ((idx % 2 == 1), digit) {
             case (true, 9): sum += 9

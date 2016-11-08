@@ -39,7 +39,7 @@ public struct ValidationRuleRequired<T>: ValidationRule {
         self.failureError = failureError
     }
     
-    public func validateInput(input: T?) -> Bool {        
+    public func validateInput(_ input: T?) -> Bool {        
         return input != nil
     }
     

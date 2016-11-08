@@ -17,7 +17,7 @@ class ToggleButton: UIButton {
     super.init(frame: CGRectZero)
     accessibilityLabel = accessibilityLabel ?? config.identifier
     tintColor = config.tintColor
-    setImage(config.image, forState: .Normal)
+    setImage(config.image, for: .normal)
   }
 
   required init?(coder aDecoder: NSCoder) {
@@ -27,10 +27,10 @@ class ToggleButton: UIButton {
   func update() {
     if toggled {
       tintColor = config.toggledTintColor
-      setImage(config.toggledImage, forState: .Normal)
+      setImage(config.toggledImage, for: .normal)
     } else {
       tintColor = config.tintColor
-      setImage(config.image, forState: .Normal)
+      setImage(config.image, for: .normal)
     }
   }
 

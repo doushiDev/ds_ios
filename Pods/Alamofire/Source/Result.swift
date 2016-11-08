@@ -24,15 +24,14 @@
 
 import Foundation
 
-/**
-    Used to represent whether a request was successful or encountered an error.
-
-    - Success: The request and all post processing operations were successful resulting in the serialization of the 
-               provided associated value.
-    - Failure: The request encountered an error resulting in a failure. The associated values are the original data 
-               provided by the server as well as the error that caused the failure.
-*/
-public enum Result<Value, Error: Error> {
+/// Used to represent whether a request was successful or encountered an error.
+///
+/// - success: The request and all post processing operations were successful resulting in the serialization of the
+///            provided associated value.
+///
+/// - failure: The request encountered an error resulting in a failure. The associated values are the original data
+///            provided by the server as well as the error that caused the failure.
+public enum Result<Value> {
     case success(Value)
     case failure(Error)
 
@@ -75,7 +74,7 @@ public enum Result<Value, Error: Error> {
 // MARK: - CustomStringConvertible
 
 extension Result: CustomStringConvertible {
-    /// The textual representation used when written to an output stream, which includes whether the result was a 
+    /// The textual representation used when written to an output stream, which includes whether the result was a
     /// success or failure.
     public var description: String {
         switch self {

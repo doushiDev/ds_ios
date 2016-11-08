@@ -353,14 +353,14 @@ extension ImageDownloader: URLSessionDataDelegate {
             
             if let fetchLoad = self.fetchLoadForKey(URL) {
                 
-                if let image = UIImage.kf_imageWithData(fetchLoad.responseData, scale: fetchLoad.scale) {
+                if let image = UIImage.kf_imageWithData(fetchLoad.responseData as Data, scale: fetchLoad.scale) {
                     
                     self.delegate?.imageDownloader?(self, didDownloadImage: image, forURL: URL, withResponse: task.response!)
                     
                     if fetchLoad.shouldDecode {
-                        self.callbackWithImage(image.kf_decodedImage(scale: fetchLoad.scale), error: nil, imageURL: URL, originalData: fetchLoad.responseData)
+                        self.callbackWithImage(image.kf_decodedImage(scale: fetchLoad.scale), error: nil, imageURL: URL, originalData: fetchLoad.responseData as Data)
                     } else {
-                        self.callbackWithImage(image, error: nil, imageURL: URL, originalData: fetchLoad.responseData)
+                        self.callbackWithImage(image, error: nil, imageURL: URL, originalData: fetchLoad.responseData as Data)
                     }
                     
                 } else {

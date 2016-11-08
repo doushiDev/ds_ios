@@ -276,7 +276,7 @@ extension ImageCache {
             if options.shouldDecode {
                 self.processQueue.async(execute: { () -> Void in
                     let result = image.kf_decodedImage(scale: options.scale)
-                    (options.queue).async(execute: { () -> Void in
+                    (options.queue)?.async(execute: { () -> Void in
                         completionHandler(result, .memory)
                     })
                 })

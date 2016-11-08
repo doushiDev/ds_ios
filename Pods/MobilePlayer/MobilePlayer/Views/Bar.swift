@@ -20,7 +20,7 @@ class Bar: UIView {
     self.config = config
     if config.backgroundColor.count > 1 {
       let gradientLayer = CAGradientLayer()
-      gradientLayer.colors = [config.backgroundColor.first!.CGColor, config.backgroundColor.last!.CGColor]
+      gradientLayer.colors = [config.backgroundColor.first!.cgColor, config.backgroundColor.last!.cgColor]
       gradientLayer.locations = [0, 1]
       self.gradientLayer = gradientLayer
     } else {
@@ -65,7 +65,7 @@ class Bar: UIView {
     }
     if let
       elementView = elementView,
-      element = elementView as? Element {
+      let element = elementView as? Element {
         addSubview(elementView)
         elements.append(element)
         setNeedsLayout()

@@ -12,7 +12,7 @@ import MediaPlayer
 final class MobilePlayerControlsView: UIView {
   let config: MobilePlayerConfig
   let previewImageView = UIImageView(frame: CGRectZero)
-  let activityIndicatorView = UIActivityIndicatorView(activityIndicatorStyle: .White)
+  let activityIndicatorView = UIActivityIndicatorView(activityIndicatorStyle: .white)
   let overlayContainerView = UIView(frame: CGRectZero)
   let topBar: Bar
   let bottomBar: Bar
@@ -20,7 +20,7 @@ final class MobilePlayerControlsView: UIView {
   var controlsHidden: Bool = false {
     didSet {
       if oldValue != controlsHidden {
-        UIView.animateWithDuration(0.2) {
+        UIView.animate(withDuration: 0.2) {
           self.layoutSubviews()
         }
       }
@@ -32,7 +32,7 @@ final class MobilePlayerControlsView: UIView {
     topBar = Bar(config: config.topBarConfig)
     bottomBar = Bar(config: config.bottomBarConfig)
     super.init(frame: CGRectZero)
-    previewImageView.contentMode = .ScaleAspectFit
+    previewImageView.contentMode = .scaleAspectFit
     addSubview(previewImageView)
     activityIndicatorView.startAnimating()
     addSubview(activityIndicatorView)

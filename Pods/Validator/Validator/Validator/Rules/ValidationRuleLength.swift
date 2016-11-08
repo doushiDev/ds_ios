@@ -28,6 +28,35 @@
 */
 
 import Foundation
+fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l < r
+  case (nil, _?):
+    return true
+  default:
+    return false
+  }
+}
+
+fileprivate func >= <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l >= r
+  default:
+    return !(lhs < rhs)
+  }
+}
+
+fileprivate func <= <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l <= r
+  default:
+    return !(rhs < lhs)
+  }
+}
+
 
 public struct ValidationRuleLength: ValidationRule {
     
@@ -43,7 +72,7 @@ public struct ValidationRuleLength: ValidationRule {
         self.failureError = failureError
     }
     
-    public func validateInput(input: String?) -> Bool {
+    public func validateInput(_ input: String?) -> Bool {
         return input?.characters.count >= min && input?.characters.count <= max
     }
 

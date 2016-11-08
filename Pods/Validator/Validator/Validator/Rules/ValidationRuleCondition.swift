@@ -33,15 +33,15 @@ public struct ValidationRuleCondition<T>: ValidationRule {
     
     public typealias InputType = T
     
-    public let condition: T? -> Bool
+    public let condition: (T?) -> Bool
     public let failureError: ValidationErrorType
         
-    public init(failureError: ValidationErrorType, condition: (T? -> Bool)) {
+    public init(failureError: ValidationErrorType, condition: @escaping ((T?) -> Bool)) {
         self.condition = condition
         self.failureError = failureError
     }
     
-    public func validateInput(input: T?) -> Bool {
+    public func validateInput(_ input: T?) -> Bool {
         return condition(input)
     }
     

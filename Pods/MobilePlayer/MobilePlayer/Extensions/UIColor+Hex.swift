@@ -18,7 +18,7 @@ extension UIColor {
     if hex.hasPrefix("#") {
       let index   = hex.startIndex.advancedBy(1)
       let hex     = hex.substringFromIndex(index)
-      let scanner = NSScanner(string: hex)
+      let scanner = Scanner(string: hex)
       var hexValue = CUnsignedLongLong(0)
       if scanner.scanHexLongLong(&hexValue) {
         switch (hex.characters.count) {

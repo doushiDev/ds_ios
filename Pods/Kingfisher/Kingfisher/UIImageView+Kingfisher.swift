@@ -192,7 +192,7 @@ public extension UIImageView {
             progressBlock: { receivedSize, totalSize in
                 if let progressBlock = progressBlock {
                     DispatchQueue.main.async(execute: { () -> Void in
-                        progressBlock(receivedSize: receivedSize, totalSize: totalSize)
+                        progressBlock(receivedSize, totalSize)
                         
                     })
                 }
@@ -202,7 +202,7 @@ public extension UIImageView {
                 dispatch_async_safely_main_queue {
                     
                     guard let sSelf = self , imageURL == sSelf.kf_webURL else {
-                        completionHandler?(image: image, error: error, cacheType: cacheType, imageURL: imageURL)
+                        completionHandler?(image, error, cacheType, imageURL)
                         return
                     }
                     
@@ -210,7 +210,7 @@ public extension UIImageView {
                     
                     guard let image = image else {
                         indicator?.stopAnimating()
-                        completionHandler?(image: nil, error: error, cacheType: cacheType, imageURL: imageURL)
+                        completionHandler?(nil, error, cacheType, imageURL)
                         return
                     }
                     
@@ -229,7 +229,7 @@ public extension UIImageView {
                                         },
                                         completion: { finished in
                                             transition.completion?(finished)
-                                            completionHandler?(image: image, error: error, cacheType: cacheType, imageURL: imageURL)
+                                            completionHandler?(image, error, cacheType, imageURL)
                                         }
                                     )
                                 }
@@ -237,7 +237,7 @@ public extension UIImageView {
                     } else {
                         indicator?.stopAnimating()
                         sSelf.image = image
-                        completionHandler?(image: image, error: error, cacheType: cacheType, imageURL: imageURL)
+                        completionHandler?(image, error, cacheType, imageURL)
                     }
                 }
             }

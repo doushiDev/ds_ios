@@ -43,15 +43,15 @@ class YoutubeParser: NSObject {
   static func youtubeIDFromURL(url: NSURL) -> String? {
     if let
       host = url.host,
-      pathComponents = url.pathComponents {
+      let pathComponents = url.pathComponents {
         if host.rangeOfString("youtu.be") != nil {
           return pathComponents[1]
         } else if (host.rangeOfString("youtube.com") != nil && pathComponents[1] == "embed") || (host == "youtube.googleapis.com") {
           return pathComponents[2]
         } else if let
           queryString = url.query,
-          videoParam = queryStringToDictionary(queryString)["v"] as? String
-          where (host.rangeOfString("youtube.com") != nil) {
+          let videoParam = queryStringToDictionary(queryString)["v"] as? String
+          , (host.rangeOfString("youtube.com") != nil) {
             return videoParam
         }
     }
@@ -60,24 +60,24 @@ class YoutubeParser: NSObject {
 
   static func h264videosWithYoutubeID(
     youtubeID: String,
-    completion: (videoInfo: YoutubeVideoInfo?, error: NSError?) -> Void) {
-      let request = NSMutableURLRequest(URL: NSURL(string: "\(infoURL)\(youtubeID)")!)
+    completion: @escaping (_ videoInfo: YoutubeVideoInfo?, _ error: NSError?) -> Void) {
+      let request = NSMutableURLRequest(url: NSURL(string: "\(infoURL)\(youtubeID)")! as URL)
       request.setValue(userAgent, forHTTPHeaderField: "User-Agent")
-      request.HTTPMethod = "GET"
+      request.httpMethod = "GET"
       NSURLConnection.sendAsynchronousRequest(
-        request,
-        queue: NSOperationQueue.mainQueue(),
+        request as URLRequest,
+        queue: OperationQueue.main,
         completionHandler: { response, data, error in
           if let error = error {
-            completion(videoInfo: nil, error: error)
+            completion(nil, error as NSError?)
             return
           }
           guard let
             data = data,
-            dataString = NSString(data: data, encoding: NSUTF8StringEncoding) as? String else {
+            let dataString = NSString(data: data, encoding: String.Encoding.utf8.rawValue) as? String else {
               completion(
-                videoInfo: nil,
-                error: NSError(domain: "com.movielala.MobilePlayer.error", code: 0, userInfo: nil))
+                nil,
+                NSError(domain: "com.movielala.MobilePlayer.error", code: 0, userInfo: nil))
               return
           }
           let parts = self.queryStringToDictionary(dataString)

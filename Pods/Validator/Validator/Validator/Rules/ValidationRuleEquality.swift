@@ -43,13 +43,13 @@ public struct ValidationRuleEquality<T: Equatable>: ValidationRule {
         self.dynamicTarget = nil
     }
     
-    public init(dynamicTarget: (() -> T), failureError: ValidationErrorType) {
+    public init(dynamicTarget: @escaping (() -> T), failureError: ValidationErrorType) {
         self.target = dynamicTarget()
         self.dynamicTarget = dynamicTarget
         self.failureError = failureError
     }
   
-    public func validateInput(input: T?) -> Bool {
+    public func validateInput(_ input: T?) -> Bool {
         if let dT = dynamicTarget { return input == dT() }
         return input == target
     }
