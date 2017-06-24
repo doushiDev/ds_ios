@@ -4,7 +4,7 @@
 //
 //  Created by João D. Moreira on 30/08/16.
 //
-//  Copyright (c) 2016 Wei Wang <onevcat@gmail.com>
+//  Copyright (c) 2017 Wei Wang <onevcat@gmail.com>
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -35,6 +35,17 @@
 #else
     public typealias IndicatorView = UIView
 #endif
+
+public enum IndicatorType {
+    /// No indicator.
+    case none
+    /// Use system activity indicator.
+    case activity
+    /// Use an image as indicator. GIF is supported.
+    case image(imageData: Data)
+    /// Use a custom indicator, which conforms to the `Indicator` protocol.
+    case custom(indicator: Indicator)
+}
 
 // MARK: - Indicator Protocol
 public protocol Indicator {

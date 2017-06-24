@@ -4,7 +4,7 @@
 //
 //  Created by Claire Knight <claire.knight@moggytech.co.uk> on 24/02/2016
 //
-//  Copyright (c) 2016 Wei Wang <onevcat@gmail.com>
+//  Copyright (c) 2017 Wei Wang <onevcat@gmail.com>
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -128,7 +128,7 @@ public class ImagePrefetcher {
         pendingResources = ArraySlice(resources)
         
         // We want all callbacks from main queue, so we ignore the call back queue in options
-        let optionsInfoWithoutQueue = options?.kf_removeAllMatchesIgnoringAssociatedValue(.callbackDispatchQueue(nil))
+        let optionsInfoWithoutQueue = options?.removeAllMatchesIgnoringAssociatedValue(.callbackDispatchQueue(nil))
         self.optionsInfo = optionsInfoWithoutQueue ?? KingfisherEmptyOptionsInfo
         
         let cache = self.optionsInfo.targetCache
@@ -237,7 +237,9 @@ public class ImagePrefetcher {
         if optionsInfo.forceRefresh {
             downloadAndCache(resource)
         } else {
-            let alreadyInCache = manager.cache.isImageCached(forKey: resource.cacheKey).cached
+            let alreadyInCache = manager.cache.isImageCached(forKey: resource.cacheKey,
+                                                             processorIdentifier: optionsInfo.processor.identifier).cached
+
             if alreadyInCache {
                 append(cached: resource)
             } else {

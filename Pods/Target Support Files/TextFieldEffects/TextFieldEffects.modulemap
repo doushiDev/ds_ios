@@ -1,6 +1,0 @@
-framework module TextFieldEffects {
-  umbrella header "TextFieldEffects-umbrella.h"
-
-  export *
-  module * { export * }
-}

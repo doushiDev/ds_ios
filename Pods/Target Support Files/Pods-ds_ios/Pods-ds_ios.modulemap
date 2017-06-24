@@ -1,6 +1,0 @@
-framework module Pods_ds_ios {
-  umbrella header "Pods-ds_ios-umbrella.h"
-
-  export *
-  module * { export * }
-}
