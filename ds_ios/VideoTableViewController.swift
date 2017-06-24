@@ -263,8 +263,8 @@ class VideoTableViewController: UITableViewController {
             
             cell.titleLabel.text = videoInfo.title
             cell.timeLabel.text = videoInfo.cTime
-            cell.picImageView.kf_setImageWithURL(URL(string: videoInfo.pic)!)
-            
+            cell.picImageView.kf_setImage(with: URL(string: videoInfo.pic)!)
+                        
         }
         return cell
     }

@@ -16,7 +16,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var loginUIButton: CornerRadiusButton!
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.alamofireManager =  Manager.sharedInstanceAndTimeOut
+        self.alamofireManager =  SessionManager.sharedInstanceAndTimeOut
         
         phoneTextField.delegate = self
         pwdTextField.delegate = self
@@ -43,7 +43,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var pwdResultUILabel: UILabel!
     
-    var alamofireManager : Manager?
+    var alamofireManager : SessionManager?
     
     
     

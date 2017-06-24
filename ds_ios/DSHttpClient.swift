@@ -188,16 +188,16 @@ class HttpController: NSObject {
 
 
 // MARK: - 扩展Manager
-extension Alamofire.Manager{
+extension Alamofire.SessionManager{
     
     /// 请求规则
-    static let sharedInstanceAndTimeOut: Manager = {
+    static let sharedInstanceAndTimeOut: SessionManager = {
         let configuration = URLSessionConfiguration.default
         //请求超时 时间
         configuration.timeoutIntervalForRequest = 10 // 秒
         
-        configuration.httpAdditionalHeaders = Manager.defaultHTTPHeaders
-        return Manager(configuration: configuration)
+        configuration.httpAdditionalHeaders = SessionManager.defaultHTTPHeaders
+        return SessionManager(configuration: configuration)
     }()
     
     
@@ -210,6 +210,15 @@ struct HttpClientByVideo {
     
     // 创建逗视网络请求 Alamofire 路由
     enum DSRouter: URLRequestConvertible {
+        /// Returns a URL request or throws if an `Error` was encountered.
+        ///
+        /// - throws: An `Error` if the underlying `URLRequest` is `nil`.
+        ///
+        /// - returns: A URL request.
+        public func asURLRequest() throws -> URLRequest {
+            code
+        }
+
         
         // 逗视API地址
         static let baseURLString = "https://api.ds.itjh.net/v2.0/rest/video/"
@@ -225,7 +234,7 @@ struct HttpClientByVideo {
         case getVideosById(String,Int) //根据视频id获取视频信息
         
         // 不同请求，对应不同请求类型
-        var method: Alamofire.Method {
+        var method: Alamofire.SessionManager {
             switch self {
             case .videosByType:
                 return .GET
@@ -387,6 +396,16 @@ struct HttpClientByUserAndVideo {
     
     // 创建逗视网络请求 Alamofire 路由
     enum DSRouter: URLRequestConvertible {
+        /// Returns a URL request or throws if an `Error` was encountered.
+        ///
+        /// - throws: An `Error` if the underlying `URLRequest` is `nil`.
+        ///
+        /// - returns: A URL request.
+        public func asURLRequest() throws -> URLRequest {
+            
+            
+        }
+
         
         // 逗视API地址
         static let baseURLString = "https://api.ds.itjh.net/v2.0/rest/userAndVideo/"
@@ -448,7 +467,8 @@ struct HttpClientByUserAndVideo {
                 
             }
             
-            let encoding = Alamofire.ParameterEncoding.url
+            let encoding = Alamofire.ParameterEncoding.encode(self)
+            
             return encoding.encode(URLRequest, parameters: nil).0
         }
     }

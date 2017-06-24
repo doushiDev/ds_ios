@@ -12,7 +12,9 @@ import Foundation
 /// 数据中心
 class DataCenter: NSObject {
     
-    private static var __once: () = { () -> Void in
+    
+    
+    fileprivate static var __once: () = { () -> Void in
             Static.instance = DataCenter()
         }()
     

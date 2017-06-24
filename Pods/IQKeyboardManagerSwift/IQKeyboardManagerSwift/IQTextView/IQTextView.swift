@@ -46,10 +46,10 @@ open class IQTextView : UITextView {
         NotificationCenter.default.removeObserver(self)
     }
     
-    fileprivate var placeholderLabel: UILabel?
+    private var placeholderLabel: UILabel?
     
     /** @abstract To set textView's placeholder text. Default is ni.    */
-    @IBInspectable open var placeholder : String? {
+    @IBInspectable public var placeholder : String? {
 
         get {
             return placeholderLabel?.text
@@ -88,7 +88,7 @@ open class IQTextView : UITextView {
         }
     }
 
-    open func refreshPlaceholder() {
+    public func refreshPlaceholder() {
         
         if text.characters.count != 0 {
             placeholderLabel?.alpha = 0

@@ -6,7 +6,7 @@ use_frameworks!
 def shared_pods
     
     
-    pod 'Kingfisher', '~> 1.6'
+    pod 'Kingfisher', '~> 3.0'
     
     pod 'MJRefresh'
     
@@ -25,15 +25,18 @@ def shared_pods
     pod 'TextFieldEffects'
     
     ##键盘扩展
-    pod 'IQKeyboardManagerSwift'
+    pod 'IQKeyboardManagerSwift', :git => 'https://github.com/hackiftekhar/IQKeyboardManager.git', :branch => 'swift3'
     
-    pod 'SwiftyJSON', :git => 'https://github.com/SwiftyJSON/SwiftyJSON.git'
+#    pod 'SwiftyJSON', :git => 'https://github.com/SwiftyJSON/SwiftyJSON.git'
     #
+    pod 'SwiftyJSON', :git => 'https://github.com/acegreen/SwiftyJSON.git', :branch => 'swift3'
+    pod 'Alamofire','~> 4.0.0'
+#    pod 'Kingfisher','~> 3.1.0'
     pod 'Validator'
     
     pod 'Qiniu', '~> 7.0'
     
-    pod 'MobilePlayer'
+#    pod 'MobilePlayer'
 
 #    pod 'Google-Mobile-Ads-SDK', '~> 7.0'
 
@@ -45,7 +48,7 @@ end
 
 
 target 'ds_ios'  do
-    pod 'Alamofire', '~> 4.0'
+#    pod 'Alamofire', '~> 4.0'
 
     shared_pods
 end

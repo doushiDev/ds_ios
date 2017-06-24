@@ -14,7 +14,7 @@ let user =  userDefaults.object(forKey: "userInfo")
 
 
 
-var alamofireManager : Manager = Manager.sharedInstanceAndTimeOut
+var alamofireManager : SessionManager = SessionManager.sharedInstanceAndTimeOut
 
 let width = UIScreen.main.bounds.size.width
 let height = UIScreen.main.bounds.size.height

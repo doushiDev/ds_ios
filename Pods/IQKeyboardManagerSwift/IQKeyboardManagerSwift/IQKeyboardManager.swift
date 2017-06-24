@@ -22,6 +22,7 @@
 // THE SOFTWARE.
 
 
+import Foundation
 import CoreGraphics
 import UIKit
 
@@ -121,26 +122,6 @@ open class IQKeyboardManager: NSObject, UIGestureRecognizerDelegate {
         }
         get {
             return _privateKeyboardDistanceFromTextField
-        }
-    }
-    
-    /**
-     Boolean to know if keyboard is showing.
-     */
-    open var keyboardShowing: Bool {
-        
-        get {
-            return _privateIsKeyboardShowing
-        }
-    }
-    
-    /**
-     moved distance to the top used to maintain distance between keyboard and textField. Most of the time this will be a positive value.
-     */
-    open var movedDistance: CGFloat {
-        
-        get {
-            return _privateMovedDistance
         }
     }
 
@@ -269,7 +250,9 @@ open class IQKeyboardManager: NSObject, UIGestureRecognizerDelegate {
     
     /** used with textView to detect a textFieldView contentInset is changed or not. (Bug ID: #92)*/
     fileprivate var         isTextViewContentInsetChanged = false
-        
+    
+    /*******************************************/
+    
 
     ///---------------------------------------
     /// MARK: UIKeyboard appearance overriding
@@ -367,41 +350,47 @@ open class IQKeyboardManager: NSObject, UIGestureRecognizerDelegate {
     Returns YES if can navigate to previous responder textField/textView, otherwise NO.
     */
     open var canGoPrevious: Bool {
-        //Getting all responder view's.
-        if let textFields = responderViews() {
-            if let  textFieldRetain = _textFieldView {
-                
-                //Getting index of current textField.
-                if let index = textFields.index(of: textFieldRetain) {
+        
+        get {
+            //Getting all responder view's.
+            if let textFields = responderViews() {
+                if let  textFieldRetain = _textFieldView {
                     
-                    //If it is not first textField. then it's previous object canBecomeFirstResponder.
-                    if index > 0 {
-                        return true
+                    //Getting index of current textField.
+                    if let index = textFields.index(of: textFieldRetain) {
+                        
+                        //If it is not first textField. then it's previous object canBecomeFirstResponder.
+                        if index > 0 {
+                            return true
+                        }
                     }
                 }
             }
+            return false
         }
-        return false
     }
     
     /**
     Returns YES if can navigate to next responder textField/textView, otherwise NO.
     */
     open var canGoNext: Bool {
-        //Getting all responder view's.
-        if let textFields = responderViews() {
-            if let  textFieldRetain = _textFieldView {
-                //Getting index of current textField.
-                if let index = textFields.index(of: textFieldRetain) {
-                    
-                    //If it is not first textField. then it's previous object canBecomeFirstResponder.
-                    if index < textFields.count-1 {
-                        return true
+        
+        get {
+            //Getting all responder view's.
+            if let textFields = responderViews() {
+                if let  textFieldRetain = _textFieldView {
+                    //Getting index of current textField.
+                    if let index = textFields.index(of: textFieldRetain) {
+                        
+                        //If it is not first textField. then it's previous object canBecomeFirstResponder.
+                        if index < textFields.count-1 {
+                            return true
+                        }
                     }
                 }
             }
+            return false
         }
-        return false
     }
     
     /**
@@ -549,7 +538,8 @@ open class IQKeyboardManager: NSObject, UIGestureRecognizerDelegate {
         if gesture.state == UIGestureRecognizerState.ended {
 
             //Resigning currently responder textField.
-            _ = resignFirstResponder()
+           let _ = resignFirstResponder()
+          
         }
     }
     
@@ -660,7 +650,7 @@ open class IQKeyboardManager: NSObject, UIGestureRecognizerDelegate {
     /*******************************************/
 
     /** To save UITextField/UITextView object voa textField/textView notifications. */
-    fileprivate weak var    _textFieldView: UIView?
+    private weak var    _textFieldView: UIView?
     
     /** To save rootViewController.view.frame. */
     fileprivate var         _topViewBeginRect = CGRect.zero
@@ -709,11 +699,14 @@ open class IQKeyboardManager: NSObject, UIGestureRecognizerDelegate {
     
     /*******************************************/
     
-    /** Boolean to maintain keyboard is showing or it is hide. To solve rootViewController.view.frame calculations. */
-    fileprivate var         _privateIsKeyboardShowing = false
-
-    fileprivate var         _privateMovedDistance : CGFloat = 0.0
+    fileprivate struct flags {
+        /** Boolean to maintain keyboard is showing or it is hide. To solve rootViewController.view.frame calculations. */
+        var isKeyboardShowing = false
+    }
     
+    /** Private flags to use within the project */
+    fileprivate var         _keyboardManagerFlags = flags(isKeyboardShowing: false)
+
     /** To use with keyboardDistanceFromTextField. */
     fileprivate var         _privateKeyboardDistanceFromTextField: CGFloat = 10.0
     
@@ -782,7 +775,7 @@ open class IQKeyboardManager: NSObject, UIGestureRecognizerDelegate {
     }
     
     /** Getting keyWindow. */
-    fileprivate func keyWindow() -> UIWindow? {
+    private func keyWindow() -> UIWindow? {
         
         if let keyWindow = _textFieldView?.window {
             return keyWindow
@@ -813,7 +806,7 @@ open class IQKeyboardManager: NSObject, UIGestureRecognizerDelegate {
     ///-----------------------
     
     /*  Helper function to manipulate RootViewController's frame with animation. */
-    fileprivate func setRootViewFrame(_ frame: CGRect) {
+    private func setRootViewFrame(_ frame: CGRect) {
         
         //  Getting topMost ViewController.
         var controller = _textFieldView?.topMostController()
@@ -850,7 +843,7 @@ open class IQKeyboardManager: NSObject, UIGestureRecognizerDelegate {
     }
 
     /* Adjusting RootViewController's frame according to interface orientation. */
-    fileprivate func adjustFrame() {
+    private func adjustFrame() {
         
         //  We are unable to get textField object while keyboard showing on UIWebView's textField.  (Bug ID: #11)
         if _textFieldView == nil {
@@ -859,8 +852,7 @@ open class IQKeyboardManager: NSObject, UIGestureRecognizerDelegate {
         
         let textFieldView = _textFieldView!
 
-        let startTime = CACurrentMediaTime()
-        showLog("****** \(#function) started ******")
+        showLog("****** \(#function) %@ started ******")
 
         //  Getting KeyWindow object.
         let optionalWindow = keyWindow()
@@ -1187,7 +1179,7 @@ open class IQKeyboardManager: NSObject, UIGestureRecognizerDelegate {
             //  Special case for iPad modalPresentationStyle.
             if rootController.modalPresentationStyle == UIModalPresentationStyle.formSheet ||
                 rootController.modalPresentationStyle == UIModalPresentationStyle.pageSheet {
-                
+        
                 showLog("Found Special case for Model Presentation Style: \(rootController.modalPresentationStyle)")
                 
                 //  +Positive or zero.
@@ -1205,7 +1197,6 @@ open class IQKeyboardManager: NSObject, UIGestureRecognizerDelegate {
                     showLog("Moving Upward")
                     //  Setting adjusted rootViewRect
                     setRootViewFrame(rootViewRect)
-                    _privateMovedDistance = (_topViewBeginRect.origin.y-rootViewRect.origin.y)
                 } else {  //  -Negative
                     //  Calculating disturbed distance. Pull Request #3
                     let disturbDistance = rootViewRect.minY-_topViewBeginRect.minY
@@ -1219,7 +1210,6 @@ open class IQKeyboardManager: NSObject, UIGestureRecognizerDelegate {
                         showLog("Moving Downward")
                         //  Setting adjusted rootViewRect
                         setRootViewFrame(rootViewRect)
-                        _privateMovedDistance = (_topViewBeginRect.origin.y-rootViewRect.origin.y)
                     }
                 }
             } else {  //If presentation style is neither UIModalPresentationFormSheet nor UIModalPresentationPageSheet then going ahead.(General case)
@@ -1237,7 +1227,6 @@ open class IQKeyboardManager: NSObject, UIGestureRecognizerDelegate {
                     showLog("Moving Upward")
                     //  Setting adjusted rootViewRect
                     setRootViewFrame(rootViewRect)
-                    _privateMovedDistance = (_topViewBeginRect.origin.y-rootViewRect.origin.y)
                 } else {  //  -Negative
                     let disturbDistance : CGFloat = rootViewRect.minY-_topViewBeginRect.minY
                     
@@ -1251,14 +1240,12 @@ open class IQKeyboardManager: NSObject, UIGestureRecognizerDelegate {
                         //  Setting adjusted rootViewRect
                         //  Setting adjusted rootViewRect
                         setRootViewFrame(rootViewRect)
-                        _privateMovedDistance = (_topViewBeginRect.origin.y-rootViewRect.origin.y)
                     }
                 }
             }
         }
 
-        let elapsedTime = CACurrentMediaTime() - startTime
-        showLog("****** \(#function) ended: \(elapsedTime) seconds ******")
+        showLog("****** \(#function) ended ******")
     }
 
     ///---------------------
@@ -1266,14 +1253,14 @@ open class IQKeyboardManager: NSObject, UIGestureRecognizerDelegate {
     ///---------------------
     
     /*  Refreshes textField/textView position if any external changes is explicitly made by user.   */
-    open func reloadLayoutIfNeeded() -> Void {
+    public func reloadLayoutIfNeeded() -> Void {
 
         if privateIsEnabled() == false {
             return
         }
 
         if _textFieldView != nil &&
-        _privateIsKeyboardShowing == true &&
+        _keyboardManagerFlags.isKeyboardShowing == true &&
         _topViewBeginRect.equalTo(CGRect.zero) == false &&
         _textFieldView?.isAlertViewTextField() == false {
             adjustFrame()
@@ -1290,18 +1277,17 @@ open class IQKeyboardManager: NSObject, UIGestureRecognizerDelegate {
         _kbShowNotification = notification
 
         //  Boolean to know keyboard is showing/hiding
-        _privateIsKeyboardShowing = true
+        _keyboardManagerFlags.isKeyboardShowing = true
         
         if privateIsEnabled() == false {
             return
         }
         
-        let startTime = CACurrentMediaTime()
         showLog("****** \(#function) started ******")
 
         //  (Bug ID: #5)
         if _textFieldView != nil && _topViewBeginRect.equalTo(CGRect.zero) == true {
-            
+        
             //  keyboard is not showing(At the beginning only). We should save rootViewRect.
             if let constant = _textFieldView?.viewController()?.IQLayoutGuideConstraint?.constant {
                 _layoutGuideConstraintInitialConstant = constant
@@ -1317,10 +1303,8 @@ open class IQKeyboardManager: NSObject, UIGestureRecognizerDelegate {
                 _topViewBeginRect = unwrappedRootController.view.frame
                 
                 if shouldFixInteractivePopGestureRecognizer == true &&
-                    unwrappedRootController is UINavigationController &&
-                    unwrappedRootController.modalPresentationStyle != UIModalPresentationStyle.formSheet &&
-                    unwrappedRootController.modalPresentationStyle != UIModalPresentationStyle.pageSheet {
-
+                    unwrappedRootController is UINavigationController {
+                    
                     if let window = keyWindow() {
                         _topViewBeginRect.origin = CGPoint(x: 0,y: window.frame.size.height-unwrappedRootController.view.frame.size.height)
                     } else {
@@ -1386,7 +1370,7 @@ open class IQKeyboardManager: NSObject, UIGestureRecognizerDelegate {
             
             //If _textFieldView is inside UITableViewController then let UITableViewController to handle it (Bug ID: #37) (Bug ID: #76) See note:- https://developer.apple.com/library/ios/documentation/StringsTextFonts/Conceptual/TextAndWebiPhoneOS/KeyboardManagement/KeyboardManagement.html If it is UIAlertView textField then do not affect anything (Bug ID: #70).
             
-            if _privateIsKeyboardShowing == true &&
+            if _keyboardManagerFlags.isKeyboardShowing == true &&
                 _textFieldView != nil &&
                 _textFieldView?.isAlertViewTextField() == false {
                 
@@ -1395,8 +1379,7 @@ open class IQKeyboardManager: NSObject, UIGestureRecognizerDelegate {
             }
         }
         
-        let elapsedTime = CACurrentMediaTime() - startTime
-        showLog("****** \(#function) ended: \(elapsedTime) seconds ******")
+        showLog("****** \(#function) ended ******")
     }
 
     /*  UIKeyboardDidShowNotification. */
@@ -1406,7 +1389,6 @@ open class IQKeyboardManager: NSObject, UIGestureRecognizerDelegate {
             return
         }
         
-        let startTime = CACurrentMediaTime()
         showLog("****** \(#function) started ******")
         
         //  Getting topMost ViewController.
@@ -1417,15 +1399,14 @@ open class IQKeyboardManager: NSObject, UIGestureRecognizerDelegate {
         }
         
         if _textFieldView != nil &&
-            (topMostController?.modalPresentationStyle == UIModalPresentationStyle.formSheet || topMostController?.modalPresentationStyle == UIModalPresentationStyle.pageSheet) &&
+            topMostController?.modalPresentationStyle == UIModalPresentationStyle.formSheet &&
             _textFieldView?.isAlertViewTextField() == false {
             
             //  keyboard is already showing. adjust frame.
             adjustFrame()
         }
         
-        let elapsedTime = CACurrentMediaTime() - startTime
-        showLog("****** \(#function) ended: \(elapsedTime) seconds ******")
+        showLog("****** \(#function) ended ******")
     }
 
     /*  UIKeyboardWillHideNotification. So setting rootViewController to it's default frame. */
@@ -1441,7 +1422,6 @@ open class IQKeyboardManager: NSObject, UIGestureRecognizerDelegate {
             return
         }
         
-        let startTime = CACurrentMediaTime()
         showLog("****** \(#function) started ******")
 
         //Commented due to #56. Added all the conditions below to handle UIWebView's textFields.    (Bug ID: #56)
@@ -1449,9 +1429,9 @@ open class IQKeyboardManager: NSObject, UIGestureRecognizerDelegate {
         //    if (_textFieldView == nil)   return
 
         //  Boolean to know keyboard is showing/hiding
-        _privateIsKeyboardShowing = false
+        _keyboardManagerFlags.isKeyboardShowing = false
         
-        let info : [AnyHashable: Any]? = (notification as NSNotification?)?.userInfo
+        let info : [AnyHashable : Any]? = (notification as NSNotification?)?.userInfo
         
         //  Getting keyboard animation duration
         if let duration =  (info?[UIKeyboardAnimationDurationUserInfoKey] as? NSNumber)?.doubleValue {
@@ -1540,7 +1520,6 @@ open class IQKeyboardManager: NSObject, UIGestureRecognizerDelegate {
                         
                         //  Setting it's new frame
                         rootViewController.view.frame = self._topViewBeginRect
-                        self._privateMovedDistance = 0
                         
                         //Animating content if needed (Bug ID: #204)
                         if self.layoutIfNeededOnUpdate == true {
@@ -1563,19 +1542,16 @@ open class IQKeyboardManager: NSObject, UIGestureRecognizerDelegate {
         _startingContentOffset = CGPoint.zero
         //    topViewBeginRect = CGRectZero    //Commented due to #82
 
-        let elapsedTime = CACurrentMediaTime() - startTime
-        showLog("****** \(#function) ended: \(elapsedTime) seconds ******")
+        showLog("****** \(#function) ended ******")
     }
 
     internal func keyboardDidHide(_ notification:Notification) {
 
-        let startTime = CACurrentMediaTime()
         showLog("****** \(#function) started ******")
         
         _topViewBeginRect = CGRect.zero
 
-        let elapsedTime = CACurrentMediaTime() - startTime
-        showLog("****** \(#function) ended: \(elapsedTime) seconds ******")
+        showLog("****** \(#function) ended ******")
     }
     
     ///-------------------------------------------
@@ -1585,7 +1561,6 @@ open class IQKeyboardManager: NSObject, UIGestureRecognizerDelegate {
     /**  UITextFieldTextDidBeginEditingNotification, UITextViewTextDidBeginEditingNotification. Fetching UITextFieldView object. */
     internal func textFieldViewDidBeginEditing(_ notification:Notification) {
 
-        let startTime = CACurrentMediaTime()
         showLog("****** \(#function) started ******")
 
         //  Getting object
@@ -1613,6 +1588,8 @@ open class IQKeyboardManager: NSObject, UIGestureRecognizerDelegate {
         //If autoToolbar enable, then add toolbar on all the UITextField/UITextView's if required.
         if privateIsEnableAutoToolbar() == true {
 
+            showLog("adding UIToolbars if required")
+
             //UITextView special case. Keyboard Notification is firing before textView notification so we need to resign it first and then again set it as first responder to add toolbar on it.
             if _textFieldView is UITextView == true &&
                 _textFieldView?.inputAccessoryView == nil {
@@ -1635,8 +1612,7 @@ open class IQKeyboardManager: NSObject, UIGestureRecognizerDelegate {
         }
 
         if privateIsEnabled() == false {
-            let elapsedTime = CACurrentMediaTime() - startTime
-            showLog("****** \(#function) ended: \(elapsedTime) seconds ******")
+            showLog("****** \(#function) ended ******")
             return
         }
         
@@ -1659,9 +1635,7 @@ open class IQKeyboardManager: NSObject, UIGestureRecognizerDelegate {
                 _topViewBeginRect = rootViewController.view.frame
                 
                 if shouldFixInteractivePopGestureRecognizer == true &&
-                    rootViewController is UINavigationController &&
-                    rootViewController.modalPresentationStyle != UIModalPresentationStyle.formSheet &&
-                    rootViewController.modalPresentationStyle != UIModalPresentationStyle.pageSheet {
+                    rootViewController is UINavigationController {
                     if let window = keyWindow() {
                         _topViewBeginRect.origin = CGPoint(x: 0,y: window.frame.size.height-rootViewController.view.frame.size.height)
                     } else {
@@ -1675,7 +1649,7 @@ open class IQKeyboardManager: NSObject, UIGestureRecognizerDelegate {
         
         //If _textFieldView is inside ignored responder then do nothing. (Bug ID: #37, #74, #76)
         //See notes:- https://developer.apple.com/library/ios/documentation/StringsTextFonts/Conceptual/TextAndWebiPhoneOS/KeyboardManagement/KeyboardManagement.html If it is UIAlertView textField then do not affect anything (Bug ID: #70).
-        if _privateIsKeyboardShowing == true &&
+        if _keyboardManagerFlags.isKeyboardShowing == true &&
             _textFieldView != nil &&
             _textFieldView?.isAlertViewTextField() == false {
 
@@ -1683,14 +1657,12 @@ open class IQKeyboardManager: NSObject, UIGestureRecognizerDelegate {
             adjustFrame()
         }
 
-        let elapsedTime = CACurrentMediaTime() - startTime
-        showLog("****** \(#function) ended: \(elapsedTime) seconds ******")
+        showLog("****** \(#function) ended ******")
     }
     
     /**  UITextFieldTextDidEndEditingNotification, UITextViewTextDidEndEditingNotification. Removing fetched object. */
     internal func textFieldViewDidEndEditing(_ notification:Notification) {
         
-        let startTime = CACurrentMediaTime()
         showLog("****** \(#function) started ******")
 
         //Removing gesture recognizer   (Enhancement ID: #14)
@@ -1719,8 +1691,7 @@ open class IQKeyboardManager: NSObject, UIGestureRecognizerDelegate {
         //Setting object to nil
         _textFieldView = nil
 
-        let elapsedTime = CACurrentMediaTime() - startTime
-        showLog("****** \(#function) ended: \(elapsedTime) seconds ******")
+        showLog("****** \(#function) ended ******")
     }
 
     ///------------------------------------------
@@ -1730,7 +1701,6 @@ open class IQKeyboardManager: NSObject, UIGestureRecognizerDelegate {
     /**  UIApplicationWillChangeStatusBarOrientationNotification. Need to set the textView to it's original position. If any frame changes made. (Bug ID: #92)*/
     internal func willChangeStatusBarOrientation(_ notification:Notification) {
         
-        let startTime = CACurrentMediaTime()
         showLog("****** \(#function) started ******")
         
         //If textViewContentInsetChanged is saved then restore it.
@@ -1752,18 +1722,16 @@ open class IQKeyboardManager: NSObject, UIGestureRecognizerDelegate {
             }
         }
 
-        let elapsedTime = CACurrentMediaTime() - startTime
-        showLog("****** \(#function) ended: \(elapsedTime) seconds ******")
+        showLog("****** \(#function) ended ******")
     }
     
     /**  UIApplicationDidChangeStatusBarFrameNotification. Need to refresh view position and update _topViewBeginRect. (Bug ID: #446)*/
     internal func didChangeStatusBarFrame(_ notification : Notification?) -> Void {
         
         let oldStatusBarFrame = _statusBarFrame;
-        
         //  Getting keyboard animation duration
-        if let newFrame =  ((notification as NSNotification?)?.userInfo?[UIApplicationStatusBarFrameUserInfoKey] as? NSNumber)?.cgRectValue {
-            
+        if let newFrame =  ((notification as NSNotification?)?.userInfo?[UIApplicationStatusBarFrameUserInfoKey] as? NSValue)?.cgRectValue {
+        
             _statusBarFrame = newFrame
         }
 
@@ -1771,7 +1739,6 @@ open class IQKeyboardManager: NSObject, UIGestureRecognizerDelegate {
             return
         }
         
-        let startTime = CACurrentMediaTime()
         showLog("****** \(#function) started ******")
         
         if _rootViewController != nil &&
@@ -1781,9 +1748,7 @@ open class IQKeyboardManager: NSObject, UIGestureRecognizerDelegate {
                 _topViewBeginRect = unwrappedRootController.view.frame
                 
                 if shouldFixInteractivePopGestureRecognizer == true &&
-                    unwrappedRootController is UINavigationController &&
-                    unwrappedRootController.modalPresentationStyle != UIModalPresentationStyle.formSheet &&
-                    unwrappedRootController.modalPresentationStyle != UIModalPresentationStyle.pageSheet {
+                    unwrappedRootController is UINavigationController {
                     
                     if let window = keyWindow() {
                         _topViewBeginRect.origin = CGPoint(x: 0,y: window.frame.size.height-unwrappedRootController.view.frame.size.height)
@@ -1800,7 +1765,7 @@ open class IQKeyboardManager: NSObject, UIGestureRecognizerDelegate {
         
         //If _textFieldView is inside UITableViewController then let UITableViewController to handle it (Bug ID: #37) (Bug ID: #76) See note:- https://developer.apple.com/library/ios/documentation/StringsTextFonts/Conceptual/TextAndWebiPhoneOS/KeyboardManagement/KeyboardManagement.html If it is UIAlertView textField then do not affect anything (Bug ID: #70).
         
-        if _privateIsKeyboardShowing == true &&
+        if _keyboardManagerFlags.isKeyboardShowing == true &&
             _textFieldView != nil &&
             _statusBarFrame.size.equalTo(oldStatusBarFrame.size) == false &&
             _textFieldView?.isAlertViewTextField() == false {
@@ -1809,8 +1774,7 @@ open class IQKeyboardManager: NSObject, UIGestureRecognizerDelegate {
             adjustFrame()
         }
         
-        let elapsedTime = CACurrentMediaTime() - startTime
-        showLog("****** \(#function) ended: \(elapsedTime) seconds ******")
+        showLog("****** \(#function) ended ******")
     }
 
     ///------------------
@@ -1818,7 +1782,7 @@ open class IQKeyboardManager: NSObject, UIGestureRecognizerDelegate {
     ///------------------
     
     /**	Get all UITextField/UITextView siblings of textFieldView. */
-    fileprivate func responderViews()-> [UIView]? {
+    private func responderViews()-> [UIView]? {
         
         var superConsideredView : UIView?
 
@@ -1857,16 +1821,11 @@ open class IQKeyboardManager: NSObject, UIGestureRecognizerDelegate {
     }
     
     /** Add toolbar if it is required to add on textFields and it's siblings. */
-    fileprivate func addToolbarIfRequired() {
+    private func addToolbarIfRequired() {
         
-        let startTime = CACurrentMediaTime()
-        showLog("****** \(#function) started ******")
-
         //	Getting all the sibling textFields.
         if let siblings = responderViews() {
             
-            showLog("Found \(siblings.count) responder sibling(s)")
-
             //	If only one object is found, then adding only Done button.
             if siblings.count == 1 ||
                 shouldHidePreviousNext == true {
@@ -2216,22 +2175,14 @@ open class IQKeyboardManager: NSObject, UIGestureRecognizerDelegate {
                 }
             }
         }
-
-        let elapsedTime = CACurrentMediaTime() - startTime
-        showLog("****** \(#function) ended: \(elapsedTime) seconds ******")
     }
     
     /** Remove any toolbar if it is IQToolbar. */
-    fileprivate func removeToolbarIfRequired() {    //  (Bug ID: #18)
+    private func removeToolbarIfRequired() {    //  (Bug ID: #18)
         
-        let startTime = CACurrentMediaTime()
-        showLog("****** \(#function) started ******")
-
         //	Getting all the sibling textFields.
         if let siblings = responderViews() {
             
-            showLog("Found \(siblings.count) responder sibling(s)")
-
             for view in siblings {
                 
                 if let toolbar = view.inputAccessoryView as? IQToolbar {
@@ -2249,43 +2200,11 @@ open class IQKeyboardManager: NSObject, UIGestureRecognizerDelegate {
                 }
             }
         }
-
-        let elapsedTime = CACurrentMediaTime() - startTime
-        showLog("****** \(#function) ended: \(elapsedTime) seconds ******")
     }
     
-    /**	reloadInputViews to reload toolbar buttons enable/disable state on the fly Enhancement ID #434. */
-    open func reloadInputViews() {
-        
-        //	Getting all the sibling textFields.
-        if let siblings = responderViews() {
-            
-            showLog("Found \(siblings.count) responder sibling(s)")
-            
-            for textField in siblings {
-                
-                //	If firstTextField, then previous should not be enabled.
-                if siblings[0] == textField {
-                    
-                    if siblings.count == 1 {
-                        textField.setEnablePrevious(false, isNextEnabled: false)
-                    } else {
-                        textField.setEnablePrevious(false, isNextEnabled: true)
-                    }
-                    
-                    //	If lastTextField then next should not be enaled.
-                } else if siblings.last == textField {
-                    textField.setEnablePrevious(true, isNextEnabled: false)
-                } else {
-                    textField.setEnablePrevious(true, isNextEnabled: true)
-                }
-            }
-        }
-    }
-    
-    open var enableDebugging = false
+    public var enableDebugging = false
 
-    fileprivate func showLog(_ logString: String) {
+    private func showLog(_ logString: String) {
         
         if enableDebugging {
             print("IQKeyboardManager: " + logString)

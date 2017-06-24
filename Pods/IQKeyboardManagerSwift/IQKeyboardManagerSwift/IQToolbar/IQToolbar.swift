@@ -136,7 +136,7 @@ open class IQToolbar: UIToolbar , UIInputViewAudioFeedback {
         
         sizeToFit()
         autoresizingMask = UIViewAutoresizing.flexibleWidth
-        tintColor = UIColor.black
+        tintColor = UIColor .black
         self.isTranslucent = true
     }
     
@@ -145,7 +145,7 @@ open class IQToolbar: UIToolbar , UIInputViewAudioFeedback {
 
         sizeToFit()
         autoresizingMask = UIViewAutoresizing.flexibleWidth
-        tintColor = UIColor.black
+        tintColor = UIColor .black
         self.isTranslucent = true
     }
 
@@ -256,7 +256,7 @@ open class IQToolbar: UIToolbar , UIInputViewAudioFeedback {
         }
     }
     
-    open var enableInputClicksWhenVisible: Bool {
+    public var enableInputClicksWhenVisible: Bool {
         return true
     }
 }

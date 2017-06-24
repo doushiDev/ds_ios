@@ -135,7 +135,7 @@ class VideoTaxisTableViewController: UITableViewController {
             let videoInfo = (videos.object(at: (indexPath as NSIndexPath).row) as! VideoInfo)
             
             cell.titleLabel.text = videoInfo.title
-            cell.picImageView.kf_setImageWithURL(URL(string: videoInfo.pic)!)
+            cell.picImageView.kf_setImage(with: URL(string: videoInfo.pic)!)
             
         }
         

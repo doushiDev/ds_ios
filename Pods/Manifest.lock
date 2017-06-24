@@ -20,10 +20,9 @@ PODS:
   - APParallaxHeader (0.1.6)
   - Fabric (1.6.8)
   - HappyDNS (0.3.10)
-  - IQKeyboardManagerSwift (4.0.6)
-  - Kingfisher (1.9.3)
+  - IQKeyboardManagerSwift (4.0.4)
+  - Kingfisher (3.0.1)
   - MJRefresh (3.1.12)
-  - MobilePlayer (1.1.5)
   - Qiniu (7.1.1):
     - AFNetworking (~> 3)
     - HappyDNS (~> 0.3)
@@ -39,30 +38,36 @@ PODS:
   - Validator (1.2.0)
 
 DEPENDENCIES:
-  - Alamofire (~> 4.0)
+  - Alamofire (~> 4.0.0)
   - Answers
   - APParallaxHeader
   - Fabric
-  - IQKeyboardManagerSwift
-  - Kingfisher (~> 1.6)
+  - IQKeyboardManagerSwift (from `https://github.com/hackiftekhar/IQKeyboardManager.git`, branch `swift3`)
+  - Kingfisher (~> 3.0)
   - MJRefresh
-  - MobilePlayer
   - Qiniu (~> 7.0)
   - RoundImageView (~> 1.0.1)
   - SDCycleScrollView (~> 1.3)
   - StrechyParallaxScrollView (~> 0.1)
-  - SwiftyJSON (from `https://github.com/SwiftyJSON/SwiftyJSON.git`)
+  - SwiftyJSON (from `https://github.com/acegreen/SwiftyJSON.git`, branch `swift3`)
   - TextFieldEffects
   - Validator
 
 EXTERNAL SOURCES:
+  IQKeyboardManagerSwift:
+    :branch: swift3
+    :git: https://github.com/hackiftekhar/IQKeyboardManager.git
   SwiftyJSON:
-    :git: https://github.com/SwiftyJSON/SwiftyJSON.git
+    :branch: swift3
+    :git: https://github.com/acegreen/SwiftyJSON.git
 
 CHECKOUT OPTIONS:
+  IQKeyboardManagerSwift:
+    :commit: d27180d877c8d36d5be80ee9d8c24d184ac26081
+    :git: https://github.com/hackiftekhar/IQKeyboardManager.git
   SwiftyJSON:
-    :commit: 73670b94292b8d8496c398a973f56ac67789ba9f
-    :git: https://github.com/SwiftyJSON/SwiftyJSON.git
+    :commit: 8971384559780e631b041ac91b16734a396d4c14
+    :git: https://github.com/acegreen/SwiftyJSON.git
 
 SPEC CHECKSUMS:
   AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
@@ -71,10 +76,9 @@ SPEC CHECKSUMS:
   APParallaxHeader: 854bc48a2487ca12c702f8a236fec0d89cdac5c3
   Fabric: 5755268d0171435ab167e3d0878a28a777deaf10
   HappyDNS: 06a9fed2796663fd87626dbf02552933265bf059
-  IQKeyboardManagerSwift: b3015e819559ca76381f87a0833f44d178564603
-  Kingfisher: 9e37d2a78a082dc123bfe8a16de65de85518daae
+  IQKeyboardManagerSwift: e0964d04d6a29b71016fd346dca13ecb80a2823a
+  Kingfisher: d5a491b45ea453d90a31bd2c0831d5243e73a73f
   MJRefresh: b96cdb21c4aa75a7b07654311ab2f315c497e806
-  MobilePlayer: 2fdc07a564fa89da65ff660f8fdcf06ab75f775d
   Qiniu: 5e5d7d759d22393bb4b87cdfacf8fab951260f3e
   RoundImageView: af3ea25d9b69456749c5b4da68e513060ddbd428
   SDCycleScrollView: f72904c77698a7f93a41bcbbc2d78b073bf7326c
@@ -84,6 +88,6 @@ SPEC CHECKSUMS:
   TextFieldEffects: bc4fd3bd557321bd61a0762f3f50965477a36f62
   Validator: 4015c0fcaacd165100b337dc4198ba308fb567fb
 
-PODFILE CHECKSUM: 4f7cc3334f28872d31b2a7962fd42916e038e3bb
+PODFILE CHECKSUM: 21522705cbc734bcc097a1549698a71f8be417c5
 
-COCOAPODS: 1.0.1
+COCOAPODS: 1.2.0.beta.1

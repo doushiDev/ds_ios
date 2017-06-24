@@ -33,7 +33,7 @@ import UIKit
      
      This property applies a color to the edges of the control. The default value for this property is a clear color.
      */
-    @IBInspectable dynamic open var activeBorderColor: UIColor = .clear() {
+    @IBInspectable dynamic open var activeBorderColor: UIColor = .clear {
         didSet {
             updateBorder()
             updateBackground()
@@ -46,7 +46,7 @@ import UIKit
      
      This property applies a color to the edges of the control. The default value for this property is a clear color.
      */
-    @IBInspectable dynamic open var inactiveBorderColor: UIColor = .clear() {
+    @IBInspectable dynamic open var inactiveBorderColor: UIColor = .clear {
         didSet {
             updateBorder()
             updateBackground()
@@ -59,7 +59,7 @@ import UIKit
      
      This property applies a color to the background of the input.
      */
-    @IBInspectable dynamic open var activeBackgroundColor: UIColor = .clear() {
+    @IBInspectable dynamic open var activeBackgroundColor: UIColor = .clear {
         didSet {
             updateBackground()
         }
@@ -70,7 +70,7 @@ import UIKit
      
      This property applies a color to the complete placeholder string. The default value for this property is a dark gray color.
      */
-    @IBInspectable dynamic open var placeholderColor: UIColor = .darkGray() {
+    @IBInspectable dynamic open var placeholderColor: UIColor = .darkGray {
         didSet {
             updatePlaceholder()
         }

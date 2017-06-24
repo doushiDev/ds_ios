@@ -22,27 +22,8 @@
 // THE SOFTWARE.
 
 
+import Foundation
 import UIKit
-fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
-  switch (lhs, rhs) {
-  case let (l?, r?):
-    return l < r
-  case (nil, _?):
-    return true
-  default:
-    return false
-  }
-}
-
-fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
-  switch (lhs, rhs) {
-  case let (l?, r?):
-    return l > r
-  default:
-    return rhs < lhs
-  }
-}
-
 
 private var kIQShouldHidePlaceholderText    = "kIQShouldHidePlaceholderText"
 private var kIQPlaceholderText              = "kIQPlaceholderText"
@@ -85,7 +66,8 @@ public extension UIView {
             
             if let toolbar = self.inputAccessoryView as? IQToolbar {
                 if self.responds(to: #selector(getter: UITextField.placeholder)) {
-                    toolbar.title = self.drawingPlaceholderText
+                    let textField = self as AnyObject
+                    toolbar.title = textField.drawingPlaceholderText
                 }
             }
         }
@@ -105,7 +87,8 @@ public extension UIView {
             
             if let toolbar = self.inputAccessoryView as? IQToolbar {
                 if self.responds(to: #selector(getter: UITextField.placeholder)) {
-                    toolbar.title = self.drawingPlaceholderText
+                    let textField = self as AnyObject
+                    toolbar.title = textField.drawingPlaceholderText
                 }
             }
         }
@@ -115,26 +98,21 @@ public extension UIView {
      `drawingPlaceholderText` will be actual text used to draw on toolbar. This would either `placeholder` or `placeholderText`.
      */
     public var drawingPlaceholderText: String? {
-
-        if (self.shouldHidePlaceholderText)
-        {
-            return nil
-        }
-        else if (self.placeholderText?.isEmpty == false) {
-            return self.placeholderText
-        }
-        else if self.responds(to: #selector(getter: UITextField.placeholder)) {
-            
-            if let textField = self as? UITextField {
-                return textField.placeholder
-            } else if let textView = self as? IQTextView {
-                return textView.placeholder
-            } else {
+        get {
+            if (self.shouldHidePlaceholderText)
+            {
                 return nil
             }
-        }
-        else {
-            return nil
+            else if (self.placeholderText?.isEmpty == false) {
+                return self.placeholderText
+            }
+            else if self.responds(to: #selector(getter: UITextField.placeholder)) {
+                let textField = self as AnyObject
+                return textField.placeholder
+            }
+            else {
+                return nil
+            }
         }
     }
 
@@ -791,7 +769,7 @@ public extension UIView {
             let toolbar = IQToolbar()
             
             var items : [UIBarButtonItem] = []
-            
+			
             let prev : IQBarButtonItem
             let next : IQBarButtonItem
             
@@ -804,22 +782,16 @@ public extension UIView {
                 }
             }
             
-            var imageLeftArrow : UIImage!
-            var imageRightArrow : UIImage!
+            var imageLeftArrow = UIImage(named: "IQButtonBarArrowLeft", in: bundle, compatibleWith: nil)
+            var imageRightArrow = UIImage(named: "IQButtonBarArrowRight", in: bundle, compatibleWith: nil)
             
-            if #available(iOS 10.0, *) {
-                imageLeftArrow = UIImage(named: "IQButtonBarArrowUp", in: bundle, compatibleWith: nil)
-                imageRightArrow = UIImage(named: "IQButtonBarArrowDown", in: bundle, compatibleWith: nil)
-            } else {
-                imageLeftArrow = UIImage(named: "IQButtonBarArrowLeft", in: bundle, compatibleWith: nil)
-                imageRightArrow = UIImage(named: "IQButtonBarArrowRight", in: bundle, compatibleWith: nil)
-            }
-
             //Support for RTL languages like Arabic, Persia etc... (Bug ID: #448)
-            if #available(iOS 9.0, *) {
-                imageLeftArrow = imageLeftArrow?.imageFlippedForRightToLeftLayoutDirection()
-                imageRightArrow = imageRightArrow?.imageFlippedForRightToLeftLayoutDirection()
-            }
+          
+          if #available(iOS 9.0, *) {
+            imageLeftArrow = imageLeftArrow?.imageFlippedForRightToLeftLayoutDirection()
+            imageRightArrow = imageRightArrow?.imageFlippedForRightToLeftLayoutDirection()
+
+          }
 
             prev = IQBarButtonItem(image: imageLeftArrow, style: UIBarButtonItemStyle.plain, target: target, action: previousAction)
             prev.accessibilityLabel = "Toolbar Previous Button"
@@ -832,11 +804,7 @@ public extension UIView {
 
             //Fixed space
             let fixed = IQBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.fixedSpace, target: nil, action: nil)
-            if #available(iOS 10.0, *) {
-                fixed.width = 6
-            } else {
-                fixed.width = 20
-            }
+            fixed.width = 23
             items.append(fixed)
 
             //Next button
@@ -939,22 +907,14 @@ public extension UIView {
                 }
             }
             
-            var imageLeftArrow : UIImage!
-            var imageRightArrow : UIImage!
-            
-            if #available(iOS 10.0, *) {
-                imageLeftArrow = UIImage(named: "IQButtonBarArrowUp", in: bundle, compatibleWith: nil)
-                imageRightArrow = UIImage(named: "IQButtonBarArrowDown", in: bundle, compatibleWith: nil)
-            } else {
-                imageLeftArrow = UIImage(named: "IQButtonBarArrowLeft", in: bundle, compatibleWith: nil)
-                imageRightArrow = UIImage(named: "IQButtonBarArrowRight", in: bundle, compatibleWith: nil)
-            }
+            var imageLeftArrow = UIImage(named: "IQButtonBarArrowLeft", in: bundle, compatibleWith: nil)
+            var imageRightArrow = UIImage(named: "IQButtonBarArrowRight", in: bundle, compatibleWith: nil)
             
             //Support for RTL languages like Arabic, Persia etc... (Bug ID: #448)
-            if #available(iOS 9.0, *) {
-                imageLeftArrow = imageLeftArrow?.imageFlippedForRightToLeftLayoutDirection()
-                imageRightArrow = imageRightArrow?.imageFlippedForRightToLeftLayoutDirection()
-            }
+          if #available(iOS 9.0, *) {
+            imageLeftArrow = imageLeftArrow?.imageFlippedForRightToLeftLayoutDirection()
+            imageRightArrow = imageRightArrow?.imageFlippedForRightToLeftLayoutDirection()
+          }
             
             prev = IQBarButtonItem(image: imageLeftArrow, style: UIBarButtonItemStyle.plain, target: target, action: previousAction)
             prev.accessibilityLabel = "Toolbar Previous Button"
@@ -967,11 +927,7 @@ public extension UIView {
             
             //Fixed space
             let fixed = IQBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.fixedSpace, target: nil, action: nil)
-            if #available(iOS 10.0, *) {
-                fixed.width = 6
-            } else {
-                fixed.width = 20
-            }
+            fixed.width = 23
             items.append(fixed)
             
             //Next button
@@ -1087,22 +1043,17 @@ public extension UIView {
                 }
             }
             
-            var imageLeftArrow : UIImage!
-            var imageRightArrow : UIImage!
-            
-            if #available(iOS 10.0, *) {
-                imageLeftArrow = UIImage(named: "IQButtonBarArrowUp", in: bundle, compatibleWith: nil)
-                imageRightArrow = UIImage(named: "IQButtonBarArrowDown", in: bundle, compatibleWith: nil)
-            } else {
-                imageLeftArrow = UIImage(named: "IQButtonBarArrowLeft", in: bundle, compatibleWith: nil)
-                imageRightArrow = UIImage(named: "IQButtonBarArrowRight", in: bundle, compatibleWith: nil)
-            }
+            var imageLeftArrow = UIImage(named: "IQButtonBarArrowLeft", in: bundle, compatibleWith: nil)
+            var imageRightArrow = UIImage(named: "IQButtonBarArrowRight", in: bundle, compatibleWith: nil)
             
             //Support for RTL languages like Arabic, Persia etc... (Bug ID: #448)
-            if #available(iOS 9.0, *) {
-                imageLeftArrow = imageLeftArrow?.imageFlippedForRightToLeftLayoutDirection()
-                imageRightArrow = imageRightArrow?.imageFlippedForRightToLeftLayoutDirection()
-            }
+          
+          if #available(iOS 9.0, *) {
+            imageLeftArrow = imageLeftArrow?.imageFlippedForRightToLeftLayoutDirection()
+            imageRightArrow = imageRightArrow?.imageFlippedForRightToLeftLayoutDirection()
+
+          }
+          
             
             prev = IQBarButtonItem(image: imageLeftArrow, style: UIBarButtonItemStyle.plain, target: target, action: previousAction)
             prev.accessibilityLabel = "Toolbar Previous Button"
@@ -1115,11 +1066,7 @@ public extension UIView {
 
             //Fixed space
             let fixed = IQBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.fixedSpace, target: nil, action: nil)
-            if #available(iOS 10.0, *) {
-                fixed.width = 6
-            } else {
-                fixed.width = 20
-            }
+            fixed.width = 23
             items.append(fixed)
 
             //Next button
@@ -1203,7 +1150,7 @@ public extension UIView {
         //  Getting inputAccessoryView.
         if let inputAccessoryView = self.inputAccessoryView as? IQToolbar {
             //  If it is IQToolbar and it's items are greater than zero.
-            if inputAccessoryView.items?.count > 3 {
+            if (inputAccessoryView.items?.count)! > 3 {
                 if let items = inputAccessoryView.items {
                     if let prevButton = items[0] as? IQBarButtonItem {
                         if let nextButton = items[2] as? IQBarButtonItem {
