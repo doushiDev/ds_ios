@@ -15,7 +15,7 @@ class MainViewController: UIViewController {
     
     /// 子标题
     lazy var subTitleArr:[String] = {
-        return ["推荐", "娱乐", "搞笑", "小品"]
+        return ["推荐", "娱乐", "搞笑", "小品", "体育"]
     }()
     
     /// 子控制器
@@ -30,8 +30,8 @@ class MainViewController: UIViewController {
         
         
         let newVideoTableViewController = aStoryboard.instantiateViewController(withIdentifier: "HomeVideoTableViewController") as! HomeVideoTableViewController
-        newVideoTableViewController.cid = 3
-        newVideoTableViewController.view.tag = 3
+        newVideoTableViewController.cid = 33
+        newVideoTableViewController.view.tag = 33
         
         let hotVideoTableViewController = aStoryboard.instantiateViewController(withIdentifier: "HomeVideoTableViewController") as! HomeVideoTableViewController
         hotVideoTableViewController.cid = 17
@@ -44,11 +44,16 @@ class MainViewController: UIViewController {
         popVideoTableViewController1.cid = 35
         popVideoTableViewController1.view.tag = 35
         
+        let popVideoTableViewController2 = aStoryboard.instantiateViewController(withIdentifier: "HomeVideoTableViewController") as! HomeVideoTableViewController
+        popVideoTableViewController2.cid = 13
+        popVideoTableViewController2.view.tag = 13
         
         controllerArray.append(newVideoTableViewController)
         controllerArray.append(hotVideoTableViewController)
         controllerArray.append(popVideoTableViewController)
         controllerArray.append(popVideoTableViewController1)
+        controllerArray.append(popVideoTableViewController2)
+
         
         
         

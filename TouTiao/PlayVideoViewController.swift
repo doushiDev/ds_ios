@@ -133,7 +133,7 @@ class PlayVideoViewController: UIViewController,ZFPlayerDelegate,GADBannerViewDe
             
             shareObject.title = self.videoTitle
             shareObject.descr = "更多精彩视频，下载搞笑头条APP"
-            shareObject.thumbImage = UIImage.init(named: "Icon-60")//缩略图
+            shareObject.thumbImage = self.videoImage?.image//缩略图
             
             shareObject.webpageUrl = "https://api.toutiao.itjh.net/share.html?title=\(self.videoTitle!)&pic=\(self.videoPic!)&videoUrl=\(self.videoUrlStr!)"
             

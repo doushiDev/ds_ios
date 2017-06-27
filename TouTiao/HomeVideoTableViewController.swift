@@ -65,6 +65,8 @@ class HomeVideoTableViewController: UITableViewController {
                         }else{
                             var dictInts = Dictionary<String, Video>()
                             
+                            
+                            
                             for number in videoList {
                                 //                            if number.at == 1 {
                                 dictInts[(number?.vid!)!] = number
@@ -76,12 +78,15 @@ class HomeVideoTableViewController: UITableViewController {
                                 result.append(value)
                             }
                             self.videos = self.videos + result
-                            self.tableView?.mj_footer.endRefreshing()
+                            if videoList.count == 0 {
+                                
+                                self.tableView?.mj_footer.endRefreshingWithNoMoreData()
+                            }else {
+                                self.tableView?.mj_footer.endRefreshing()
+
+                            }
                             
                         }
-                        
-                       
-                        
                         
                         self.pageNum = self.pageNum + 1
                         self.tableView.reloadData()
