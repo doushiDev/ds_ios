@@ -1,5 +1,6 @@
 PODS:
   - Alamofire (4.3.0)
+  - APParallaxHeader (0.1.6)
   - FDFullscreenPopGesture (1.1)
   - Firebase/AdMob (3.14.0):
     - Firebase/Core
@@ -26,6 +27,11 @@ PODS:
   - Realm/Headers (2.4.3)
   - RealmSwift (2.4.3):
     - Realm (= 2.4.3)
+  - SDCycleScrollView (1.66):
+    - SDWebImage (~> 4.0.0)
+  - SDWebImage (4.0.0):
+    - SDWebImage/Core (= 4.0.0)
+  - SDWebImage/Core (4.0.0)
   - SwiftyJSON (3.1.4)
   - UMengAnalytics (4.2.4)
   - ZFPlayer (2.1.1):
@@ -33,18 +39,21 @@ PODS:
 
 DEPENDENCIES:
   - Alamofire (~> 4.3)
+  - APParallaxHeader
   - FDFullscreenPopGesture
   - Firebase/AdMob
   - Firebase/Core
   - HandyJSON (~> 1.2.0)
   - Kingfisher (~> 3.0)
   - RealmSwift
+  - SDCycleScrollView (~> 1.3)
   - SwiftyJSON
   - UMengAnalytics
   - ZFPlayer
 
 SPEC CHECKSUMS:
   Alamofire: 856a113053a7bc9cbe5d6367a555d773fc5cfef7
+  APParallaxHeader: 854bc48a2487ca12c702f8a236fec0d89cdac5c3
   FDFullscreenPopGesture: a8a620179e3d9c40e8e00256dcee1c1a27c6d0f0
   Firebase: 85a581fb04e44f63ae9f4fbc8d6dabf4a4c18653
   FirebaseAnalytics: 0d1b7d81d5021155be37702a94ba1ec16d45365d
@@ -57,10 +66,12 @@ SPEC CHECKSUMS:
   Masonry: 7c429b56da9d4ee0bbb3ed77a5ea710d6a5df39e
   Realm: e08d60b0048ccccd3949c8c28a92c4db5712d7e9
   RealmSwift: 30d49739ccb3385d201242736ca4dda56aec9dfc
+  SDCycleScrollView: e3ade90e9b3159bec04330b208fbfd81c3f3b671
+  SDWebImage: 76a6348bdc74eb5a55dd08a091ef298e56b55e41
   SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
   UMengAnalytics: ef8d45f94c0e5771dc364cf6a5731d9d3b101da2
   ZFPlayer: c36657da33c28c75dfb100e98e7976b5b3e1fc10
 
-PODFILE CHECKSUM: 9c74d17480916bfc3c62025f2af8be08cf9d5d82
+PODFILE CHECKSUM: 9f1ad643dc467c4e9be08e701983a598ae778b0b
 
 COCOAPODS: 1.1.1

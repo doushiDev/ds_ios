@@ -210,9 +210,9 @@ class PlayVideoViewController: UIViewController,ZFPlayerDelegate,GADBannerViewDe
     
     func zf_playerBackAction() {
         print("asd")
-//        self.navigationController?.popViewController(animated: true)
+        self.navigationController?.popViewController(animated: true)
         
-        let _ = navigationController?.popToRootViewController(animated: true)
+//        let _ = navigationController?.popToRootViewController(animated: true)
         
         //
 //        self.navigationController?.dismiss(animated: true, completion: nil)

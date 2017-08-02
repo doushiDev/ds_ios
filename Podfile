@@ -19,6 +19,8 @@ target 'TouTiao' do
   pod 'Firebase/AdMob'
   pod 'RealmSwift'
   pod 'UMengAnalytics'
-  
+  pod 'APParallaxHeader'
+  pod 'SDCycleScrollView','~> 1.3'
+
 
 end

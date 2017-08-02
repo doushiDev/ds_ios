@@ -36,7 +36,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        
 //        [self confitUShareSettings];
         
-        
+        UITabBar.appearance().tintColor = UIColor(rgba:"#f0a22a")
+
         let umAnalyticsConfig = UMAnalyticsConfig()
         
         umAnalyticsConfig.appKey = "563b6bdc67e58e73ee002acd"
@@ -72,8 +73,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             // 将这个配置应用到默认的 Realm 数据库当中
             Realm.Configuration.defaultConfiguration = config
         }
-        
-
         
         return true
     }

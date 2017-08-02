@@ -17,7 +17,8 @@ class FavoriteVideosTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.navigationController?.navigationBar.tintColor = UIColor(rgba:"#f0a22a")
+
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
         
@@ -26,10 +27,11 @@ class FavoriteVideosTableViewController: UITableViewController {
         loadData()
         
         
-        self.view.addSubview(notFavoriteView)
+//        self.view.addSubview(notFavoriteView)
     }
     @IBOutlet var notFavoriteView: UIView!
     
+    @IBOutlet weak var notLabel: UILabel!
     func loadData() {
         
         // 获取默认的 Realm 实例
@@ -38,9 +40,12 @@ class FavoriteVideosTableViewController: UITableViewController {
         videos = realm.objects(RealmVideo.self).sorted(byKeyPath: "createDate", ascending: false)
         
         if((videos?.count)! > 0){
-            self.notFavoriteView.isHidden = true
+//            self.notFavoriteView.isHidden = true
+            self.notLabel.isHidden = true
         }else{
-            self.notFavoriteView.isHidden = false
+//            self.notFavoriteView.isHidden = false
+            self.notLabel.isHidden = false
+
         }
         
         self.tableView.reloadData()

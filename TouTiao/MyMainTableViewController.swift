@@ -13,7 +13,8 @@ class MyMainTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.navigationController?.navigationBar.tintColor = UIColor(rgba:"#f0a22a")
+
         self.tableView.tableHeaderView = myImage
     }
     

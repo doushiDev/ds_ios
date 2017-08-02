@@ -24,7 +24,8 @@ class HomeVideoTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
+        self.navigationController?.navigationBar.tintColor = UIColor(rgba:"#f0a22a")
+
         //设置回调（一旦进入刷新状态就会调用这个refreshingBlock）
         self.tableView.mj_header = MJRefreshNormalHeader(refreshingBlock: { () -> Void in
             self.pageNum = 0

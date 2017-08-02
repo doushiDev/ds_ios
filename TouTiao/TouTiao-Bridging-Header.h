@@ -15,3 +15,10 @@
 #import "UMSocialWechatHandler.h"
 #import "UMSocialSinaHandler.h"
 #import "UMSocialQQHandler.h"
+
+
+#import <SDCycleScrollView/SDCycleScrollView.h>
+
+#import <APParallaxHeader/UIScrollView+APParallaxHeader.h>
+#import "ParallaxHeaderView.h"
+#import "UIImage+ImageEffects.h"

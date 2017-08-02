@@ -10,6 +10,12 @@
 		31951C4D255F72F87FCB7AA1 /* Pods_TouTiao.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75C78EA3101491CA2D47013C /* Pods_TouTiao.framework */; };
 		AB6A01A81E62060B003696EC /* CAPSPageMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = AB6A01A71E62060B003696EC /* CAPSPageMenu.m */; };
 		AB6A01AA1E62094B003696EC /* LXFMenuPageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB6A01A91E62094B003696EC /* LXFMenuPageController.swift */; };
+		ABA322A71F10C15900943242 /* FindMainTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABA322A61F10C15900943242 /* FindMainTableViewController.swift */; };
+		ABA322A91F10C17600943242 /* FindTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABA322A81F10C17600943242 /* FindTableViewCell.swift */; };
+		ABA322AB1F10C72400943242 /* VideoInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABA322AA1F10C72400943242 /* VideoInfo.swift */; };
+		ABA322B01F10C99C00943242 /* ParallaxHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = ABA322AD1F10C99C00943242 /* ParallaxHeaderView.m */; };
+		ABA322B11F10C99C00943242 /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = ABA322AF1F10C99C00943242 /* UIImage+ImageEffects.m */; };
+		ABA322B31F10DAB400943242 /* VideoTaxisTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABA322B21F10DAB400943242 /* VideoTaxisTableViewController.swift */; };
 		ABA902B81E5FD8C900468FB6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABA902B71E5FD8C900468FB6 /* AppDelegate.swift */; };
 		ABA902BA1E5FD8C900468FB6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABA902B91E5FD8C900468FB6 /* ViewController.swift */; };
 		ABA902BD1E5FD8C900468FB6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ABA902BB1E5FD8C900468FB6 /* Main.storyboard */; };
@@ -74,6 +80,14 @@
 		AB6A01A61E62060B003696EC /* CAPSPageMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CAPSPageMenu.h; sourceTree = "<group>"; };
 		AB6A01A71E62060B003696EC /* CAPSPageMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CAPSPageMenu.m; sourceTree = "<group>"; };
 		AB6A01A91E62094B003696EC /* LXFMenuPageController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LXFMenuPageController.swift; sourceTree = "<group>"; };
+		ABA322A61F10C15900943242 /* FindMainTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FindMainTableViewController.swift; sourceTree = "<group>"; };
+		ABA322A81F10C17600943242 /* FindTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FindTableViewCell.swift; sourceTree = "<group>"; };
+		ABA322AA1F10C72400943242 /* VideoInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoInfo.swift; sourceTree = "<group>"; };
+		ABA322AC1F10C99C00943242 /* ParallaxHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParallaxHeaderView.h; sourceTree = "<group>"; };
+		ABA322AD1F10C99C00943242 /* ParallaxHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ParallaxHeaderView.m; sourceTree = "<group>"; };
+		ABA322AE1F10C99C00943242 /* UIImage+ImageEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ImageEffects.h"; sourceTree = "<group>"; };
+		ABA322AF1F10C99C00943242 /* UIImage+ImageEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ImageEffects.m"; sourceTree = "<group>"; };
+		ABA322B21F10DAB400943242 /* VideoTaxisTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoTaxisTableViewController.swift; sourceTree = "<group>"; };
 		ABA902B41E5FD8C900468FB6 /* TouTiao.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TouTiao.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ABA902B71E5FD8C900468FB6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		ABA902B91E5FD8C900468FB6 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -230,6 +244,13 @@
 		ABA902B61E5FD8C900468FB6 /* TouTiao */ = {
 			isa = PBXGroup;
 			children = (
+				ABA322B21F10DAB400943242 /* VideoTaxisTableViewController.swift */,
+				ABA322AC1F10C99C00943242 /* ParallaxHeaderView.h */,
+				ABA322AD1F10C99C00943242 /* ParallaxHeaderView.m */,
+				ABA322AE1F10C99C00943242 /* UIImage+ImageEffects.h */,
+				ABA322AF1F10C99C00943242 /* UIImage+ImageEffects.m */,
+				ABA322A81F10C17600943242 /* FindTableViewCell.swift */,
+				ABA322A61F10C15900943242 /* FindMainTableViewController.swift */,
 				ABC554341EFE6DD100254713 /* UMSocial */,
 				ABB49E331E621BE700A6BAF8 /* GoogleService-Info.plist */,
 				AB6A01A91E62094B003696EC /* LXFMenuPageController.swift */,
@@ -348,6 +369,7 @@
 		ABD1C39F1E61C51700D5009D /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				ABA322AA1F10C72400943242 /* VideoInfo.swift */,
 				ABD1C3A01E61C52400D5009D /* Video.swift */,
 				ABB49E391E6288F200A6BAF8 /* RealmVideo.swift */,
 			);
@@ -484,7 +506,7 @@
 				TargetAttributes = {
 					ABA902B31E5FD8C900468FB6 = {
 						CreatedOnToolsVersion = 8.2.1;
-						DevelopmentTeam = 587PLL658T;
+						DevelopmentTeam = U77C6M584E;
 						LastSwiftMigration = 0820;
 						ProvisioningStyle = Automatic;
 					};
@@ -580,8 +602,10 @@
 			files = (
 				ABC5542F1EFE64C000254713 /* MyMainTableViewController.swift in Sources */,
 				ABD1C41E1E61CC5A00D5009D /* MJRefreshAutoNormalFooter.m in Sources */,
+				ABA322B11F10C99C00943242 /* UIImage+ImageEffects.m in Sources */,
 				ABD1C4191E61CC5A00D5009D /* MJRefreshBackFooter.m in Sources */,
 				ABB49E361E6225CE00A6BAF8 /* AdsViewController.swift in Sources */,
+				ABA322A91F10C17600943242 /* FindTableViewCell.swift in Sources */,
 				AB6A01A81E62060B003696EC /* CAPSPageMenu.m in Sources */,
 				ABB49E3A1E6288F200A6BAF8 /* RealmVideo.swift in Sources */,
 				ABD1C41D1E61CC5A00D5009D /* MJRefreshAutoGifFooter.m in Sources */,
@@ -590,6 +614,8 @@
 				ABD1C41B1E61CC5A00D5009D /* MJRefreshFooter.m in Sources */,
 				ABD1C4271E61CC5A00D5009D /* MJRefreshConst.m in Sources */,
 				ABD1C4241E61CC5A00D5009D /* MJRefreshNormalHeader.m in Sources */,
+				ABA322B31F10DAB400943242 /* VideoTaxisTableViewController.swift in Sources */,
+				ABA322B01F10C99C00943242 /* ParallaxHeaderView.m in Sources */,
 				ABB49E381E6280A400A6BAF8 /* TouTiaoConfig.swift in Sources */,
 				ABD1C42B1E61CC5A00D5009D /* UIView+MJExtension.m in Sources */,
 				ABD1C42D1E61D34D00D5009D /* PlayVideoViewController.swift in Sources */,
@@ -611,8 +637,10 @@
 				ABD1C41C1E61CC5A00D5009D /* MJRefreshHeader.m in Sources */,
 				ABD1C4221E61CC5A00D5009D /* MJRefreshBackStateFooter.m in Sources */,
 				ABD1C4181E61CC5A00D5009D /* MJRefreshAutoFooter.m in Sources */,
+				ABA322A71F10C15900943242 /* FindMainTableViewController.swift in Sources */,
 				ABD1C39A1E618F2400D5009D /* MainViewController.swift in Sources */,
 				ABD1C3961E6173C300D5009D /* HomeVideoTableViewCell.swift in Sources */,
+				ABA322AB1F10C72400943242 /* VideoInfo.swift in Sources */,
 				ABA902B81E5FD8C900468FB6 /* AppDelegate.swift in Sources */,
 				ABD1C4291E61CC5A00D5009D /* UIScrollView+MJExtension.m in Sources */,
 			);
@@ -739,7 +767,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				DEVELOPMENT_TEAM = 587PLL658T;
+				DEVELOPMENT_TEAM = U77C6M584E;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -756,11 +784,12 @@
 					"$(PROJECT_DIR)/TouTiao/UMSocial/SocialLibraries/WeChat",
 					"$(PROJECT_DIR)/TouTiao/UMSocial/UMSocialSDKPlugin",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "me.doushi.ds-ios";
+				PRODUCT_BUNDLE_IDENTIFIER = net.itjh.gxtt;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "TouTiao/TouTiao-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -770,7 +799,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				DEVELOPMENT_TEAM = 587PLL658T;
+				DEVELOPMENT_TEAM = U77C6M584E;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -787,10 +816,11 @@
 					"$(PROJECT_DIR)/TouTiao/UMSocial/SocialLibraries/WeChat",
 					"$(PROJECT_DIR)/TouTiao/UMSocial/UMSocialSDKPlugin",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "me.doushi.ds-ios";
+				PRODUCT_BUNDLE_IDENTIFIER = net.itjh.gxtt;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "TouTiao/TouTiao-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
