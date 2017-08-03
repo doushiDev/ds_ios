@@ -506,7 +506,7 @@
 				TargetAttributes = {
 					ABA902B31E5FD8C900468FB6 = {
 						CreatedOnToolsVersion = 8.2.1;
-						DevelopmentTeam = U77C6M584E;
+						DevelopmentTeam = 587PLL658T;
 						LastSwiftMigration = 0820;
 						ProvisioningStyle = Automatic;
 					};
@@ -767,7 +767,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				DEVELOPMENT_TEAM = U77C6M584E;
+				DEVELOPMENT_TEAM = 587PLL658T;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -784,12 +784,12 @@
 					"$(PROJECT_DIR)/TouTiao/UMSocial/SocialLibraries/WeChat",
 					"$(PROJECT_DIR)/TouTiao/UMSocial/UMSocialSDKPlugin",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = net.itjh.gxtt;
+				PRODUCT_BUNDLE_IDENTIFIER = "me.doushi.ds-ios";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "TouTiao/TouTiao-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -799,7 +799,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				DEVELOPMENT_TEAM = U77C6M584E;
+				DEVELOPMENT_TEAM = 587PLL658T;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -816,11 +816,11 @@
 					"$(PROJECT_DIR)/TouTiao/UMSocial/SocialLibraries/WeChat",
 					"$(PROJECT_DIR)/TouTiao/UMSocial/UMSocialSDKPlugin",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = net.itjh.gxtt;
+				PRODUCT_BUNDLE_IDENTIFIER = "me.doushi.ds-ios";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "TouTiao/TouTiao-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};

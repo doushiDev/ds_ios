@@ -96,7 +96,8 @@ class HomeVideoTableViewController: UITableViewController {
                 }
                 
             case .failure(let error):
-                
+                self.tableView.mj_header.endRefreshing()
+                self.tableView?.mj_footer.endRefreshing()
                 print(error)
             }
         }
@@ -188,39 +189,42 @@ class HomeVideoTableViewController: UITableViewController {
         
         let playVideoViewController = aStoryboard.instantiateViewController(withIdentifier: "PlayVideoViewController") as! PlayVideoViewController
         
-        
-        let url = URL(string: self.videos[indexPath.row].videoUrl)
-        //
-        playVideoViewController.videoUrl = url
-        playVideoViewController.videoTitle = self.videos[indexPath.row].title
-        playVideoViewController.videoUrlStr = self.videos[indexPath.row].videoUrl
-        playVideoViewController.videoPic = self.videos[indexPath.row].pic
-        
-        let cell = tableView.cellForRow(at: indexPath) as! HomeVideoTableViewCell
+        if videos.count > 0 {
+            let url = URL(string: self.videos[indexPath.row].videoUrl)
+            //
+            playVideoViewController.videoUrl = url
+            playVideoViewController.videoTitle = self.videos[indexPath.row].title
+            playVideoViewController.videoUrlStr = self.videos[indexPath.row].videoUrl
+            playVideoViewController.videoPic = self.videos[indexPath.row].pic
+            
+            let cell = tableView.cellForRow(at: indexPath) as! HomeVideoTableViewCell
+            
+            playVideoViewController.videoImage = cell.videoImageView
+            
+            let video:RealmVideo = RealmVideo()
+            video.vid = self.videos[indexPath.row].vid!
+            video.videoUrl = self.videos[indexPath.row].videoUrl
+            video.pic = self.videos[indexPath.row].pic!
+            video.title = self.videos[indexPath.row].title!
+            video.shareUrl = self.videos[indexPath.row].shareUrl
+            video.at = self.videos[indexPath.row].at
+            playVideoViewController.realmVideo = video
+            if video.at != 1 {
+                
+                //            return
+                
+                MobClick.event("ads")
+                
+                let evaluateString = self.videos[indexPath.row].videoUrl
+                
+                UIApplication.shared.openURL(URL(string: evaluateString)!)
+                
+            }else {
+                
+                self.navigationController?.pushViewController(playVideoViewController, animated: true)
+            }
+            
 
-        playVideoViewController.videoImage = cell.videoImageView
-        
-        let video:RealmVideo = RealmVideo()
-        video.vid = self.videos[indexPath.row].vid!
-        video.videoUrl = self.videos[indexPath.row].videoUrl
-        video.pic = self.videos[indexPath.row].pic!
-        video.title = self.videos[indexPath.row].title!
-        video.shareUrl = self.videos[indexPath.row].shareUrl
-        video.at = self.videos[indexPath.row].at
-        playVideoViewController.realmVideo = video
-        if video.at != 1 {
-            
-            //            return
-            
-            MobClick.event("ads")
-            
-            let evaluateString = self.videos[indexPath.row].videoUrl
-            
-            UIApplication.shared.openURL(URL(string: evaluateString)!)
-            
-        }else {
-            
-            self.navigationController?.pushViewController(playVideoViewController, animated: true)
         }
         
         

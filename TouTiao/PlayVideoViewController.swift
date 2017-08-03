@@ -13,9 +13,13 @@ import FDFullscreenPopGesture
 import GoogleMobileAds
 import RealmSwift
 import Realm
+import Alamofire
+import Kingfisher
 
+import HandyJSON
+import SwiftyJSON
 
-class PlayVideoViewController: UIViewController,ZFPlayerDelegate,GADBannerViewDelegate  {
+class PlayVideoViewController: UIViewController,ZFPlayerDelegate,GADBannerViewDelegate,UITableViewDelegate,UITableViewDataSource  {
     
     @IBOutlet weak var playerFatherView: UIView!
      var interstitial: GADInterstitial!
@@ -25,7 +29,10 @@ class PlayVideoViewController: UIViewController,ZFPlayerDelegate,GADBannerViewDe
     
     var  playerModel:ZFPlayerModel = ZFPlayerModel()
  
+    @IBOutlet weak var otherVideoTableView: UITableView!
+    //视频集合
     
+    var videos:[Video] = []
     var videoUrl:URL?
     
     var videoUrlStr:String?
@@ -48,11 +55,21 @@ class PlayVideoViewController: UIViewController,ZFPlayerDelegate,GADBannerViewDe
     }
   
     
+    override func loadView() {
+        
+        super.loadView()
+        
+        loadNewData()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        otherVideoTableView.delegate = self
+        otherVideoTableView.dataSource = self
         
         interstitial = GADInterstitial(adUnitID: "ca-app-pub-7191090490730162/4714192339")
+        
         let request = GADRequest()
         // Requests test ads on test devices.
 
@@ -85,6 +102,7 @@ class PlayVideoViewController: UIViewController,ZFPlayerDelegate,GADBannerViewDe
 //        bannerView.delegate = self
         adView.delegate = self
         adView.adUnitID = "ca-app-pub-7191090490730162/9842395935"
+        adView.frame = CGRect(x: 0, y: -60, width: self.view.frame.width, height: 60)
         adView.rootViewController = self
         adView.load(GADRequest())
         // 获取默认的 Realm 实例
@@ -103,6 +121,78 @@ class PlayVideoViewController: UIViewController,ZFPlayerDelegate,GADBannerViewDe
         }
 
     }
+    
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+        return 10
+    }
+    
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+       
+        let cell = tableView.dequeueReusableCell(withIdentifier: "HomeVideoTableViewCell", for: indexPath) as! HomeVideoTableViewCell
+        
+        if videos.count > 0 {
+            
+            
+            let url = URL(string: videos[indexPath.row].pic!)
+            
+            cell.videoImageView.kf.setImage(with: url, placeholder: Image(named:"moren"), options: [.transition(ImageTransition.fade(1))], progressBlock: nil, completionHandler: nil)
+            
+            
+            cell.videoTitleLabel.text = videos[indexPath.row].title
+            
+            
+        }else {
+        
+            cell.videoTitleLabel.text = "搞笑视频在等着你"
+            cell.videoImageView.image = UIImage(named: "moren")
+        }
+        
+        
+        
+        return cell
+
+    }
+    
+    
+    // MARK: - Table view data source
+    // 加载新数据
+    func loadNewData(){
+        
+        Alamofire.request("https://api.toutiao.itjh.net/v1.0/rest/video/getVideosByType/0/30/33").responseJSON { response in
+            
+            
+            switch response.result {
+                
+            case .success:
+                
+                if let JSONData = response.result.value {
+                    if let videoList = JSONDeserializer<Video>.deserializeModelArrayFrom(json: JSON(JSONData)["content"].rawString()) {
+                        
+                        self.videos = videoList as! [Video]
+                        self.otherVideoTableView.reloadData()
+                        
+                    }
+                }
+                
+            case .failure(let error):
+                
+                print(error)
+            }
+            
+            
+        }
+        
+    }
+
+
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        
+        return 108
+    }
+
     
     @IBOutlet weak var adView: GADBannerView!
 
@@ -260,9 +350,16 @@ class PlayVideoViewController: UIViewController,ZFPlayerDelegate,GADBannerViewDe
 //            self.playerView?.play()
 //        }
         
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        
+        super.viewDidAppear(animated)
+        
         self.isPlaying = false
         
         self.playerView?.play()
+        
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -287,5 +384,56 @@ class PlayVideoViewController: UIViewController,ZFPlayerDelegate,GADBannerViewDe
         // Pass the selected object to the new view controller.
     }
     */
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // Get the new view controller using segue.destinationViewController.
+        // Pass the selected object to the new view controller.
+        // 播放页面隐藏tabbar
+        //        if segue.identifier == "toPlayVideo" {
+        
+        let path = self.otherVideoTableView.indexPathForSelectedRow!
+        
+        self.playerView?.pause()
+        
+        if let playVideoViewController = segue.destination as? PlayVideoViewController {
+            
+            
+            let url = URL(string: self.videos[path.row].videoUrl)
+            //
+            playVideoViewController.videoUrl = url
+            playVideoViewController.videoTitle = self.videos[path.row].title
+            playVideoViewController.videoUrlStr = self.videos[path.row].videoUrl
+            playVideoViewController.videoPic = self.videos[path.row].pic
+            
+            let cell = otherVideoTableView.cellForRow(at: path) as! HomeVideoTableViewCell
+            
+            playVideoViewController.videoImage = cell.videoImageView
+            
+            let video:RealmVideo = RealmVideo()
+            video.vid = self.videos[path.row].vid!
+            video.videoUrl = self.videos[path.row].videoUrl
+            video.pic = self.videos[path.row].pic!
+            video.title = self.videos[path.row].title!
+            video.shareUrl = self.videos[path.row].shareUrl
+            video.at = self.videos[path.row].at
+            playVideoViewController.realmVideo = video
+            if video.at != 1 {
+                
+                //            return
+                
+                MobClick.event("ads")
+                
+                let evaluateString = self.videos[path.row].videoUrl
+                
+                UIApplication.shared.openURL(URL(string: evaluateString)!)
+                
+            }else {
+                
+                //                self.navigationController?.pushViewController(playVideoViewController, animated: true)
+            }
+        }
+        //        }
+    }
+
 
 }

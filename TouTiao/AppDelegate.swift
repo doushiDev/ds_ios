@@ -50,7 +50,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         MobClick.setAppVersion(version)
         
-        UMSocialManager.default().openLog(true)
+        UMSocialManager.default().openLog(false)
         
         UMSocialManager.default().umSocialAppkey = "563b6bdc67e58e73ee002acd"
         
