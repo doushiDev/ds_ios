@@ -49,25 +49,29 @@ extension Kingfisher where Base: ImageView {
      
      - note: Both the `progressBlock` and `completionHandler` will be invoked in main thread.
      The `CallbackDispatchQueue` specified in `optionsInfo` will not be used in callbacks of this method.
+     
+     If `resource` is `nil`, the `placeholder` image will be set and
+     `completionHandler` will be called with both `error` and `image` being `nil`.
      */
     @discardableResult
     public func setImage(with resource: Resource?,
-                         placeholder: Image? = nil,
+                         placeholder: Placeholder? = nil,
                          options: KingfisherOptionsInfo? = nil,
                          progressBlock: DownloadProgressBlock? = nil,
                          completionHandler: CompletionHandler? = nil) -> RetrieveImageTask
     {
         guard let resource = resource else {
-            base.image = placeholder
+            self.placeholder = placeholder
             setWebURL(nil)
             completionHandler?(nil, nil, .none, nil)
             return .empty
         }
         
-        var options = options ?? KingfisherEmptyOptionsInfo
+        var options = KingfisherManager.shared.defaultOptions + (options ?? KingfisherEmptyOptionsInfo)
+        let noImageOrPlaceholderSet = base.image == nil && self.placeholder == nil
         
-        if !options.keepCurrentImageWhileLoading {
-            base.image = placeholder
+        if !options.keepCurrentImageWhileLoading || noImageOrPlaceholderSet { // Always set placeholder while there is no image/placehoer yet.
+            self.placeholder = placeholder
         }
 
         let maybeIndicator = indicator
@@ -75,8 +79,8 @@ extension Kingfisher where Base: ImageView {
         
         setWebURL(resource.downloadURL)
 
-        if base.shouldPreloadAllGIF() {
-            options.append(.preloadAllGIFData)
+        if base.shouldPreloadAllAnimation() {
+            options.append(.preloadAllAnimationData)
         }
         
         let task = KingfisherManager.shared.retrieveImage(
@@ -92,20 +96,22 @@ extension Kingfisher where Base: ImageView {
             },
             completionHandler: {[weak base] image, error, cacheType, imageURL in
                 DispatchQueue.main.safeAsync {
+                    maybeIndicator?.stopAnimatingView()
                     guard let strongBase = base, imageURL == self.webURL else {
+                        completionHandler?(image, error, cacheType, imageURL)
                         return
                     }
+                    
                     self.setImageTask(nil)
                     guard let image = image else {
-                        maybeIndicator?.stopAnimatingView()
                         completionHandler?(nil, error, cacheType, imageURL)
                         return
                     }
                     
-                    guard let transitionItem = options.firstMatchIgnoringAssociatedValue(.transition(.none)),
+                    guard let transitionItem = options.lastMatchIgnoringAssociatedValue(.transition(.none)),
                         case .transition(let transition) = transitionItem, ( options.forceTransition || cacheType == .none) else
                     {
-                        maybeIndicator?.stopAnimatingView()
+                        self.placeholder = nil
                         strongBase.image = image
                         completionHandler?(image, error, cacheType, imageURL)
                         return
@@ -115,6 +121,8 @@ extension Kingfisher where Base: ImageView {
                         UIView.transition(with: strongBase, duration: 0.0, options: [],
                                           animations: { maybeIndicator?.stopAnimatingView() },
                                           completion: { _ in
+
+                                            self.placeholder = nil
                                             UIView.transition(with: strongBase, duration: transition.duration,
                                                               options: [transition.animationOptions, .allowUserInteraction],
                                                               animations: {
@@ -148,6 +156,7 @@ extension Kingfisher where Base: ImageView {
 private var lastURLKey: Void?
 private var indicatorKey: Void?
 private var indicatorTypeKey: Void?
+private var placeholderKey: Void?
 private var imageTaskKey: Void?
 
 extension Kingfisher where Base: ImageView {
@@ -200,7 +209,10 @@ extension Kingfisher where Base: ImageView {
             
             // Add new
             if var newIndicator = newValue {
-                newIndicator.view.frame = base.frame
+                // Set default indicator frame if the view's frame not set.
+                if newIndicator.view.frame != .zero {
+                    newIndicator.view.frame = base.frame
+                }
                 newIndicator.viewCenter = CGPoint(x: base.bounds.midX, y: base.bounds.midY)
                 newIndicator.view.isHidden = true
                 base.addSubview(newIndicator.view)
@@ -217,6 +229,26 @@ extension Kingfisher where Base: ImageView {
     
     fileprivate func setImageTask(_ task: RetrieveImageTask?) {
         objc_setAssociatedObject(base, &imageTaskKey, task, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+    }
+    
+    public fileprivate(set) var placeholder: Placeholder? {
+        get {
+            return (objc_getAssociatedObject(base, &placeholderKey) as? Box<Placeholder?>)?.value
+        }
+        
+        set {
+            if let previousPlaceholder = placeholder {
+                previousPlaceholder.remove(from: base)
+            }
+            
+            if let newPlaceholder = newValue {
+                newPlaceholder.add(to: base)
+            } else {
+                base.image = nil
+            }
+            
+            objc_setAssociatedObject(base, &placeholderKey, Box(value: newValue), .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+        }
     }
 }
 
@@ -243,7 +275,7 @@ extension ImageView {
     @available(*, deprecated, message: "Extensions directly on image views are deprecated. Use `imageView.kf.setImage` instead.", renamed: "kf.setImage")
     @discardableResult
     public func kf_setImage(with resource: Resource?,
-                              placeholder: Image? = nil,
+                              placeholder: Placeholder? = nil,
                                   options: KingfisherOptionsInfo? = nil,
                             progressBlock: DownloadProgressBlock? = nil,
                         completionHandler: CompletionHandler? = nil) -> RetrieveImageTask
@@ -285,8 +317,9 @@ extension ImageView {
     fileprivate func kf_setImageTask(_ task: RetrieveImageTask?) { kf.setImageTask(task) }
     @available(*, deprecated, message: "Extensions directly on image views are deprecated.", renamed: "kf.setWebURL")
     fileprivate func kf_setWebURL(_ url: URL) { kf.setWebURL(url) }
-}
 
-extension ImageView {
+    func shouldPreloadAllAnimation() -> Bool { return true }
+
+    @available(*, deprecated, renamed: "shouldPreloadAllAnimation")
     func shouldPreloadAllGIF() -> Bool { return true }
 }

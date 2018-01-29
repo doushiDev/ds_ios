@@ -10,6 +10,7 @@
 		31951C4D255F72F87FCB7AA1 /* Pods_TouTiao.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75C78EA3101491CA2D47013C /* Pods_TouTiao.framework */; };
 		AB6A01A81E62060B003696EC /* CAPSPageMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = AB6A01A71E62060B003696EC /* CAPSPageMenu.m */; };
 		AB6A01AA1E62094B003696EC /* LXFMenuPageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB6A01A91E62094B003696EC /* LXFMenuPageController.swift */; };
+		AB9435EE201F3EB100C78188 /* UIDevice+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB9435ED201F3EB100C78188 /* UIDevice+Extension.swift */; };
 		ABA322A71F10C15900943242 /* FindMainTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABA322A61F10C15900943242 /* FindMainTableViewController.swift */; };
 		ABA322A91F10C17600943242 /* FindTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABA322A81F10C17600943242 /* FindTableViewCell.swift */; };
 		ABA322AB1F10C72400943242 /* VideoInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABA322AA1F10C72400943242 /* VideoInfo.swift */; };
@@ -80,6 +81,7 @@
 		AB6A01A61E62060B003696EC /* CAPSPageMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CAPSPageMenu.h; sourceTree = "<group>"; };
 		AB6A01A71E62060B003696EC /* CAPSPageMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CAPSPageMenu.m; sourceTree = "<group>"; };
 		AB6A01A91E62094B003696EC /* LXFMenuPageController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LXFMenuPageController.swift; sourceTree = "<group>"; };
+		AB9435ED201F3EB100C78188 /* UIDevice+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIDevice+Extension.swift"; sourceTree = "<group>"; };
 		ABA322A61F10C15900943242 /* FindMainTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FindMainTableViewController.swift; sourceTree = "<group>"; };
 		ABA322A81F10C17600943242 /* FindTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FindTableViewCell.swift; sourceTree = "<group>"; };
 		ABA322AA1F10C72400943242 /* VideoInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoInfo.swift; sourceTree = "<group>"; };
@@ -277,6 +279,7 @@
 				ABB49E371E6280A400A6BAF8 /* TouTiaoConfig.swift */,
 				ABB49E3B1E628FE300A6BAF8 /* FavoriteVideosTableViewController.swift */,
 				ABC5542C1EFE530F00254713 /* Main2ViewController.swift */,
+				AB9435ED201F3EB100C78188 /* UIDevice+Extension.swift */,
 			);
 			path = TouTiao;
 			sourceTree = "<group>";
@@ -625,6 +628,7 @@
 				ABD1C3A11E61C52400D5009D /* Video.swift in Sources */,
 				ABD1C4321E61F9EE00D5009D /* PlayVideoTableViewController.swift in Sources */,
 				ABD1C4201E61CC5A00D5009D /* MJRefreshBackGifFooter.m in Sources */,
+				AB9435EE201F3EB100C78188 /* UIDevice+Extension.swift in Sources */,
 				ABD1C39C1E618FC400D5009D /* UIColor-Extension.swift in Sources */,
 				ABD1C4231E61CC5A00D5009D /* MJRefreshGifHeader.m in Sources */,
 				ABD1C4281E61CC5A00D5009D /* NSBundle+MJRefresh.m in Sources */,

@@ -10,10 +10,7 @@ import UIKit
 
 class MyMainTableViewController: UITableViewController {
     @IBOutlet var myImage: UIImageView!
-    
-    
-    
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.navigationBar.tintColor = UIColor(rgba:"#f0a22a")

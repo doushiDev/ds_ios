@@ -57,9 +57,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.configUSharePlatforms()
         
         // Use Firebase library to configure APIs.
-        FIRApp.configure()
+        FirebaseApp.configure()
         // Initialize Google Mobile Ads SDK.
-        GADMobileAds.configure(withApplicationID: "ca-app-pub-7191090490730162/3156733936")
+        GADMobileAds.configure(withApplicationID: "ca-app-pub-8316818329546054~7439566002")
 
         var config = Realm.Configuration()
         

@@ -8,6 +8,7 @@
 
 import UIKit
 import FDFullscreenPopGesture
+import Foundation
 
 class MainViewController: UIViewController {
     
@@ -92,62 +93,13 @@ class MainViewController: UIViewController {
         
         lxfMenuVc.tipBtnFontSize = 14
         
-        
-        
-        lxfMenuVc.view.frame = CGRect(x: 0.0, y: 64, width: self.view.frame.width, height: self.view.frame.height - 112)
-        
-        
-        //        let parameters: [CAPSPageMenuOption] = [
-        //            .selectedMenuItemLabelColor(UIColor(rgba:"#f0a22a")),
-        //            .unselectedMenuItemLabelColor(UIColor(rgba:"#939395")),
-        //            .scrollMenuBackgroundColor(UIColor(rgba: "#f2f2f2")),
-        //            .viewBackgroundColor(UIColor.white),
-        //            .selectionIndicatorColor(UIColor(rgba:"#fea113")),
-        //            .bottomMenuHairlineColor(UIColor(rgba:"#f2f2f2")),
-        //
-        //            .menuItemFont(UIFont(name: "AvenirNextCondensed-DemiBold", size: 13.0)!),
-        //            .menuHeight(40.0),
-        //            .menuItemWidth(90.0),
-        //
-        //
-        //            .centerMenuItems(true)
-        //        ]
-        
-        //
-        //        NSDictionary *parameters = @{
-        //            CAPSPageMenuOptionScrollMenuBackgroundColor: [UIColor colorWithRed:30.0/255.0 green:30.0/255.0 blue:30.0/255.0 alpha:1.0],
-        //            CAPSPageMenuOptionViewBackgroundColor: [UIColor colorWithRed:20.0/255.0 green:20.0/255.0 blue:20.0/255.0 alpha:1.0],
-        //            CAPSPageMenuOptionSelectionIndicatorColor: [UIColor orangeColor],
-        //            CAPSPageMenuOptionBottomMenuHairlineColor: [UIColor colorWithRed:70.0/255.0 green:70.0/255.0 blue:70.0/255.0 alpha:1.0],
-        //            CAPSPageMenuOptionMenuItemFont: [UIFont fontWithName:@"HelveticaNeue" size:13.0],
-        //            CAPSPageMenuOptionMenuHeight: @(40.0),
-        //            CAPSPageMenuOptionMenuItemWidth: @(90.0),
-        //            CAPSPageMenuOptionCenterMenuItems: @(YES)
-        //        };
-        
-        
-        //        var parameters:Dictionary = [Any: Any]()
-        
-        
-        
-        
-        
-        //        _pageMenu = [[CAPSPageMenu alloc] initWithViewControllers:controllerArray frame:CGRectMake(0.0, 0.0, self.view.frame.size.width, self.view.frame.size.height) options:parameters];
-        
-        
-        //        pageMenu = CAPSPageMenu(viewControllers: controllerArray, frame: CGRect(x: 0.0, y: 64, width: self.view.frame.width, height: self.view.frame.height - 112), options: [CAPSPageMenuOptionMenuHeight : 40])
-        //
-        
-        //        pageMenu = CAPSPageMenu(viewControllers: controllerArray, frame: CGRect(x: 0.0, y: 64, width: self.view.frame.width, height: self.view.frame.height - 112), pageMenuOptions: parameters)
-        
-        
-        
-        //        self.addChildViewController(pageMenu!)
-        
-        //        self.view.addSubview(pageMenu!.view)
-        
-        //        pageMenu!.didMove(toParentViewController: self)
-        
+    
+        if UIDevice.isX() {
+            lxfMenuVc.view.frame = CGRect(x: 0.0, y: 90, width: self.view.frame.width, height: self.view.frame.height - 112)
+        }else{
+            
+            lxfMenuVc.view.frame = CGRect(x: 0.0, y: 64, width: self.view.frame.width, height: self.view.frame.height - 112)
+        }
         
         
     }
@@ -188,4 +140,6 @@ class MainViewController: UIViewController {
     }
     
     
+    
 }
+

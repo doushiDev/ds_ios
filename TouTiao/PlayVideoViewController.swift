@@ -58,7 +58,17 @@ class PlayVideoViewController: UIViewController,ZFPlayerDelegate,GADBannerViewDe
     override func loadView() {
         
         super.loadView()
+//
+//        self.view.frame = CGRect(x: 0, y: 90, width: self.view.frame.width, height: 200)
+//
+
+        print("view frame -> \(self.view.frame)")
         
+        print("playerFatherView frame -> \(self.playerFatherView.frame)")
+
+        self.playerFatherView.frame = CGRect(x: 0, y: 34, width: self.view.frame.width, height: 215)
+        print("playerFatherView frame -> \(self.playerFatherView.frame)")
+
         loadNewData()
     }
     
@@ -68,12 +78,12 @@ class PlayVideoViewController: UIViewController,ZFPlayerDelegate,GADBannerViewDe
         otherVideoTableView.delegate = self
         otherVideoTableView.dataSource = self
         
-        interstitial = GADInterstitial(adUnitID: "ca-app-pub-7191090490730162/4714192339")
+        interstitial = GADInterstitial(adUnitID: "ca-app-pub-8316818329546054/7962310185")
         
         let request = GADRequest()
         // Requests test ads on test devices.
 
-//        request.testDevices = ["e2c6cbd54759890e2fb3ac1bdb5abd2f"]
+        request.testDevices = ["418519ef0ef219dc198f706d0a417ade"]
         interstitial.load(request)
         gameOver()
         // Do any additional setup after loading the view.
@@ -100,11 +110,25 @@ class PlayVideoViewController: UIViewController,ZFPlayerDelegate,GADBannerViewDe
 //        let bannerView = GADBannerView(adSize: kGADAdSizeSmartBannerPortrait)
 //
 //        bannerView.delegate = self
+        
+        let request1 = GADRequest()
+        // Requests test ads on test devices.
+        
+//        request1.testDevices = ["418519ef0ef219dc198f706d0a417ade"]
+
+        
+        
         adView.delegate = self
-        adView.adUnitID = "ca-app-pub-7191090490730162/9842395935"
-        adView.frame = CGRect(x: 0, y: -60, width: self.view.frame.width, height: 60)
+        adView.adUnitID = "ca-app-pub-8316818329546054/7962310185"
+        
+        print("adView.frame -> \(adView.frame)")
+        
+//        adView.frame = CGRect(x: 0, y: self.view.frame.height + 60, width: self.view.frame.width, height: 60)
+        
+        print("adView.frame -> \(adView.frame)")
+        
         adView.rootViewController = self
-        adView.load(GADRequest())
+        adView.load(request1)
         // 获取默认的 Realm 实例
         let realm = try! Realm()
         let fVideo = realm.objects(RealmVideo.self).filter("vid = '\(realmVideo!.vid)'").first
@@ -222,14 +246,14 @@ class PlayVideoViewController: UIViewController,ZFPlayerDelegate,GADBannerViewDe
             let shareObject:UMShareWebpageObject = UMShareWebpageObject.init()
             
             shareObject.title = self.videoTitle
-            shareObject.descr = "更多精彩视频，下载搞笑头条APP"
+            shareObject.descr = "更多搞笑视频，下载搞笑头条APP"
             shareObject.thumbImage = self.videoImage?.image//缩略图
             
             shareObject.webpageUrl = "https://api.toutiao.itjh.net/share.html?title=\(self.videoTitle!)&pic=\(self.videoPic!)&videoUrl=\(self.videoUrlStr!)"
             
             
             if platformType.rawValue == 0 {
-                messageObject.text = "\(self.videoTitle!) -- 更多精彩视频，下载搞笑头条APP 下载地址: http://t.cn/Roaq9ZZ"
+                messageObject.text = "\(self.videoTitle!) -- 更多搞笑视频，下载搞笑头条APP 下载地址: http://t.cn/Roaq9ZZ"
                 //创建图片内容对象
                 
                 let shareImage = UMShareImageObject()

@@ -45,7 +45,7 @@ class FindMainTableViewController: UITableViewController,SDCycleScrollViewDelega
         self.navigationController?.navigationBar.tintColor = UIColor(rgba:"#f0a22a")
         
         
-        tableHeardView = SDCycleScrollView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 240))
+        tableHeardView = SDCycleScrollView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 200))
         
         
         tableHeardView.pageControlStyle = SDCycleScrollViewPageContolStyleAnimated;
@@ -58,7 +58,7 @@ class FindMainTableViewController: UITableViewController,SDCycleScrollViewDelega
         tableHeardView.showPageControl = false
         
         
-        self.tableView.addParallax(with: tableHeardView, andHeight: 240)
+        self.tableView.addParallax(with: tableHeardView, andHeight: 200)
         self.tableView.parallaxView.delegate = self
         
         

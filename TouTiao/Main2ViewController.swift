@@ -8,6 +8,7 @@
 
 import UIKit
 import FDFullscreenPopGesture
+import Foundation
 
 class Main2ViewController: UIViewController {
     
@@ -61,18 +62,6 @@ class Main2ViewController: UIViewController {
         controllerArray.append(popVideoTableViewController4)
         
         
-        
-        //        for _ in 0..<5 {
-        //            // 创建随机颜色
-        //            let red = CGFloat(arc4random_uniform(255))/CGFloat(255.0)
-        //            let green = CGFloat( arc4random_uniform(255))/CGFloat(255.0)
-        //            let blue = CGFloat(arc4random_uniform(255))/CGFloat(255.0)
-        //            let colorRun = UIColor.init(red:red, green:green, blue:blue , alpha: 1)
-        //
-        //            let subController = UIViewController()
-        //            subController.view.backgroundColor = colorRun
-        //            cons.append(subController)
-        //        }
         return controllerArray
     }()
     
@@ -99,7 +88,12 @@ class Main2ViewController: UIViewController {
         
         
         
-        lxfMenuVc.view.frame = CGRect(x: 0.0, y: 64, width: self.view.frame.width, height: self.view.frame.height - 112)
+        if UIDevice.isX() {
+            lxfMenuVc.view.frame = CGRect(x: 0.0, y: 90, width: self.view.frame.width, height: self.view.frame.height - 112)
+        }else{
+            
+            lxfMenuVc.view.frame = CGRect(x: 0.0, y: 64, width: self.view.frame.width, height: self.view.frame.height - 112)
+        }
         
         
         //        let parameters: [CAPSPageMenuOption] = [
@@ -194,3 +188,4 @@ class Main2ViewController: UIViewController {
     
     
 }
+
