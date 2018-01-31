@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		31951C4D255F72F87FCB7AA1 /* Pods_TouTiao.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75C78EA3101491CA2D47013C /* Pods_TouTiao.framework */; };
+		AB134FB720208763004E2DEB /* SCLAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB134FB520208762004E2DEB /* SCLAlertView.swift */; };
+		AB134FB820208763004E2DEB /* SCLExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB134FB620208762004E2DEB /* SCLExtensions.swift */; };
 		AB6A01A81E62060B003696EC /* CAPSPageMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = AB6A01A71E62060B003696EC /* CAPSPageMenu.m */; };
 		AB6A01AA1E62094B003696EC /* LXFMenuPageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB6A01A91E62094B003696EC /* LXFMenuPageController.swift */; };
 		AB9435EE201F3EB100C78188 /* UIDevice+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB9435ED201F3EB100C78188 /* UIDevice+Extension.swift */; };
@@ -73,11 +75,15 @@
 		ABD1C42D1E61D34D00D5009D /* PlayVideoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABD1C42C1E61D34D00D5009D /* PlayVideoViewController.swift */; };
 		ABD1C4301E61D3C200D5009D /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ABD1C42E1E61D39D00D5009D /* MediaPlayer.framework */; };
 		ABD1C4321E61F9EE00D5009D /* PlayVideoTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABD1C4311E61F9EE00D5009D /* PlayVideoTableViewController.swift */; };
+		ABEB10C0201F834600B3BD2E /* DSDataCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABEB10BF201F834600B3BD2E /* DSDataCenter.swift */; };
+		ABEB10C2201F836E00B3BD2E /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABEB10C1201F836E00B3BD2E /* User.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		39CFD7446E46BF938B54E748 /* Pods-TouTiao.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TouTiao.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TouTiao/Pods-TouTiao.debug.xcconfig"; sourceTree = "<group>"; };
 		75C78EA3101491CA2D47013C /* Pods_TouTiao.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TouTiao.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		AB134FB520208762004E2DEB /* SCLAlertView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SCLAlertView.swift; path = "../../../../../../Downloads/SCLAlertView-Swift-0.7.0/SCLAlertView/SCLAlertView.swift"; sourceTree = "<group>"; };
+		AB134FB620208762004E2DEB /* SCLExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SCLExtensions.swift; path = "../../../../../../Downloads/SCLAlertView-Swift-0.7.0/SCLAlertView/SCLExtensions.swift"; sourceTree = "<group>"; };
 		AB6A01A61E62060B003696EC /* CAPSPageMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CAPSPageMenu.h; sourceTree = "<group>"; };
 		AB6A01A71E62060B003696EC /* CAPSPageMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CAPSPageMenu.m; sourceTree = "<group>"; };
 		AB6A01A91E62094B003696EC /* LXFMenuPageController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LXFMenuPageController.swift; sourceTree = "<group>"; };
@@ -173,6 +179,8 @@
 		ABD1C42C1E61D34D00D5009D /* PlayVideoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayVideoViewController.swift; sourceTree = "<group>"; };
 		ABD1C42E1E61D39D00D5009D /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 		ABD1C4311E61F9EE00D5009D /* PlayVideoTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayVideoTableViewController.swift; sourceTree = "<group>"; };
+		ABEB10BF201F834600B3BD2E /* DSDataCenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DSDataCenter.swift; sourceTree = "<group>"; };
+		ABEB10C1201F836E00B3BD2E /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		F644B45E2132183DEC17C82F /* Pods-TouTiao.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TouTiao.release.xcconfig"; path = "Pods/Target Support Files/Pods-TouTiao/Pods-TouTiao.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -246,6 +254,8 @@
 		ABA902B61E5FD8C900468FB6 /* TouTiao */ = {
 			isa = PBXGroup;
 			children = (
+				AB134FB520208762004E2DEB /* SCLAlertView.swift */,
+				AB134FB620208762004E2DEB /* SCLExtensions.swift */,
 				ABA322B21F10DAB400943242 /* VideoTaxisTableViewController.swift */,
 				ABA322AC1F10C99C00943242 /* ParallaxHeaderView.h */,
 				ABA322AD1F10C99C00943242 /* ParallaxHeaderView.m */,
@@ -280,6 +290,8 @@
 				ABB49E3B1E628FE300A6BAF8 /* FavoriteVideosTableViewController.swift */,
 				ABC5542C1EFE530F00254713 /* Main2ViewController.swift */,
 				AB9435ED201F3EB100C78188 /* UIDevice+Extension.swift */,
+				ABEB10BF201F834600B3BD2E /* DSDataCenter.swift */,
+				ABEB10C1201F836E00B3BD2E /* User.swift */,
 			);
 			path = TouTiao;
 			sourceTree = "<group>";
@@ -604,6 +616,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				ABC5542F1EFE64C000254713 /* MyMainTableViewController.swift in Sources */,
+				AB134FB820208763004E2DEB /* SCLExtensions.swift in Sources */,
 				ABD1C41E1E61CC5A00D5009D /* MJRefreshAutoNormalFooter.m in Sources */,
 				ABA322B11F10C99C00943242 /* UIImage+ImageEffects.m in Sources */,
 				ABD1C4191E61CC5A00D5009D /* MJRefreshBackFooter.m in Sources */,
@@ -619,11 +632,13 @@
 				ABD1C4241E61CC5A00D5009D /* MJRefreshNormalHeader.m in Sources */,
 				ABA322B31F10DAB400943242 /* VideoTaxisTableViewController.swift in Sources */,
 				ABA322B01F10C99C00943242 /* ParallaxHeaderView.m in Sources */,
+				ABEB10C0201F834600B3BD2E /* DSDataCenter.swift in Sources */,
 				ABB49E381E6280A400A6BAF8 /* TouTiaoConfig.swift in Sources */,
 				ABD1C42B1E61CC5A00D5009D /* UIView+MJExtension.m in Sources */,
 				ABD1C42D1E61D34D00D5009D /* PlayVideoViewController.swift in Sources */,
 				ABD1C42A1E61CC5A00D5009D /* UIScrollView+MJRefresh.m in Sources */,
 				ABD1C41A1E61CC5A00D5009D /* MJRefreshComponent.m in Sources */,
+				ABEB10C2201F836E00B3BD2E /* User.swift in Sources */,
 				ABB49E3C1E628FE300A6BAF8 /* FavoriteVideosTableViewController.swift in Sources */,
 				ABD1C3A11E61C52400D5009D /* Video.swift in Sources */,
 				ABD1C4321E61F9EE00D5009D /* PlayVideoTableViewController.swift in Sources */,
@@ -632,6 +647,7 @@
 				ABD1C39C1E618FC400D5009D /* UIColor-Extension.swift in Sources */,
 				ABD1C4231E61CC5A00D5009D /* MJRefreshGifHeader.m in Sources */,
 				ABD1C4281E61CC5A00D5009D /* NSBundle+MJRefresh.m in Sources */,
+				AB134FB720208763004E2DEB /* SCLAlertView.swift in Sources */,
 				ABA902BA1E5FD8C900468FB6 /* ViewController.swift in Sources */,
 				ABD1C3981E6173F700D5009D /* HomeVideoTableViewController.swift in Sources */,
 				AB6A01AA1E62094B003696EC /* LXFMenuPageController.swift in Sources */,

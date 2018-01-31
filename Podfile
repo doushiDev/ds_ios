@@ -21,7 +21,8 @@ target 'TouTiao' do
   pod 'UMengAnalytics'
   pod 'APParallaxHeader'
   pod 'SDCycleScrollView','~> 1.3'
-
+  pod 'SnapKit', '~> 3.2.0'
+  pod 'HandyJSON', '~> 1.2.0'
 
 end
 

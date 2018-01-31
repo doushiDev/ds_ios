@@ -7,19 +7,213 @@
 //
 
 import UIKit
+import SnapKit
+
 
 class MyMainTableViewController: UITableViewController {
     @IBOutlet var myImage: UIImageView!
 
+    @IBOutlet weak var myBackImageView: UIImageView!
+    
+    @IBOutlet weak var headerView: UIView!
+
+    
+    let userCircle = UIImageView(frame: CGRect(x: 0,y: 0,width: 80,height: 80))
+    
+    let loginButton = UIButton(frame: CGRect(x: 0, y: 200, width: 80, height: 20))
+    
+    @IBOutlet weak var loginStatusLabel: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.navigationBar.tintColor = UIColor(rgba:"#f0a22a")
+//        self.tableView.tableHeaderView = myImage
+        loginButton.isEnabled = true
 
-        self.tableView.tableHeaderView = myImage
+    }
+    
+    override func loadView() {
+        super.loadView()
+        
+        self.headerView.frame = CGRect(x: 0, y: 64, width: UIScreen.main.bounds.width, height: 220)
+        
+        userCircle.alpha = 1
+        userCircle.center = myBackImageView.center
+        userCircle.layer.masksToBounds = true
+        userCircle.layer.cornerRadius = 35
+        userCircle.isUserInteractionEnabled = true
+        let userCircleTap = UITapGestureRecognizer()
+        userCircleTap.addTarget(self, action: #selector(MyMainTableViewController.userCircleAction))
+        userCircle.addGestureRecognizer(userCircleTap)
+        myBackImageView.addSubview(userCircle)
+        
+        
+        loginButton.titleLabel?.font = UIFont(name: "Avenir Next Bold", size: 16)
+        myBackImageView.addSubview(loginButton)
+        
+
+        loginButton.snp.makeConstraints { (make) -> Void in
+            make.top.equalTo(userCircle.snp.bottom).offset(10)
+            make.width.equalTo(150)
+            make.height.equalTo(20)
+            make.centerX.equalTo(myBackImageView)
+        }
+        
+        userCircle.snp.makeConstraints { (make) -> Void in
+            make.size.equalTo(70)
+            make.center.equalTo(myBackImageView)
+        }
+        
+        // 设置用户头像
+        userCircle.image = UIImage(named: "touxiang")
+        
+        // 设置login
+        loginButton.setTitle("立即登录", for: UIControlState())
+        
+        loginButton.addTarget(self, action: #selector(MyMainTableViewController.toLoginView(_:)), for: .touchUpInside)
+
+    }
+    
+    func userCircleAction() {
+        if loginButton.isEnabled {
+            
+            showLoginView()
+        }
+        
+    }
+    
+    func showLoginView() {
+
+        print("d 点击登录")
+        
+//        let loginViewController = YHConfig.mainStoryboard.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
+//
+//        self.present(loginViewController, animated: true, completion: nil)
+        
+    }
+    
+    /**
+     跳转登录页面
+     */
+    func toLoginView(_ sender: UIButton!){
+        
+        print("点击了登录")
+        
+//        let loginViewController = YHConfig.mainStoryboard.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
+//
+//        self.present(loginViewController, animated: true, completion: nil)
+//
+        
+        alertLogin()
+        
+    }
+    
+    func alertLogin() {
+        
+        
+        // Create custom Appearance Configuration
+        let appearance = SCLAlertView.SCLAppearance(
+            kTitleFont: UIFont(name: "HelveticaNeue", size: 20)!,
+            kTextFont: UIFont(name: "HelveticaNeue", size: 14)!,
+            kButtonFont: UIFont(name: "HelveticaNeue-Bold", size: 14)!,
+            showCloseButton: false
+        )
+        
+        // Initialize SCLAlertView using custom Appearance
+        let alert = SCLAlertView(appearance: appearance)
+        
+        // Creat the subview
+        let subview = UIView(frame: CGRect(x: 0,y: 0,width: 216,height: 70))
+        let x = (subview.frame.width - 180) / 2
+        
+        // Add textfield 1
+        let textfield1 = UITextField(frame: CGRect(x: x,y: 10,width: 180,height: 25))
+        //        textfield1.layer.borderColor = UIColor.green.cgColor
+        textfield1.layer.borderWidth = 1.5
+        textfield1.layer.cornerRadius = 5
+        textfield1.placeholder = "手机号"
+        textfield1.keyboardType = .phonePad
+        textfield1.textAlignment = NSTextAlignment.center
+        subview.addSubview(textfield1)
+        
+        // Add textfield 2
+        let textfield2 = UITextField(frame: CGRect(x: x,y: textfield1.frame.maxY + 10,width: 180,height: 25))
+        textfield2.isSecureTextEntry = true
+        //        textfield2.layer.borderColor = UIColor.blue.cgColor
+        textfield2.layer.borderWidth = 1.5
+        textfield2.layer.cornerRadius = 5
+        textfield1.layer.borderColor = UIColor.blue.cgColor
+        textfield2.placeholder = "密码"
+        textfield2.isSecureTextEntry = true
+        textfield2.textAlignment = NSTextAlignment.center
+        subview.addSubview(textfield2)
+        
+        // Add the subview to the alert's UI property
+        alert.customSubview = subview
+        _ = alert.addButton("登录/注册") {
+            print("Logged in")
+            
+//            textfield1.text
+            if !self.validateMobile(phone: textfield1.text!) {
+                
+                print("手机号不对")
+                
+            }
+            
+        }
+        _ = alert.addButton("关闭",backgroundColor: UIColor.gray) {
+            
+            print("关闭")
+        }
+        
+        
+        
+        _ = alert.showInfo("登录/注册", subTitle: "", duration: 10)
+        
+    }
+    
+    func validateMobile(phone: String) -> Bool {
+        let phoneRegex: String = "^((13[0-9])|(15[^4,\\D])|(16[^4,\\D])|(18[0,0-9])|(17[0,0-9]))\\d{8}$"
+        let phoneTest = NSPredicate(format: "SELF MATCHES %@", phoneRegex)
+        return phoneTest.evaluate(with: phone)
     }
     
     
+    func setHeadImage(){
+        
+        if let userDic:Dictionary =  UserDefaults.standard.dictionary(forKey: "user") {
+            
+//            let url = URL(string: userDic["headImage"] as! String)
+            
+//            self.userCircle.kf.setImage(with: url, placeholder: Image(named:"picture-default"), options: [.transition(ImageTransition.fade(1))], progressBlock: nil, completionHandler: nil)
+//
+//            self.loginButton.setTitle(userDic["nickName"] as? String, for: UIControlState())
+            self.loginButton.isEnabled = false
+            //禁止点击
+            loginButton.isEnabled = false
+            loginStatusLabel.text = "退出当前用户"
+            loginStatusLabel.textColor = UIColor.red
+        
+            
+            
+        }else{
+            loginButton.setTitle("立即登录", for: UIControlState())
+            loginButton.isEnabled = true
+            userCircle.image = UIImage(named: "touxiang")
+            loginStatusLabel.text = "立即登录"
+            loginStatusLabel.textColor = UIColor(rgba: "#f5436d")
+            
+        }
+        
+        
+    }
+    
+    
+    
     override func viewWillAppear(_ animated: Bool) {
+        // 刷新用户信息
+        
+        setHeadImage()
         super.viewWillAppear(animated)
     }
     
@@ -101,6 +295,42 @@ class MyMainTableViewController: UITableViewController {
             })
             
         }
+        
+        if (indexPath as NSIndexPath).section == 2 && (indexPath as NSIndexPath).row == 0 {
+            
+            
+            if let userCircle:Dictionary =  UserDefaults.standard.dictionary(forKey: "user"){
+                
+                print("登出")
+                //确定按钮
+                let alertController = UIAlertController(title: "确定要退出吗？", message: "", preferredStyle: .alert)
+                
+                let cancelAction = UIAlertAction(title: "取消", style: .cancel) { (action) in
+                }
+                alertController.addAction(cancelAction)
+                
+                let OKAction = UIAlertAction(title: "确定", style: .default) { (action) in
+                    
+                    
+                    UserDefaults.standard.removeObject(forKey: "user")
+                    DSDataCenter.sharedInstance.user = User()
+                    
+                    self.setHeadImage()
+                    
+                }
+                alertController.addAction(OKAction)
+                
+                self.present(alertController, animated: true) {
+                }
+            }else{
+                print("点击了登录")
+//                let loginViewController = YHConfig.mainStoryboard.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
+//
+//                self.present(loginViewController, animated: true, completion: nil)
+                alertLogin()
+            }
+        }
+        
         
         
         
@@ -223,6 +453,28 @@ class MyMainTableViewController: UITableViewController {
      */
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     
+    
+}
+
+extension MyMainTableViewController {
+    
+    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        
+        
+        let Offset_y = scrollView.contentOffset.y
+        // 下拉 纵向偏移量变小 变成负的
+        if ( Offset_y < 0) {
+            // 拉伸后图片的高度
+            let totalOffset = 200 - Offset_y;
+            // 图片放大比例
+            let scale = totalOffset / 200;
+            let width = UIScreen.main.bounds.width
+            // 拉伸后图片位置
+            myBackImageView!.frame = CGRect(x: -(width * scale - width) / 2, y: Offset_y, width: width * scale, height: totalOffset);
+            
+        }
+        
+    }
     
 }
 

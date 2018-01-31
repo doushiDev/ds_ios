@@ -39,6 +39,7 @@ PODS:
   - SDWebImage (4.2.3):
     - SDWebImage/Core (= 4.2.3)
   - SDWebImage/Core (4.2.3)
+  - SnapKit (3.2.0)
   - SwiftyJSON (4.0.0)
   - UMengAnalytics (4.2.4)
   - ZFPlayer (2.1.5):
@@ -54,6 +55,7 @@ DEPENDENCIES:
   - Kingfisher (~> 3.0)
   - RealmSwift (= 2.8.1)
   - SDCycleScrollView (~> 1.3)
+  - SnapKit (~> 3.2.0)
   - SwiftyJSON
   - UMengAnalytics
   - ZFPlayer
@@ -76,10 +78,11 @@ SPEC CHECKSUMS:
   RealmSwift: 4764ca7657f2193c256fb032c0b123926f70dbcd
   SDCycleScrollView: 884b88f0266dd4708a0e1934975c69cb971707b1
   SDWebImage: 791bb72962b3492327ddcac4b1880bd1b5458431
+  SnapKit: 1ca44df72cfa543218d177cb8aab029d10d86ea7
   SwiftyJSON: 070dabdcb1beb81b247c65ffa3a79dbbfb3b48aa
   UMengAnalytics: ef8d45f94c0e5771dc364cf6a5731d9d3b101da2
   ZFPlayer: 8a80bf8eb4638b97fbceaefcd3ca9978e9f17c9d
 
-PODFILE CHECKSUM: 0c80d2c1a7288f8f67080488bfe63a20332264e1
+PODFILE CHECKSUM: a9ff902ed6a893181c13044b2fecf93e19755735
 
 COCOAPODS: 1.2.0
