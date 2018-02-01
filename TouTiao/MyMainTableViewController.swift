@@ -155,8 +155,16 @@ class MyMainTableViewController: UITableViewController {
             
 //            textfield1.text
             if !self.validateMobile(phone: textfield1.text!) {
-                
                 print("手机号不对")
+            }else{
+                
+                var user: User = User()
+                user.nickName = textfield1.text!
+
+                TouTiaoConfig.userDefaults.set(JSONSerializer.serialize(model: user).toSimpleDictionary(), forKey: "user")
+                DSDataCenter.sharedInstance.user = user
+                
+                self.setHeadImage()
                 
             }
             
@@ -187,7 +195,9 @@ class MyMainTableViewController: UITableViewController {
             
 //            self.userCircle.kf.setImage(with: url, placeholder: Image(named:"picture-default"), options: [.transition(ImageTransition.fade(1))], progressBlock: nil, completionHandler: nil)
 //
-//            self.loginButton.setTitle(userDic["nickName"] as? String, for: UIControlState())
+            self.loginButton.setTitle(userDic["nickName"] as? String, for: UIControlState())
+            
+            
             self.loginButton.isEnabled = false
             //禁止点击
             loginButton.isEnabled = false
