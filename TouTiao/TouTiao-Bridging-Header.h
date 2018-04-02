@@ -5,7 +5,6 @@
 #import "MJRefresh.h"
 #import "CAPSPageMenu.h"
 
-
 #import "UMMobClick/MobClick.h"
 
 
@@ -22,3 +21,4 @@
 #import <APParallaxHeader/UIScrollView+APParallaxHeader.h>
 #import "ParallaxHeaderView.h"
 #import "UIImage+ImageEffects.h"
+

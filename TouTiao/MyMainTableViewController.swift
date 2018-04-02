@@ -176,7 +176,7 @@ class MyMainTableViewController: UITableViewController {
         
         
         
-        _ = alert.showInfo("登录/注册", subTitle: "", duration: 10)
+        _ = alert.showInfo("登录/注册", subTitle: "", closeButtonTitle: "10")
         
     }
     
@@ -274,12 +274,12 @@ class MyMainTableViewController: UITableViewController {
                 //2.分享分享网页
                 let shareObject:UMShareWebpageObject = UMShareWebpageObject.init()
                 shareObject.title = "推荐一个专注搞笑视频的应用"
-                shareObject.descr = "搞笑头条,瞬间让你好看,试试看吧"
+                shareObject.descr = "逗音视频 - 好玩人的视频都在这"
                 shareObject.thumbImage = UIImage.init(named: "Icon-60")//缩略图
                 shareObject.webpageUrl = "https://api.toutiao.itjh.net/share.html?title=%E5%8D%95%E8%BA%AB%E7%8B%97%E5%9C%A8%E5%AF%82%E5%AF%9E%E7%9A%84%E5%A4%9C%E9%87%8C%E9%83%BD%E4%BC%9A%E5%B9%B2%E5%98%9B&pic=http://img.mms.v1.cn/static/mms/images/2017-02-14/201702141510141635.jpg&videoUrl=http://f04.v1.cn/transcode/14478674MOBILET2.mp4&type=1"
                 
                 if platformType.rawValue == 0 {
-                    messageObject.text = "推荐一个专注搞笑视频的应用 -- 搞笑头条,瞬间让你好看,试试看吧！下载地址: http://t.cn/Roaq9ZZ"
+                    messageObject.text = "推荐一个专注搞笑视频的应用 -- 逗音视频 - 好玩人的视频都在这,试试看吧！下载地址: http://t.cn/Roaq9ZZ"
                     //创建图片内容对象
                     
                     let shareImage = UMShareImageObject()

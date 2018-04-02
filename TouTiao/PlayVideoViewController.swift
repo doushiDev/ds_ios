@@ -18,11 +18,14 @@ import Kingfisher
 
 import HandyJSON
 import SwiftyJSON
+import AVOSCloud
 
-class PlayVideoViewController: UIViewController,ZFPlayerDelegate,GADBannerViewDelegate,UITableViewDelegate,UITableViewDataSource  {
+class PlayVideoViewController: UIViewController,ZFPlayerDelegate,UITableViewDelegate,UITableViewDataSource  {
+    
+    
     
     @IBOutlet weak var playerFatherView: UIView!
-     var interstitial: GADInterstitial!
+    
     var playerView:ZFPlayerView?
     
     var isPlaying:Bool?
@@ -47,21 +50,11 @@ class PlayVideoViewController: UIViewController,ZFPlayerDelegate,GADBannerViewDe
     
     @IBOutlet weak var favoriteButton: UIButton!
     
-    func gameOver() {
-        if interstitial.isReady {
-            interstitial.present(fromRootViewController: self)
-        }
-        // Rest of game over logic goes here.
-    }
-  
+    var bannerView: GADBannerView!
     
     override func loadView() {
         
         super.loadView()
-//
-//        self.view.frame = CGRect(x: 0, y: 90, width: self.view.frame.width, height: 200)
-//
-
         print("view frame -> \(self.view.frame)")
         
         print("playerFatherView frame -> \(self.playerFatherView.frame)")
@@ -78,73 +71,86 @@ class PlayVideoViewController: UIViewController,ZFPlayerDelegate,GADBannerViewDe
         otherVideoTableView.delegate = self
         otherVideoTableView.dataSource = self
         
-        interstitial = GADInterstitial(adUnitID: "ca-app-pub-8316818329546054/7962310185")
         
-        let request = GADRequest()
-        // Requests test ads on test devices.
-
-        request.testDevices = ["418519ef0ef219dc198f706d0a417ade"]
-        interstitial.load(request)
-        gameOver()
-        // Do any additional setup after loading the view.
+        let query = AVQuery.init(className: "Google_AdSense")
+        
+        query.selectKeys(["application_id","ad_unit_id"])
+        
+        query.getFirstObjectInBackground { (avObject, error) in
+            
+            
+            let av:AVObject = avObject!
+            print("application_id -> \(String(describing: av["application_id"]))")
+            print("ad_unit_id -> \(String(describing: av["ad_unit_id"]))")
+        
+        
+        
+            self.bannerView = GADBannerView(adSize: kGADAdSizeBanner)
+            self.addBannerViewToView(self.bannerView)
+            self.bannerView.adUnitID =  av["ad_unit_id"] as? String
+            self.bannerView.rootViewController = self
+            self.bannerView.load(GADRequest())
+        
+        
+        
+        }
+        
         
         self.playerView = ZFPlayerView()
-        
-//        self.fd_prefersNavigationBarHidden = true;
-
         playerModel.title = videoTitle!
         playerModel.videoURL = videoUrl!
         playerModel.placeholderImage = UIImage(named: "loading_bgView1")
         playerModel.fatherView = self.playerFatherView
-         
-    
         self.playerView?.playerControlView(nil, playerModel: self.playerModel)
         
         // 设置代理
         self.playerView?.delegate = self;
         self.playerView?.hasPreviewView = true;
-        
         self.playerView?.autoPlayTheVideo()
         
-        
-//        let bannerView = GADBannerView(adSize: kGADAdSizeSmartBannerPortrait)
-//
-//        bannerView.delegate = self
-        
-        let request1 = GADRequest()
-        // Requests test ads on test devices.
-        
-//        request1.testDevices = ["418519ef0ef219dc198f706d0a417ade"]
-
-        
-        
-        adView.delegate = self
-        adView.adUnitID = "ca-app-pub-8316818329546054/7962310185"
-        
-        print("adView.frame -> \(adView.frame)")
-        
-//        adView.frame = CGRect(x: 0, y: self.view.frame.height + 60, width: self.view.frame.width, height: 60)
-        
-        print("adView.frame -> \(adView.frame)")
-        
-        adView.rootViewController = self
-        adView.load(request1)
         // 获取默认的 Realm 实例
         let realm = try! Realm()
         let fVideo = realm.objects(RealmVideo.self).filter("vid = '\(realmVideo!.vid)'").first
         
         if fVideo != nil {
             favoriteButton.setTitle("取消收藏", for: .normal)
+            favoriteButton.setImage(UIImage(named: "hearts"), for: .normal)
+
             favoriteButton.tag = 1
         }else {
             favoriteButton.titleLabel?.text = "收藏"
             favoriteButton.setTitle("收藏", for: .normal)
+            favoriteButton.setImage(UIImage(named: "noheart"), for: .normal)
 
             favoriteButton.tag = 0
 
         }
 
     }
+    
+    
+    func addBannerViewToView(_ bannerView: GADBannerView) {
+        bannerView.translatesAutoresizingMaskIntoConstraints = false
+ 
+        view.addSubview(bannerView)
+        view.addConstraints(
+            [NSLayoutConstraint(item: bannerView,
+                                attribute: .bottom,
+                                relatedBy: .equal,
+                                toItem: bottomLayoutGuide,
+                                attribute: .top,
+                                multiplier: 1,
+                                constant: 0),
+             NSLayoutConstraint(item: bannerView,
+                                attribute: .centerX,
+                                relatedBy: .equal,
+                                toItem: view,
+                                attribute: .centerX,
+                                multiplier: 1,
+                                constant: 0)
+            ])
+    }
+    
     
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -217,12 +223,11 @@ class PlayVideoViewController: UIViewController,ZFPlayerDelegate,GADBannerViewDe
         return 108
     }
 
-    
-    @IBOutlet weak var adView: GADBannerView!
 
     func adViewDidReceiveAd(_ bannerView: GADBannerView) {
         bannerView.isHidden = false
     }
+    
     func adView(_ bannerView: GADBannerView,
                 didFailToReceiveAdWithError error: GADRequestError) {
         print("adView:didFailToReceiveAdWithError: \(error.localizedDescription)")
@@ -246,14 +251,14 @@ class PlayVideoViewController: UIViewController,ZFPlayerDelegate,GADBannerViewDe
             let shareObject:UMShareWebpageObject = UMShareWebpageObject.init()
             
             shareObject.title = self.videoTitle
-            shareObject.descr = "更多搞笑视频，下载搞笑头条APP"
+            shareObject.descr = "逗音视频 - 好玩人的视频都在这"
             shareObject.thumbImage = self.videoImage?.image//缩略图
             
             shareObject.webpageUrl = "https://api.toutiao.itjh.net/share.html?title=\(self.videoTitle!)&pic=\(self.videoPic!)&videoUrl=\(self.videoUrlStr!)"
             
             
             if platformType.rawValue == 0 {
-                messageObject.text = "\(self.videoTitle!) -- 更多搞笑视频，下载搞笑头条APP 下载地址: http://t.cn/Roaq9ZZ"
+                messageObject.text = "\(self.videoTitle!) -- 逗音视频 - 好玩人的视频都在这 下载地址: http://t.cn/Roaq9ZZ"
                 //创建图片内容对象
                 
                 let shareImage = UMShareImageObject()
@@ -299,6 +304,10 @@ class PlayVideoViewController: UIViewController,ZFPlayerDelegate,GADBannerViewDe
                 
                 
                 favoriteButton.setTitle("取消收藏", for: .normal)
+                
+                
+                
+                favoriteButton.setImage(UIImage(named: "hearts"), for: .normal)
 
                 favoriteButton.tag = 1
             }
@@ -310,7 +319,8 @@ class PlayVideoViewController: UIViewController,ZFPlayerDelegate,GADBannerViewDe
                    realm.delete(fVideo!)
                 }
                 favoriteButton.setTitle("收藏", for: .normal)
-
+                favoriteButton.setImage(UIImage(named:"noheart"), for: UIControlState.normal)
+                
                 favoriteButton.tag = 0
             }
         }

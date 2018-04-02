@@ -11,12 +11,34 @@ import Alamofire
 import Kingfisher
 import HandyJSON
 import SwiftyJSON
+import APParallaxHeader
+import SDCycleScrollView
 
-class HomeVideoTableViewController: UITableViewController {
+
+class HomeVideoTableViewController: UITableViewController,SDCycleScrollViewDelegate,APParallaxViewDelegate {
     
     var cid:Int = 0
     
     var videos:[Video] = []
+    
+    
+    //视频集合
+    var videos1:[Video] = []
+    
+    
+    //图片地址集合
+    let imageURL = [ "http://mvimg2.meitudata.com/5626e665370cc6772.jpg!thumb320",
+                     "http://mvimg2.meitudata.com/562602616fc839554.jpg!thumb320",
+                     "http://mvimg2.meitudata.com/56234c04a53038517.jpg!thumb320"
+    ]
+    var imageURL1 = [String]()
+    var titles1 = [String]()
+    
+    let titles  = ["偏偏起舞的青春","小苹果 疯狂🎸","hey 逗比"]
+    
+    var tableHeardView = SDCycleScrollView()
+    
+    
     
     // 起始页码
     var pageNum = 0
@@ -40,8 +62,134 @@ class HomeVideoTableViewController: UITableViewController {
         })
         self.tableView.mj_footer.isHidden = true
         
+        loadData1()
+        tableHeardView = SDCycleScrollView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 200))
+        
+        
+        tableHeardView.pageControlStyle = SDCycleScrollViewPageContolStyleAnimated;
+        tableHeardView.delegate = self;
+        
+        
+        tableHeardView.pageDotColor = Color.yellow// 自定义分页控件小圆标颜色
+        tableHeardView.placeholderImage = UIImage(named: "tutorial_background_03")
+        tableHeardView.autoScrollTimeInterval = 5
+        tableHeardView.showPageControl = false
+        
+        
+        self.tableView.addParallax(with: tableHeardView, andHeight: 200)
+        self.tableView.parallaxView.delegate = self
+        
+        
+        
         
     }
+    
+    
+    func cycleScrollView(_ cycleScrollView: SDCycleScrollView!, didSelectItemAt index: Int) {
+        //        print("点击了\(index) 张图片")
+        let videoInfo = (self.videos[index] )
+        
+        
+        
+        let aStoryboard = UIStoryboard(name: "Main", bundle:Bundle.main)
+        
+        let playVideoViewController = aStoryboard.instantiateViewController(withIdentifier: "PlayVideoViewController") as! PlayVideoViewController
+        
+        let video:RealmVideo = RealmVideo()
+        video.vid = videoInfo.vid!
+        video.videoUrl = videoInfo.videoUrl
+        video.pic = videoInfo.pic!
+        video.title = videoInfo.title!
+        video.shareUrl = videoInfo.shareUrl
+        video.at = videoInfo.at
+        playVideoViewController.realmVideo = video
+        
+        let url = URL(string: self.videos1[index].videoUrl)
+        //
+        playVideoViewController.videoUrl = url
+        playVideoViewController.videoTitle = videoInfo.title
+        playVideoViewController.videoUrlStr = videoInfo.videoUrl
+        playVideoViewController.videoPic = videoInfo.pic
+        
+        
+        if videoInfo.at != 1 {
+            
+            //            return
+            
+            MobClick.event("ads")
+            
+            let evaluateString = self.videos1[index].videoUrl
+            
+            UIApplication.shared.openURL(URL(string: evaluateString)!)
+            
+        }else {
+            
+            self.navigationController?.pushViewController(playVideoViewController, animated: true)
+        }
+        
+        
+        
+        
+        
+    }
+    
+    
+    
+    
+    func loadData1(){
+        
+        
+        Alamofire.request("https://api.toutiao.itjh.net/v1.0/rest/video/getVideosByType/0/30/33").responseJSON { response in
+            
+            
+            switch response.result {
+                
+            case .success:
+                
+                if let JSONData = response.result.value {
+                    if let videoList = JSONDeserializer<Video>.deserializeModelArrayFrom(json: JSON(JSONData)["content"].rawString()) {
+                        
+                        
+                        
+                        self.imageURL1.removeAll()
+                        self.titles1.removeAll()
+                        self.videos.removeAll()
+                        self.videos1 = videoList as! [Video]
+                        
+                        for index in 0...4 {
+                            let videoInfo = (self.videos1[index] )
+                            
+                            self.imageURL1.append(videoInfo.pic!)
+                            self.titles1.append(videoInfo.title!)
+                            
+                        }
+                        
+                        
+                        self.tableHeardView.titlesGroup = self.titles1;
+                        self.tableHeardView.imageURLStringsGroup = self.imageURL1
+                        
+                    }
+                }
+                
+            case .failure(let error):
+                
+                print(error)
+            }
+            
+            
+        }
+        
+        
+    }
+    
+    func parallaxView(_ view: APParallaxView!, willChangeFrame frame: CGRect) {
+        
+    }
+    
+    func parallaxView(_ view: APParallaxView!, didChangeFrame frame: CGRect) {
+        
+    }
+    
     
     func loadData(cid:Int, pageNum:Int, count:Int) {
         

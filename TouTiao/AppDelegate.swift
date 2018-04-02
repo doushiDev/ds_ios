@@ -10,7 +10,7 @@ import UIKit
 import Firebase
 import Realm
 import RealmSwift
-
+import AVOSCloud
 
 
 @UIApplicationMain
@@ -20,21 +20,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+     
+
         
-        // Override point for customization after application launch.
-        
-        
-        /* 打开调试日志 */
-//        [[UMSocialManager defaultManager] openLog:YES];
-        
-        
-//        
-//        /* 设置友盟appkey */
-//        [[UMSocialManager defaultManager] setUmSocialAppkey:USHARE_DEMO_APPKEY];
-//        
-//        [self configUSharePlatforms];
-//        
-//        [self confitUShareSettings];
+        AVOSCloud.setApplicationId("uifopET7EiqxOcBceWidiBA2-gzGzoHsz", clientKey: "F4Mf1hX8YqxEnJ0VpopuzfAn")
+        AVAnalytics.trackAppOpened(launchOptions: launchOptions)
+        AVOSCloud.setAllLogsEnabled(true)
         
         UITabBar.appearance().tintColor = UIColor(rgba:"#f0a22a")
 
@@ -56,10 +47,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         self.configUSharePlatforms()
         
-        // Use Firebase library to configure APIs.
         FirebaseApp.configure()
-        // Initialize Google Mobile Ads SDK.
-        GADMobileAds.configure(withApplicationID: "ca-app-pub-8316818329546054~7439566002")
+        
+        
+        let query = AVQuery.init(className: "Google_AdSense")
+        
+        query.selectKeys(["application_id","ad_unit_id"])
+        
+        query.getFirstObjectInBackground { (avObject, error) in
+            
+            
+            let av:AVObject = avObject!
+            print("application_id -> \(String(describing: av["application_id"]))")
+            print("ad_unit_id -> \(String(describing: av["ad_unit_id"]))")
+            GADMobileAds.configure(withApplicationID:
+                av["application_id"] as! String)
+        }
+        
+        
+        
+
 
         var config = Realm.Configuration()
         
