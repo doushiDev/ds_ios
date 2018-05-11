@@ -11,7 +11,7 @@ target 'TouTiao' do
   # Pods for TouTiao
   pod 'Alamofire', '~> 4.3'
   pod 'Kingfisher', '~> 3.0'
-  pod 'HandyJSON', '~> 1.2.0'
+  pod 'HandyJSON', '~> 1.2.1'
   pod 'SwiftyJSON'
   pod 'ZFPlayer'
   pod 'FDFullscreenPopGesture'
@@ -21,8 +21,7 @@ target 'TouTiao' do
   pod 'UMengAnalytics'
   pod 'APParallaxHeader'
   pod 'SDCycleScrollView','~> 1.3'
-  pod 'SnapKit', '~> 3.2.0'
-  pod 'HandyJSON', '~> 1.2.0'
+  pod 'SnapKit', '~> 3.2.0' 
   pod 'AVOSCloud'               # 数据存储、短信、云引擎调用等基础服务模块
   pod 'AVOSCloudIM'             # 实时通信模块
 

@@ -47,12 +47,6 @@
 		ABC554531EFE6DD100254713 /* UMSocialSDKResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = ABC554491EFE6DD100254713 /* UMSocialSDKResources.bundle */; };
 		ABC554541EFE6DD100254713 /* UShareUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ABC5544A1EFE6DD100254713 /* UShareUI.framework */; };
 		ABC554561EFE722300254713 /* UMSocialSwiftInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABC554551EFE722300254713 /* UMSocialSwiftInterface.swift */; };
-		ABC95D602023338200E68700 /* Converter.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABC95D592023338200E68700 /* Converter.swift */; };
-		ABC95D612023338200E68700 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABC95D5A2023338200E68700 /* Extension.swift */; };
-		ABC95D622023338200E68700 /* HelpingMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABC95D5C2023338200E68700 /* HelpingMapper.swift */; };
-		ABC95D632023338200E68700 /* JSONDeserializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABC95D5D2023338200E68700 /* JSONDeserializer.swift */; };
-		ABC95D642023338200E68700 /* JSONSerializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABC95D5E2023338200E68700 /* JSONSerializer.swift */; };
-		ABC95D652023338200E68700 /* Property.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABC95D5F2023338200E68700 /* Property.swift */; };
 		ABD18EFA1E64037C00FA41A3 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ABD18EF91E64037C00FA41A3 /* CoreTelephony.framework */; };
 		ABD18EFC1E64038900FA41A3 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = ABD18EFB1E64038900FA41A3 /* libz.tbd */; };
 		ABD18EFE1E64039300FA41A3 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = ABD18EFD1E64039300FA41A3 /* libsqlite3.tbd */; };
@@ -142,13 +136,6 @@
 		ABC554491EFE6DD100254713 /* UMSocialSDKResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = UMSocialSDKResources.bundle; sourceTree = "<group>"; };
 		ABC5544A1EFE6DD100254713 /* UShareUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = UShareUI.framework; sourceTree = "<group>"; };
 		ABC554551EFE722300254713 /* UMSocialSwiftInterface.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UMSocialSwiftInterface.swift; sourceTree = "<group>"; };
-		ABC95D592023338200E68700 /* Converter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Converter.swift; sourceTree = "<group>"; };
-		ABC95D5A2023338200E68700 /* Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
-		ABC95D5B2023338200E68700 /* HandyJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HandyJSON.h; sourceTree = "<group>"; };
-		ABC95D5C2023338200E68700 /* HelpingMapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelpingMapper.swift; sourceTree = "<group>"; };
-		ABC95D5D2023338200E68700 /* JSONDeserializer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONDeserializer.swift; sourceTree = "<group>"; };
-		ABC95D5E2023338200E68700 /* JSONSerializer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONSerializer.swift; sourceTree = "<group>"; };
-		ABC95D5F2023338200E68700 /* Property.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Property.swift; sourceTree = "<group>"; };
 		ABD18EF91E64037C00FA41A3 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		ABD18EFB1E64038900FA41A3 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		ABD18EFD1E64039300FA41A3 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
@@ -297,7 +284,6 @@
 				ABBFD2872071E0D100372250 /* GoogleService-Info.plist */,
 				AB5F7F9A20712E6C007F5E4A /* baidu */,
 				ABD8CC73205B72DC0038B58D /* SCLAlertView */,
-				ABC95D582023338200E68700 /* HandyJSON */,
 				ABA322B21F10DAB400943242 /* VideoTaxisTableViewController.swift */,
 				ABA322AC1F10C99C00943242 /* ParallaxHeaderView.h */,
 				ABA322AD1F10C99C00943242 /* ParallaxHeaderView.m */,
@@ -420,20 +406,6 @@
 				ABC5544A1EFE6DD100254713 /* UShareUI.framework */,
 			);
 			path = UMSocialUI;
-			sourceTree = "<group>";
-		};
-		ABC95D582023338200E68700 /* HandyJSON */ = {
-			isa = PBXGroup;
-			children = (
-				ABC95D592023338200E68700 /* Converter.swift */,
-				ABC95D5A2023338200E68700 /* Extension.swift */,
-				ABC95D5B2023338200E68700 /* HandyJSON.h */,
-				ABC95D5C2023338200E68700 /* HelpingMapper.swift */,
-				ABC95D5D2023338200E68700 /* JSONDeserializer.swift */,
-				ABC95D5E2023338200E68700 /* JSONSerializer.swift */,
-				ABC95D5F2023338200E68700 /* Property.swift */,
-			);
-			path = HandyJSON;
 			sourceTree = "<group>";
 		};
 		ABD1C39F1E61C51700D5009D /* Model */ = {
@@ -679,7 +651,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				ABC95D652023338200E68700 /* Property.swift in Sources */,
 				ABC5542F1EFE64C000254713 /* MyMainTableViewController.swift in Sources */,
 				ABD1C41E1E61CC5A00D5009D /* MJRefreshAutoNormalFooter.m in Sources */,
 				ABA322B11F10C99C00943242 /* UIImage+ImageEffects.m in Sources */,
@@ -690,12 +661,10 @@
 				AB6A01A81E62060B003696EC /* CAPSPageMenu.m in Sources */,
 				ABB49E3A1E6288F200A6BAF8 /* RealmVideo.swift in Sources */,
 				ABD1C41D1E61CC5A00D5009D /* MJRefreshAutoGifFooter.m in Sources */,
-				ABC95D602023338200E68700 /* Converter.swift in Sources */,
 				ABC554561EFE722300254713 /* UMSocialSwiftInterface.swift in Sources */,
 				ABD1C4211E61CC5A00D5009D /* MJRefreshBackNormalFooter.m in Sources */,
 				ABD1C41B1E61CC5A00D5009D /* MJRefreshFooter.m in Sources */,
 				ABD1C4271E61CC5A00D5009D /* MJRefreshConst.m in Sources */,
-				ABC95D642023338200E68700 /* JSONSerializer.swift in Sources */,
 				ABD1C4241E61CC5A00D5009D /* MJRefreshNormalHeader.m in Sources */,
 				ABA322B31F10DAB400943242 /* VideoTaxisTableViewController.swift in Sources */,
 				ABA322B01F10C99C00943242 /* ParallaxHeaderView.m in Sources */,
@@ -711,13 +680,10 @@
 				ABD1C4321E61F9EE00D5009D /* PlayVideoTableViewController.swift in Sources */,
 				ABD1C4201E61CC5A00D5009D /* MJRefreshBackGifFooter.m in Sources */,
 				AB9435EE201F3EB100C78188 /* UIDevice+Extension.swift in Sources */,
-				ABC95D632023338200E68700 /* JSONDeserializer.swift in Sources */,
 				ABD1C39C1E618FC400D5009D /* UIColor-Extension.swift in Sources */,
 				ABD1C4231E61CC5A00D5009D /* MJRefreshGifHeader.m in Sources */,
 				ABD1C4281E61CC5A00D5009D /* NSBundle+MJRefresh.m in Sources */,
-				ABC95D622023338200E68700 /* HelpingMapper.swift in Sources */,
 				ABA902BA1E5FD8C900468FB6 /* ViewController.swift in Sources */,
-				ABC95D612023338200E68700 /* Extension.swift in Sources */,
 				ABD1C3981E6173F700D5009D /* HomeVideoTableViewController.swift in Sources */,
 				AB6A01AA1E62094B003696EC /* LXFMenuPageController.swift in Sources */,
 				ABD8CC7C205B735B0038B58D /* SCLAlertView.swift in Sources */,
@@ -869,6 +835,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 587PLL658T;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -890,8 +858,9 @@
 					"$(PROJECT_DIR)/TouTiao/xunfei",
 					"$(PROJECT_DIR)/TouTiao/youmi",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "me.doushi.ds-ios";
+				PRODUCT_BUNDLE_IDENTIFIER = "me.doushi.ds-ios1";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "TouTiao/TouTiao-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
@@ -905,6 +874,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 587PLL658T;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -926,8 +897,9 @@
 					"$(PROJECT_DIR)/TouTiao/xunfei",
 					"$(PROJECT_DIR)/TouTiao/youmi",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "me.doushi.ds-ios";
+				PRODUCT_BUNDLE_IDENTIFIER = "me.doushi.ds-ios1";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "TouTiao/TouTiao-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

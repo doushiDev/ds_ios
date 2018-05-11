@@ -89,7 +89,9 @@ class PlayVideoViewController: UIViewController,ZFPlayerDelegate,UITableViewDele
             self.addBannerViewToView(self.bannerView)
             self.bannerView.adUnitID =  av["ad_unit_id"] as? String
             self.bannerView.rootViewController = self
-            self.bannerView.load(GADRequest())
+            var request = GADRequest()
+            request.testDevices = ["cb5f8f63abdf96116102fcee76276fed"]
+            self.bannerView.load(request)
         
         
         
@@ -98,6 +100,7 @@ class PlayVideoViewController: UIViewController,ZFPlayerDelegate,UITableViewDele
         
         self.playerView = ZFPlayerView()
         playerModel.title = videoTitle!
+//        playerModel.
         playerModel.videoURL = videoUrl!
         playerModel.placeholderImage = UIImage(named: "loading_bgView1")
         playerModel.fatherView = self.playerFatherView
@@ -147,7 +150,21 @@ class PlayVideoViewController: UIViewController,ZFPlayerDelegate,UITableViewDele
                                 toItem: view,
                                 attribute: .centerX,
                                 multiplier: 1,
-                                constant: 0)
+                                constant: 0),
+             NSLayoutConstraint(item: bannerView,
+                                attribute: .left,
+                                relatedBy: .equal,
+                                toItem: view,
+                                attribute: .left,
+                                multiplier: 1,
+                                constant: 0),
+             NSLayoutConstraint(item: bannerView,
+                                attribute: .height,
+                                relatedBy: .equal,
+                                toItem: nil,
+                                attribute: .height,
+                                multiplier: 1,
+                                constant: 70)
             ])
     }
     
@@ -408,6 +425,11 @@ class PlayVideoViewController: UIViewController,ZFPlayerDelegate,UITableViewDele
 
     }
     
+    func zf_playerControlViewWillHidden(_ controlView: UIView!, isFullscreen fullscreen: Bool) {
+        
+        
+    }
+    
     
     /*
     // MARK: - Navigation
@@ -427,8 +449,7 @@ class PlayVideoViewController: UIViewController,ZFPlayerDelegate,UITableViewDele
         
         let path = self.otherVideoTableView.indexPathForSelectedRow!
         
-        self.playerView?.pause()
-        
+        self.playerView?.stopPlayWhileCellNotVisable = true
         if let playVideoViewController = segue.destination as? PlayVideoViewController {
             
             
