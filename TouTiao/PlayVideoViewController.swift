@@ -90,7 +90,7 @@ class PlayVideoViewController: UIViewController,ZFPlayerDelegate,UITableViewDele
             self.bannerView.adUnitID =  av["ad_unit_id"] as? String
             self.bannerView.rootViewController = self
             var request = GADRequest()
-            request.testDevices = ["cb5f8f63abdf96116102fcee76276fed"]
+            request.testDevices = [kGADSimulatorID]
             self.bannerView.load(request)
         
         
@@ -134,8 +134,10 @@ class PlayVideoViewController: UIViewController,ZFPlayerDelegate,UITableViewDele
     
     func addBannerViewToView(_ bannerView: GADBannerView) {
         bannerView.translatesAutoresizingMaskIntoConstraints = false
- 
+//        bannerView.backgroundColor = UIColor.red
         view.addSubview(bannerView)
+        
+        print(bannerView.frame)
         view.addConstraints(
             [NSLayoutConstraint(item: bannerView,
                                 attribute: .bottom,
@@ -143,7 +145,7 @@ class PlayVideoViewController: UIViewController,ZFPlayerDelegate,UITableViewDele
                                 toItem: bottomLayoutGuide,
                                 attribute: .top,
                                 multiplier: 1,
-                                constant: 0),
+                                constant: -otherVideoTableView.frame.height+5),
              NSLayoutConstraint(item: bannerView,
                                 attribute: .centerX,
                                 relatedBy: .equal,

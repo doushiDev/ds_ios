@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="L5m-d4-ugd">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="L5m-d4-ugd">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -133,8 +133,12 @@
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fLV-AZ-F7G">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="250"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Obu-81-hjb">
-                                <rect key="frame" x="0.0" y="323" width="375" height="283"/>
+                                <rect key="frame" x="0.0" y="384" width="375" height="283"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
@@ -171,10 +175,6 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fLV-AZ-F7G">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="250"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                            </view>
                         </subviews>
                         <color key="backgroundColor" red="0.93725490570000003" green="0.93725490570000003" blue="0.95686274770000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
@@ -947,8 +947,11 @@
                                     <constraint firstItem="wLd-Lm-9wS" firstAttribute="top" secondItem="D9f-7E-Fuv" secondAttribute="top" constant="18" id="wuC-qy-0eY"/>
                                 </constraints>
                             </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZoB-wp-pP5">
+                                <rect key="frame" x="0.0" y="20" width="375" height="231"/>
+                            </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="yv2-xM-o0k">
-                                <rect key="frame" x="0.0" y="332" width="375" height="283"/>
+                                <rect key="frame" x="0.0" y="384" width="375" height="283"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="283" id="GEP-Il-2oR"/>
@@ -997,13 +1000,10 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZoB-wp-pP5">
-                                <rect key="frame" x="0.0" y="20" width="375" height="231"/>
-                            </view>
                         </subviews>
                         <color key="backgroundColor" red="0.93725490570000003" green="0.93725490570000003" blue="0.95686274770000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="yv2-xM-o0k" firstAttribute="top" secondItem="D9f-7E-Fuv" secondAttribute="bottom" constant="8" symbolic="YES" id="6qN-5Q-b6p"/>
+                            <constraint firstItem="yv2-xM-o0k" firstAttribute="top" secondItem="D9f-7E-Fuv" secondAttribute="bottom" constant="60" id="6qN-5Q-b6p"/>
                             <constraint firstItem="D9f-7E-Fuv" firstAttribute="top" secondItem="ZoB-wp-pP5" secondAttribute="bottom" constant="8" symbolic="YES" id="7Hb-HE-emh"/>
                             <constraint firstAttribute="trailing" secondItem="ZoB-wp-pP5" secondAttribute="trailing" id="8TX-rV-ByE"/>
                             <constraint firstItem="ZoB-wp-pP5" firstAttribute="trailing" secondItem="D9f-7E-Fuv" secondAttribute="trailing" id="IrK-jx-Ds9"/>
@@ -1012,7 +1012,7 @@
                             <constraint firstItem="ZoB-wp-pP5" firstAttribute="leading" secondItem="D9f-7E-Fuv" secondAttribute="leading" id="ctE-zx-LwO"/>
                             <constraint firstItem="ZoB-wp-pP5" firstAttribute="leading" secondItem="SmO-dW-B2a" secondAttribute="leading" id="eZI-pA-XDC"/>
                             <constraint firstItem="ZoB-wp-pP5" firstAttribute="top" secondItem="SmO-dW-B2a" secondAttribute="top" constant="20" symbolic="YES" id="kVi-ZF-Huf"/>
-                            <constraint firstItem="yv2-xM-o0k" firstAttribute="top" secondItem="SmO-dW-B2a" secondAttribute="top" constant="332" id="lIN-tb-DFa"/>
+                            <constraint firstItem="yv2-xM-o0k" firstAttribute="top" secondItem="SmO-dW-B2a" secondAttribute="top" constant="384" id="lIN-tb-DFa"/>
                             <constraint firstItem="D9f-7E-Fuv" firstAttribute="top" secondItem="SmO-dW-B2a" secondAttribute="top" constant="259" id="xSq-Bs-1fQ"/>
                         </constraints>
                     </view>

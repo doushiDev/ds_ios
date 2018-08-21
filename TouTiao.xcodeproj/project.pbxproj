@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		31951C4D255F72F87FCB7AA1 /* Pods_TouTiao.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75C78EA3101491CA2D47013C /* Pods_TouTiao.framework */; };
+		AB02345720BBC623007D7025 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AB02345620BBC623007D7025 /* GoogleService-Info.plist */; };
 		AB5F7FD420712F9B007F5E4A /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB5F7FD320712F9B007F5E4A /* StoreKit.framework */; };
 		AB5F7FD620712FB0007F5E4A /* libz.1.2.5.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = AB5F7FD520712FAF007F5E4A /* libz.1.2.5.tbd */; };
 		AB5F7FD820712FC3007F5E4A /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB5F7FD720712FC2007F5E4A /* AdSupport.framework */; };
@@ -31,7 +32,6 @@
 		ABB49E381E6280A400A6BAF8 /* TouTiaoConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB49E371E6280A400A6BAF8 /* TouTiaoConfig.swift */; };
 		ABB49E3A1E6288F200A6BAF8 /* RealmVideo.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB49E391E6288F200A6BAF8 /* RealmVideo.swift */; };
 		ABB49E3C1E628FE300A6BAF8 /* FavoriteVideosTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB49E3B1E628FE300A6BAF8 /* FavoriteVideosTableViewController.swift */; };
-		ABBFD2882071E0D100372250 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = ABBFD2872071E0D100372250 /* GoogleService-Info.plist */; };
 		ABC5542D1EFE530F00254713 /* Main2ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABC5542C1EFE530F00254713 /* Main2ViewController.swift */; };
 		ABC5542F1EFE64C000254713 /* MyMainTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABC5542E1EFE64C000254713 /* MyMainTableViewController.swift */; };
 		ABC554311EFE6B6C00254713 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ABC554301EFE6B6C00254713 /* MessageUI.framework */; };
@@ -47,6 +47,8 @@
 		ABC554531EFE6DD100254713 /* UMSocialSDKResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = ABC554491EFE6DD100254713 /* UMSocialSDKResources.bundle */; };
 		ABC554541EFE6DD100254713 /* UShareUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ABC5544A1EFE6DD100254713 /* UShareUI.framework */; };
 		ABC554561EFE722300254713 /* UMSocialSwiftInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABC554551EFE722300254713 /* UMSocialSwiftInterface.swift */; };
+		ABCA449C2118945C00C46665 /* SCLAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABCA449A2118945C00C46665 /* SCLAlertView.swift */; };
+		ABCA449D2118945C00C46665 /* SCLExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABCA449B2118945C00C46665 /* SCLExtensions.swift */; };
 		ABD18EFA1E64037C00FA41A3 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ABD18EF91E64037C00FA41A3 /* CoreTelephony.framework */; };
 		ABD18EFC1E64038900FA41A3 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = ABD18EFB1E64038900FA41A3 /* libz.tbd */; };
 		ABD18EFE1E64039300FA41A3 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = ABD18EFD1E64039300FA41A3 /* libsqlite3.tbd */; };
@@ -78,8 +80,6 @@
 		ABD1C42D1E61D34D00D5009D /* PlayVideoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABD1C42C1E61D34D00D5009D /* PlayVideoViewController.swift */; };
 		ABD1C4301E61D3C200D5009D /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ABD1C42E1E61D39D00D5009D /* MediaPlayer.framework */; };
 		ABD1C4321E61F9EE00D5009D /* PlayVideoTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABD1C4311E61F9EE00D5009D /* PlayVideoTableViewController.swift */; };
-		ABD8CC7C205B735B0038B58D /* SCLAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABD8CC7A205B735B0038B58D /* SCLAlertView.swift */; };
-		ABD8CC7D205B735B0038B58D /* SCLExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABD8CC7B205B735B0038B58D /* SCLExtensions.swift */; };
 		ABEB10C0201F834600B3BD2E /* DSDataCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABEB10BF201F834600B3BD2E /* DSDataCenter.swift */; };
 		ABEB10C2201F836E00B3BD2E /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABEB10C1201F836E00B3BD2E /* User.swift */; };
 /* End PBXBuildFile section */
@@ -87,6 +87,7 @@
 /* Begin PBXFileReference section */
 		39CFD7446E46BF938B54E748 /* Pods-TouTiao.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TouTiao.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TouTiao/Pods-TouTiao.debug.xcconfig"; sourceTree = "<group>"; };
 		75C78EA3101491CA2D47013C /* Pods_TouTiao.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TouTiao.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		AB02345620BBC623007D7025 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
 		AB5F7FD320712F9B007F5E4A /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		AB5F7FD520712FAF007F5E4A /* libz.1.2.5.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.1.2.5.tbd; path = usr/lib/libz.1.2.5.tbd; sourceTree = SDKROOT; };
 		AB5F7FD720712FC2007F5E4A /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
@@ -116,7 +117,6 @@
 		ABB49E371E6280A400A6BAF8 /* TouTiaoConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TouTiaoConfig.swift; sourceTree = "<group>"; };
 		ABB49E391E6288F200A6BAF8 /* RealmVideo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmVideo.swift; sourceTree = "<group>"; };
 		ABB49E3B1E628FE300A6BAF8 /* FavoriteVideosTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoriteVideosTableViewController.swift; sourceTree = "<group>"; };
-		ABBFD2872071E0D100372250 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		ABC5542C1EFE530F00254713 /* Main2ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Main2ViewController.swift; sourceTree = "<group>"; };
 		ABC5542E1EFE64C000254713 /* MyMainTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyMainTableViewController.swift; sourceTree = "<group>"; };
 		ABC554301EFE6B6C00254713 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
@@ -136,6 +136,8 @@
 		ABC554491EFE6DD100254713 /* UMSocialSDKResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = UMSocialSDKResources.bundle; sourceTree = "<group>"; };
 		ABC5544A1EFE6DD100254713 /* UShareUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = UShareUI.framework; sourceTree = "<group>"; };
 		ABC554551EFE722300254713 /* UMSocialSwiftInterface.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UMSocialSwiftInterface.swift; sourceTree = "<group>"; };
+		ABCA449A2118945C00C46665 /* SCLAlertView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SCLAlertView.swift; sourceTree = "<group>"; };
+		ABCA449B2118945C00C46665 /* SCLExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SCLExtensions.swift; sourceTree = "<group>"; };
 		ABD18EF91E64037C00FA41A3 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		ABD18EFB1E64038900FA41A3 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		ABD18EFD1E64039300FA41A3 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
@@ -187,8 +189,6 @@
 		ABD1C42C1E61D34D00D5009D /* PlayVideoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayVideoViewController.swift; sourceTree = "<group>"; };
 		ABD1C42E1E61D39D00D5009D /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 		ABD1C4311E61F9EE00D5009D /* PlayVideoTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayVideoTableViewController.swift; sourceTree = "<group>"; };
-		ABD8CC7A205B735B0038B58D /* SCLAlertView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SCLAlertView.swift; path = "../../../../../../../Downloads/SCLAlertView-Swift-0.7.0/SCLAlertView/SCLAlertView.swift"; sourceTree = "<group>"; };
-		ABD8CC7B205B735B0038B58D /* SCLExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SCLExtensions.swift; path = "../../../../../../../Downloads/SCLAlertView-Swift-0.7.0/SCLAlertView/SCLExtensions.swift"; sourceTree = "<group>"; };
 		ABEB10BF201F834600B3BD2E /* DSDataCenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DSDataCenter.swift; sourceTree = "<group>"; };
 		ABEB10C1201F836E00B3BD2E /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		F644B45E2132183DEC17C82F /* Pods-TouTiao.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TouTiao.release.xcconfig"; path = "Pods/Target Support Files/Pods-TouTiao/Pods-TouTiao.release.xcconfig"; sourceTree = "<group>"; };
@@ -281,7 +281,7 @@
 		ABA902B61E5FD8C900468FB6 /* TouTiao */ = {
 			isa = PBXGroup;
 			children = (
-				ABBFD2872071E0D100372250 /* GoogleService-Info.plist */,
+				AB02345620BBC623007D7025 /* GoogleService-Info.plist */,
 				AB5F7F9A20712E6C007F5E4A /* baidu */,
 				ABD8CC73205B72DC0038B58D /* SCLAlertView */,
 				ABA322B21F10DAB400943242 /* VideoTaxisTableViewController.swift */,
@@ -516,8 +516,8 @@
 		ABD8CC73205B72DC0038B58D /* SCLAlertView */ = {
 			isa = PBXGroup;
 			children = (
-				ABD8CC7A205B735B0038B58D /* SCLAlertView.swift */,
-				ABD8CC7B205B735B0038B58D /* SCLExtensions.swift */,
+				ABCA449A2118945C00C46665 /* SCLAlertView.swift */,
+				ABCA449B2118945C00C46665 /* SCLExtensions.swift */,
 			);
 			path = SCLAlertView;
 			sourceTree = "<group>";
@@ -557,7 +557,7 @@
 				TargetAttributes = {
 					ABA902B31E5FD8C900468FB6 = {
 						CreatedOnToolsVersion = 8.2.1;
-						DevelopmentTeam = 587PLL658T;
+						DevelopmentTeam = TACP4ERH8G;
 						LastSwiftMigration = 0820;
 						ProvisioningStyle = Automatic;
 					};
@@ -587,12 +587,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				ABA902C21E5FD8C900468FB6 /* LaunchScreen.storyboard in Resources */,
-				ABBFD2882071E0D100372250 /* GoogleService-Info.plist in Resources */,
 				ABC554511EFE6DD100254713 /* UMSocialSDKPromptResources.bundle in Resources */,
 				ABA902BF1E5FD8C900468FB6 /* Assets.xcassets in Resources */,
 				ABA902BD1E5FD8C900468FB6 /* Main.storyboard in Resources */,
 				ABC554531EFE6DD100254713 /* UMSocialSDKResources.bundle in Resources */,
 				ABD1C4261E61CC5A00D5009D /* MJRefresh.bundle in Resources */,
+				AB02345720BBC623007D7025 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -653,11 +653,11 @@
 			files = (
 				ABC5542F1EFE64C000254713 /* MyMainTableViewController.swift in Sources */,
 				ABD1C41E1E61CC5A00D5009D /* MJRefreshAutoNormalFooter.m in Sources */,
+				ABCA449D2118945C00C46665 /* SCLExtensions.swift in Sources */,
 				ABA322B11F10C99C00943242 /* UIImage+ImageEffects.m in Sources */,
 				ABD1C4191E61CC5A00D5009D /* MJRefreshBackFooter.m in Sources */,
 				ABB49E361E6225CE00A6BAF8 /* AdsViewController.swift in Sources */,
 				ABA322A91F10C17600943242 /* FindTableViewCell.swift in Sources */,
-				ABD8CC7D205B735B0038B58D /* SCLExtensions.swift in Sources */,
 				AB6A01A81E62060B003696EC /* CAPSPageMenu.m in Sources */,
 				ABB49E3A1E6288F200A6BAF8 /* RealmVideo.swift in Sources */,
 				ABD1C41D1E61CC5A00D5009D /* MJRefreshAutoGifFooter.m in Sources */,
@@ -684,9 +684,9 @@
 				ABD1C4231E61CC5A00D5009D /* MJRefreshGifHeader.m in Sources */,
 				ABD1C4281E61CC5A00D5009D /* NSBundle+MJRefresh.m in Sources */,
 				ABA902BA1E5FD8C900468FB6 /* ViewController.swift in Sources */,
+				ABCA449C2118945C00C46665 /* SCLAlertView.swift in Sources */,
 				ABD1C3981E6173F700D5009D /* HomeVideoTableViewController.swift in Sources */,
 				AB6A01AA1E62094B003696EC /* LXFMenuPageController.swift in Sources */,
-				ABD8CC7C205B735B0038B58D /* SCLAlertView.swift in Sources */,
 				ABD1C41F1E61CC5A00D5009D /* MJRefreshAutoStateFooter.m in Sources */,
 				ABC5542D1EFE530F00254713 /* Main2ViewController.swift in Sources */,
 				ABD1C4251E61CC5A00D5009D /* MJRefreshStateHeader.m in Sources */,
@@ -837,7 +837,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 587PLL658T;
+				DEVELOPMENT_TEAM = TACP4ERH8G;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -858,7 +858,7 @@
 					"$(PROJECT_DIR)/TouTiao/xunfei",
 					"$(PROJECT_DIR)/TouTiao/youmi",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "me.doushi.ds-ios1";
+				PRODUCT_BUNDLE_IDENTIFIER = "me.doushi.ds-ios";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "TouTiao/TouTiao-Bridging-Header.h";
@@ -876,7 +876,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 587PLL658T;
+				DEVELOPMENT_TEAM = TACP4ERH8G;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -897,7 +897,7 @@
 					"$(PROJECT_DIR)/TouTiao/xunfei",
 					"$(PROJECT_DIR)/TouTiao/youmi",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "me.doushi.ds-ios1";
+				PRODUCT_BUNDLE_IDENTIFIER = "me.doushi.ds-ios";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "TouTiao/TouTiao-Bridging-Header.h";
