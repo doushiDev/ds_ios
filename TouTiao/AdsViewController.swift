@@ -18,7 +18,7 @@ class AdsViewController: UIViewController, GADBannerViewDelegate {
         interstitial = GADInterstitial(adUnitID: "ca-app-pub-7191090490730162~9203267530")
         
         interstitial = createAndLoadInterstitial()
-
+        print("ok")
 
         // Do any additional setup after loading the view.
         adsView.delegate = self
