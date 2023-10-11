@@ -48,7 +48,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.configUSharePlatforms()
         
         FirebaseApp.configure()
-        
+
+        let dd = 0
         
         let query = AVQuery.init(className: "Google_AdSense")
         
