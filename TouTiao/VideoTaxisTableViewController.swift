@@ -48,6 +48,10 @@ class VideoTaxisTableViewController: UITableViewController {
         
     }
     
+    func test1(){
+        print("te")
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
