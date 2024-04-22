@@ -1,6 +1,6 @@
 // !$*UTF8*$!
 {
-	archiveVersion = 1;
+	archiveVersion = 2;
 	classes = {
 	};
 	objectVersion = 46;
