@@ -22,5 +22,8 @@ class HomeVideoTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
+    func name(parameters) -> Type {
+        sdds
+    }
 
 }

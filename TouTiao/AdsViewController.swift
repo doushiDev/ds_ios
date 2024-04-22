@@ -30,6 +30,7 @@ class AdsViewController: UIViewController, GADBannerViewDelegate {
 //        request.testDevices = ["e2c6cbd54759890e2fb3ac1bdb5abd2f"]
 
 //        adsView.load(request)
+        // 的d
         interstitial.load(request)
 
         gameOver()
