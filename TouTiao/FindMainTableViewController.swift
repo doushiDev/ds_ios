@@ -25,9 +25,9 @@ class FindMainTableViewController: UITableViewController,SDCycleScrollViewDelega
     
     
     //图片地址集合
-    let imageURL = [ "http://mvimg2.meitudata.com/5626e665370cc6772.jpg!thumb320",
-                     "http://mvimg2.meitudata.com/562602616fc839554.jpg!thumb320",
-                     "http://mvimg2.meitudata.com/56234c04a53038517.jpg!thumb320"
+    let imageURL = [ "http://mvimg2.meitudata.com/5626e665370cc6772.jpg!thumb3201",
+                     "http://mvimg2.meitudata.com/562602616fc839554.jpg!thumb3201",
+                     "http://mvimg2.meitudata.com/56234c04a53038517.jpg!thumb3201"
     ]
     var imageURL1 = [String]()
     var titles1 = [String]()
@@ -53,7 +53,7 @@ class FindMainTableViewController: UITableViewController,SDCycleScrollViewDelega
         
         
         tableHeardView.pageDotColor = Color.yellow// 自定义分页控件小圆标颜色
-        tableHeardView.placeholderImage = UIImage(named: "tutorial_background_03")
+        tableHeardView.placeholderImage = UIImage(named: "1tutorial_background_03")
         tableHeardView.autoScrollTimeInterval = 5
         tableHeardView.showPageControl = false
         
