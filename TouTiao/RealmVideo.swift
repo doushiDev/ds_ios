@@ -19,6 +19,7 @@ class RealmVideo: Object {
     dynamic var videoUrl:String = ""
     dynamic var createDate:String = ""
     dynamic var at:Int = 1
+    dynamic var type:String = ""
     
     override static func primaryKey() -> String? {
         return "vid"

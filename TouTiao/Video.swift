@@ -19,5 +19,7 @@ struct Video: HandyJSON {
     var shareUrl:String = ""
     var videoUrl:String = ""
     var at:Int = 0
+    var duration:Int = 0
+    var playCount:Int = 0
 
 }

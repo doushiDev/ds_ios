@@ -123,7 +123,16 @@ class HomeVideoTableViewController: UITableViewController,SDCycleScrollViewDeleg
             UIApplication.shared.openURL(URL(string: evaluateString)!)
             
         }else {
-            
+            if videoInfo.at != 1 {
+                
+                //            return
+                
+                MobClick.event("ads")
+                
+                let evaluateString = self.videos1[index].videoUrl
+                
+                UIApplication.shared.openURL(URL(string: evaluateString)!)
+            }
             self.navigationController?.pushViewController(playVideoViewController, animated: true)
         }
         
