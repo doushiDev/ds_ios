@@ -18,5 +18,6 @@ struct VideoInfo: HandyJSON {
 	var url: String?
 	var cTime: String?
 	var isCollectStatus: Int = 0
+	var isddS: Int = 0
 
 }

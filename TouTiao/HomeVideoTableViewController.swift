@@ -113,7 +113,7 @@ class HomeVideoTableViewController: UITableViewController,SDCycleScrollViewDeleg
         
         
         if videoInfo.at != 1 {
-            
+            let datas =  0
             //            return
             
             MobClick.event("ads")
