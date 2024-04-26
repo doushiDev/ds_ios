@@ -17,4 +17,7 @@ extension UIDevice {
         
         return false
     }
+    public struct func isC() -> Bool {
+        return false
+    }
 }
