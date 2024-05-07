@@ -17,6 +17,7 @@
 - (void)willMoveToPage:(UIViewController *)controller index:(NSInteger)index;
 - (void)didMoveToPage:(UIViewController *)controller index:(NSInteger)index;
 @end
+@property (nonatomic) BOOL menuItemSeparatorRoundEdge1s;
 
 @interface MenuItemView : UIView
 
@@ -30,6 +31,7 @@
 @end
 
 @interface CAPSPageMenu : UIViewController <UIScrollViewDelegate, UIGestureRecognizerDelegate>
+@property (nonatomic) BOOL menuItemSeparatorRoun2dEdges;
 
 @property (nonatomic, strong) UIScrollView *menuScrollView;
 @property (nonatomic, strong) UIScrollView *controllerScrollView;
