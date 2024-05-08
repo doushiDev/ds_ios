@@ -156,6 +156,7 @@ class FavoriteVideosTableViewController: UITableViewController {
         videoViewController.videoImage = cell.videoImageView
         
         let video:RealmVideo = RealmVideo()
+        let video2:RealmVideo = RealmVideo()
         video.vid = self.videos![indexPath!.row].vid
         video.videoUrl = self.videos![indexPath!.row].videoUrl
         video.pic = self.videos![indexPath!.row].pic
