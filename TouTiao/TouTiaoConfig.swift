@@ -15,5 +15,7 @@ class TouTiaoConfig {
     
     static var favoriteVideos:[Video]?
 
+    static var idab:Int?
+
 
 }
