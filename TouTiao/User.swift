@@ -20,6 +20,7 @@ struct User: HandyJSON {
     var platformName: String = ""
     var channel: String = ""
     var integral: Int = 0
+    var integral1: Int = 0
     
     init() {
         

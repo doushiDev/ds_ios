@@ -14,6 +14,9 @@ class FindTableViewCell: UITableViewCell {
     
  
     @IBOutlet weak var cellImageView: UIImageView!
+    @IBOutlet weak var cellImageView1: UIImageView!
+
+
     
     override func awakeFromNib() {
         super.awakeFromNib()
