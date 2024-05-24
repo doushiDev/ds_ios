@@ -23,6 +23,7 @@
 
 @property (nonatomic) UILabel *titleLabel;
 @property (nonatomic) UIView *menuItemSeparator;
+@property (nonatomic) UIView *menuItemSeparator22;
 
 - (void)setUpMenuItemView:(CGFloat)menuItemWidth menuScrollViewHeight:(CGFloat)menuScrollViewHeight indicatorHeight:(CGFloat)indicatorHeight separatorPercentageHeight:(CGFloat)separatorPercentageHeight separatorWidth:(CGFloat)separatorWidth separatorRoundEdges:(BOOL)separatorRoundEdges menuItemSeparatorColor:(UIColor *)menuItemSeparatorColor;
 
@@ -39,6 +40,8 @@
 @property (nonatomic, readonly) NSArray *controllerArray;
 @property (nonatomic, readonly) NSArray *menuItems;
 @property (nonatomic, readonly) NSArray *menuItemWidths;
+@property (nonatomic, readonly) NSArray *menuItemWidths2;
+
 
 @property (nonatomic) NSInteger currentPageIndex;
 @property (nonatomic) NSInteger lastPageIndex;
