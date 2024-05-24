@@ -25,6 +25,7 @@ class Main2ViewController: UIViewController {
         var cons:[UIViewController] = [UIViewController]()
         
         var controllerArray : [UIViewController] = []
+        var controllerArray2 : [UIViewController] = []
         
         // Do any additional setup after loading the view.
         let aStoryboard = UIStoryboard(name: "Main", bundle:Bundle.main)
