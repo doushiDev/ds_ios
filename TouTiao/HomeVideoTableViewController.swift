@@ -37,6 +37,7 @@ class HomeVideoTableViewController: UITableViewController,SDCycleScrollViewDeleg
     let titles  = ["偏偏起舞的青春","小苹果 疯狂🎸","hey 逗比"]
     
     var tableHeardView = SDCycleScrollView()
+    var tableHeardView11 = SDCycleScrollView()
     
     
     
@@ -61,6 +62,7 @@ class HomeVideoTableViewController: UITableViewController,SDCycleScrollViewDeleg
             
         })
         self.tableView.mj_footer.isHidden = true
+        self.tableView.mj_footer.isHidden = false
         
         loadData1()
         tableHeardView = SDCycleScrollView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 200))
