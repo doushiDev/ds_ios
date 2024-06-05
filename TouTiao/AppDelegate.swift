@@ -42,7 +42,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         MobClick.setAppVersion(version)
         
         UMSocialManager.default().openLog(false)
-        
+        UMSocialManager.default().openLog(false)
+
         UMSocialManager.default().umSocialAppkey = "563b6bdc67e58e73ee002acd"
         
         self.configUSharePlatforms()
@@ -50,7 +51,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         FirebaseApp.configure()
 
         let dd = 0
-        
+        let hyr = 0
         let query = AVQuery.init(className: "Google_AdSense")
         
         query.selectKeys(["application_id","ad_unit_id"])
