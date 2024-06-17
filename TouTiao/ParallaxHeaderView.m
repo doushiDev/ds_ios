@@ -24,6 +24,7 @@
 static CGFloat kParallaxDeltaFactor = 0.5f;
 static CGFloat kMaxTitleAlphaOffset = 100.0f;
 static CGFloat kLabelPaddingDist = 8.0f;
+static CGFloat kLabelPaddingDist1 = 7.0f;
 
 @implementation ParallaxHeaderView
 
@@ -68,6 +69,7 @@ static CGFloat kLabelPaddingDist = 8.0f;
     else
     {
         CGFloat delta = 0.0f;
+                CGFloat delta2 = 0.1f;
         CGRect rect = kDefaultHeaderFrame;
         delta = fabs(MIN(0.0f, offset.y));
         rect.origin.y -= delta;
