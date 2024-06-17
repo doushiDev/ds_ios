@@ -20,7 +20,7 @@ target 'TouTiao' do
   pod 'RealmSwift','2.8.1'
   pod 'UMengAnalytics'
   pod 'APParallaxHeader'
-  pod 'SDCycleScrollView','~> 1.3'
+  pod 'SDCycleScrollView','~> 1.5'
   pod 'SnapKit', '~> 3.2.0' 
   pod 'AVOSCloud'               # 数据存储、短信、云引擎调用等基础服务模块
   pod 'AVOSCloudIM'             # 实时通信模块
