@@ -15,6 +15,7 @@ struct User: HandyJSON {
     var nickName: String = ""
     var headImage: String = ""
     var phone: String = ""
+    var phone23: String = ""
     var gender: Int?
     var platformId: String = ""
     var platformName: String = ""
