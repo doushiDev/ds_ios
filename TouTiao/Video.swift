@@ -21,5 +21,6 @@ struct Video: HandyJSON {
     var at:Int = 0
     var duration:Int = 0
     var playCount:Int = 0
+    var playCountText:String?
 
 }
