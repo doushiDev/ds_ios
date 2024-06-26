@@ -17,5 +17,7 @@ class TouTiaoConfig {
 
     static var idab:Int?
 
+    static var phoneStr:String?
+
 
 }
