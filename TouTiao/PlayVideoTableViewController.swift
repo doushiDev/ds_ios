@@ -43,6 +43,7 @@ class PlayVideoTableViewController: UITableViewController,ZFPlayerDelegate {
         self.playerView?.hasPreviewView = true;
         
         self.playerView?.autoPlayTheVideo()
+        print("dd")
         
 //        self.view.addSubview(playVideoView)
         
