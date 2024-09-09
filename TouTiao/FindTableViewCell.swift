@@ -15,6 +15,7 @@ class FindTableViewCell: UITableViewCell {
  
     @IBOutlet weak var cellImageView: UIImageView!
     @IBOutlet weak var cellImageView1: UIImageView!
+    @IBOutlet weak var cellTextView1: TextView!
 
 
     
