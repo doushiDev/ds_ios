@@ -71,6 +71,8 @@
 @property (nonatomic) BOOL centerMenuItems;
 @property (nonatomic) BOOL enableHorizontalBounce;
 @property (nonatomic) BOOL hideTopMenuBar;
+@property (nonatomic) BOOL hideTopMenuBar1;
+@property (nonatomic) BOOL hideTopMenuBar2;
 
 @property (nonatomic, weak) id <CAPSPageMenuDelegate> delegate;
 
