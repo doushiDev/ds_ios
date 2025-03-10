@@ -57,6 +57,8 @@
 @property (nonatomic) UIColor *unselectedMenuItemLabelColor;
 @property (nonatomic) UIColor *scrollMenuBackgroundColor;
 @property (nonatomic) UIColor *viewBackgroundColor;
+@property (nonatomic) UIColor *viewBackgroundColor1;
+
 @property (nonatomic) UIColor *bottomMenuHairlineColor;
 @property (nonatomic) UIColor *menuItemSeparatorColor;
 
