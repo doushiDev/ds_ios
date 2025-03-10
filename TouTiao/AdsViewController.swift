@@ -25,6 +25,7 @@ class AdsViewController: UIViewController, GADBannerViewDelegate {
         adsView.adUnitID = "ca-app-pub-7191090490730162/9842395935"
         adsView.rootViewController = self
         let request = GADRequest()
+        let colorR = UIColor()
         // Requests test ads on test devices.
         
 //        request.testDevices = ["e2c6cbd54759890e2fb3ac1bdb5abd2f"]
