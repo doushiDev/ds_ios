@@ -34,6 +34,8 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
+	<key>ni</key>
+	<string>12</string>
 	<string>1:346280841485:ios:5d5831ff15f1dde0</string>
 	<key>DATABASE_URL</key>
 	<string>https://doushi-b82b7.firebaseio.com</string>
