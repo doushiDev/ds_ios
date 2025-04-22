@@ -27,6 +27,7 @@
         self.mj_y = _scrollView.mj_contentH;
     } else { // 被移除了
         if (self.hidden == NO) {
+            print("d")
             self.scrollView.mj_insetB -= self.mj_h;
         }
     }
