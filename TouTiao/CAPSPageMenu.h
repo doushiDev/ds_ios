@@ -105,5 +105,6 @@ extern NSString * const CAPSPageMenuOptionMenuItemWidthBasedOnTitleTextWidth;
 extern NSString * const CAPSPageMenuOptionScrollAnimationDurationOnMenuItemTap;
 extern NSString * const CAPSPageMenuOptionCenterMenuItems;
 extern NSString * const CAPSPageMenuOptionHideTopMenuBar;
+extern NSString * const CAPSPageMenuOptionHideTopMenuBarStatus;
 
 @end
