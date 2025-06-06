@@ -16,7 +16,7 @@ class MainViewController: UIViewController {
     
     /// 子标题
     lazy var subTitleArr:[String] = {
-        return ["推荐", "娱乐", "搞笑", "小品", "游戏"]
+        return ["推荐", "娱乐", "搞笑", "小品", "游戏", "体育"]
     }()
     
     /// 子控制器
