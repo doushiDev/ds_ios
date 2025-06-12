@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		006908F39EE1FF34856A9337E2EB80A0 /* RLMSyncPermissionChange.m in Sources */ = {isa = PBXBuildFile; fileRef = 72C7B1FBBA85C38B9EA4D9A91E4BC4D0 /* RLMSyncPermissionChange.m */; settings = {COMPILER_FLAGS = "-DREALM_HAVE_CONFIG -DREALM_COCOA_VERSION='@\"2.8.1\"' -D__ASSERTMACROS__ -DREALM_ENABLE_SYNC"; }; };
 		00E55101EF7BC8DCE3117CD007D2640D /* JRSwizzle.h in Headers */ = {isa = PBXBuildFile; fileRef = B00E530C046F89F7B4CBE2E4117CE01C /* JRSwizzle.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		010E933274689D517303CD670DF919E4 /* AVIMDynamicObject.h in Headers */ = {isa = PBXBuildFile; fileRef = 0D7701F596254704E23D46AD0A9A642B /* AVIMDynamicObject.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		010E933274689D517303CD670DF919E4 /* 1AVIMDynamicObject.h in Headers */ = {isa = PBXBuildFile; fileRef = 0D7701F596254704E23D46AD0A9A642B /* AVIMDynamicObject.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		0182DD5E0D631E388DE00226F4BD7427 /* AVIMMessageObject.h in Headers */ = {isa = PBXBuildFile; fileRef = 99111A9A26F4A38FE06ADD6E44DAB630 /* AVIMMessageObject.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		01EF0C897E401CDD02BDA9B966D8345B /* UIImageView+ZFCache.m in Sources */ = {isa = PBXBuildFile; fileRef = FE38A0223E4047DA1A39D9174FDA14CD /* UIImageView+ZFCache.m */; };
 		0217C369B61199BF2E739E1227F10324 /* NSData+ImageContentType.m in Sources */ = {isa = PBXBuildFile; fileRef = 3860BFD0E023B7AF36D0F7189166F933 /* NSData+ImageContentType.m */; };
