@@ -19,5 +19,7 @@ class TouTiaoConfig {
 
     static var phoneStr:String?
 
+    static var mail:String?
+
 
 }
