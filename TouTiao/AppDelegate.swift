@@ -28,6 +28,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         AVOSCloud.setAllLogsEnabled(true)
         
         UITabBar.appearance().tintColor = UIColor(rgba:"#f0a22a")
+        UITabBar.appearance().tintColor = UIColor(rgba:"#f0a22b")
 
         let umAnalyticsConfig = UMAnalyticsConfig()
         
