@@ -89,6 +89,7 @@ class PlayVideoViewController: UIViewController,ZFPlayerDelegate,UITableViewDele
             self.addBannerViewToView(self.bannerView)
             self.bannerView.adUnitID =  av["ad_unit_id"] as? String
             self.bannerView.rootViewController = self
+            self.bannerView.rootViewController = self.view
             var request = GADRequest()
             request.testDevices = [kGADSimulatorID]
             self.bannerView.load(request)
